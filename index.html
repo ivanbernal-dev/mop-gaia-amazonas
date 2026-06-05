@@ -372,6 +372,7 @@ body.dark .intro {
   max-width: 78%;
   transform: translateX(-50%);
   pointer-events: none;
+  z-index: 9;
 }
 
 .circle svg {
@@ -383,12 +384,15 @@ body.dark .intro {
 .circle-mark > span {
   max-width: 100%;
   min-width: 0;
-  padding: 6px 8px;
+  padding: 7px 10px;
   border-radius: 999px;
-  background: rgba(11, 79, 63, 0.74);
-  box-shadow: 0 6px 16px rgba(8, 42, 34, 0.18);
-  font-size: clamp(0.72rem, 2.5vw, 1rem);
+  background: rgba(246, 242, 234, 0.94);
+  color: var(--verde-nucleo);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.22);
+  font-size: clamp(0.78rem, 2.4vw, 1rem);
+  font-weight: 900;
   overflow-wrap: anywhere;
+  line-height: 1.05;
 }
 
 .circle:hover,
@@ -411,6 +415,24 @@ body.dark .intro {
 .core .circle-mark {
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.core .circle-mark {
+  width: 88%;
+  max-width: 88%;
+}
+
+.core .circle-mark > span {
+  width: 100%;
+  padding: 5px 4px;
+  font-size: clamp(0.58rem, 1.8vw, 0.78rem);
+  text-align: center;
+  white-space: normal;
+}
+
+.core svg {
+  width: clamp(18px, 4.8vw, 28px);
+  height: clamp(18px, 4.8vw, 28px);
 }
 
 .ring-misional {
@@ -629,6 +651,14 @@ body.dark .sidebar button.active {
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
+.dependency-grid li a {
+  display: inline-block;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+  color: var(--acento-legible);
+  font-weight: 800;
+}
+
 .dependency-grid li.featured-dependency {
   grid-column: 1 / -1;
   border-left: 6px solid var(--verde-nucleo);
@@ -664,7 +694,7 @@ body.dark .dependency-grid li:focus-visible {
 .dependency-grid li::after {
   content: "Abrir micrositio";
   display: inline-block;
-  margin-top: 12px;
+  margin-top: 14px;
   color: var(--acento-legible);
   font-size: 0.82rem;
   font-weight: 800;
@@ -744,6 +774,10 @@ body.dark .dependency-grid li:focus-visible {
   padding-left: 18px;
 }
 
+.contact-card {
+  display: none;
+}
+
 .org-chart {
   display: grid;
   gap: 12px;
@@ -774,8 +808,24 @@ body.dark .dependency-grid li:focus-visible {
   font-size: 0.88rem;
 }
 
+.org-person .org-email {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 7px;
+  border-radius: 999px;
+  background: rgba(36, 113, 163, 0.11);
+  color: #174e73;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 body.dark .org-person span {
   color: #bed1ca;
+}
+
+body.dark .org-person .org-email {
+  background: rgba(143, 205, 240, 0.16);
+  color: #b9e2ff;
 }
 
 .document-app {
@@ -863,11 +913,25 @@ body.dark .org-person span {
 
 .document-summary {
   overflow-x: auto;
+  padding: 0;
 }
 
 .document-summary h3 {
   margin: 0;
-  padding: 14px 14px 0;
+  padding: 14px;
+  cursor: pointer;
+}
+
+.document-summary summary {
+  min-height: 48px;
+  padding: 14px;
+  color: var(--acento-legible);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.document-summary summary::marker {
+  color: var(--acento-legible);
 }
 
 .document-summary table {
@@ -925,6 +989,7 @@ body.dark .org-person span {
 .document-status {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   min-height: 26px;
   padding: 5px 8px;
   border-radius: 999px;
@@ -938,10 +1003,42 @@ body.dark .org-person span {
   color: #174e73;
 }
 
+.document-type svg,
+.document-status svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+}
+
 .document-status {
   flex: 0 0 auto;
   background: rgba(30, 132, 73, 0.13);
   color: var(--acento-legible);
+}
+
+.document-status.status-vigente {
+  background: #dff5e8;
+  color: #0f6b3d;
+}
+
+.document-status.status-construccion {
+  background: #edf0f2;
+  color: #51606a;
+}
+
+.document-status.status-actualizacion {
+  background: #fff3cd;
+  color: #7a5600;
+}
+
+.document-status.status-obsoleto {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.document-status.status-clasificar {
+  background: #e7e3f8;
+  color: #4b3a86;
 }
 
 .document-meta {
@@ -988,6 +1085,31 @@ body.dark .document-meta {
 body.dark .document-type {
   background: rgba(143, 205, 240, 0.16);
   color: #b9e2ff;
+}
+
+body.dark .document-status.status-vigente {
+  background: rgba(128, 232, 173, 0.18);
+  color: #9cf2c0;
+}
+
+body.dark .document-status.status-construccion {
+  background: rgba(210, 217, 222, 0.18);
+  color: #d7e0e5;
+}
+
+body.dark .document-status.status-actualizacion {
+  background: rgba(255, 211, 99, 0.18);
+  color: #ffde80;
+}
+
+body.dark .document-status.status-obsoleto {
+  background: rgba(248, 113, 113, 0.18);
+  color: #ffb0b0;
+}
+
+body.dark .document-status.status-clasificar {
+  background: rgba(184, 169, 255, 0.18);
+  color: #d8ceff;
 }
 
 body.dark .document-controls {
@@ -1211,7 +1333,6 @@ body.dark .document-file {
       <h2 id="titulo-nucleo">Macroproceso de Gobernanza y Propósito</h2>
       <p>El Macroproceso de Gobernanza y Propósito representa la razón de ser de la Fundación Gaia Amazonas. Desde aquí se orienta la gobernanza territorial amazónica y se refrenda cada etapa del Acuerdo Intercultural.</p>
 
-      <h3>En este encuentro</h3>
       <p>Este macroproceso conecta la trayectoria institucional con la Ruta 2030. Reúne la voz de los pueblos indígenas, la Junta Directiva, la Dirección General y los aliados que sostienen la apuesta de GAIA por la autonomía territorial y el cuidado de la Amazonia.</p>
 
       <h3>Dependencias del Macroproceso de Gobernanza y Propósito</h3>
@@ -1265,7 +1386,6 @@ body.dark .document-file {
       <h2 id="titulo-misional">Macroproceso Misional</h2>
       <p>El Macroproceso Misional es el corazón operativo de la Fundación Gaia Amazonas. Aquí se materializa la misión de proteger la integridad territorial de la Amazonia oriental colombiana y fortalecer la autonomía de los gobiernos indígenas.</p>
 
-      <h3>En este encuentro</h3>
       <p>Este macroproceso permite conversar sobre cómo la estrategia se vuelve acompañamiento territorial concreto: consolidación de ETI, ordenamiento territorial indígena, seguimiento a convenios, gestión de proyectos y cooperación para avanzar con las comunidades.</p>
 
       <h3>Dependencias Misionales</h3>
@@ -1322,7 +1442,6 @@ body.dark .document-file {
       <h2 id="titulo-apoyo">Macroproceso de Apoyo</h2>
       <p>El Macroproceso de Apoyo garantiza las condiciones habilitantes para que la misión se pueda ejecutar: talento humano, recursos financieros, logística, tecnología, soporte jurídico y cumplimiento institucional.</p>
 
-      <h3>En este encuentro</h3>
       <p>Este macroproceso ayuda a mirar hacia adentro de GAIA: cómo nos organizamos, cómo cuidamos a los equipos, cómo administramos los recursos, cómo resolvemos la logística territorial y cómo aseguramos que la operación sea oportuna, transparente y cumplida.</p>
 
       <h3>Dependencias del Macroproceso de Apoyo</h3>
@@ -1379,7 +1498,6 @@ body.dark .document-file {
       <h2 id="titulo-estrategico">Macroproceso Estratégico</h2>
       <p>El Macroproceso Estratégico asegura ética, transparencia, integridad, planeación y alineación institucional. Es la capa que conecta la visión amazónica de largo plazo con las decisiones cotidianas de la Fundación.</p>
 
-      <h3>En este encuentro</h3>
       <p>Este macroproceso permite ubicar las conversaciones estratégicas: hacia dónde va GAIA, qué alianzas necesita, qué riesgos debe anticipar y cómo mantener una gestión íntegra frente a los desafíos políticos, territoriales y ambientales de la Amazonia.</p>
 
       <h3>Dependencias Estratégicas</h3>
@@ -1463,8 +1581,8 @@ body.dark .document-file {
           <button class="document-reset" type="button" id="docReset">Limpiar filtros</button>
         </div>
 
-        <section class="document-summary" aria-labelledby="titulo-resumen-documental">
-          <h3 id="titulo-resumen-documental">Resumen por tipo documental</h3>
+        <details class="document-summary" aria-labelledby="titulo-resumen-documental">
+          <summary id="titulo-resumen-documental">Resumen por tipo documental</summary>
           <table>
             <thead>
               <tr>
@@ -1477,7 +1595,7 @@ body.dark .document-file {
             </thead>
             <tbody id="docSummaryBody"></tbody>
           </table>
-        </section>
+        </details>
 
         <p class="document-results-meta" id="docResultsMeta">Cargando documentos...</p>
         <div class="document-list" id="docList"></div>
@@ -1511,10 +1629,10 @@ body.dark .document-file {
           <p id="dependencyResponsible">Por completar</p>
         </article>
         <article class="microsite-card">
-          <h3>Equipo</h3>
+          <h3>Equipo y contactos</h3>
           <div id="dependencyTeam">Espacio preparado para nombres, cargos y fotografías.</div>
         </article>
-        <article class="microsite-card">
+        <article class="microsite-card contact-card">
           <h3>Correos</h3>
           <div id="dependencyContact">Espacio preparado para correos institucionales y canales de contacto.</div>
         </article>
@@ -1809,10 +1927,6 @@ function setActiveNav(panelId) {
   navButtons.forEach((button) => {
     const isActive = button.dataset.nav === panelId;
     button.classList.toggle("active", isActive);
-    if (isActive) {
-      const details = button.closest("details");
-      if (details) details.open = true;
-    }
   });
 }
 
@@ -1902,9 +2016,40 @@ function renderDocumentSummary() {
   `).join("");
 }
 
+function getDocumentTypeIcon(type) {
+  const key = normalizeText(type);
+  if (key.includes("manual") || key.includes("politica") || key.includes("reglamento") || key.includes("estatuto")) {
+    return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><path d="M8 15h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><text x="8" y="12" font-size="4.5" font-weight="800" fill="currentColor">PDF</text></svg>`;
+  }
+  if (key.includes("matriz")) {
+    return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 10h16M4 15h16M10 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path></svg>`;
+  }
+  if (key.includes("formato") || key.includes("acta")) {
+    return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><path d="M14 3v5h5M8 13h8M8 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>`;
+  }
+  if (key.includes("procedimiento")) {
+    return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12M6 12h12M6 17h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><circle cx="4" cy="7" r="1.2" fill="currentColor"></circle><circle cx="4" cy="12" r="1.2" fill="currentColor"></circle><circle cx="4" cy="17" r="1.2" fill="currentColor"></circle></svg>`;
+  }
+  if (key.includes("guia") || key.includes("plan")) {
+    return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10a4 4 0 0 1 4 4v12H9a4 4 0 0 0-4-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><path d="M9 8h6M9 12h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>`;
+  }
+  return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><path d="M8 12h8M8 16h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>`;
+}
+
+function getDocumentStatusClass(status) {
+  const key = normalizeText(status);
+  if (key.includes("vigente")) return "status-vigente";
+  if (key.includes("construccion")) return "status-construccion";
+  if (key.includes("actualizacion")) return "status-actualizacion";
+  if (key.includes("obsoleto")) return "status-obsoleto";
+  return "status-clasificar";
+}
+
 function renderDocumentCard(record) {
   const link = cleanDocValue(record.linkDocumento, "");
   const isExternalLink = /^https?:\/\//i.test(link);
+  const tipo = cleanDocValue(record.tipoDocumental);
+  const estado = cleanDocValue(record.estado, "Sin estado");
   const fileMarkup = link
     ? `<div class="document-file">${isExternalLink ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener">Abrir documento</a>` : `Referencia documental: ${escapeHtml(link)}`}</div>`
     : "";
@@ -1915,13 +2060,13 @@ function renderDocumentCard(record) {
     <article class="document-card">
       <header>
         <div>
-          <span class="document-type">${escapeHtml(cleanDocValue(record.tipoDocumental))}</span>
+          <span class="document-type">${getDocumentTypeIcon(tipo)}${escapeHtml(tipo)}</span>
           <h3>${escapeHtml(cleanDocValue(record.nombre, "Documento sin nombre"))}</h3>
         </div>
-        <span class="document-status">${escapeHtml(cleanDocValue(record.estado, "Sin estado"))}</span>
+        <span class="document-status ${getDocumentStatusClass(estado)}">${escapeHtml(estado)}</span>
       </header>
       <div class="document-meta">
-        <span><strong>Código:</strong> ${escapeHtml(cleanDocValue(record.codigo, "Sin código"))}</span>
+        <span><strong>Código del documento:</strong> ${escapeHtml(cleanDocValue(record.codigo, "Por completar en la matriz"))}</span>
         <span><strong>Macroproceso:</strong> ${escapeHtml(cleanDocValue(record.macroproceso))}</span>
         <span><strong>Proceso:</strong> ${escapeHtml(cleanDocValue(record.proceso))}</span>
         <span><strong>Subproceso:</strong> ${escapeHtml(cleanDocValue(record.subproceso))}</span>
@@ -1970,6 +2115,9 @@ function initDocumentModule() {
 function showPanel(panelId) {
   mapSection.style.display = "none";
   dependencySite.classList.remove("is-visible");
+  document.querySelectorAll(".sidebar details").forEach((details) => {
+    details.open = false;
+  });
   panels.forEach((panel) => {
     panel.classList.toggle("is-visible", panel.id === panelId);
   });
@@ -1983,6 +2131,9 @@ function showPanel(panelId) {
 function volver() {
   panels.forEach((panel) => panel.classList.remove("is-visible"));
   dependencySite.classList.remove("is-visible");
+  document.querySelectorAll(".sidebar details").forEach((details) => {
+    details.open = false;
+  });
   mapSection.style.display = "grid";
   pageTitle.textContent = defaultPageTitle;
   activePanelId = "";
@@ -2011,6 +2162,17 @@ function getDependencyData(card) {
   };
 }
 
+function addTeamContactPlaceholders() {
+  dependencyTeam.querySelectorAll(".org-person").forEach((person) => {
+    if (!person.querySelector(".org-email")) {
+      const email = document.createElement("span");
+      email.className = "org-email";
+      email.textContent = "Correo por completar";
+      person.appendChild(email);
+    }
+  });
+}
+
 function openDependencySite(card) {
   const data = getDependencyData(card);
   panels.forEach((panel) => panel.classList.remove("is-visible"));
@@ -2019,6 +2181,7 @@ function openDependencySite(card) {
   dependencyResponsible.textContent = data.responsible;
   dependencySummary.textContent = data.summary;
   dependencyTeam.innerHTML = data.team;
+  addTeamContactPlaceholders();
   dependencyContact.innerHTML = data.contact;
   dependencyRelevant.innerHTML = data.relevant;
   dependencySite.classList.add("is-visible");
