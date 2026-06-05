@@ -2066,7 +2066,7 @@ function renderDocumentCard(record) {
         <span class="document-status ${getDocumentStatusClass(estado)}">${escapeHtml(estado)}</span>
       </header>
       <div class="document-meta">
-        <span><strong>Código del documento:</strong> ${escapeHtml(cleanDocValue(record.codigo, "Por completar en la matriz"))}</span>
+        <span><strong>Código del documento:</strong> ${escapeHtml(cleanDocValue(record.codigo, "Pendiente de codificación"))}</span>
         <span><strong>Macroproceso:</strong> ${escapeHtml(cleanDocValue(record.macroproceso))}</span>
         <span><strong>Proceso:</strong> ${escapeHtml(cleanDocValue(record.proceso))}</span>
         <span><strong>Subproceso:</strong> ${escapeHtml(cleanDocValue(record.subproceso))}</span>
