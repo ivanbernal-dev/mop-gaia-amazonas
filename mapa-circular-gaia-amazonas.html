@@ -248,7 +248,7 @@ body.dark .intro {
 }
 
 .map-context p {
-  max-width: 460px;
+  max-width: 620px;
   margin: 0 0 18px;
   color: rgba(255, 255, 255, 0.88);
   font-weight: 700;
@@ -512,6 +512,10 @@ body.dark .intro {
   grid-template-columns: 220px 1fr;
   opacity: 1;
   transform: translateY(0);
+}
+
+.panel.wide-panel {
+  max-width: 1120px;
 }
 
 .sidebar {
@@ -833,6 +837,13 @@ body.dark .org-person .org-email {
   gap: 18px;
 }
 
+.map-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
 .document-kpis {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
@@ -841,7 +852,9 @@ body.dark .org-person .org-email {
 
 .document-kpi,
 .document-summary,
-.document-card {
+.document-card,
+.project-card,
+.project-table-wrap {
   border: 1px solid var(--linea);
   border-radius: 8px;
   background: var(--panel-suave);
@@ -864,6 +877,205 @@ body.dark .org-person .org-email {
   color: #48645c;
   font-size: 0.86rem;
   font-weight: 700;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.project-card {
+  padding: 16px;
+}
+
+.project-card strong {
+  display: block;
+  color: var(--acento-legible);
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.project-card span {
+  display: block;
+  margin-top: 8px;
+  color: #48645c;
+  font-weight: 700;
+}
+
+.project-table-wrap {
+  overflow-x: auto;
+}
+
+.project-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+}
+
+.project-table th,
+.project-table td {
+  padding: 12px;
+  border: 1px solid var(--linea);
+  vertical-align: top;
+}
+
+.project-table th {
+  background: #d9ecd2;
+  color: #101b17;
+  text-align: left;
+}
+
+.project-table td:nth-child(2),
+.project-table td:nth-child(3) {
+  white-space: nowrap;
+}
+
+.project-table tfoot td {
+  background: #d9ecd2;
+  color: #101b17;
+  font-weight: 900;
+}
+
+.project-note {
+  margin: 0;
+  color: #48645c;
+  font-size: 0.92rem;
+}
+
+.excess-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: var(--panel-suave);
+}
+
+.excess-tabs button {
+  min-height: 38px;
+  padding: 8px 13px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--acento-legible);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.excess-tabs button.active {
+  background: var(--verde-nucleo);
+  color: #fff;
+}
+
+.excess-pane {
+  display: none;
+}
+
+.excess-pane.is-visible {
+  display: block;
+}
+
+.excess-year-list {
+  display: grid;
+  gap: 14px;
+}
+
+.excess-year-card {
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--panel-suave);
+  overflow: hidden;
+}
+
+.excess-year-card summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 54px;
+  padding: 14px 16px;
+  color: var(--acento-legible);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.excess-year-card summary span {
+  color: #48645c;
+  font-size: 0.9rem;
+}
+
+.excess-card-body {
+  display: grid;
+  gap: 12px;
+  padding: 0 16px 16px;
+}
+
+.excess-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 10px;
+}
+
+.excess-mini {
+  padding: 10px;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.excess-mini strong {
+  display: block;
+  color: var(--acento-legible);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.excess-mini span {
+  display: block;
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+}
+
+.excess-program-list {
+  display: grid;
+  gap: 10px;
+}
+
+.excess-program {
+  padding: 12px;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.excess-program h4 {
+  margin: 0 0 8px;
+  color: var(--acento-legible);
+}
+
+.excess-program p {
+  margin: 6px 0 0;
+}
+
+.excess-total {
+  padding: 12px;
+  border-radius: 8px;
+  background: #d9ecd2;
+  color: #101b17;
+  font-weight: 900;
+}
+
+.excess-description {
+  display: grid;
+  gap: 8px;
+}
+
+.excess-description p {
+  margin: 0;
 }
 
 .document-controls {
@@ -1071,15 +1283,42 @@ body.dark .org-person .org-email {
 
 body.dark .document-kpi,
 body.dark .document-summary,
-body.dark .document-card {
+body.dark .document-card,
+body.dark .project-card,
+body.dark .project-table-wrap {
   border-color: rgba(143, 227, 186, 0.18);
   background: #26352f;
 }
 
 body.dark .document-kpi span,
 body.dark .document-results-meta,
-body.dark .document-meta {
+body.dark .document-meta,
+body.dark .project-card span,
+body.dark .project-note {
   color: #bed1ca;
+}
+
+body.dark .project-table th,
+body.dark .project-table tfoot td {
+  background: rgba(143, 227, 186, 0.18);
+  color: #edf6f2;
+}
+
+body.dark .excess-tabs,
+body.dark .excess-year-card,
+body.dark .excess-mini,
+body.dark .excess-program {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: #26352f;
+}
+
+body.dark .excess-year-card summary span {
+  color: #bed1ca;
+}
+
+body.dark .excess-total {
+  background: rgba(143, 227, 186, 0.18);
+  color: #edf6f2;
 }
 
 body.dark .document-type {
@@ -1211,8 +1450,8 @@ body.dark .document-file {
   <section id="mapSection" class="map-section" aria-label="Mapa circular de macroprocesos">
     <div class="map-context">
       <span class="map-brand">Gaia Amazonas</span>
-      <h2>Amazonía viva, gobierno propio y gestión institucional</h2>
-      <p>Un MOP para conectar propósito, territorio, capacidades internas y visión de largo plazo.</p>
+      <h2>Propósito Superior</h2>
+      <p>Una Amazonía y un planeta sanos, sustentados por modelos de desarrollo y ordenamiento territorial intercultural que ponen la vida en el centro.</p>
       <div class="map-tags" aria-label="Ejes visuales del modelo">
         <span>ETI</span>
         <span>Acuerdo Intercultural</span>
@@ -1222,13 +1461,22 @@ body.dark .document-file {
         <span>Gobernanza y riesgos</span>
         <span>Acción diaria</span>
       </div>
-      <button class="map-action" type="button" data-nav="panel-documentos">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
-          <path d="M14 3v5h5M8 13h8M8 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-        Consultar procesos y documentos
-      </button>
+      <div class="map-actions" aria-label="Accesos principales">
+        <button class="map-action" type="button" data-nav="panel-documentos">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+            <path d="M14 3v5h5M8 13h8M8 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Consultar procesos y documentos
+        </button>
+        <button class="map-action" type="button" data-nav="panel-excedentes">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 19V5M4 19h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M8 16v-5M13 16V8M18 16v-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+          Proyectos o Programas de destinación de los excedentes
+        </button>
+      </div>
     </div>
     <div id="mapa" class="circular-container">
       <button class="circle ring-estrategico"
@@ -1603,6 +1851,60 @@ body.dark .document-file {
     </div>
   </section>
 
+  <section id="panel-excedentes" class="panel wide-panel" aria-labelledby="titulo-excedentes">
+    <nav class="sidebar" aria-label="Secciones del mapa"></nav>
+
+    <div class="content">
+      <div class="panel-toolbar">
+        <button class="back-btn" type="button" data-back>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Regresar al mapa principal
+        </button>
+      </div>
+      <figure class="section-visual">
+        <img src="assets/mop-misional.jpg" alt="Territorio amazónico para representar programas y proyectos de destinación de excedentes">
+      </figure>
+      <h2 id="titulo-excedentes">Proyectos o Programas de Destinación de los Excedentes</h2>
+      <p>Esta sección organiza la información histórica de excedentes en dos instancias: los proyectos de destinación aprobados y los informes detallados de ejecución.</p>
+
+      <div class="document-app" aria-label="Programas y proyectos de destinación de excedentes">
+        <div class="project-grid" aria-label="Indicadores de destinación de excedentes">
+          <article class="project-card">
+            <strong>2019-2024</strong>
+            <span>Vigencias documentadas</span>
+          </article>
+          <article class="project-card">
+            <strong>2 instancias</strong>
+            <span>Proyecto de destinación e informe de ejecución</span>
+          </article>
+          <article class="project-card">
+            <strong>Objeto social</strong>
+            <span>Destinación misional y seguimiento de ejecución</span>
+          </article>
+        </div>
+
+        <div class="excess-tabs" role="tablist" aria-label="Instancias de excedentes">
+          <button class="active" type="button" data-excess-tab="projects">Proyecto de destinación</button>
+          <button type="button" data-excess-tab="reports">Informes de ejecución</button>
+        </div>
+
+        <section class="excess-pane is-visible" id="excessProjects" aria-labelledby="titulo-proyectos-destinacion">
+          <h3 id="titulo-proyectos-destinacion">Proyecto de destinación de excedentes</h3>
+          <div class="excess-year-list" id="excessProjectList"></div>
+        </section>
+
+        <section class="excess-pane" id="excessReports" aria-labelledby="titulo-informes-ejecucion">
+          <h3 id="titulo-informes-ejecucion">Informes detallados de ejecución</h3>
+          <div class="excess-year-list" id="excessReportList"></div>
+        </section>
+
+        <p class="project-note">Información consolidada a partir de los documentos de proyecto de destinación e informes detallados de ejecución suministrados para las vigencias 2019 a 2024.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="dependencySite" class="microsite" aria-labelledby="dependencyTitle">
     <div class="microsite-hero">
       <h2 id="dependencyTitle">Micrositio de dependencia</h2>
@@ -1646,6 +1948,7 @@ body.dark .document-file {
 </main>
 
 <script src="assets/documentos-mop.js"></script>
+<script src="assets/excedentes-mop.js"></script>
 <script>
 const mapa = document.getElementById("mapa");
 const mapSection = document.getElementById("mapSection");
@@ -1682,6 +1985,7 @@ const documentKpis = {
   construccion: document.getElementById("docConstruccion"),
   clasificar: document.getElementById("docClasificar")
 };
+const excessData = window.EXCEDENTES_MOP_DATA || { proyectos: [], informes: [] };
 const defaultPageTitle = "Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas";
 let activePanelId = "";
 const sidebarItems = [
@@ -1709,6 +2013,11 @@ const sidebarItems = [
     id: "panel-documentos",
     title: "Gestión documental",
     description: "Consulta de procesos, procedimientos, manuales y documentos del MOP."
+  },
+  {
+    id: "panel-excedentes",
+    title: "Excedentes",
+    description: "Programas y proyectos de destinación de excedentes al objeto social."
   }
 ];
 const narrationTexts = {
@@ -2112,6 +2421,93 @@ function initDocumentModule() {
   });
 }
 
+function findExcessValue(item, names) {
+  const entries = Object.entries(item || {});
+  for (const name of names) {
+    const found = entries.find(([key]) => normalizeText(key) === normalizeText(name));
+    if (found) return found[1];
+  }
+  return "";
+}
+
+function renderProjectDestination(project) {
+  const rows = project.filas || [];
+  const totalValue = findExcessValue(project.total, ["Valor Asignado", "Valor asignado"]);
+  const totalMission = findExcessValue(project.total, ["Vinculación misional", "Vinculacion misional"]);
+  const totalTerm = findExcessValue(project.total, ["Plazo de ejecución", "Plazo de ejecucion"]);
+  const programs = rows.map((row) => {
+    const name = findExcessValue(row, ["Programa / Proyecto"]);
+    const value = findExcessValue(row, ["Valor Asignado", "Valor asignado"]);
+    const pct = findExcessValue(row, ["%"]);
+    const mission = findExcessValue(row, ["Vinculación misional", "Vinculacion misional"]);
+    const term = findExcessValue(row, ["Plazo de ejecución", "Plazo de ejecucion"]);
+    return `
+      <article class="excess-program">
+        <h4>${escapeHtml(name)}</h4>
+        <div class="excess-mini-grid">
+          <div class="excess-mini"><strong>Valor asignado</strong><span>${escapeHtml(value || "Por completar")}</span></div>
+          ${pct ? `<div class="excess-mini"><strong>Participación</strong><span>${escapeHtml(pct)}</span></div>` : ""}
+          <div class="excess-mini"><strong>Plazo</strong><span>${escapeHtml(term || "Por completar")}</span></div>
+        </div>
+        ${mission ? `<p>${escapeHtml(mission)}</p>` : ""}
+      </article>
+    `;
+  }).join("");
+
+  return `
+    <details class="excess-year-card" ${project.vigencia === "2024" ? "open" : ""}>
+      <summary>Vigencia ${escapeHtml(project.vigencia)} <span>${escapeHtml(totalValue || project.acta || "")}</span></summary>
+      <div class="excess-card-body">
+        <div class="excess-mini-grid">
+          <div class="excess-mini"><strong>Acta</strong><span>${escapeHtml(project.acta || "Por completar")}</span></div>
+          <div class="excess-mini"><strong>Total aprobado</strong><span>${escapeHtml(totalValue || "Por completar")}</span></div>
+          <div class="excess-mini"><strong>Plazo</strong><span>${escapeHtml(totalTerm || "Por completar")}</span></div>
+        </div>
+        <div class="excess-program-list">${programs}</div>
+        <div class="excess-total">${escapeHtml(totalMission || "100 % destinado al objeto social")}</div>
+      </div>
+    </details>
+  `;
+}
+
+function renderExecutionReport(report) {
+  const description = (report.descripcion || []).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("");
+  return `
+    <details class="excess-year-card" ${report.vigencia === "2024" ? "open" : ""}>
+      <summary>Vigencia ${escapeHtml(report.vigencia)} <span>${escapeHtml(report.valorEjecutado || report.valorAsignado || "")}</span></summary>
+      <div class="excess-card-body">
+        <div class="excess-mini-grid">
+          <div class="excess-mini"><strong>Acta</strong><span>${escapeHtml(report.acta || "Por completar")}</span></div>
+          <div class="excess-mini"><strong>Valor asignado</strong><span>${escapeHtml(report.valorAsignado || "Por completar")}</span></div>
+          <div class="excess-mini"><strong>Valor ejecutado</strong><span>${escapeHtml(report.valorEjecutado || "Por completar")}</span></div>
+          <div class="excess-mini"><strong>Saldo</strong><span>${escapeHtml(report.saldo || "Por completar")}</span></div>
+          <div class="excess-mini"><strong>Plazo aprobado</strong><span>${escapeHtml(report.plazo || "Por completar")}</span></div>
+          <div class="excess-mini"><strong>Año de ejecución</strong><span>${escapeHtml(report.anioEjecucion || "Por completar")}</span></div>
+        </div>
+        <div class="excess-description">${description}</div>
+      </div>
+    </details>
+  `;
+}
+
+function initExcessModule() {
+  const projectList = document.getElementById("excessProjectList");
+  const reportList = document.getElementById("excessReportList");
+  if (!projectList || !reportList) return;
+
+  projectList.innerHTML = (excessData.proyectos || []).map(renderProjectDestination).join("");
+  reportList.innerHTML = (excessData.informes || []).map(renderExecutionReport).join("");
+
+  document.querySelectorAll("[data-excess-tab]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const target = button.dataset.excessTab;
+      document.querySelectorAll("[data-excess-tab]").forEach((tab) => tab.classList.toggle("active", tab === button));
+      document.getElementById("excessProjects")?.classList.toggle("is-visible", target === "projects");
+      document.getElementById("excessReports")?.classList.toggle("is-visible", target === "reports");
+    });
+  });
+}
+
 function showPanel(panelId) {
   mapSection.style.display = "none";
   dependencySite.classList.remove("is-visible");
@@ -2265,6 +2661,7 @@ toggleDark.addEventListener("click", () => {
 
 setDarkMode(localStorage.getItem("gaia-map-dark-mode") === "true");
 initDocumentModule();
+initExcessModule();
 
 document.querySelectorAll("[data-audio]").forEach((button) => {
   button.addEventListener("click", async () => {
