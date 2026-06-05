@@ -269,6 +269,35 @@ body.dark .intro {
   font-size: 0.88rem;
 }
 
+.map-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  min-height: 42px;
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(246, 242, 234, 0.95);
+  color: var(--verde-nucleo);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+.map-action svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.map-action:hover,
+.map-action:focus-visible {
+  transform: translateY(-1px);
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+}
+
 .circular-container {
   position: relative;
   width: min(520px, 92vw);
@@ -749,6 +778,227 @@ body.dark .org-person span {
   color: #bed1ca;
 }
 
+.document-app {
+  display: grid;
+  gap: 18px;
+}
+
+.document-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 10px;
+}
+
+.document-kpi,
+.document-summary,
+.document-card {
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--panel-suave);
+}
+
+.document-kpi {
+  padding: 14px;
+}
+
+.document-kpi strong {
+  display: block;
+  color: var(--acento-legible);
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.document-kpi span {
+  display: block;
+  margin-top: 6px;
+  color: #48645c;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.document-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(11, 79, 63, 0.16);
+  border-radius: 8px;
+  background: rgba(11, 79, 63, 0.06);
+}
+
+.document-controls label {
+  display: grid;
+  gap: 6px;
+  color: var(--acento-legible);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.document-controls input,
+.document-controls select {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--tinta);
+  font: inherit;
+}
+
+.document-controls input {
+  padding: 8px 10px;
+}
+
+.document-reset {
+  align-self: end;
+  min-height: 38px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--verde-nucleo);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.document-summary {
+  overflow-x: auto;
+}
+
+.document-summary h3 {
+  margin: 0;
+  padding: 14px 14px 0;
+}
+
+.document-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.document-summary th,
+.document-summary td {
+  padding: 9px 12px;
+  border-top: 1px solid var(--linea);
+  text-align: left;
+}
+
+.document-summary th {
+  color: var(--acento-legible);
+  background: rgba(11, 79, 63, 0.08);
+}
+
+.document-results-meta {
+  color: #48645c;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.document-list {
+  display: grid;
+  gap: 12px;
+}
+
+.document-card {
+  padding: 14px;
+}
+
+.document-card header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+}
+
+.document-card h3 {
+  margin: 0;
+  color: var(--acento-legible);
+}
+
+.document-type,
+.document-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.document-type {
+  margin-bottom: 8px;
+  background: rgba(36, 113, 163, 0.13);
+  color: #174e73;
+}
+
+.document-status {
+  flex: 0 0 auto;
+  background: rgba(30, 132, 73, 0.13);
+  color: var(--acento-legible);
+}
+
+.document-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 8px;
+  margin: 10px 0;
+  color: #48645c;
+  font-size: 0.88rem;
+}
+
+.document-meta span {
+  display: block;
+}
+
+.document-card p {
+  margin: 8px 0 0;
+}
+
+.document-file {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  background: rgba(11, 79, 63, 0.08);
+  color: var(--acento-legible);
+  font-size: 0.88rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+body.dark .document-kpi,
+body.dark .document-summary,
+body.dark .document-card {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: #26352f;
+}
+
+body.dark .document-kpi span,
+body.dark .document-results-meta,
+body.dark .document-meta {
+  color: #bed1ca;
+}
+
+body.dark .document-type {
+  background: rgba(143, 205, 240, 0.16);
+  color: #b9e2ff;
+}
+
+body.dark .document-controls {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: rgba(143, 227, 186, 0.08);
+}
+
+body.dark .document-file {
+  background: rgba(143, 227, 186, 0.1);
+}
+
 .microsite-actions {
   display: flex;
   justify-content: flex-end;
@@ -814,6 +1064,15 @@ body.dark .org-person span {
     justify-content: center;
     width: 100%;
   }
+
+  .document-card header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .document-status {
+    align-self: flex-start;
+  }
 }
 </style>
 </head>
@@ -841,6 +1100,13 @@ body.dark .org-person span {
         <span>Gobernanza y riesgos</span>
         <span>Acción diaria</span>
       </div>
+      <button class="map-action" type="button" data-nav="panel-documentos">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+          <path d="M14 3v5h5M8 13h8M8 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        Consultar procesos y documentos
+      </button>
     </div>
     <div id="mapa" class="circular-container">
       <button class="circle ring-estrategico"
@@ -1131,6 +1397,94 @@ body.dark .org-person span {
     </div>
   </section>
 
+  <section id="panel-documentos" class="panel document-panel" aria-labelledby="titulo-documentos">
+    <nav class="sidebar" aria-label="Secciones del mapa"></nav>
+
+    <div class="content">
+      <div class="panel-toolbar">
+        <button class="back-btn" type="button" data-back>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Regresar al mapa principal
+        </button>
+      </div>
+      <figure class="section-visual">
+        <img src="assets/amazon-mop-collage.png" alt="Composición visual amazónica para representar la gestión documental del Modelo de Operación por Procesos">
+      </figure>
+      <h2 id="titulo-documentos">Gestión Documental del MOP</h2>
+      <p>Esta aplicación permite revisar los procesos, procedimientos, manuales, políticas, formatos y demás documentos asociados al Modelo de Operación por Procesos. La información se toma del listado maestro de control de información documentada y del resumen documental por tipo.</p>
+
+      <div class="document-app" aria-label="Aplicación de consulta documental">
+        <div class="document-kpis" aria-label="Indicadores documentales">
+          <article class="document-kpi">
+            <strong id="docTotal">0</strong>
+            <span>Documentos registrados</span>
+          </article>
+          <article class="document-kpi">
+            <strong id="docVigentes">0</strong>
+            <span>Vigentes</span>
+          </article>
+          <article class="document-kpi">
+            <strong id="docActualizacion">0</strong>
+            <span>En actualización</span>
+          </article>
+          <article class="document-kpi">
+            <strong id="docConstruccion">0</strong>
+            <span>En construcción</span>
+          </article>
+          <article class="document-kpi">
+            <strong id="docClasificar">0</strong>
+            <span>Por clasificar</span>
+          </article>
+        </div>
+
+        <div class="document-controls" aria-label="Filtros de documentos">
+          <label>
+            Buscar
+            <input id="docSearch" type="search" placeholder="Código, nombre, palabras clave...">
+          </label>
+          <label>
+            Macroproceso
+            <select id="docMacro"></select>
+          </label>
+          <label>
+            Proceso
+            <select id="docProceso"></select>
+          </label>
+          <label>
+            Tipo documental
+            <select id="docTipo"></select>
+          </label>
+          <label>
+            Estado
+            <select id="docEstado"></select>
+          </label>
+          <button class="document-reset" type="button" id="docReset">Limpiar filtros</button>
+        </div>
+
+        <section class="document-summary" aria-labelledby="titulo-resumen-documental">
+          <h3 id="titulo-resumen-documental">Resumen por tipo documental</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Vigentes</th>
+                <th>Obsoletos</th>
+                <th>En actualización</th>
+                <th>En construcción</th>
+              </tr>
+            </thead>
+            <tbody id="docSummaryBody"></tbody>
+          </table>
+        </section>
+
+        <p class="document-results-meta" id="docResultsMeta">Cargando documentos...</p>
+        <div class="document-list" id="docList"></div>
+      </div>
+    </div>
+  </section>
+
   <section id="dependencySite" class="microsite" aria-labelledby="dependencyTitle">
     <div class="microsite-hero">
       <h2 id="dependencyTitle">Micrositio de dependencia</h2>
@@ -1173,6 +1527,7 @@ body.dark .org-person span {
   </section>
 </main>
 
+<script src="assets/documentos-mop.js"></script>
 <script>
 const mapa = document.getElementById("mapa");
 const mapSection = document.getElementById("mapSection");
@@ -1189,6 +1544,26 @@ const dependencyContact = document.getElementById("dependencyContact");
 const dependencyRelevant = document.getElementById("dependencyRelevant");
 const backToMacroPanel = document.getElementById("backToMacroPanel");
 const toggleDark = document.getElementById("toggleDark");
+const documentData = window.DOCUMENTOS_MOP_DATA || { documentos: [], resumenTipoDocumental: [] };
+const documentRecords = documentData.documentos || [];
+const documentControls = {
+  search: document.getElementById("docSearch"),
+  macro: document.getElementById("docMacro"),
+  proceso: document.getElementById("docProceso"),
+  tipo: document.getElementById("docTipo"),
+  estado: document.getElementById("docEstado"),
+  reset: document.getElementById("docReset"),
+  list: document.getElementById("docList"),
+  meta: document.getElementById("docResultsMeta"),
+  summary: document.getElementById("docSummaryBody")
+};
+const documentKpis = {
+  total: document.getElementById("docTotal"),
+  vigentes: document.getElementById("docVigentes"),
+  actualizacion: document.getElementById("docActualizacion"),
+  construccion: document.getElementById("docConstruccion"),
+  clasificar: document.getElementById("docClasificar")
+};
 const defaultPageTitle = "Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas";
 let activePanelId = "";
 const sidebarItems = [
@@ -1211,6 +1586,11 @@ const sidebarItems = [
     id: "panel-estrategico",
     title: "Estratégico",
     description: "Visión amazónica, planeación y alianzas multiactor."
+  },
+  {
+    id: "panel-documentos",
+    title: "Gestión documental",
+    description: "Consulta de procesos, procedimientos, manuales y documentos del MOP."
   }
 ];
 const narrationTexts = {
@@ -1430,8 +1810,160 @@ function setActiveNav(panelId) {
     const isActive = button.dataset.nav === panelId;
     button.classList.toggle("active", isActive);
     if (isActive) {
-      button.closest("details").open = true;
+      const details = button.closest("details");
+      if (details) details.open = true;
     }
+  });
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function normalizeText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function cleanDocValue(value, fallback = "Por clasificar") {
+  const cleaned = String(value || "").trim();
+  return cleaned || fallback;
+}
+
+function fillDocumentSelect(select, records, field, label) {
+  if (!select) return;
+  const values = Array.from(new Set(records.map((record) => cleanDocValue(record[field]))))
+    .sort((a, b) => a.localeCompare(b, "es"));
+  select.innerHTML = `<option value="">${label}</option>${values.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join("")}`;
+}
+
+function matchesDocumentFilters(record) {
+  const search = normalizeText(documentControls.search?.value || "");
+  const searchable = normalizeText([
+    record.macroproceso,
+    record.proceso,
+    record.subproceso,
+    record.tipoDocumental,
+    record.descripcionTematica,
+    record.codigo,
+    record.nombre,
+    record.estado,
+    record.dependencia,
+    record.linkDocumento
+  ].join(" "));
+
+  const selectedMacro = documentControls.macro?.value || "";
+  const selectedProceso = documentControls.proceso?.value || "";
+  const selectedTipo = documentControls.tipo?.value || "";
+  const selectedEstado = documentControls.estado?.value || "";
+
+  return (
+    (!search || searchable.includes(search)) &&
+    (!selectedMacro || cleanDocValue(record.macroproceso) === selectedMacro) &&
+    (!selectedProceso || cleanDocValue(record.proceso) === selectedProceso) &&
+    (!selectedTipo || cleanDocValue(record.tipoDocumental) === selectedTipo) &&
+    (!selectedEstado || cleanDocValue(record.estado) === selectedEstado)
+  );
+}
+
+function documentStatusCount(term) {
+  const normalizedTerm = normalizeText(term);
+  return documentRecords.filter((record) => normalizeText(record.estado).includes(normalizedTerm)).length;
+}
+
+function updateDocumentKpis() {
+  if (!documentKpis.total) return;
+  const pending = documentRecords.filter((record) => !record.macroproceso || !record.tipoDocumental || !record.codigo).length;
+  documentKpis.total.textContent = documentRecords.length;
+  documentKpis.vigentes.textContent = documentStatusCount("vigente");
+  documentKpis.actualizacion.textContent = documentStatusCount("actualizacion");
+  documentKpis.construccion.textContent = documentStatusCount("construccion");
+  documentKpis.clasificar.textContent = pending;
+}
+
+function renderDocumentSummary() {
+  if (!documentControls.summary) return;
+  documentControls.summary.innerHTML = (documentData.resumenTipoDocumental || []).map((item) => `
+    <tr>
+      <td>${escapeHtml(item.tipoDocumental)}</td>
+      <td>${escapeHtml(item.vigentes)}</td>
+      <td>${escapeHtml(item.obsoletos)}</td>
+      <td>${escapeHtml(item.enActualizacion)}</td>
+      <td>${escapeHtml(item.enConstruccion)}</td>
+    </tr>
+  `).join("");
+}
+
+function renderDocumentCard(record) {
+  const link = cleanDocValue(record.linkDocumento, "");
+  const isExternalLink = /^https?:\/\//i.test(link);
+  const fileMarkup = link
+    ? `<div class="document-file">${isExternalLink ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener">Abrir documento</a>` : `Referencia documental: ${escapeHtml(link)}`}</div>`
+    : "";
+  const description = record.descripcionTematica ? `<p>${escapeHtml(record.descripcionTematica)}</p>` : "";
+  const observations = record.observaciones ? `<p><strong>Observaciones:</strong> ${escapeHtml(record.observaciones)}</p>` : "";
+
+  return `
+    <article class="document-card">
+      <header>
+        <div>
+          <span class="document-type">${escapeHtml(cleanDocValue(record.tipoDocumental))}</span>
+          <h3>${escapeHtml(cleanDocValue(record.nombre, "Documento sin nombre"))}</h3>
+        </div>
+        <span class="document-status">${escapeHtml(cleanDocValue(record.estado, "Sin estado"))}</span>
+      </header>
+      <div class="document-meta">
+        <span><strong>Código:</strong> ${escapeHtml(cleanDocValue(record.codigo, "Sin código"))}</span>
+        <span><strong>Macroproceso:</strong> ${escapeHtml(cleanDocValue(record.macroproceso))}</span>
+        <span><strong>Proceso:</strong> ${escapeHtml(cleanDocValue(record.proceso))}</span>
+        <span><strong>Subproceso:</strong> ${escapeHtml(cleanDocValue(record.subproceso))}</span>
+        <span><strong>Dependencia:</strong> ${escapeHtml(cleanDocValue(record.dependencia))}</span>
+        <span><strong>Versión:</strong> ${escapeHtml(cleanDocValue(record.version, "Sin versión"))}</span>
+      </div>
+      ${description}
+      ${observations}
+      ${fileMarkup}
+    </article>
+  `;
+}
+
+function renderDocumentList() {
+  if (!documentControls.list || !documentControls.meta) return;
+  const filtered = documentRecords.filter(matchesDocumentFilters);
+  documentControls.meta.textContent = `${filtered.length} de ${documentRecords.length} documentos encontrados`;
+  documentControls.list.innerHTML = filtered.length
+    ? filtered.map(renderDocumentCard).join("")
+    : `<article class="document-card"><h3>No se encontraron documentos</h3><p>Ajusta los filtros o borra la búsqueda para ver más registros.</p></article>`;
+}
+
+function initDocumentModule() {
+  if (!documentControls.list) return;
+  fillDocumentSelect(documentControls.macro, documentRecords, "macroproceso", "Todos los macroprocesos");
+  fillDocumentSelect(documentControls.proceso, documentRecords, "proceso", "Todos los procesos");
+  fillDocumentSelect(documentControls.tipo, documentRecords, "tipoDocumental", "Todos los tipos");
+  fillDocumentSelect(documentControls.estado, documentRecords, "estado", "Todos los estados");
+  updateDocumentKpis();
+  renderDocumentSummary();
+  renderDocumentList();
+
+  [documentControls.search, documentControls.macro, documentControls.proceso, documentControls.tipo, documentControls.estado].forEach((control) => {
+    control?.addEventListener("input", renderDocumentList);
+    control?.addEventListener("change", renderDocumentList);
+  });
+
+  documentControls.reset?.addEventListener("click", () => {
+    [documentControls.search, documentControls.macro, documentControls.proceso, documentControls.tipo, documentControls.estado].forEach((control) => {
+      if (control) control.value = "";
+    });
+    renderDocumentList();
   });
 }
 
@@ -1569,6 +2101,7 @@ toggleDark.addEventListener("click", () => {
 });
 
 setDarkMode(localStorage.getItem("gaia-map-dark-mode") === "true");
+initDocumentModule();
 
 document.querySelectorAll("[data-audio]").forEach((button) => {
   button.addEventListener("click", async () => {
