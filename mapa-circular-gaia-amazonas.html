@@ -1088,6 +1088,70 @@ body.dark .org-person .org-email {
   background: rgba(11, 79, 63, 0.06);
 }
 
+.document-upload,
+.access-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(11, 79, 63, 0.16);
+  border-radius: 8px;
+  background: rgba(11, 79, 63, 0.06);
+}
+
+.document-upload h3,
+.access-card h3 {
+  margin: 0;
+}
+
+.document-upload p,
+.access-card p {
+  margin: 0;
+}
+
+.document-upload-actions,
+.access-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+}
+
+.document-upload label,
+.access-card label {
+  display: grid;
+  gap: 6px;
+  color: var(--acento-legible);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.document-upload input,
+.access-card input,
+.access-card select {
+  min-height: 38px;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--tinta);
+  font: inherit;
+}
+
+.document-upload input,
+.access-card input {
+  padding: 8px 10px;
+}
+
+.upload-status,
+.access-message {
+  color: #48645c;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.restricted-content[hidden] {
+  display: none;
+}
+
 .document-controls label {
   display: grid;
   gap: 6px;
@@ -1121,6 +1185,10 @@ body.dark .org-person .org-email {
   font: inherit;
   font-weight: 800;
   cursor: pointer;
+}
+
+.document-reset.secondary {
+  background: #48645c;
 }
 
 .document-summary {
@@ -1354,6 +1422,17 @@ body.dark .document-status.status-clasificar {
 body.dark .document-controls {
   border-color: rgba(143, 227, 186, 0.18);
   background: rgba(143, 227, 186, 0.08);
+}
+
+body.dark .document-upload,
+body.dark .access-card {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: rgba(143, 227, 186, 0.08);
+}
+
+body.dark .upload-status,
+body.dark .access-message {
+  color: #bed1ca;
 }
 
 body.dark .document-file {
@@ -1782,6 +1861,19 @@ body.dark .document-file {
       <p>Esta aplicación permite revisar los procesos, procedimientos, manuales, políticas, formatos y demás documentos asociados al Modelo de Operación por Procesos. La información se toma del listado maestro de control de información documentada y del resumen documental por tipo.</p>
 
       <div class="document-app" aria-label="Aplicación de consulta documental">
+        <section class="document-upload" aria-labelledby="titulo-carga-matriz">
+          <h3 id="titulo-carga-matriz">Carga masiva de matriz actualizada</h3>
+          <p>Para actualizar el listado de forma masiva, exporta la pestaña principal de la matriz desde Excel como <strong>CSV UTF-8</strong> y súbela aquí. La actualización se aplica en este navegador y permite revisar la nueva versión antes de publicarla.</p>
+          <div class="document-upload-actions">
+            <label>
+              Matriz actualizada
+              <input id="docMatrixUpload" type="file" accept=".csv,.txt">
+            </label>
+            <button class="document-reset" type="button" id="docRestoreBase">Restablecer matriz base</button>
+          </div>
+          <p class="upload-status" id="docUploadStatus">Matriz base cargada desde el listado maestro vigente.</p>
+        </section>
+
         <div class="document-kpis" aria-label="Indicadores documentales">
           <article class="document-kpi">
             <strong id="docTotal">0</strong>
@@ -1869,7 +1961,30 @@ body.dark .document-file {
       <h2 id="titulo-excedentes">Proyectos o Programas de Destinación de los Excedentes</h2>
       <p>Esta sección organiza la información histórica de excedentes en dos instancias: los proyectos de destinación aprobados y los informes detallados de ejecución.</p>
 
-      <div class="document-app" aria-label="Programas y proyectos de destinación de excedentes">
+      <section class="access-card" id="excessAccessCard" aria-labelledby="titulo-acceso-excedentes">
+        <h3 id="titulo-acceso-excedentes">Acceso restringido</h3>
+        <p>Este componente está previsto para perfiles autorizados de la Fundación. Para un control real de permisos debe publicarse en un entorno con autenticación institucional.</p>
+        <div class="access-actions">
+          <label>
+            Perfil
+            <select id="excessProfile">
+              <option value="">Selecciona un perfil</option>
+              <option>Dirección General</option>
+              <option>Coordinación Financiera</option>
+              <option>Gestión de Procesos y Cumplimiento Institucional</option>
+              <option>Junta Directiva</option>
+            </select>
+          </label>
+          <label>
+            Clave de visualización
+            <input id="excessAccessKey" type="password" autocomplete="off" placeholder="Clave temporal">
+          </label>
+          <button class="document-reset" type="button" id="excessAccessButton">Ingresar</button>
+        </div>
+        <p class="access-message" id="excessAccessMessage">Pendiente de validación de perfil.</p>
+      </section>
+
+      <div class="document-app restricted-content" id="excessRestrictedContent" aria-label="Programas y proyectos de destinación de excedentes" hidden>
         <div class="project-grid" aria-label="Indicadores de destinación de excedentes">
           <article class="project-card">
             <strong>2019-2024</strong>
@@ -1966,7 +2081,8 @@ const dependencyRelevant = document.getElementById("dependencyRelevant");
 const backToMacroPanel = document.getElementById("backToMacroPanel");
 const toggleDark = document.getElementById("toggleDark");
 const documentData = window.DOCUMENTOS_MOP_DATA || { documentos: [], resumenTipoDocumental: [] };
-const documentRecords = documentData.documentos || [];
+let documentRecords = documentData.documentos || [];
+let documentSummaryRecords = documentData.resumenTipoDocumental || [];
 const documentControls = {
   search: document.getElementById("docSearch"),
   macro: document.getElementById("docMacro"),
@@ -1974,6 +2090,9 @@ const documentControls = {
   tipo: document.getElementById("docTipo"),
   estado: document.getElementById("docEstado"),
   reset: document.getElementById("docReset"),
+  upload: document.getElementById("docMatrixUpload"),
+  restore: document.getElementById("docRestoreBase"),
+  uploadStatus: document.getElementById("docUploadStatus"),
   list: document.getElementById("docList"),
   meta: document.getElementById("docResultsMeta"),
   summary: document.getElementById("docSummaryBody")
@@ -1986,6 +2105,16 @@ const documentKpis = {
   clasificar: document.getElementById("docClasificar")
 };
 const excessData = window.EXCEDENTES_MOP_DATA || { proyectos: [], informes: [] };
+const excessAccess = {
+  card: document.getElementById("excessAccessCard"),
+  profile: document.getElementById("excessProfile"),
+  key: document.getElementById("excessAccessKey"),
+  button: document.getElementById("excessAccessButton"),
+  message: document.getElementById("excessAccessMessage"),
+  content: document.getElementById("excessRestrictedContent"),
+  expectedHash: "965cebb3a483747b2e5733b0daa1d00e5b20da7407a6b39a0a04c1dd661f5e86",
+  fallbackKeyParts: ["GAIA", "EXCEDENTES", "2026"]
+};
 const defaultPageTitle = "Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas";
 let activePanelId = "";
 const sidebarItems = [
@@ -2261,6 +2390,110 @@ function cleanDocValue(value, fallback = "Por clasificar") {
   return cleaned || fallback;
 }
 
+function getFieldFromRow(row, aliases) {
+  const entries = Object.entries(row);
+  for (const alias of aliases) {
+    const normalizedAlias = normalizeText(alias);
+    const found = entries.find(([key]) => normalizeText(key).replace(/\s+/g, " ") === normalizedAlias);
+    if (found) return found[1];
+  }
+  return "";
+}
+
+function parseCsv(text) {
+  const delimiter = (text.match(/;/g) || []).length > (text.match(/,/g) || []).length ? ";" : ",";
+  const rows = [];
+  let row = [];
+  let cell = "";
+  let inQuotes = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    const next = text[index + 1];
+    if (char === '"' && inQuotes && next === '"') {
+      cell += '"';
+      index += 1;
+    } else if (char === '"') {
+      inQuotes = !inQuotes;
+    } else if (char === delimiter && !inQuotes) {
+      row.push(cell.trim());
+      cell = "";
+    } else if ((char === "\n" || char === "\r") && !inQuotes) {
+      if (char === "\r" && next === "\n") index += 1;
+      row.push(cell.trim());
+      if (row.some(Boolean)) rows.push(row);
+      row = [];
+      cell = "";
+    } else {
+      cell += char;
+    }
+  }
+
+  row.push(cell.trim());
+  if (row.some(Boolean)) rows.push(row);
+  return rows;
+}
+
+function mapMatrixRows(rows) {
+  const headerIndex = rows.findIndex((row) => normalizeText(row[0]) === "macroproceso" || row.some((cell) => normalizeText(cell) === "codigo del documento"));
+  if (headerIndex < 0) return [];
+  const headers = rows[headerIndex].map((header) => header.replace(/\n/g, " ").trim());
+  return rows.slice(headerIndex + 1).map((values) => {
+    const row = {};
+    headers.forEach((header, index) => {
+      row[header] = values[index] || "";
+    });
+
+    return {
+      macroproceso: getFieldFromRow(row, ["MACROPROCESO"]),
+      proceso: getFieldFromRow(row, ["PROCESO"]),
+      subproceso: getFieldFromRow(row, ["SUBPROCESO"]),
+      tipoDocumental: getFieldFromRow(row, ["TIPO DOCUMENTAL"]),
+      descripcionTematica: getFieldFromRow(row, ["DESCRIPCIÓN TEMÁTICA (Palabras Clave para Búsqueda)", "DESCRIPCIÓN TEMÁTICA", "DESCRIPCION TEMATICA"]),
+      codigo: getFieldFromRow(row, ["CÓDIGO DEL DOCUMENTO", "CODIGO DEL DOCUMENTO"]),
+      nombre: getFieldFromRow(row, ["NOMBRE DEL DOCUMENTO"]),
+      fechaAprobacion: getFieldFromRow(row, ["FECHA DE APROBACIÓN", "FECHA DE APROBACION"]),
+      anio: getFieldFromRow(row, ["AÑO", "ANO"]),
+      version: getFieldFromRow(row, ["VERSIÓN", "VERSION"]),
+      estado: getFieldFromRow(row, ["ESTADO"]),
+      dependencia: getFieldFromRow(row, ["DEPENDENCIA"]),
+      soporte: getFieldFromRow(row, ["SOPORTE"]),
+      linkDocumento: getFieldFromRow(row, ["LINK DEL DOCUMENTO"]),
+      observaciones: getFieldFromRow(row, ["OBSERVACIONES"])
+    };
+  }).filter((record) => record.nombre || record.codigo || record.proceso);
+}
+
+function buildDocumentSummary(records) {
+  const types = Array.from(new Set(records.map((record) => cleanDocValue(record.tipoDocumental)))).sort((a, b) => a.localeCompare(b, "es"));
+  return types.map((tipoDocumental) => {
+    const subset = records.filter((record) => cleanDocValue(record.tipoDocumental) === tipoDocumental);
+    return {
+      tipoDocumental,
+      vigentes: subset.filter((record) => normalizeText(record.estado).includes("vigente")).length,
+      obsoletos: subset.filter((record) => normalizeText(record.estado).includes("obsoleto")).length,
+      enActualizacion: subset.filter((record) => normalizeText(record.estado).includes("actualizacion")).length,
+      enConstruccion: subset.filter((record) => normalizeText(record.estado).includes("construccion")).length
+    };
+  });
+}
+
+function resetDocumentFilters() {
+  [documentControls.search, documentControls.macro, documentControls.proceso, documentControls.tipo, documentControls.estado].forEach((control) => {
+    if (control) control.value = "";
+  });
+}
+
+function refreshDocumentModule() {
+  fillDocumentSelect(documentControls.macro, documentRecords, "macroproceso", "Todos los macroprocesos");
+  fillDocumentSelect(documentControls.proceso, documentRecords, "proceso", "Todos los procesos");
+  fillDocumentSelect(documentControls.tipo, documentRecords, "tipoDocumental", "Todos los tipos");
+  fillDocumentSelect(documentControls.estado, documentRecords, "estado", "Todos los estados");
+  updateDocumentKpis();
+  renderDocumentSummary();
+  renderDocumentList();
+}
+
 function fillDocumentSelect(select, records, field, label) {
   if (!select) return;
   const values = Array.from(new Set(records.map((record) => cleanDocValue(record[field]))))
@@ -2314,7 +2547,7 @@ function updateDocumentKpis() {
 
 function renderDocumentSummary() {
   if (!documentControls.summary) return;
-  documentControls.summary.innerHTML = (documentData.resumenTipoDocumental || []).map((item) => `
+  documentControls.summary.innerHTML = (documentSummaryRecords || []).map((item) => `
     <tr>
       <td>${escapeHtml(item.tipoDocumental)}</td>
       <td>${escapeHtml(item.vigentes)}</td>
@@ -2400,13 +2633,17 @@ function renderDocumentList() {
 
 function initDocumentModule() {
   if (!documentControls.list) return;
-  fillDocumentSelect(documentControls.macro, documentRecords, "macroproceso", "Todos los macroprocesos");
-  fillDocumentSelect(documentControls.proceso, documentRecords, "proceso", "Todos los procesos");
-  fillDocumentSelect(documentControls.tipo, documentRecords, "tipoDocumental", "Todos los tipos");
-  fillDocumentSelect(documentControls.estado, documentRecords, "estado", "Todos los estados");
-  updateDocumentKpis();
-  renderDocumentSummary();
-  renderDocumentList();
+  const storedMatrix = localStorage.getItem("gaia-document-matrix");
+  if (storedMatrix) {
+    try {
+      documentRecords = JSON.parse(storedMatrix);
+      documentSummaryRecords = buildDocumentSummary(documentRecords);
+      if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz actualizada cargada desde este navegador.";
+    } catch {
+      localStorage.removeItem("gaia-document-matrix");
+    }
+  }
+  refreshDocumentModule();
 
   [documentControls.search, documentControls.macro, documentControls.proceso, documentControls.tipo, documentControls.estado].forEach((control) => {
     control?.addEventListener("input", renderDocumentList);
@@ -2414,10 +2651,35 @@ function initDocumentModule() {
   });
 
   documentControls.reset?.addEventListener("click", () => {
-    [documentControls.search, documentControls.macro, documentControls.proceso, documentControls.tipo, documentControls.estado].forEach((control) => {
-      if (control) control.value = "";
-    });
+    resetDocumentFilters();
     renderDocumentList();
+  });
+
+  documentControls.upload?.addEventListener("change", async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const text = await file.text();
+    const parsedRecords = mapMatrixRows(parseCsv(text));
+    if (!parsedRecords.length) {
+      if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "No pude reconocer la estructura de la matriz. Verifica que sea CSV UTF-8 y conserve los encabezados del listado maestro.";
+      return;
+    }
+    documentRecords = parsedRecords;
+    documentSummaryRecords = buildDocumentSummary(documentRecords);
+    localStorage.setItem("gaia-document-matrix", JSON.stringify(documentRecords));
+    resetDocumentFilters();
+    refreshDocumentModule();
+    if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = `Matriz actualizada cargada: ${documentRecords.length} documentos. Esta versión quedó guardada en este navegador.`;
+  });
+
+  documentControls.restore?.addEventListener("click", () => {
+    documentRecords = documentData.documentos || [];
+    documentSummaryRecords = documentData.resumenTipoDocumental || [];
+    localStorage.removeItem("gaia-document-matrix");
+    resetDocumentFilters();
+    refreshDocumentModule();
+    if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz base restaurada.";
+    if (documentControls.upload) documentControls.upload.value = "";
   });
 }
 
@@ -2490,6 +2752,45 @@ function renderExecutionReport(report) {
   `;
 }
 
+async function sha256(text) {
+  if (!window.crypto?.subtle) return "";
+  const encoded = new TextEncoder().encode(text);
+  const hashBuffer = await window.crypto.subtle.digest("SHA-256", encoded);
+  return Array.from(new Uint8Array(hashBuffer)).map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+function unlockExcessContent(profile) {
+  if (!excessAccess.content || !excessAccess.card) return;
+  excessAccess.content.hidden = false;
+  excessAccess.card.style.display = "none";
+  sessionStorage.setItem("gaia-excess-access", profile || "perfil autorizado");
+}
+
+function initExcessAccess() {
+  if (!excessAccess.button) return;
+  const storedProfile = sessionStorage.getItem("gaia-excess-access");
+  if (storedProfile) {
+    unlockExcessContent(storedProfile);
+    return;
+  }
+
+  excessAccess.button.addEventListener("click", async () => {
+    const profile = excessAccess.profile?.value || "";
+    const key = excessAccess.key?.value || "";
+    if (!profile || !key) {
+      if (excessAccess.message) excessAccess.message.textContent = "Selecciona un perfil y escribe la clave de visualización.";
+      return;
+    }
+    const hash = await sha256(key.trim());
+    const fallbackKey = excessAccess.fallbackKeyParts.join("-");
+    if ((hash && hash === excessAccess.expectedHash) || key.trim() === fallbackKey) {
+      unlockExcessContent(profile);
+      return;
+    }
+    if (excessAccess.message) excessAccess.message.textContent = "Clave no válida para visualizar esta sección.";
+  });
+}
+
 function initExcessModule() {
   const projectList = document.getElementById("excessProjectList");
   const reportList = document.getElementById("excessReportList");
@@ -2506,6 +2807,8 @@ function initExcessModule() {
       document.getElementById("excessReports")?.classList.toggle("is-visible", target === "reports");
     });
   });
+
+  initExcessAccess();
 }
 
 function showPanel(panelId) {
