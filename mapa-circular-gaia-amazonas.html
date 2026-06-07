@@ -335,6 +335,31 @@ body.dark .intro {
   bottom: 22%;
 }
 
+.audit-node {
+  right: -9%;
+  top: 2%;
+  width: 32%;
+  height: 32%;
+  z-index: 6;
+  background:
+    linear-gradient(135deg, rgba(246, 242, 234, 0.98), rgba(221, 236, 225, 0.96)),
+    var(--panel);
+  color: var(--verde-nucleo);
+  box-shadow: 0 18px 34px rgba(8, 42, 34, 0.2);
+}
+
+.audit-node .circle-mark {
+  top: 50%;
+  max-width: 90%;
+  transform: translate(-50%, -50%);
+}
+
+.audit-node .circle-mark > span {
+  background: rgba(11, 79, 63, 0.94);
+  color: #fff;
+  white-space: normal;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -1152,6 +1177,138 @@ body.dark .org-person .org-email {
   display: none;
 }
 
+.suggestion-builder,
+.audit-card,
+.audit-report-card {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--panel-suave);
+}
+
+.suggestion-builder h3,
+.audit-card h3,
+.audit-report-card h3 {
+  margin: 0;
+  color: var(--acento-legible);
+}
+
+.suggestion-builder p,
+.audit-card p,
+.audit-report-card p {
+  margin: 0;
+}
+
+.suggestion-grid,
+.audit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.suggestion-grid label,
+.suggestion-full {
+  display: grid;
+  gap: 6px;
+  color: var(--acento-legible);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.suggestion-full {
+  grid-column: 1 / -1;
+}
+
+.suggestion-grid input,
+.suggestion-grid select,
+.suggestion-grid textarea {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--tinta);
+  font: inherit;
+}
+
+.suggestion-grid input,
+.suggestion-grid select {
+  padding: 8px 10px;
+}
+
+.suggestion-grid textarea {
+  min-height: 86px;
+  padding: 9px 10px;
+  resize: vertical;
+}
+
+.suggestion-actions,
+.audit-report-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.suggestion-draft {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-left: 4px solid var(--verde-nucleo);
+  border-radius: 8px;
+  background: rgba(11, 79, 63, 0.07);
+}
+
+.suggestion-draft[hidden] {
+  display: none;
+}
+
+.suggestion-draft h4 {
+  margin: 0;
+  color: var(--acento-legible);
+}
+
+.suggestion-draft dl {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.35fr) 1fr;
+  gap: 8px 12px;
+  margin: 0;
+}
+
+.suggestion-draft dt {
+  color: var(--acento-legible);
+  font-weight: 900;
+}
+
+.suggestion-draft dd {
+  margin: 0;
+}
+
+.audit-tag {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 28px;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(36, 113, 163, 0.13);
+  color: #174e73;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.audit-report-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.audit-report-card ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
 .document-controls label {
   display: grid;
   gap: 6px;
@@ -1176,14 +1333,19 @@ body.dark .org-person .org-email {
 }
 
 .document-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   align-self: end;
   min-height: 38px;
+  padding: 8px 13px;
   border: 0;
   border-radius: 6px;
   background: var(--verde-nucleo);
   color: #fff;
   font: inherit;
   font-weight: 800;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -1430,6 +1592,23 @@ body.dark .access-card {
   background: rgba(143, 227, 186, 0.08);
 }
 
+body.dark .suggestion-builder,
+body.dark .audit-card,
+body.dark .audit-report-card {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: #26352f;
+}
+
+body.dark .suggestion-draft {
+  background: rgba(143, 227, 186, 0.1);
+  border-left-color: #8fe3ba;
+}
+
+body.dark .audit-tag {
+  background: rgba(143, 205, 240, 0.16);
+  color: #b9e2ff;
+}
+
 body.dark .upload-status,
 body.dark .access-message {
   color: #bed1ca;
@@ -1503,6 +1682,18 @@ body.dark .document-file {
   .back-btn {
     justify-content: center;
     width: 100%;
+  }
+
+  .audit-node {
+    right: -2%;
+    top: -4%;
+    width: 30%;
+    height: 30%;
+  }
+
+  .audit-node .circle-mark > span {
+    padding: 6px 7px;
+    font-size: 0.68rem;
   }
 
   .document-card header {
@@ -1617,6 +1808,19 @@ body.dark .document-file {
       </button>
       <div class="subdirection-bridge bridge-stp">Subdirección Técnica y Política<br><span>Articula lo misional</span></div>
       <div class="subdirection-bridge bridge-sde">Subdirección de Desarrollo Estratégico<br><span>Articula apoyo y recursos</span></div>
+      <button class="circle audit-node"
+              type="button"
+              data-title="Revisoría y Auditoría"
+              data-tooltip="<strong>Revisoría y Auditoría</strong><br>Aseguramiento independiente del MOP.<br><em>Rol:</em> informes de auditoría, revisoría fiscal y planes de mejoramiento."
+              data-target="panel-auditoria">
+        <span class="circle-mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 3h9l3 3v15H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+            <path d="M15 3v4h4M9 12l2 2 4-5M9 18h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <span>Revisoría y Auditoría</span>
+        </span>
+      </button>
     </div>
   </section>
 
@@ -1842,6 +2046,74 @@ body.dark .document-file {
     </div>
   </section>
 
+  <section id="panel-auditoria" class="panel wide-panel" aria-labelledby="titulo-auditoria">
+    <nav class="sidebar" aria-label="Secciones del mapa"></nav>
+
+    <div class="content">
+      <div class="panel-toolbar">
+        <button class="back-btn" type="button" data-back>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Regresar al mapa principal
+        </button>
+      </div>
+      <figure class="section-visual">
+        <img src="assets/mop-estrategico.jpg" alt="Paisaje amazónico como referencia visual para el aseguramiento institucional">
+      </figure>
+      <h2 id="titulo-auditoria">Macroproceso de Revisoría y Auditoría</h2>
+      <p>Este macroproceso reúne las revisiones independientes que ayudan a verificar la gestión de la Fundación, fortalecer la confianza institucional y convertir los hallazgos en planes de mejoramiento trazables.</p>
+
+      <div class="audit-grid" aria-label="Componentes de revisoría y auditoría">
+        <article class="audit-card">
+          <span class="audit-tag">Auditoría externa de proyectos</span>
+          <h3>Auditores externos de proyectos</h3>
+          <p><strong>Quién es nuestro auditor:</strong> espacio preparado para registrar la firma auditora, el equipo asignado y los datos de contacto por proyecto.</p>
+          <p>Aquí se podrán consultar los informes de auditoría por proyecto y año, junto con soportes, observaciones relevantes y estado de cierre.</p>
+        </article>
+
+        <article class="audit-card">
+          <span class="audit-tag">Revisoría fiscal</span>
+          <h3>Revisor fiscal</h3>
+          <p><strong>Quién es nuestro revisor fiscal:</strong> espacio preparado para registrar el nombre del revisor fiscal, la firma, vigencia y canales de contacto.</p>
+          <p>Esta sección organizará los informes del revisor fiscal, certificaciones, dictámenes y comunicaciones formales por vigencia.</p>
+        </article>
+      </div>
+
+      <div class="audit-report-grid" aria-label="Repositorios preparados">
+        <article class="audit-report-card">
+          <h3>Informes de auditoría por proyecto y año</h3>
+          <ul>
+            <li>Proyecto auditado</li>
+            <li>Vigencia revisada</li>
+            <li>Firma auditora o auditor responsable</li>
+            <li>Informe final y anexos</li>
+          </ul>
+        </article>
+
+        <article class="audit-report-card">
+          <h3>Planes de mejoramiento</h3>
+          <ul>
+            <li>Hallazgo u oportunidad de mejora</li>
+            <li>Responsable interno</li>
+            <li>Acciones, fechas y evidencia de cierre</li>
+            <li>Estado de avance</li>
+          </ul>
+        </article>
+
+        <article class="audit-report-card">
+          <h3>Informes de revisoría fiscal</h3>
+          <ul>
+            <li>Dictamen o informe por vigencia</li>
+            <li>Estados financieros asociados</li>
+            <li>Recomendaciones y seguimiento</li>
+            <li>Soportes institucionales</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section id="panel-documentos" class="panel document-panel" aria-labelledby="titulo-documentos">
     <nav class="sidebar" aria-label="Secciones del mapa"></nav>
 
@@ -1939,6 +2211,83 @@ body.dark .document-file {
 
         <p class="document-results-meta" id="docResultsMeta">Cargando documentos...</p>
         <div class="document-list" id="docList"></div>
+
+        <section class="suggestion-builder" aria-labelledby="titulo-sugerencia-documento">
+          <h3 id="titulo-sugerencia-documento">¿No encontraste el documento que buscabas?</h3>
+          <p>Si una acción institucional no está sistematizada en el listado maestro, puedes construir una fase inicial de propuesta para que GPC revise si debe convertirse en proceso, procedimiento, guía, manual, política, formato u otro documento del MOP.</p>
+
+          <form id="docSuggestionForm">
+            <div class="suggestion-grid">
+              <label>
+                Tipo de documento sugerido
+                <select name="tipo">
+                  <option>Política</option>
+                  <option>Procedimiento</option>
+                  <option>Guía</option>
+                  <option>Manual</option>
+                  <option>Formato</option>
+                  <option>Matriz</option>
+                  <option>Instructivo</option>
+                  <option>Otro</option>
+                </select>
+              </label>
+              <label>
+                Nombre tentativo
+                <input name="nombre" type="text" placeholder="Ej. Política de vinculación de pasantes universitarios">
+              </label>
+              <label>
+                Macroproceso relacionado
+                <select name="macroproceso">
+                  <option>Gobernanza y Propósito</option>
+                  <option>Misional</option>
+                  <option>Apoyo</option>
+                  <option>Estratégico</option>
+                  <option>Revisoría y Auditoría</option>
+                  <option>Por definir</option>
+                </select>
+              </label>
+              <label>
+                Dependencia solicitante
+                <input name="dependencia" type="text" placeholder="Ej. THB, CFI, SLS, TIC, AJL, GPC">
+              </label>
+              <label class="suggestion-full">
+                ¿Qué necesidad o situación quieres resolver?
+                <textarea name="necesidad" placeholder="Describe qué está pasando hoy y por qué hace falta documentarlo."></textarea>
+              </label>
+              <label class="suggestion-full">
+                ¿Cuál sería el objetivo del documento?
+                <textarea name="objetivo" placeholder="Explica qué debería ordenar, orientar, controlar o facilitar este documento."></textarea>
+              </label>
+              <label class="suggestion-full">
+                ¿A quién aplica y hasta dónde llega?
+                <textarea name="alcance" placeholder="Indica equipos, cargos, sedes, territorios, proyectos o situaciones incluidas."></textarea>
+              </label>
+              <label class="suggestion-full">
+                ¿Qué temas mínimos debería contener?
+                <textarea name="contenido" placeholder="Enumera pasos, criterios, responsables, documentos relacionados o controles necesarios."></textarea>
+              </label>
+              <label class="suggestion-full">
+                ¿Qué riesgo existe si no se documenta?
+                <textarea name="riesgos" placeholder="Ej. decisiones inconsistentes, reprocesos, falta de trazabilidad, incumplimiento normativo."></textarea>
+              </label>
+              <label>
+                Nombre de quien propone
+                <input name="solicitante" type="text" placeholder="Tu nombre">
+              </label>
+              <label>
+                Correo institucional
+                <input name="correo" type="email" placeholder="nombre@gaiaamazonas.org">
+              </label>
+            </div>
+
+            <div class="suggestion-actions">
+              <button class="document-reset" type="button" id="docSuggestionPreview">Construir fase inicial</button>
+              <a class="document-reset secondary" id="docSuggestionSend" href="mailto:ivan.bernal@gaiaamazonas.org" hidden>Enviar sugerencia de nuevo documento</a>
+            </div>
+          </form>
+
+          <article class="suggestion-draft" id="docSuggestionDraft" hidden aria-live="polite"></article>
+        </section>
       </div>
     </div>
   </section>
@@ -2104,6 +2453,12 @@ const documentKpis = {
   construccion: document.getElementById("docConstruccion"),
   clasificar: document.getElementById("docClasificar")
 };
+const documentSuggestion = {
+  form: document.getElementById("docSuggestionForm"),
+  preview: document.getElementById("docSuggestionPreview"),
+  send: document.getElementById("docSuggestionSend"),
+  draft: document.getElementById("docSuggestionDraft")
+};
 const excessData = window.EXCEDENTES_MOP_DATA || { proyectos: [], informes: [] };
 const excessAccess = {
   card: document.getElementById("excessAccessCard"),
@@ -2137,6 +2492,11 @@ const sidebarItems = [
     id: "panel-estrategico",
     title: "Estratégico",
     description: "Visión amazónica, planeación y alianzas multiactor."
+  },
+  {
+    id: "panel-auditoria",
+    title: "Revisoría y auditoría",
+    description: "Auditorías externas, revisoría fiscal y planes de mejoramiento."
   },
   {
     id: "panel-documentos",
@@ -2683,6 +3043,82 @@ function initDocumentModule() {
   });
 }
 
+function getSuggestionValue(formData, name, fallback = "Por completar") {
+  const value = String(formData.get(name) || "").trim();
+  return value || fallback;
+}
+
+function buildDocumentSuggestion() {
+  if (!documentSuggestion.form || !documentSuggestion.draft || !documentSuggestion.send) return;
+  const formData = new FormData(documentSuggestion.form);
+  const fields = {
+    tipo: getSuggestionValue(formData, "tipo"),
+    nombre: getSuggestionValue(formData, "nombre", "Documento por nombrar"),
+    macroproceso: getSuggestionValue(formData, "macroproceso"),
+    dependencia: getSuggestionValue(formData, "dependencia"),
+    necesidad: getSuggestionValue(formData, "necesidad"),
+    objetivo: getSuggestionValue(formData, "objetivo"),
+    alcance: getSuggestionValue(formData, "alcance"),
+    contenido: getSuggestionValue(formData, "contenido"),
+    riesgos: getSuggestionValue(formData, "riesgos"),
+    solicitante: getSuggestionValue(formData, "solicitante"),
+    correo: getSuggestionValue(formData, "correo")
+  };
+
+  const subject = `Sugerencia de nuevo documento MOP - ${fields.nombre}`;
+  const body = [
+    "Hola Ivan,",
+    "",
+    "Comparto una sugerencia de nuevo documento para revisión de GPC - Gestión de Procesos y Cumplimiento Institucional.",
+    "",
+    `Tipo de documento sugerido: ${fields.tipo}`,
+    `Nombre tentativo: ${fields.nombre}`,
+    `Macroproceso relacionado: ${fields.macroproceso}`,
+    `Dependencia solicitante: ${fields.dependencia}`,
+    "",
+    `Necesidad o situación a resolver: ${fields.necesidad}`,
+    "",
+    `Objetivo inicial: ${fields.objetivo}`,
+    "",
+    `Alcance propuesto: ${fields.alcance}`,
+    "",
+    `Temas mínimos sugeridos: ${fields.contenido}`,
+    "",
+    `Riesgo de no documentarlo: ${fields.riesgos}`,
+    "",
+    `Solicitante: ${fields.solicitante}`,
+    `Correo institucional: ${fields.correo}`,
+    "",
+    "Quedo atento/a a la revisión para definir si debe iniciar construcción, ajuste documental o incorporación al listado maestro."
+  ].join("\n");
+
+  documentSuggestion.draft.innerHTML = `
+    <h4>Fase inicial propuesta</h4>
+    <dl>
+      <dt>Documento</dt><dd>${escapeHtml(fields.tipo)} - ${escapeHtml(fields.nombre)}</dd>
+      <dt>Ubicación MOP</dt><dd>${escapeHtml(fields.macroproceso)} / ${escapeHtml(fields.dependencia)}</dd>
+      <dt>Necesidad</dt><dd>${escapeHtml(fields.necesidad)}</dd>
+      <dt>Objetivo</dt><dd>${escapeHtml(fields.objetivo)}</dd>
+      <dt>Alcance</dt><dd>${escapeHtml(fields.alcance)}</dd>
+      <dt>Contenido mínimo</dt><dd>${escapeHtml(fields.contenido)}</dd>
+      <dt>Riesgo</dt><dd>${escapeHtml(fields.riesgos)}</dd>
+      <dt>Solicitante</dt><dd>${escapeHtml(fields.solicitante)} - ${escapeHtml(fields.correo)}</dd>
+    </dl>
+  `;
+  documentSuggestion.draft.hidden = false;
+  documentSuggestion.send.href = `mailto:ivan.bernal@gaiaamazonas.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  documentSuggestion.send.hidden = false;
+}
+
+function initDocumentSuggestion() {
+  if (!documentSuggestion.preview || !documentSuggestion.form) return;
+  documentSuggestion.preview.addEventListener("click", buildDocumentSuggestion);
+  documentSuggestion.form.addEventListener("input", () => {
+    if (documentSuggestion.send) documentSuggestion.send.hidden = true;
+    if (documentSuggestion.draft) documentSuggestion.draft.hidden = true;
+  });
+}
+
 function findExcessValue(item, names) {
   const entries = Object.entries(item || {});
   for (const name of names) {
@@ -2964,6 +3400,7 @@ toggleDark.addEventListener("click", () => {
 
 setDarkMode(localStorage.getItem("gaia-map-dark-mode") === "true");
 initDocumentModule();
+initDocumentSuggestion();
 initExcessModule();
 
 document.querySelectorAll("[data-audio]").forEach((button) => {
