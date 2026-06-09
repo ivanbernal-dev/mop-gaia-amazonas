@@ -4,10 +4,46 @@ window.AUDITORIA_MOP_DATA = {
     revisorFiscal: "SAS AUDITORES & CONSULTORES SAS."
   },
   auditoriaExterna: [
-    { anio: "2021", documentos: [] },
-    { anio: "2022", documentos: [] },
-    { anio: "2023", documentos: [] },
-    { anio: "2024", documentos: [] },
+    {
+      anio: "2021",
+      documentos: [
+        {
+          titulo: "Auditoría institucional GAIA 2021",
+          descripcion: "Informe de auditoría institucional de la Fundación Gaia Amazonas para la vigencia 2021.",
+          url: "assets/docs/auditoria/proyectos/2021/FUNDACION GAIA-Auditoria Institucional - 2021.pdf"
+        }
+      ]
+    },
+    {
+      anio: "2022",
+      documentos: [
+        {
+          titulo: "Informe auditoría institucional GAIA 2022",
+          descripcion: "Informe de auditoría institucional de la Fundación Gaia Amazonas para la vigencia 2022.",
+          url: "assets/docs/auditoria/proyectos/2022/8. INFORME AUDITORIA INSTITUCIONAL GAIA 2022.pdf"
+        }
+      ]
+    },
+    {
+      anio: "2023",
+      documentos: [
+        {
+          titulo: "Reporte de auditoría GAIA institucional 2023",
+          descripcion: "Reporte de auditoría institucional de la Fundación Gaia Amazonas para la vigencia 2023.",
+          url: "assets/docs/auditoria/proyectos/2023/1-REPORTE DE AUDITORIA -GAIA-INSTITUCIONAL 2023.pdf"
+        }
+      ]
+    },
+    {
+      anio: "2024",
+      documentos: [
+        {
+          titulo: "Reporte de auditoría GAIA institucional 2024",
+          descripcion: "Reporte de auditoría institucional correspondiente al periodo enero a diciembre de 2024.",
+          url: "assets/docs/auditoria/proyectos/2024/A-REPORTE DE AUDITORIA GAIA INSTITUCIONAL. Ene a Dic-2024 -F.pdf"
+        }
+      ]
+    },
     { anio: "2025", documentos: [] },
     { anio: "2026", documentos: [] }
   ],
