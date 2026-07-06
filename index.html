@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas</title>
-<link rel="stylesheet" href="assets/css/mop.css?v=20260702-2">
+<link rel="stylesheet" href="assets/css/mop.css?v=20260706-admin">
 </head>
 <body>
 <main class="page">
@@ -368,14 +368,14 @@
         <article class="audit-card">
           <span class="audit-tag">Auditoría externa de proyectos</span>
           <h3>Auditores externos de proyectos</h3>
-          <p><strong>Quién es nuestro auditor:</strong> CIP. REVISORES FISCALES AUDITORES & CONSULTORES LTDA. - CIP LTDA.</p>
+          <p><strong>Quién es nuestro auditor:</strong> <span id="auditExternalFirm">CIP. REVISORES FISCALES AUDITORES & CONSULTORES LTDA. - CIP LTDA.</span></p>
           <p>Aquí se podrán consultar y descargar los informes de auditoría externa por proyecto y por año, junto con soportes, observaciones relevantes y estado de cierre.</p>
         </article>
 
         <article class="audit-card">
           <span class="audit-tag">Revisoría fiscal</span>
           <h3>Revisor fiscal</h3>
-          <p><strong>Quién es nuestro revisor fiscal:</strong> SAS AUDITORES & CONSULTORES SAS.</p>
+          <p><strong>Quién es nuestro revisor fiscal:</strong> <span id="auditFiscalFirm">SAS AUDITORES & CONSULTORES SAS.</span></p>
           <p>Esta sección organizará los informes del revisor fiscal, certificaciones, dictámenes y comunicaciones formales por vigencia.</p>
         </article>
       </div>
@@ -434,22 +434,22 @@
       <p>Esta aplicación permite revisar los procesos, procedimientos, manuales, políticas, formatos y demás documentos asociados al Modelo de Operación por Procesos. La información se toma del listado maestro de control de información documentada y del resumen documental por tipo.</p>
 
       <div class="document-app" aria-label="Aplicación de consulta documental">
-        <details class="admin-gate" id="docAdminGate">
-          <summary>Administración documental</summary>
-          <p>La carga masiva está reservada para el administrador del MOP. Este control permite revisar una matriz actualizada antes de publicarla.</p>
+        <details class="admin-gate admin-login" id="docAdminGate">
+          <summary>Acceso administrador MOP</summary>
+          <p>El perfil administrador permite gestionar visibilidad documental, cargar matrices actualizadas y preparar cambios de responsables, equipos o firmas auditoras antes de publicarlos.</p>
           <div class="admin-gate-actions">
             <label>
               Clave de administrador
               <input id="docAdminKey" type="password" autocomplete="off" placeholder="Clave temporal">
             </label>
-            <button class="document-reset" type="button" id="docAdminUnlock">Activar carga masiva</button>
+            <button class="document-reset" type="button" id="docAdminUnlock">Ingresar como administrador</button>
           </div>
-          <p class="upload-status" id="docAdminStatus">Carga masiva oculta para usuarios de consulta.</p>
+          <p class="upload-status" id="docAdminStatus">Administración oculta para usuarios de consulta.</p>
         </details>
 
         <section class="document-upload admin-only" id="docAdminArea" aria-labelledby="titulo-carga-matriz" hidden>
-          <h3 id="titulo-carga-matriz">Carga masiva de matriz actualizada</h3>
-          <p>Para actualizar el listado de forma masiva, exporta la pestaña principal de la matriz desde Excel como <strong>CSV UTF-8</strong> y súbela aquí. La actualización se aplica en este navegador y permite revisar la nueva versión antes de publicarla.</p>
+          <h3 id="titulo-carga-matriz">Administración documental y contenidos MOP</h3>
+          <p>Este módulo permite preparar cambios administrativos desde el navegador. Para que los cambios sean visibles para todas las personas, exporta la configuración o publica la nueva matriz en GitHub.</p>
           <div class="document-upload-actions">
             <label>
               Matriz actualizada
@@ -458,6 +458,62 @@
             <button class="document-reset" type="button" id="docRestoreBase">Restablecer matriz base</button>
           </div>
           <p class="upload-status" id="docUploadStatus">Matriz base cargada desde el listado maestro vigente.</p>
+
+          <div class="admin-manager-grid">
+            <section class="admin-manager-card" aria-labelledby="titulo-visibilidad-documentos">
+              <h4 id="titulo-visibilidad-documentos">Visibilidad de documentos</h4>
+              <p>Activa o desactiva documentos del listado público. Los documentos ocultos no aparecen en filtros, indicadores ni resultados de consulta.</p>
+              <div class="admin-inline-actions">
+                <label>
+                  Buscar documento
+                  <input id="adminDocVisibilitySearch" type="search" placeholder="Código, nombre, proceso...">
+                </label>
+                <button class="document-reset secondary" type="button" id="adminShowFilteredDocs">Mostrar filtrados</button>
+                <button class="document-reset secondary danger" type="button" id="adminHideFilteredDocs">Ocultar filtrados</button>
+              </div>
+              <p class="upload-status" id="adminVisibilityStatus">Todos los documentos visibles.</p>
+              <div class="admin-document-list" id="adminDocVisibilityList"></div>
+            </section>
+
+            <section class="admin-manager-card" aria-labelledby="titulo-contenidos-mop">
+              <h4 id="titulo-contenidos-mop">Contenidos editables del MOP</h4>
+              <p>Actualiza responsables, equipos, información relevante de dependencias y firmas de auditoría. Estos cambios se aplican en este navegador y pueden exportarse.</p>
+              <label>
+                Dependencia o componente
+                <select id="adminContentTarget"></select>
+              </label>
+              <label>
+                Responsable
+                <input id="adminContentResponsible" type="text" placeholder="Nombre o firma responsable">
+              </label>
+              <label>
+                Resumen
+                <textarea id="adminContentSummary" placeholder="Resumen breve que aparecerá en el micrositio"></textarea>
+              </label>
+              <label>
+                Equipo o conformación
+                <textarea id="adminContentTeam" placeholder="Una persona por línea o texto HTML sencillo"></textarea>
+              </label>
+              <label>
+                Información relevante
+                <textarea id="adminContentRelevant" placeholder="Procesos, enlaces, funciones, datos clave o notas"></textarea>
+              </label>
+              <div class="admin-inline-actions">
+                <button class="document-reset" type="button" id="adminSaveContent">Guardar cambio local</button>
+                <button class="document-reset secondary" type="button" id="adminResetContent">Restablecer componente</button>
+              </div>
+              <p class="upload-status" id="adminContentStatus">Selecciona una dependencia para editar.</p>
+            </section>
+          </div>
+
+          <div class="admin-inline-actions">
+            <button class="document-reset" type="button" id="adminExportConfig">Exportar configuración MOP</button>
+            <label class="admin-import-label">
+              Importar configuración
+              <input id="adminImportConfig" type="file" accept=".json,application/json">
+            </label>
+          </div>
+          <p class="upload-status" id="adminConfigStatus">La configuración administrativa se guarda en este navegador.</p>
         </section>
 
         <details class="suggestion-builder" aria-labelledby="titulo-sugerencia-documento">

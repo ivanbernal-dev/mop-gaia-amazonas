@@ -1218,7 +1218,9 @@ body.dark .org-person .org-email {
 
 .document-upload label,
 .access-card label,
-.admin-gate label {
+.admin-gate label,
+.admin-manager-card label,
+.admin-import-label {
   display: grid;
   gap: 6px;
   color: var(--acento-legible);
@@ -1229,7 +1231,11 @@ body.dark .org-person .org-email {
 .document-upload input,
 .access-card input,
 .access-card select,
-.admin-gate input {
+.admin-gate input,
+.admin-manager-card input,
+.admin-manager-card select,
+.admin-manager-card textarea,
+.admin-import-label input {
   min-height: 38px;
   border: 1px solid var(--linea);
   border-radius: 6px;
@@ -1240,8 +1246,17 @@ body.dark .org-person .org-email {
 
 .document-upload input,
 .access-card input,
-.admin-gate input {
+.admin-gate input,
+.admin-manager-card input,
+.admin-manager-card select,
+.admin-import-label input {
   padding: 8px 10px;
+}
+
+.admin-manager-card textarea {
+  min-height: 92px;
+  padding: 9px 10px;
+  resize: vertical;
 }
 
 .upload-status,
@@ -1257,6 +1272,93 @@ body.dark .org-person .org-email {
 
 .admin-only[hidden] {
   display: none;
+}
+
+.admin-login {
+  border-style: dashed;
+}
+
+.admin-manager-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.admin-manager-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.admin-manager-card h4 {
+  margin: 0;
+  color: var(--acento-legible);
+  font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.admin-manager-card p {
+  margin: 0;
+}
+
+.admin-inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+}
+
+.admin-inline-actions label {
+  flex: 1 1 220px;
+}
+
+.document-reset.danger {
+  background: var(--gaia-wine-700);
+}
+
+.admin-document-list {
+  display: grid;
+  gap: 8px;
+  max-height: 360px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.admin-document-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 10px;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  background: var(--panel-suave);
+}
+
+.admin-document-item input {
+  margin-top: 2px;
+}
+
+.admin-document-item strong,
+.admin-document-item small {
+  display: block;
+}
+
+.admin-document-item small {
+  margin-top: 4px;
+  color: #48645c;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.document-empty-state {
+  border-style: dashed;
+  background: rgba(28, 75, 81, 0.05);
 }
 
 .admin-gate summary,
@@ -1769,6 +1871,20 @@ body.dark .document-upload,
 body.dark .access-card,
 body.dark .admin-gate {
   border-color: rgba(143, 227, 186, 0.18);
+  background: rgba(143, 227, 186, 0.08);
+}
+
+body.dark .admin-manager-card,
+body.dark .admin-document-item {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: #26352f;
+}
+
+body.dark .admin-document-item small {
+  color: #bed1ca;
+}
+
+body.dark .document-empty-state {
   background: rgba(143, 227, 186, 0.08);
 }
 

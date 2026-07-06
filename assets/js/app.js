@@ -38,6 +38,24 @@ const documentAdmin = {
   status: document.getElementById("docAdminStatus"),
   expectedKey: "GAIA-GPC-2026"
 };
+const adminControls = {
+  visibilitySearch: document.getElementById("adminDocVisibilitySearch"),
+  visibilityList: document.getElementById("adminDocVisibilityList"),
+  visibilityStatus: document.getElementById("adminVisibilityStatus"),
+  showFiltered: document.getElementById("adminShowFilteredDocs"),
+  hideFiltered: document.getElementById("adminHideFilteredDocs"),
+  contentTarget: document.getElementById("adminContentTarget"),
+  contentResponsible: document.getElementById("adminContentResponsible"),
+  contentSummary: document.getElementById("adminContentSummary"),
+  contentTeam: document.getElementById("adminContentTeam"),
+  contentRelevant: document.getElementById("adminContentRelevant"),
+  saveContent: document.getElementById("adminSaveContent"),
+  resetContent: document.getElementById("adminResetContent"),
+  contentStatus: document.getElementById("adminContentStatus"),
+  exportConfig: document.getElementById("adminExportConfig"),
+  importConfig: document.getElementById("adminImportConfig"),
+  configStatus: document.getElementById("adminConfigStatus")
+};
 const documentKpis = {
   total: document.getElementById("docTotal"),
   vigentes: document.getElementById("docVigentes"),
@@ -53,6 +71,10 @@ const documentSuggestion = {
 };
 const excessData = window.EXCEDENTES_MOP_DATA || { proyectos: [], informes: [] };
 const auditData = window.AUDITORIA_MOP_DATA || { auditoriaExterna: [], revisoriaFiscal: [], planesMejoramiento: [] };
+const defaultAuditFirms = {
+  externalFirm: "CIP. REVISORES FISCALES AUDITORES & CONSULTORES LTDA. - CIP LTDA.",
+  fiscalFirm: "SAS AUDITORES & CONSULTORES SAS."
+};
 const excessAccess = {
   card: document.getElementById("excessAccessCard"),
   profile: document.getElementById("excessProfile"),
@@ -65,6 +87,9 @@ const excessAccess = {
 };
 const defaultPageTitle = "Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas";
 let activePanelId = "";
+let documentVisibility = {};
+let dependencyOverrides = {};
+let auditOverrides = {};
 const sidebarItems = [
   {
     id: "panel-nucleo",
@@ -343,6 +368,77 @@ function cleanDocValue(value, fallback = "Por clasificar") {
   return cleaned || fallback;
 }
 
+function getDocumentKey(record) {
+  return normalizeText(`${record.codigo || "sin-codigo"}|${record.nombre || ""}|${record.proceso || ""}`);
+}
+
+function loadJsonSetting(key, fallback) {
+  try {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : fallback;
+  } catch {
+    localStorage.removeItem(key);
+    return fallback;
+  }
+}
+
+function saveAdminSettings() {
+  localStorage.setItem("gaia-document-visibility", JSON.stringify(documentVisibility));
+  localStorage.setItem("gaia-dependency-overrides", JSON.stringify(dependencyOverrides));
+  localStorage.setItem("gaia-audit-overrides", JSON.stringify(auditOverrides));
+}
+
+function loadAdminSettings() {
+  documentVisibility = loadJsonSetting("gaia-document-visibility", {});
+  dependencyOverrides = loadJsonSetting("gaia-dependency-overrides", {});
+  auditOverrides = loadJsonSetting("gaia-audit-overrides", {});
+}
+
+function isDocumentVisible(record) {
+  return documentVisibility[getDocumentKey(record)] !== false;
+}
+
+function getVisibleDocumentRecords() {
+  return documentRecords.filter(isDocumentVisible);
+}
+
+function hasActiveDocumentFilter() {
+  return Boolean(
+    normalizeText(documentControls.search?.value || "") ||
+    documentControls.macro?.value ||
+    documentControls.proceso?.value ||
+    documentControls.tipo?.value ||
+    documentControls.estado?.value
+  );
+}
+
+function textToHtml(value) {
+  const trimmed = String(value || "").trim();
+  if (!trimmed) return "";
+  if (trimmed.startsWith("<")) return trimmed;
+  return trimmed
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => `<p>${escapeHtml(line)}</p>`)
+    .join("");
+}
+
+function htmlToEditorText(value) {
+  return String(value || "")
+    .replace(/<\/p>\s*<p>/gi, "\n")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/?p>/gi, "")
+    .trim();
+}
+
+function getMergedDependencyDetail(title) {
+  return {
+    ...(dependencyDetails[title] || {}),
+    ...(dependencyOverrides[title] || {})
+  };
+}
+
 function getFieldFromRow(row, aliases) {
   const entries = Object.entries(row);
   for (const alias of aliases) {
@@ -438,13 +534,15 @@ function resetDocumentFilters() {
 }
 
 function refreshDocumentModule() {
-  fillDocumentSelect(documentControls.macro, documentRecords, "macroproceso", "Todos los macroprocesos");
-  fillDocumentSelect(documentControls.proceso, documentRecords, "proceso", "Todos los procesos");
-  fillDocumentSelect(documentControls.tipo, documentRecords, "tipoDocumental", "Todos los tipos");
-  fillDocumentSelect(documentControls.estado, documentRecords, "estado", "Todos los estados");
+  const visibleRecords = getVisibleDocumentRecords();
+  fillDocumentSelect(documentControls.macro, visibleRecords, "macroproceso", "Todos los macroprocesos");
+  fillDocumentSelect(documentControls.proceso, visibleRecords, "proceso", "Todos los procesos");
+  fillDocumentSelect(documentControls.tipo, visibleRecords, "tipoDocumental", "Todos los tipos");
+  fillDocumentSelect(documentControls.estado, visibleRecords, "estado", "Todos los estados");
   updateDocumentKpis();
   renderDocumentSummary();
   renderDocumentList();
+  renderAdminVisibilityList();
 }
 
 function fillDocumentSelect(select, records, field, label) {
@@ -485,13 +583,14 @@ function matchesDocumentFilters(record) {
 
 function documentStatusCount(term) {
   const normalizedTerm = normalizeText(term);
-  return documentRecords.filter((record) => normalizeText(record.estado).includes(normalizedTerm)).length;
+  return getVisibleDocumentRecords().filter((record) => normalizeText(record.estado).includes(normalizedTerm)).length;
 }
 
 function updateDocumentKpis() {
   if (!documentKpis.total) return;
-  const pending = documentRecords.filter((record) => !record.macroproceso || !record.tipoDocumental || !record.codigo).length;
-  documentKpis.total.textContent = documentRecords.length;
+  const visibleRecords = getVisibleDocumentRecords();
+  const pending = visibleRecords.filter((record) => !record.macroproceso || !record.tipoDocumental || !record.codigo).length;
+  documentKpis.total.textContent = visibleRecords.length;
   documentKpis.vigentes.textContent = documentStatusCount("vigente");
   documentKpis.actualizacion.textContent = documentStatusCount("actualizacion");
   documentKpis.construccion.textContent = documentStatusCount("construccion");
@@ -500,7 +599,8 @@ function updateDocumentKpis() {
 
 function renderDocumentSummary() {
   if (!documentControls.summary) return;
-  documentControls.summary.innerHTML = (documentSummaryRecords || []).map((item) => `
+  const summaryRecords = buildDocumentSummary(getVisibleDocumentRecords());
+  documentControls.summary.innerHTML = (summaryRecords || []).map((item) => `
     <tr>
       <td>${escapeHtml(item.tipoDocumental)}</td>
       <td>${escapeHtml(item.vigentes)}</td>
@@ -585,8 +685,19 @@ function renderDocumentCard(record) {
 
 function renderDocumentList() {
   if (!documentControls.list || !documentControls.meta) return;
-  const filtered = documentRecords.filter(matchesDocumentFilters);
-  documentControls.meta.textContent = `${filtered.length} de ${documentRecords.length} documentos encontrados`;
+  const visibleRecords = getVisibleDocumentRecords();
+  if (!hasActiveDocumentFilter()) {
+    documentControls.meta.textContent = `${visibleRecords.length} documentos visibles. Usa los filtros para consultar el listado.`;
+    documentControls.list.innerHTML = `
+      <article class="document-card document-empty-state">
+        <h3>Selecciona un filtro para iniciar la consulta</h3>
+        <p>Busca por código, nombre, palabra clave, macroproceso, proceso, tipo documental o estado. Así el MOP muestra solo los documentos relacionados con la necesidad de consulta.</p>
+      </article>
+    `;
+    return;
+  }
+  const filtered = visibleRecords.filter(matchesDocumentFilters);
+  documentControls.meta.textContent = `${filtered.length} de ${visibleRecords.length} documentos visibles encontrados`;
   documentControls.list.innerHTML = filtered.length
     ? filtered.map(renderDocumentCard).join("")
     : `<article class="document-card"><h3>No se encontraron documentos</h3><p>Ajusta los filtros o borra la búsqueda para ver más registros.</p></article>`;
@@ -644,12 +755,200 @@ function initDocumentModule() {
   });
 }
 
+function getAdminVisibilityRecords() {
+  const query = normalizeText(adminControls.visibilitySearch?.value || "");
+  if (!query) return documentRecords;
+  return documentRecords.filter((record) => normalizeText([
+    record.codigo,
+    record.nombre,
+    record.macroproceso,
+    record.proceso,
+    record.tipoDocumental,
+    record.estado,
+    record.dependencia
+  ].join(" ")).includes(query));
+}
+
+function updateAdminVisibilityStatus() {
+  if (!adminControls.visibilityStatus) return;
+  const hidden = documentRecords.filter((record) => !isDocumentVisible(record)).length;
+  const visible = documentRecords.length - hidden;
+  adminControls.visibilityStatus.textContent = `${visible} visibles y ${hidden} ocultos de ${documentRecords.length} documentos registrados.`;
+}
+
+function renderAdminVisibilityList() {
+  if (!adminControls.visibilityList) return;
+  const records = getAdminVisibilityRecords();
+  updateAdminVisibilityStatus();
+  adminControls.visibilityList.innerHTML = records.length
+    ? records.map((record) => {
+      const key = getDocumentKey(record);
+      const checked = isDocumentVisible(record) ? "checked" : "";
+      return `
+        <label class="admin-document-item">
+          <input type="checkbox" data-admin-doc-key="${escapeHtml(key)}" ${checked}>
+          <span>
+            <strong>${escapeHtml(cleanDocValue(record.codigo, "Sin código"))} - ${escapeHtml(cleanDocValue(record.nombre, "Documento sin nombre"))}</strong>
+            <small>${escapeHtml(cleanDocValue(record.macroproceso))} / ${escapeHtml(cleanDocValue(record.proceso))} / ${escapeHtml(cleanDocValue(record.estado, "Sin estado"))}</small>
+          </span>
+        </label>
+      `;
+    }).join("")
+    : `<p>No hay documentos para ese filtro administrativo.</p>`;
+}
+
+function setVisibilityForAdminFiltered(isVisible) {
+  getAdminVisibilityRecords().forEach((record) => {
+    const key = getDocumentKey(record);
+    if (isVisible) {
+      delete documentVisibility[key];
+    } else {
+      documentVisibility[key] = false;
+    }
+  });
+  saveAdminSettings();
+  refreshDocumentModule();
+}
+
+function collectAdminContentTargets() {
+  const titles = new Set([
+    "Auditoría externa de proyectos",
+    "Revisoría fiscal",
+    ...Object.keys(dependencyDetails),
+    ...Object.keys(dependencyOverrides)
+  ]);
+  document.querySelectorAll(".dependency-grid li strong").forEach((strong) => {
+    if (strong.textContent.trim()) titles.add(strong.textContent.trim());
+  });
+  return Array.from(titles).sort((a, b) => a.localeCompare(b, "es"));
+}
+
+function getAdminContentData(title) {
+  if (title === "Auditoría externa de proyectos") {
+    return { responsible: auditOverrides.externalFirm || document.getElementById("auditExternalFirm")?.textContent || "", summary: "", team: "", relevant: "" };
+  }
+  if (title === "Revisoría fiscal") {
+    return { responsible: auditOverrides.fiscalFirm || document.getElementById("auditFiscalFirm")?.textContent || "", summary: "", team: "", relevant: "" };
+  }
+  return getMergedDependencyDetail(title);
+}
+
+function populateAdminContentTargets() {
+  if (!adminControls.contentTarget) return;
+  const current = adminControls.contentTarget.value;
+  adminControls.contentTarget.innerHTML = collectAdminContentTargets()
+    .map((title) => `<option value="${escapeHtml(title)}">${escapeHtml(title)}</option>`)
+    .join("");
+  if (current) adminControls.contentTarget.value = current;
+  loadAdminContentEditor();
+}
+
+function loadAdminContentEditor() {
+  if (!adminControls.contentTarget) return;
+  const title = adminControls.contentTarget.value;
+  const data = getAdminContentData(title);
+  if (adminControls.contentResponsible) adminControls.contentResponsible.value = data.responsible || "";
+  if (adminControls.contentSummary) adminControls.contentSummary.value = data.summary || "";
+  if (adminControls.contentTeam) adminControls.contentTeam.value = htmlToEditorText(data.team || "");
+  if (adminControls.contentRelevant) adminControls.contentRelevant.value = htmlToEditorText(data.relevant || "");
+  if (adminControls.contentStatus) adminControls.contentStatus.textContent = title ? `Editando: ${title}` : "Selecciona una dependencia para editar.";
+}
+
+function applyAuditOverrides() {
+  const external = document.getElementById("auditExternalFirm");
+  const fiscal = document.getElementById("auditFiscalFirm");
+  if (external) external.textContent = auditOverrides.externalFirm || defaultAuditFirms.externalFirm;
+  if (fiscal) fiscal.textContent = auditOverrides.fiscalFirm || defaultAuditFirms.fiscalFirm;
+}
+
+function saveAdminContent() {
+  const title = adminControls.contentTarget?.value || "";
+  if (!title) return;
+  const responsible = adminControls.contentResponsible?.value.trim() || "";
+  if (title === "Auditoría externa de proyectos") {
+    auditOverrides.externalFirm = responsible;
+    applyAuditOverrides();
+  } else if (title === "Revisoría fiscal") {
+    auditOverrides.fiscalFirm = responsible;
+    applyAuditOverrides();
+  } else {
+    dependencyOverrides[title] = {
+      ...(dependencyOverrides[title] || {}),
+      responsible,
+      summary: adminControls.contentSummary?.value.trim() || "",
+      team: textToHtml(adminControls.contentTeam?.value || ""),
+      contact: getMergedDependencyDetail(title).contact || "<p>Correos institucionales por completar.</p>",
+      relevant: textToHtml(adminControls.contentRelevant?.value || "")
+    };
+  }
+  saveAdminSettings();
+  populateAdminContentTargets();
+  if (adminControls.contentStatus) adminControls.contentStatus.textContent = `Cambio local guardado para ${title}. Exporta la configuración para publicarlo después.`;
+}
+
+function resetAdminContent() {
+  const title = adminControls.contentTarget?.value || "";
+  if (!title) return;
+  if (title === "Auditoría externa de proyectos") {
+    delete auditOverrides.externalFirm;
+  } else if (title === "Revisoría fiscal") {
+    delete auditOverrides.fiscalFirm;
+  } else {
+    delete dependencyOverrides[title];
+  }
+  saveAdminSettings();
+  applyAuditOverrides();
+  loadAdminContentEditor();
+  if (adminControls.contentStatus) adminControls.contentStatus.textContent = `Se restableció la información base de ${title}.`;
+}
+
+function exportAdminConfig() {
+  const payload = {
+    version: "MOP-GAIA-ADMIN-1",
+    exportedAt: new Date().toISOString(),
+    documentVisibility,
+    dependencyOverrides,
+    auditOverrides
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `configuracion-mop-gaia-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  if (adminControls.configStatus) adminControls.configStatus.textContent = "Configuración exportada.";
+}
+
+async function importAdminConfig(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  try {
+    const parsed = JSON.parse(await file.text());
+    documentVisibility = parsed.documentVisibility || {};
+    dependencyOverrides = parsed.dependencyOverrides || {};
+    auditOverrides = parsed.auditOverrides || {};
+    saveAdminSettings();
+    applyAuditOverrides();
+    refreshDocumentModule();
+    populateAdminContentTargets();
+    if (adminControls.configStatus) adminControls.configStatus.textContent = `Configuración importada desde ${file.name}.`;
+  } catch {
+    if (adminControls.configStatus) adminControls.configStatus.textContent = "No pude leer la configuración. Verifica que sea un archivo JSON exportado desde el MOP.";
+  }
+}
+
 function unlockDocumentAdmin() {
   if (!documentAdmin.area) return;
   documentAdmin.area.hidden = false;
   if (documentAdmin.gate) documentAdmin.gate.open = false;
-  if (documentAdmin.status) documentAdmin.status.textContent = "Carga masiva activa para administrador.";
+  document.body.classList.add("admin-mode");
+  if (documentAdmin.status) documentAdmin.status.textContent = "Modo administrador activo.";
   sessionStorage.setItem("gaia-document-admin", "true");
+  populateAdminContentTargets();
+  renderAdminVisibilityList();
 }
 
 function initDocumentAdmin() {
@@ -663,8 +962,27 @@ function initDocumentAdmin() {
       unlockDocumentAdmin();
       return;
     }
-    if (documentAdmin.status) documentAdmin.status.textContent = "Clave no válida. La carga masiva sigue oculta.";
+    if (documentAdmin.status) documentAdmin.status.textContent = "Clave no válida. La administración sigue oculta.";
   });
+  adminControls.visibilitySearch?.addEventListener("input", renderAdminVisibilityList);
+  adminControls.visibilityList?.addEventListener("change", (event) => {
+    const input = event.target.closest("[data-admin-doc-key]");
+    if (!input) return;
+    if (input.checked) {
+      delete documentVisibility[input.dataset.adminDocKey];
+    } else {
+      documentVisibility[input.dataset.adminDocKey] = false;
+    }
+    saveAdminSettings();
+    refreshDocumentModule();
+  });
+  adminControls.showFiltered?.addEventListener("click", () => setVisibilityForAdminFiltered(true));
+  adminControls.hideFiltered?.addEventListener("click", () => setVisibilityForAdminFiltered(false));
+  adminControls.contentTarget?.addEventListener("change", loadAdminContentEditor);
+  adminControls.saveContent?.addEventListener("click", saveAdminContent);
+  adminControls.resetContent?.addEventListener("click", resetAdminContent);
+  adminControls.exportConfig?.addEventListener("click", exportAdminConfig);
+  adminControls.importConfig?.addEventListener("change", importAdminConfig);
 }
 
 function getSuggestionValue(formData, name, fallback = "Por completar") {
@@ -1063,7 +1381,7 @@ function volver() {
 
 function getDependencyData(card) {
   const title = card.querySelector("strong")?.textContent?.trim() || "Dependencia";
-  const detail = dependencyDetails[title] || {};
+  const detail = getMergedDependencyDetail(title);
   const lines = card.innerText.split("\n").map((line) => line.trim()).filter(Boolean);
   const responsibleLine = lines.find((line) => /^Responsables?:|^Responsable técnico:/i.test(line)) || "Responsable: por completar";
   const summary = lines
@@ -1073,7 +1391,7 @@ function getDependencyData(card) {
   return {
     title,
     responsible: detail.responsible || responsibleLine.replace(/^Responsables?:\s*/i, "").replace(/^Responsable técnico:\s*/i, ""),
-    summary: summary || "Espacio preparado para ampliar la función, alcance, equipo y datos relevantes de esta dependencia.",
+    summary: detail.summary || summary || "Espacio preparado para ampliar la función, alcance, equipo y datos relevantes de esta dependencia.",
     team: detail.team || "<p>Espacio preparado para nombres, cargos y fotografías.</p>",
     contact: detail.contact || "<p>Espacio preparado para correos institucionales y canales de contacto.</p>",
     relevant: detail.relevant || "<p>Espacio preparado para indicadores, documentos, procesos y enlaces clave.</p>"
@@ -1190,6 +1508,8 @@ toggleDark.addEventListener("click", () => {
 });
 
 setDarkMode(localStorage.getItem("gaia-map-dark-mode") === "true");
+loadAdminSettings();
+applyAuditOverrides();
 initDocumentModule();
 initDocumentAdmin();
 initDocumentSuggestion();
