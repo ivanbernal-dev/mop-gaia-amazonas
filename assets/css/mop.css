@@ -444,6 +444,46 @@ body.dark .gaia-top-nav a.active {
   font-weight: 900;
 }
 
+.gaia-eti-entry {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: clamp(20px, 4vw, 34px);
+  border: 1px solid rgba(28, 75, 81, 0.16);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(227, 170, 86, 0.28), transparent 30%),
+    linear-gradient(145deg, rgba(248, 234, 223, 0.95), rgba(255, 253, 248, 0.96));
+  box-shadow: 0 18px 38px rgba(28, 75, 81, 0.14);
+}
+
+.gaia-eti-entry h3 {
+  margin: 0;
+  color: var(--gaia-teal-900);
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+  line-height: 1.06;
+  text-transform: uppercase;
+}
+
+.gaia-eti-entry p {
+  max-width: 520px;
+  margin: 0;
+  color: var(--texto);
+  font-weight: 700;
+}
+
+.gaia-eti-entry article {
+  display: none;
+}
+
+.gaia-eti-entry .gaia-primary-action {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
 .gaia-timeline {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -630,6 +670,7 @@ body.dark .gaia-hero {
 }
 
 body.dark .gaia-summary-grid article,
+body.dark .gaia-eti-entry,
 body.dark .gaia-sde-grid article,
 body.dark .gaia-org-spine span,
 body.dark .gaia-alliance span,
@@ -641,6 +682,17 @@ body.dark .gaia-coordinations details,
 body.dark .gaia-transition {
   border-color: rgba(143, 227, 186, 0.18);
   background: #26352f;
+  color: #edf6f2;
+}
+
+body.dark .gaia-eti-entry {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(227, 170, 86, 0.22), transparent 32%),
+    linear-gradient(145deg, #26352f, #1b2a25);
+}
+
+body.dark .gaia-eti-entry h3,
+body.dark .gaia-eti-entry p {
   color: #edf6f2;
 }
 
