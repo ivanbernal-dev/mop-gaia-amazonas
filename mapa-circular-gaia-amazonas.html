@@ -20,22 +20,24 @@
   </header>
 
   <nav class="gaia-top-nav" aria-label="Navegación principal del sitio">
-    <a href="#conoce-gaia">Conoce GAIA</a>
-    <a href="#arquitectura-gaia">Arquitectura GAIA</a>
-    <a href="#mop-anillos">Entrar al MOP</a>
+    <button type="button" data-gaia-target="conoce-gaia">Conoce GAIA</button>
+    <button type="button" data-gaia-target="ruta-2030">Ruta 2030</button>
+    <button type="button" data-gaia-target="arquitectura-gaia">Arquitectura GAIA</button>
+    <button type="button" data-gaia-target="coordinaciones-gaia">Coordinaciones</button>
+    <button type="button" data-gaia-target="mop-anillos">Entrar al MOP</button>
     <button type="button" data-nav="panel-documentos">Documentos MOP</button>
     <button type="button" data-nav="panel-excedentes">Excedentes</button>
   </nav>
 
-  <section id="conoce-gaia" class="gaia-section gaia-hero" aria-labelledby="titulo-conoce-gaia">
+  <section id="conoce-gaia" class="gaia-section gaia-view gaia-hero is-active" aria-labelledby="titulo-conoce-gaia">
     <div class="gaia-hero-copy">
       <span class="gaia-eyebrow">Fundación Gaia Amazonas</span>
       <h2 id="titulo-conoce-gaia">Esto es GAIA Amazonas</h2>
       <p class="gaia-lead">Una organización que acompaña la protección de la vida, la integridad territorial de la Amazonía y el fortalecimiento de los gobiernos indígenas.</p>
       <p>GAIA Amazonas se encuentra en una nueva etapa de su trayectoria. Después de más de tres décadas de trabajo conjunto con los pueblos indígenas, y sobre una historia de 50 años de lucha por territorios, derechos y gobiernos indígenas, la Fundación fortalece su voz propia para contribuir a las transformaciones que definirán el futuro de la Amazonía.</p>
       <div class="gaia-actions">
-        <a class="gaia-primary-action" href="#mop-anillos">Entrar al MOP</a>
-        <a class="gaia-secondary-action" href="#arquitectura-gaia">Ver arquitectura organizacional</a>
+        <button class="gaia-primary-action" type="button" data-gaia-target="mop-anillos">Entrar al MOP</button>
+        <button class="gaia-secondary-action" type="button" data-gaia-target="arquitectura-gaia">Ver arquitectura organizacional</button>
       </div>
     </div>
     <div class="gaia-summary-grid" aria-label="Ejes institucionales de GAIA Amazonas">
@@ -48,7 +50,7 @@
     </div>
   </section>
 
-  <section class="gaia-section gaia-timeline-section" aria-labelledby="titulo-trayectoria-gaia">
+  <section class="gaia-section gaia-view gaia-timeline-section is-active" data-gaia-extra="conoce-gaia" aria-labelledby="titulo-trayectoria-gaia">
     <div class="gaia-section-heading">
       <span class="gaia-eyebrow">Trayectoria</span>
       <h2 id="titulo-trayectoria-gaia">50 años luchando por territorios, derechos y gobiernos indígenas</h2>
@@ -85,7 +87,7 @@
     </div>
   </section>
 
-  <section id="ruta-2030" class="gaia-section gaia-route" aria-labelledby="titulo-ruta-2030">
+  <section id="ruta-2030" class="gaia-section gaia-view gaia-route" aria-labelledby="titulo-ruta-2030">
     <div>
       <span class="gaia-eyebrow">Ruta 2030</span>
       <h2 id="titulo-ruta-2030">Ruta 2030: una nueva etapa institucional</h2>
@@ -115,7 +117,7 @@
     </article>
   </section>
 
-  <section id="arquitectura-gaia" class="gaia-section gaia-architecture" aria-labelledby="titulo-arquitectura-gaia">
+  <section id="arquitectura-gaia" class="gaia-section gaia-view gaia-architecture" aria-labelledby="titulo-arquitectura-gaia">
     <div class="gaia-section-heading">
       <span class="gaia-status-badge">Arquitectura institucional en fortalecimiento / versión para socialización</span>
       <h2 id="titulo-arquitectura-gaia">Arquitectura organizacional de GAIA</h2>
@@ -184,7 +186,7 @@
     </article>
   </section>
 
-  <section id="coordinaciones-gaia" class="gaia-section gaia-coordinations" aria-labelledby="titulo-coordinaciones-gaia">
+  <section id="coordinaciones-gaia" class="gaia-section gaia-view gaia-coordinations" aria-labelledby="titulo-coordinaciones-gaia">
     <div class="gaia-section-heading">
       <span class="gaia-eyebrow">Coordinaciones y equipos</span>
       <h2 id="titulo-coordinaciones-gaia">Equipos que articulan la arquitectura institucional</h2>
@@ -199,16 +201,16 @@
     </div>
   </section>
 
-  <section class="gaia-section gaia-transition" aria-labelledby="titulo-transicion-mop">
+  <section class="gaia-section gaia-view gaia-transition" aria-labelledby="titulo-transicion-mop">
     <div>
       <span class="gaia-eyebrow">Transición al MOP</span>
       <h2 id="titulo-transicion-mop">Del propósito institucional al Modelo de Operación por Procesos</h2>
       <p>Luego de conocer qué es GAIA, su trayectoria, su Ruta 2030 y su arquitectura organizacional, el MOP permite comprender cómo se organiza la operación por macroprocesos, procesos, documentos, responsables y mecanismos de mejora continua.</p>
     </div>
-    <a class="gaia-primary-action" href="#mop-anillos">Entrar a los anillos del MOP</a>
+    <button class="gaia-primary-action" type="button" data-gaia-target="mop-anillos">Entrar a los anillos del MOP</button>
   </section>
 
-  <section id="mop-anillos" class="gaia-mop-anchor" aria-label="Entrada a los anillos del Modelo de Operación por Procesos">
+  <section id="mop-anillos" class="gaia-view gaia-mop-anchor" aria-label="Entrada a los anillos del Modelo de Operación por Procesos">
   <section id="mapSection" class="map-section" aria-label="Mapa circular de macroprocesos">
     <div class="map-context">
       <span class="map-brand">Gaia Amazonas</span>

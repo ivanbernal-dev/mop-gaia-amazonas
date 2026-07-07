@@ -339,11 +339,26 @@ document.querySelectorAll(".sidebar").forEach((sidebar) => {
 });
 
 const navButtons = document.querySelectorAll("[data-nav]");
+const gaiaViewButtons = document.querySelectorAll("[data-gaia-target]");
+const gaiaViews = document.querySelectorAll(".gaia-view");
+const gaiaViewTitles = {
+  "conoce-gaia": "Esto es GAIA Amazonas",
+  "ruta-2030": "Ruta 2030 y Acuerdo Intercultural",
+  "arquitectura-gaia": "Arquitectura organizacional de GAIA",
+  "coordinaciones-gaia": "Coordinaciones y equipos",
+  "mop-anillos": defaultPageTitle
+};
 
 function setActiveNav(panelId) {
   navButtons.forEach((button) => {
     const isActive = button.dataset.nav === panelId;
     button.classList.toggle("active", isActive);
+  });
+}
+
+function setActiveGaiaView(targetId) {
+  gaiaViewButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.gaiaTarget === targetId);
   });
 }
 
@@ -1359,6 +1374,33 @@ function initAuditModule() {
   initAuditYearSelector("auditImprovementYearActions", "auditImprovementDocs", auditData.planesMejoramiento || [], "Plan de mejoramiento");
 }
 
+function showGaiaView(targetId, shouldScroll = true) {
+  document.body.classList.remove("panel-view");
+  panels.forEach((panel) => panel.classList.remove("is-visible"));
+  dependencySite.classList.remove("is-visible");
+  document.querySelectorAll(".sidebar details").forEach((details) => {
+    details.open = false;
+  });
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+
+  gaiaViews.forEach((view) => {
+    const isActive = view.id === targetId || view.dataset.gaiaExtra === targetId;
+    view.classList.toggle("is-active", isActive);
+  });
+
+  mapSection.style.display = targetId === "mop-anillos" ? "grid" : "none";
+  pageTitle.textContent = gaiaViewTitles[targetId] || defaultPageTitle;
+  activePanelId = "";
+  setActiveNav("");
+  setActiveGaiaView(targetId);
+
+  if (shouldScroll) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
 function showPanel(panelId) {
   document.body.classList.add("panel-view");
   mapSection.style.display = "none";
@@ -1373,24 +1415,20 @@ function showPanel(panelId) {
   pageTitle.textContent = panelTitle ? panelTitle.textContent : defaultPageTitle;
   activePanelId = panelId;
   setActiveNav(panelId);
+  setActiveGaiaView("");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function volver() {
-  document.body.classList.remove("panel-view");
   panels.forEach((panel) => panel.classList.remove("is-visible"));
   dependencySite.classList.remove("is-visible");
   document.querySelectorAll(".sidebar details").forEach((details) => {
     details.open = false;
   });
-  mapSection.style.display = "grid";
-  pageTitle.textContent = defaultPageTitle;
-  activePanelId = "";
-  setActiveNav("");
   if ("speechSynthesis" in window) {
     window.speechSynthesis.cancel();
   }
-  document.getElementById("mop-anillos")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  showGaiaView("mop-anillos");
 }
 
 function getDependencyData(card) {
@@ -1437,6 +1475,8 @@ function openDependencySite(card) {
   dependencyRelevant.innerHTML = data.relevant;
   dependencySite.classList.add("is-visible");
   pageTitle.textContent = data.title;
+  setActiveNav("");
+  setActiveGaiaView("");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -1475,6 +1515,10 @@ circles.forEach((circle) => {
 
 navButtons.forEach((button) => {
   button.addEventListener("click", () => showPanel(button.dataset.nav));
+});
+
+gaiaViewButtons.forEach((button) => {
+  button.addEventListener("click", () => showGaiaView(button.dataset.gaiaTarget));
 });
 
 document.querySelectorAll(".dependency-grid li").forEach((card) => {
@@ -1530,6 +1574,7 @@ initDocumentAdmin();
 initDocumentSuggestion();
 initExcessModule();
 initAuditModule();
+showGaiaView("conoce-gaia", false);
 
 document.querySelectorAll("[data-audio]").forEach((button) => {
   button.addEventListener("click", async () => {

@@ -310,6 +310,24 @@ body.dark .intro {
   box-shadow: 0 18px 45px var(--sombra);
 }
 
+.gaia-view:not(.is-active) {
+  display: none;
+}
+
+.gaia-view.is-active {
+  animation: fadeIn 220ms ease-out;
+}
+
+.gaia-top-nav button.active {
+  background: var(--gaia-teal-900);
+  color: #fff;
+}
+
+body.dark .gaia-top-nav button.active {
+  background: #d8f0e5;
+  color: #043f35;
+}
+
 .gaia-section-heading {
   max-width: 860px;
   margin-bottom: 18px;
