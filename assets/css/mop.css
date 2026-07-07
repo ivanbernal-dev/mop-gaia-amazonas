@@ -310,12 +310,23 @@ body.dark .intro {
   box-shadow: 0 18px 45px var(--sombra);
 }
 
-.gaia-view:not(.is-active) {
-  display: none;
+.gaia-view {
+  display: none !important;
 }
 
 .gaia-view.is-active {
+  display: block !important;
   animation: fadeIn 220ms ease-out;
+}
+
+.gaia-view.is-active.gaia-hero,
+.gaia-view.is-active.gaia-route,
+.gaia-view.is-active .map-section {
+  display: grid !important;
+}
+
+.gaia-view.is-active.gaia-transition {
+  display: flex !important;
 }
 
 .gaia-top-nav button.active {
