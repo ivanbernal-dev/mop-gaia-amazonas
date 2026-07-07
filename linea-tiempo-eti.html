@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L&iacute;nea de tiempo ETI | GAIA Amazonas</title>
+<meta name="description" content="L&iacute;nea de tiempo interactiva del proceso de Entidades Territoriales Ind&iacute;genas en la Amazon&iacute;a colombiana, desde el reconocimiento constitucional hasta la formalizaci&oacute;n de las primeras ETI.">
+<link rel="stylesheet" href="assets/css/mop.css?v=20260706-eti">
+</head>
+<body>
+<main class="page gaia-timeline-page">
+  <header class="gaia-timeline-header">
+    <div class="brand-header">
+      <img class="brand-logo" src="assets/gaia-logo-black.png" alt="Gaia Amazonas">
+    </div>
+    <nav class="gaia-top-nav" aria-label="Navegaci&oacute;n de l&iacute;nea de tiempo ETI">
+      <a href="index.html">Inicio</a>
+      <a href="index.html#conoce-gaia">Esto es GAIA</a>
+      <a class="active" href="#linea-tiempo-eti">L&iacute;nea de tiempo ETI</a>
+      <a href="index.html#mop-anillos">MOP</a>
+    </nav>
+  </header>
+
+  <section class="gaia-timeline-hero" aria-labelledby="titulo-linea-tiempo-eti">
+    <div class="gaia-timeline-hero__content">
+      <span class="gaia-eyebrow">Entidades Territoriales Ind&iacute;genas</span>
+      <h1 id="titulo-linea-tiempo-eti">L&iacute;nea de tiempo del proceso ETI</h1>
+      <p>Del reconocimiento constitucional a la formalizaci&oacute;n de las primeras Entidades Territoriales Ind&iacute;genas de la Amazon&iacute;a colombiana.</p>
+      <div class="gaia-hero__actions">
+        <a class="gaia-btn gaia-btn--secondary" href="index.html#conoce-gaia">Volver a Esto es GAIA</a>
+        <a class="gaia-btn gaia-btn--primary" href="index.html#mop-anillos">Continuar al MOP</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="linea-tiempo-eti" class="gaia-timeline-workspace" aria-labelledby="titulo-recorrido-eti">
+    <div class="gaia-section-heading">
+      <span class="gaia-eyebrow">Recorrido interactivo</span>
+      <h2 id="titulo-recorrido-eti">Hitos normativos, pol&iacute;ticos e interculturales</h2>
+      <p>Filtra por periodo o selecciona un a&ntilde;o para explorar los hitos del proceso de formalizaci&oacute;n y puesta en funcionamiento de las ETI.</p>
+    </div>
+
+    <div class="gaia-timeline-tools" aria-label="Filtros de la l&iacute;nea de tiempo">
+      <div>
+        <h3>Categor&iacute;as</h3>
+        <div class="gaia-timeline-filters" id="etiCategoryFilters"></div>
+      </div>
+      <div>
+        <h3>A&ntilde;os</h3>
+        <div class="gaia-timeline-years" id="etiYearFilters"></div>
+      </div>
+    </div>
+
+    <p class="gaia-timeline-count" id="etiTimelineCount" aria-live="polite"></p>
+    <div class="gaia-timeline" id="etiTimelineList"></div>
+  </section>
+
+  <section class="gaia-eti-explanation" aria-labelledby="titulo-claves-eti">
+    <div>
+      <span class="gaia-eyebrow">Claves de lectura</span>
+      <h2 id="titulo-claves-eti">Del reconocimiento constitucional a la puesta en funcionamiento</h2>
+      <p>El proceso ETI combina decisiones aut&oacute;nomas de los gobiernos ind&iacute;genas, desarrollos normativos, di&aacute;logos interculturales, superaci&oacute;n de barreras administrativas y mecanismos de coordinaci&oacute;n con el Estado.</p>
+    </div>
+    <details class="gaia-councils-list">
+      <summary>Consejos ind&iacute;genas registrados</summary>
+      <ol id="etiCouncilsList"></ol>
+      <p class="gaia-small-note">Nota: en la l&iacute;nea de tiempo de referencia se indica que uno de los registros aparece como registrado en 2023.</p>
+    </details>
+  </section>
+
+  <section class="gaia-timeline-cta" aria-label="Cierre de l&iacute;nea de tiempo ETI">
+    <h2>Conecta este recorrido con el MOP</h2>
+    <p>El Modelo de Operaci&oacute;n por Procesos permite comprender c&oacute;mo GAIA organiza sus capacidades para acompa&ntilde;ar estos procesos territoriales.</p>
+    <div class="gaia-hero__actions">
+      <a class="gaia-btn gaia-btn--secondary" href="index.html#conoce-gaia">Volver a Esto es GAIA</a>
+      <a class="gaia-btn gaia-btn--primary" href="index.html#mop-anillos">Continuar al MOP</a>
+    </div>
+  </section>
+</main>
+
+<script src="assets/js/eti-timeline.js?v=20260706-eti"></script>
+</body>
+</html>

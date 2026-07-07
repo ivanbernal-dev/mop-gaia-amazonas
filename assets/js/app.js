@@ -1590,7 +1590,8 @@ initDocumentAdmin();
 initDocumentSuggestion();
 initExcessModule();
 initAuditModule();
-showGaiaView("conoce-gaia", false);
+const initialGaiaView = gaiaViewTitles[window.location.hash.slice(1)] ? window.location.hash.slice(1) : "conoce-gaia";
+showGaiaView(initialGaiaView, false);
 
 document.querySelectorAll("[data-audio]").forEach((button) => {
   button.addEventListener("click", async () => {
