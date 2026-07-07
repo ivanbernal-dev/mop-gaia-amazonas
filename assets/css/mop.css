@@ -765,31 +765,64 @@ body.dark .lane-yellow {
   z-index: 1;
 }
 
-.subdirection-bridge {
-  position: absolute;
-  z-index: 5;
-  max-width: 170px;
-  padding: 9px 11px;
-  border: 1px solid rgba(255, 255, 255, 0.68);
+.subdirection-strip {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.subdirection-card {
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-left: 5px solid rgba(216, 240, 229, 0.9);
   border-radius: 8px;
-  background: rgba(246, 242, 234, 0.94);
+  background: rgba(246, 242, 234, 0.92);
   color: var(--gaia-teal-900);
-  font-size: clamp(0.7rem, 1.8vw, 0.86rem);
-  font-weight: 800;
-  line-height: 1.2;
-  text-align: left;
-  box-shadow: 0 10px 22px rgba(28, 75, 81, 0.22);
-  pointer-events: none;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
 }
 
-.bridge-stp {
-  right: -8%;
-  top: 36%;
+.subdirection-card span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--gaia-wine-700);
+  font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
-.bridge-sde {
-  left: -8%;
-  bottom: 22%;
+.subdirection-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.subdirection-card p {
+  margin: 0;
+  color: #1c4b51;
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+body.dark .subdirection-card {
+  border-color: rgba(143, 227, 186, 0.2);
+  border-left-color: #d8f0e5;
+  background: rgba(24, 35, 31, 0.94);
+  color: #e7f4ef;
+}
+
+body.dark .subdirection-card span {
+  color: #f3d5a7;
+}
+
+body.dark .subdirection-card p {
+  color: #bed1ca;
 }
 
 @keyframes fadeIn {
@@ -2384,6 +2417,10 @@ body.dark .document-file {
     padding: 20px;
   }
 
+  .subdirection-strip {
+    grid-template-columns: 1fr;
+  }
+
   .gaia-top-nav {
     position: static;
   }
@@ -2407,10 +2444,6 @@ body.dark .document-file {
   .map-context p {
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .map-tags {
-    justify-content: center;
   }
 
   .panel.is-visible {
