@@ -884,7 +884,7 @@ function saveAdminContent() {
   }
   saveAdminSettings();
   populateAdminContentTargets();
-  if (adminControls.contentStatus) adminControls.contentStatus.textContent = `Cambio local guardado para ${title}. Exporta la configuración para publicarlo después.`;
+  if (adminControls.contentStatus) adminControls.contentStatus.textContent = `Cambio guardado en este navegador para ${title}. Exporta la configuración para publicarlo después.`;
 }
 
 function resetAdminContent() {
