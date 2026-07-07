@@ -173,21 +173,36 @@ const dependencyDetails = {
           <div class="org-person"><strong>Katherine Ramirez</strong><span>Coordinadora</span></div>
         </div>
         <div class="org-level">
-          <div class="org-person"><strong>Janeth Calderon</strong><span>Líder de Planeación y seguimiento financiero</span></div>
-          <div class="org-person"><strong>Por contratar</strong><span>Profesional de Monitoreo y Seguimiento 1</span></div>
+          <div class="org-person"><strong>Janeth Calderon</strong><span>Líder de Planeación y Seguimiento Financiero</span></div>
           <div class="org-person"><strong>Edwin Copete</strong><span>Líder de Operaciones</span></div>
         </div>
         <div class="org-level">
-          <div class="org-person"><strong>Por contratar</strong><span>Profesional de seguimiento financiero</span></div>
-          <div class="org-person"><strong>Por contratar</strong><span>Profesional de Monitoreo y Seguimiento 2</span></div>
-          <div class="org-person"><strong>Nury Sánchez</strong><span>Profesional Junior de Operaciones</span></div>
-          <div class="org-person"><strong>Lorena Lopez</strong><span>Profesional Junior de Operaciones</span></div>
-          <div class="org-person"><strong>Por contratar</strong><span>Profesional Junior de Operaciones</span></div>
+          <div class="org-person"><strong>Alexander Franco Bernal</strong><span>Profesional de seguimiento financiero</span></div>
+          <div class="org-person"><strong>Nury Sánchez</strong><span>Profesional de Operaciones</span></div>
+          <div class="org-person"><strong>Lorena López</strong><span>Profesional de Operaciones</span></div>
+          <div class="org-person"><strong>Luisa Bonilla</strong><span>Profesional de Operaciones</span></div>
         </div>
       </div>
     `,
     contact: "<p>Correos institucionales por completar.</p>",
     relevant: "<p>Gestión técnica, financiera y programática de proyectos; seguimiento financiero; monitoreo; y soporte operativo a la ejecución institucional.</p>"
+  },
+  "THB - Talento Humano, Bienestar y Cultura Organizacional": {
+    responsible: "Sandra Moreno",
+    team: `
+      <div class="org-chart">
+        <div class="org-level">
+          <div class="org-person"><strong>Sandra Moreno</strong><span>Coordinadora THB</span></div>
+        </div>
+        <div class="org-level">
+          <div class="org-person"><strong>Aura Cristina Daza</strong><span>Profesional junior de Seguridad y Salud en el Trabajo</span></div>
+          <div class="org-person"><strong>Catherine Gaitán</strong><span>Asesora senior de género y derechos</span></div>
+          <div class="org-person"><strong>Asesor Integral de Riesgo</strong><span>Gestión preventiva y cuidado organizacional</span></div>
+        </div>
+      </div>
+    `,
+    contact: "<p>Correos institucionales por completar.</p>",
+    relevant: "<p>Gestión del talento humano, bienestar, cultura organizacional, seguridad y salud en el trabajo, enfoque de género, derechos y gestión integral del riesgo.</p>"
   },
   "CFI - Coordinación Financiera": {
     responsible: "Humberto Buitrago",
