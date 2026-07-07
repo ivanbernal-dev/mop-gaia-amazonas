@@ -589,7 +589,6 @@ body.dark .gaia-top-nav button.active {
   scroll-margin-top: 86px;
 }
 
-body.panel-view .gaia-top-nav,
 body.panel-view .gaia-section,
 body.panel-view .gaia-mop-anchor {
   display: none;
