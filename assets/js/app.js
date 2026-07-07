@@ -35,6 +35,7 @@ const documentAdmin = {
   area: document.getElementById("docAdminArea"),
   key: document.getElementById("docAdminKey"),
   unlock: document.getElementById("docAdminUnlock"),
+  logout: document.getElementById("docAdminLogout"),
   status: document.getElementById("docAdminStatus"),
   expectedKey: "GAIA-GPC-2026"
 };
@@ -951,6 +952,15 @@ function unlockDocumentAdmin() {
   renderAdminVisibilityList();
 }
 
+function logoutDocumentAdmin() {
+  if (documentAdmin.area) documentAdmin.area.hidden = true;
+  if (documentAdmin.gate) documentAdmin.gate.open = false;
+  if (documentAdmin.key) documentAdmin.key.value = "";
+  document.body.classList.remove("admin-mode");
+  sessionStorage.removeItem("gaia-document-admin");
+  if (documentAdmin.status) documentAdmin.status.textContent = "Sesión de administrador cerrada. La administración vuelve a quedar oculta.";
+}
+
 function initDocumentAdmin() {
   if (!documentAdmin.unlock) return;
   if (sessionStorage.getItem("gaia-document-admin") === "true") {
@@ -983,6 +993,7 @@ function initDocumentAdmin() {
   adminControls.resetContent?.addEventListener("click", resetAdminContent);
   adminControls.exportConfig?.addEventListener("click", exportAdminConfig);
   adminControls.importConfig?.addEventListener("change", importAdminConfig);
+  documentAdmin.logout?.addEventListener("click", logoutDocumentAdmin);
 }
 
 function getSuggestionValue(formData, name, fallback = "Por completar") {
