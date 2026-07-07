@@ -1360,6 +1360,7 @@ function initAuditModule() {
 }
 
 function showPanel(panelId) {
+  document.body.classList.add("panel-view");
   mapSection.style.display = "none";
   dependencySite.classList.remove("is-visible");
   document.querySelectorAll(".sidebar details").forEach((details) => {
@@ -1376,6 +1377,7 @@ function showPanel(panelId) {
 }
 
 function volver() {
+  document.body.classList.remove("panel-view");
   panels.forEach((panel) => panel.classList.remove("is-visible"));
   dependencySite.classList.remove("is-visible");
   document.querySelectorAll(".sidebar details").forEach((details) => {
@@ -1388,6 +1390,7 @@ function volver() {
   if ("speechSynthesis" in window) {
     window.speechSynthesis.cancel();
   }
+  document.getElementById("mop-anillos")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function getDependencyData(card) {
@@ -1422,6 +1425,7 @@ function addTeamContactPlaceholders() {
 
 function openDependencySite(card) {
   const data = getDependencyData(card);
+  document.body.classList.add("panel-view");
   panels.forEach((panel) => panel.classList.remove("is-visible"));
   mapSection.style.display = "none";
   dependencyTitle.textContent = data.title;
