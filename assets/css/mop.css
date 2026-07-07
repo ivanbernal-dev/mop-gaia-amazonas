@@ -321,6 +321,7 @@ body.dark .intro {
 
 .gaia-view.is-active.gaia-hero,
 .gaia-view.is-active.gaia-route,
+.gaia-view.is-active.gaia-reason,
 .gaia-view.is-active .map-section {
   display: grid !important;
 }
@@ -517,6 +518,179 @@ body.dark .gaia-top-nav a.active {
   gap: 16px;
 }
 
+.gaia-reason {
+  display: grid;
+  gap: clamp(18px, 3vw, 28px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(227, 170, 86, 0.18), transparent 32%),
+    radial-gradient(circle at 92% 12%, rgba(28, 75, 81, 0.1), transparent 30%),
+    var(--panel);
+}
+
+.gaia-reason__intro {
+  max-width: 940px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.gaia-reason__intro .gaia-status-badge {
+  margin-left: 8px;
+}
+
+.gaia-reason__subtitle {
+  max-width: 780px;
+  margin: 0 auto 12px;
+  color: var(--gaia-teal-900);
+  font-size: clamp(1.06rem, 1.7vw, 1.36rem);
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.gaia-reason .gaia-lead {
+  margin-bottom: 0;
+  color: var(--texto);
+  font-size: clamp(1rem, 1.45vw, 1.22rem);
+  line-height: 1.68;
+}
+
+.gaia-reason__path {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.gaia-reason-step,
+.gaia-role-card,
+.gaia-monitoring-system__steps article,
+.gaia-reason-card {
+  border: 1px solid rgba(28, 75, 81, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.78);
+}
+
+.gaia-reason-step {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-height: 100%;
+  padding: 16px;
+  border-top: 5px solid var(--gaia-teal-900);
+}
+
+.gaia-reason-step__number {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--gaia-wine-700);
+  color: #fff;
+  font-weight: 900;
+}
+
+.gaia-reason-step__tag {
+  color: var(--gaia-wine-700);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.gaia-reason-step h3,
+.gaia-role-card h3,
+.gaia-monitoring-system h3,
+.gaia-reason-card h3,
+.gaia-reason__cta h3 {
+  color: var(--gaia-teal-900);
+}
+
+.gaia-reason-step p,
+.gaia-role-card p,
+.gaia-monitoring-system p,
+.gaia-reason-card p,
+.gaia-reason__cta p {
+  margin-bottom: 0;
+}
+
+.gaia-reason__explanation,
+.gaia-monitoring-system,
+.gaia-reason__cta {
+  display: grid;
+  gap: 14px;
+}
+
+.gaia-reason-card,
+.gaia-role-card,
+.gaia-monitoring-system__steps article,
+.gaia-reason__cta {
+  padding: 16px;
+}
+
+.gaia-reason-card--wide {
+  border-left: 5px solid var(--gaia-olive);
+}
+
+.gaia-reason__grid,
+.gaia-monitoring-system__steps {
+  display: grid;
+  gap: 12px;
+}
+
+.gaia-reason__grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gaia-monitoring-system {
+  padding: 18px;
+  border-radius: 8px;
+  background: rgba(28, 75, 81, 0.08);
+}
+
+.gaia-monitoring-system__intro {
+  max-width: 820px;
+}
+
+.gaia-monitoring-system__steps {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.gaia-monitoring-system__steps strong,
+.gaia-monitoring-system__steps span {
+  display: block;
+}
+
+.gaia-monitoring-system__steps strong {
+  margin-bottom: 6px;
+  color: var(--gaia-teal-900);
+}
+
+.gaia-monitoring-system__steps span {
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.gaia-reason__cta {
+  background:
+    linear-gradient(135deg, rgba(154, 161, 58, 0.16), rgba(255, 253, 248, 0.9));
+  border: 1px solid rgba(154, 161, 58, 0.32);
+  border-radius: 8px;
+}
+
+.gaia-reason__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gaia-btn--ghost {
+  border: 1px solid rgba(28, 75, 81, 0.2);
+  background: rgba(28, 75, 81, 0.08);
+  color: var(--gaia-teal-900);
+}
+
 .gaia-feature-card,
 .gaia-monitoring {
   padding: 16px;
@@ -677,12 +851,55 @@ body.dark .gaia-alliance span,
 body.dark .gaia-timeline article,
 body.dark .gaia-feature-card,
 body.dark .gaia-monitoring,
+body.dark .gaia-reason-step,
+body.dark .gaia-role-card,
+body.dark .gaia-monitoring-system__steps article,
+body.dark .gaia-reason-card,
 body.dark .gaia-org-card,
 body.dark .gaia-coordinations details,
 body.dark .gaia-transition {
   border-color: rgba(143, 227, 186, 0.18);
   background: #26352f;
   color: #edf6f2;
+}
+
+body.dark .gaia-reason {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(227, 170, 86, 0.12), transparent 32%),
+    radial-gradient(circle at 92% 12%, rgba(143, 227, 186, 0.08), transparent 30%),
+    #18231f;
+}
+
+body.dark .gaia-reason .gaia-lead,
+body.dark .gaia-reason-step p,
+body.dark .gaia-role-card p,
+body.dark .gaia-monitoring-system p,
+body.dark .gaia-reason-card p,
+body.dark .gaia-reason__cta p,
+body.dark .gaia-monitoring-system__steps span {
+  color: #d7e5df;
+}
+
+body.dark .gaia-reason-step h3,
+body.dark .gaia-role-card h3,
+body.dark .gaia-monitoring-system h3,
+body.dark .gaia-reason-card h3,
+body.dark .gaia-reason__cta h3,
+body.dark .gaia-reason__subtitle,
+body.dark .gaia-monitoring-system__steps strong {
+  color: #edf6f2;
+}
+
+body.dark .gaia-reason__cta,
+body.dark .gaia-monitoring-system {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: rgba(143, 227, 186, 0.08);
+}
+
+body.dark .gaia-btn--ghost {
+  border-color: rgba(143, 227, 186, 0.24);
+  background: rgba(143, 227, 186, 0.12);
+  color: #d8f0e5;
 }
 
 body.dark .gaia-eti-entry {
@@ -2530,9 +2747,12 @@ body.dark .document-file {
   justify-content: center;
   min-height: 42px;
   padding: 10px 16px;
+  border: 0;
   border-radius: 999px;
+  font: inherit;
   font-weight: 900;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .gaia-btn--primary {
@@ -2771,6 +2991,9 @@ body.dark .gaia-councils-list summary {
 
   .gaia-timeline,
   .gaia-alliance,
+  .gaia-reason__path,
+  .gaia-reason__grid,
+  .gaia-monitoring-system__steps,
   .gaia-org-lanes,
   .gaia-accordion-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2816,9 +3039,20 @@ body.dark .gaia-councils-list summary {
 
   .gaia-timeline,
   .gaia-alliance,
+  .gaia-reason__path,
+  .gaia-reason__grid,
+  .gaia-monitoring-system__steps,
   .gaia-org-lanes,
   .gaia-accordion-grid {
     grid-template-columns: 1fr;
+  }
+
+  .gaia-reason__intro {
+    text-align: left;
+  }
+
+  .gaia-reason__intro .gaia-status-badge {
+    margin-left: 0;
   }
 
   .gaia-section {

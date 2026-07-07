@@ -358,7 +358,7 @@ const gaiaViewButtons = document.querySelectorAll("[data-gaia-target]");
 const gaiaViews = document.querySelectorAll(".gaia-view");
 const gaiaViewTitles = {
   "conoce-gaia": "Esto es GAIA Amazonas",
-  "ruta-2030": "Ruta 2030 y Acuerdo Intercultural",
+  "ruta-2030": "GAIA Amazonas y su Modelo de Operación",
   "arquitectura-gaia": "Arquitectura organizacional de GAIA",
   "coordinaciones-gaia": "Coordinaciones y equipos",
   "mop-anillos": defaultPageTitle
