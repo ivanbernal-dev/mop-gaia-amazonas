@@ -322,6 +322,7 @@ body.dark .intro {
 .gaia-view.is-active.gaia-hero,
 .gaia-view.is-active.gaia-route,
 .gaia-view.is-active.gaia-reason,
+.gaia-view.is-active.gaia-board,
 .gaia-view.is-active .map-section {
   display: grid !important;
 }
@@ -691,6 +692,311 @@ body.dark .gaia-top-nav a.active {
   color: var(--gaia-teal-900);
 }
 
+.gaia-board {
+  display: grid;
+  gap: 18px;
+}
+
+.gaia-board-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+  gap: 18px;
+  align-items: stretch;
+  padding: clamp(20px, 4vw, 34px);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(216, 162, 58, 0.18), transparent 30%),
+    radial-gradient(circle at 90% 10%, rgba(93, 155, 183, 0.2), transparent 28%),
+    linear-gradient(135deg, rgba(18, 55, 47, 0.96), rgba(47, 125, 98, 0.9));
+  color: #fffdf8;
+  overflow: hidden;
+}
+
+.gaia-board-hero h2,
+.gaia-board-hero p {
+  color: inherit;
+}
+
+.gaia-board-lead {
+  max-width: 820px;
+  font-size: clamp(1.08rem, 2vw, 1.42rem);
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.gaia-board-actions,
+.gaia-board-tabs,
+.gaia-board-filters div,
+.gaia-board-doc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gaia-board-actions button,
+.gaia-board-tabs button,
+.gaia-board-filter,
+.gaia-board-doc-actions button,
+.gaia-board-doc-actions a,
+.gaia-board-doc-actions span {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border: 1px solid rgba(28, 75, 81, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.88);
+  color: var(--gaia-teal-900);
+  font: inherit;
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.gaia-board-actions button {
+  border-color: rgba(255, 253, 248, 0.4);
+}
+
+.gaia-board-hero-panel {
+  display: grid;
+  align-content: end;
+  gap: 10px;
+  min-height: 260px;
+  padding: 20px;
+  border: 1px solid rgba(255, 253, 248, 0.22);
+  border-radius: 8px;
+  background:
+    linear-gradient(160deg, rgba(255, 253, 248, 0.16), rgba(255, 253, 248, 0.04)),
+    repeating-linear-gradient(135deg, rgba(255, 253, 248, 0.08) 0 2px, transparent 2px 12px);
+}
+
+.gaia-board-hero-panel strong {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1;
+}
+
+.gaia-board-filters {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(28, 75, 81, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.78);
+}
+
+.gaia-board-filters span {
+  width: 100%;
+  color: var(--gaia-teal-900);
+  font-weight: 900;
+}
+
+.gaia-board-filter.active,
+.gaia-board-tabs button[aria-selected="true"] {
+  background: var(--gaia-teal-900);
+  color: #fff;
+}
+
+.gaia-board-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.gaia-board-kpi,
+.gaia-board-card,
+.gaia-board-document-card {
+  border: 1px solid rgba(28, 75, 81, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.9);
+}
+
+.gaia-board-kpi {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border-left: 5px solid var(--gaia-olive);
+}
+
+.gaia-board-kpi strong {
+  color: var(--gaia-teal-900);
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+  line-height: 1;
+}
+
+.gaia-board-kpi span {
+  font-weight: 900;
+}
+
+.gaia-board-kpi small,
+.gaia-board-note,
+.gaia-board-doc-meta {
+  color: #5f6c64;
+  font-weight: 700;
+}
+
+.gaia-board-panel {
+  display: none;
+}
+
+.gaia-board-panel.active {
+  display: grid;
+  gap: 16px;
+}
+
+.gaia-board-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.gaia-board-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gaia-board-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gaia-board-grid.four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gaia-board-card,
+.gaia-board-document-card {
+  padding: 16px;
+}
+
+.gaia-board-heading {
+  max-width: 900px;
+}
+
+.gaia-board-chart {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid rgba(28, 75, 81, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.74);
+}
+
+.gaia-board-bar {
+  display: grid;
+  gap: 5px;
+}
+
+.gaia-board-bar label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--gaia-teal-900);
+  font-weight: 900;
+}
+
+.gaia-board-bar-track {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(28, 75, 81, 0.1);
+}
+
+.gaia-board-bar-fill {
+  display: block;
+  width: calc(var(--percent) * 1%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--gaia-olive), #5d9bb7);
+}
+
+.gaia-board-donut {
+  width: 164px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  margin: 8px auto;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--panel) 0 52%, transparent 53%),
+    conic-gradient(var(--gaia-olive) 0 calc(var(--impact) * 1%), #5d9bb7 0 100%);
+}
+
+.gaia-board-donut span {
+  color: var(--gaia-teal-900);
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.gaia-board-map {
+  min-height: 340px;
+  padding: 18px;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(216, 162, 58, 0.18), transparent 26%),
+    radial-gradient(circle at 78% 72%, rgba(93, 155, 183, 0.24), transparent 28%),
+    linear-gradient(145deg, rgba(18, 55, 47, 0.95), rgba(47, 125, 98, 0.78));
+  color: #fffdf8;
+}
+
+.gaia-board-map h3,
+.gaia-board-map p {
+  color: inherit;
+}
+
+.gaia-board-map-visual {
+  display: grid;
+  gap: 10px;
+  margin: 22px 0;
+  padding: 24px;
+  border: 1px solid rgba(255, 253, 248, 0.22);
+  border-radius: 45% 55% 48% 52% / 40% 44% 56% 60%;
+  background:
+    linear-gradient(120deg, transparent 42%, rgba(93, 155, 183, 0.72) 43% 49%, transparent 50%),
+    rgba(255, 253, 248, 0.12);
+}
+
+.gaia-board-map-visual span {
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.88);
+  color: var(--gaia-teal-900);
+  font-weight: 900;
+}
+
+.gaia-board-decision,
+.gaia-board-audit-grid span {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(28, 75, 81, 0.08);
+}
+
+.gaia-board-audit-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gaia-board-audit-grid strong {
+  color: var(--gaia-teal-900);
+  font-size: 1.45rem;
+}
+
+.gaia-board-alert {
+  border-left: 5px solid var(--gaia-wine-700);
+}
+
+.gaia-board-documents {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.gaia-board-doc-actions span {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
 .gaia-feature-card,
 .gaia-monitoring {
   padding: 16px;
@@ -855,6 +1161,11 @@ body.dark .gaia-reason-step,
 body.dark .gaia-role-card,
 body.dark .gaia-monitoring-system__steps article,
 body.dark .gaia-reason-card,
+body.dark .gaia-board-filters,
+body.dark .gaia-board-kpi,
+body.dark .gaia-board-card,
+body.dark .gaia-board-chart,
+body.dark .gaia-board-document-card,
 body.dark .gaia-org-card,
 body.dark .gaia-coordinations details,
 body.dark .gaia-transition {
@@ -900,6 +1211,45 @@ body.dark .gaia-btn--ghost {
   border-color: rgba(143, 227, 186, 0.24);
   background: rgba(143, 227, 186, 0.12);
   color: #d8f0e5;
+}
+
+body.dark .gaia-board-hero,
+body.dark .gaia-board-map {
+  background:
+    radial-gradient(circle at 8% 12%, rgba(216, 162, 58, 0.12), transparent 30%),
+    radial-gradient(circle at 90% 10%, rgba(93, 155, 183, 0.12), transparent 28%),
+    linear-gradient(135deg, #13231e, #1d3c33);
+}
+
+body.dark .gaia-board-filter,
+body.dark .gaia-board-tabs button,
+body.dark .gaia-board-actions button,
+body.dark .gaia-board-doc-actions button,
+body.dark .gaia-board-doc-actions a,
+body.dark .gaia-board-doc-actions span {
+  border-color: rgba(143, 227, 186, 0.2);
+  background: rgba(143, 227, 186, 0.1);
+  color: #d8f0e5;
+}
+
+body.dark .gaia-board-filter.active,
+body.dark .gaia-board-tabs button[aria-selected="true"] {
+  background: #d8a23a;
+  color: #13231e;
+}
+
+body.dark .gaia-board-kpi strong,
+body.dark .gaia-board-bar label,
+body.dark .gaia-board-donut span,
+body.dark .gaia-board-audit-grid strong,
+body.dark .gaia-board-filters span {
+  color: #edf6f2;
+}
+
+body.dark .gaia-board-kpi small,
+body.dark .gaia-board-note,
+body.dark .gaia-board-doc-meta {
+  color: #bed1ca;
 }
 
 body.dark .gaia-eti-entry {
@@ -2994,6 +3344,11 @@ body.dark .gaia-councils-list summary {
   .gaia-reason__path,
   .gaia-reason__grid,
   .gaia-monitoring-system__steps,
+  .gaia-board-hero,
+  .gaia-board-grid.three,
+  .gaia-board-grid.four,
+  .gaia-board-audit-grid,
+  .gaia-board-documents,
   .gaia-org-lanes,
   .gaia-accordion-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3042,6 +3397,12 @@ body.dark .gaia-councils-list summary {
   .gaia-reason__path,
   .gaia-reason__grid,
   .gaia-monitoring-system__steps,
+  .gaia-board-hero,
+  .gaia-board-grid.two,
+  .gaia-board-grid.three,
+  .gaia-board-grid.four,
+  .gaia-board-audit-grid,
+  .gaia-board-documents,
   .gaia-org-lanes,
   .gaia-accordion-grid {
     grid-template-columns: 1fr;

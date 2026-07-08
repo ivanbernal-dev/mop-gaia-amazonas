@@ -361,6 +361,7 @@ const gaiaViewTitles = {
   "ruta-2030": "GAIA Amazonas y su Modelo de Operación",
   "arquitectura-gaia": "Arquitectura organizacional de GAIA",
   "coordinaciones-gaia": "Coordinaciones y equipos",
+  "junta-directiva": "Junta Directiva",
   "mop-anillos": defaultPageTitle
 };
 
