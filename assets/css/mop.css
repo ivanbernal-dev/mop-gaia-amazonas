@@ -1365,6 +1365,138 @@ body.dark .gaia-top-nav a.active {
   height: 230px;
 }
 
+.gaia-board-indicator-module {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid rgba(28, 75, 81, 0.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(244, 241, 232, 0.9)),
+    rgba(255, 253, 248, 0.92);
+  box-shadow: 0 16px 38px rgba(18, 55, 47, 0.08);
+}
+
+.gaia-board-indicator-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.gaia-board-indicator-head h3,
+.gaia-board-indicator-head p {
+  margin: 0;
+}
+
+.gaia-board-indicator-head p {
+  max-width: 520px;
+  color: #5f6c64;
+  font-weight: 800;
+}
+
+.gaia-board-indicator-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(360px, 1.28fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.gaia-board-featured-kpi,
+.gaia-board-indicator-chart {
+  min-width: 0;
+  border: 1px solid rgba(28, 75, 81, 0.13);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.84);
+}
+
+.gaia-board-featured-kpi {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 18px;
+  border-left: 6px solid var(--gaia-gold);
+}
+
+.gaia-board-featured-kpi small:first-child {
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(47, 125, 98, 0.12);
+  color: var(--gaia-teal-900);
+  font-weight: 900;
+}
+
+.gaia-board-featured-kpi strong {
+  color: var(--gaia-teal-900);
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  line-height: 0.9;
+  overflow-wrap: anywhere;
+}
+
+.gaia-board-featured-kpi span {
+  font-size: 1.08rem;
+  font-weight: 900;
+}
+
+.gaia-board-featured-kpi p {
+  margin: 0;
+  color: #3e4b44;
+}
+
+.gaia-board-featured-kpi details summary {
+  color: var(--gaia-teal-900);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.gaia-board-indicator-chart {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.gaia-board-indicator-chart .gaia-board-canvas-wrap {
+  height: 260px;
+}
+
+.gaia-board-metric-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.gaia-board-metric-strip button {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  min-height: 74px;
+  padding: 10px;
+  border: 1px solid rgba(28, 75, 81, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.72);
+  color: var(--gaia-teal-900);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.gaia-board-metric-strip button.active,
+.gaia-board-metric-strip button:hover {
+  border-color: rgba(28, 75, 81, 0.35);
+  background: rgba(28, 75, 81, 0.08);
+}
+
+.gaia-board-metric-strip strong {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.gaia-board-metric-strip span {
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
 .gaia-board-map .gaia-board-chart {
   border-color: rgba(255, 253, 248, 0.24);
 }
@@ -1544,6 +1676,9 @@ body.dark .gaia-monitoring-system__steps article,
 body.dark .gaia-reason-card,
 body.dark .gaia-board-filters,
 body.dark .gaia-board-kpi,
+body.dark .gaia-board-indicator-module,
+body.dark .gaia-board-featured-kpi,
+body.dark .gaia-board-indicator-chart,
 body.dark .gaia-board-card,
 body.dark .gaia-board-chart,
 body.dark .gaia-board-document-card,
@@ -1570,6 +1705,28 @@ body.dark .gaia-reason-card p,
 body.dark .gaia-reason__cta p,
 body.dark .gaia-monitoring-system__steps span {
   color: #d7e5df;
+}
+
+body.dark .gaia-board-indicator-head p,
+body.dark .gaia-board-featured-kpi p {
+  color: #d7e5df;
+}
+
+body.dark .gaia-board-featured-kpi strong,
+body.dark .gaia-board-featured-kpi details summary {
+  color: #edf6f2;
+}
+
+body.dark .gaia-board-metric-strip button {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: rgba(143, 227, 186, 0.08);
+  color: #d8f0e5;
+}
+
+body.dark .gaia-board-metric-strip button.active,
+body.dark .gaia-board-metric-strip button:hover {
+  border-color: rgba(216, 162, 58, 0.5);
+  background: rgba(216, 162, 58, 0.14);
 }
 
 body.dark .gaia-reason-step h3,
@@ -3773,6 +3930,12 @@ body.dark .gaia-councils-list summary {
     min-height: 280px;
   }
 
+  .gaia-board-indicator-head,
+  .gaia-board-indicator-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
   .admin-manager-grid {
     grid-template-columns: 1fr;
   }
@@ -3847,6 +4010,14 @@ body.dark .gaia-councils-list summary {
   .gaia-board-canvas-wrap,
   .gaia-board-chart--many .gaia-board-canvas-wrap {
     height: 340px;
+  }
+
+  .gaia-board-indicator-chart .gaia-board-canvas-wrap {
+    height: 240px;
+  }
+
+  .gaia-board-metric-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .gaia-timeline-hero,

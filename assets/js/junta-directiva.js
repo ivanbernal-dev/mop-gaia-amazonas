@@ -80,7 +80,8 @@ const boardColors = {
 const boardState = {
   document: "all",
   theme: "all",
-  tab: "resumen"
+  tab: "resumen",
+  metric: ""
 };
 
 function boardMatches(item) {
@@ -94,18 +95,131 @@ function renderBoardKpis() {
   const container = document.querySelector("[data-board-kpis]");
   if (!container) return;
   const items = boardDashboardData.kpis.filter(boardMatches);
-  container.innerHTML = items.map((item) => `
-    <article class="gaia-board-kpi" data-document="${item.document}" data-theme="${item.theme}">
-      <small>${item.themeLabel}</small>
-      <strong>${item.display}</strong>
-      <span>${item.label}</span>
-      <p>${item.description}</p>
-      <details>
-        <summary>Ver fuente</summary>
-        <small>Valor completo: ${item.fullValue || item.display}. Fuente: ${item.source}.</small>
-      </details>
-    </article>
-  `).join("") || `<p class="gaia-board-note">No hay indicadores para el filtro seleccionado. Ajusta documento o tema para ampliar la consulta.</p>`;
+  if (!items.length) {
+    container.innerHTML = `<p class="gaia-board-note">No hay indicadores para el filtro seleccionado. Ajusta documento o tema para ampliar la consulta.</p>`;
+    return;
+  }
+  const activeMetric = items.find((item) => metricKey(item) === boardState.metric) || items[0];
+  boardState.metric = metricKey(activeMetric);
+  container.innerHTML = `
+    <section class="gaia-board-indicator-module" aria-label="Indicadores clave filtrados">
+      <div class="gaia-board-indicator-head">
+        <div>
+          <span class="gaia-eyebrow">Indicadores clave</span>
+          <h3>${items.length} indicadores para la consulta actual</h3>
+        </div>
+        <p>Selecciona un indicador para ver la lectura ejecutiva sin desplegar todas las tarjetas a la vez.</p>
+      </div>
+      <div class="gaia-board-indicator-layout">
+        <article class="gaia-board-featured-kpi" data-document="${activeMetric.document}" data-theme="${activeMetric.theme}">
+          <small>${activeMetric.themeLabel}</small>
+          <strong>${activeMetric.display}</strong>
+          <span>${activeMetric.label}</span>
+          <p>${activeMetric.description}</p>
+          <details>
+            <summary>Ver fuente</summary>
+            <small>Valor completo: ${activeMetric.fullValue || activeMetric.display}. Fuente: ${activeMetric.source}.</small>
+          </details>
+        </article>
+        <div class="gaia-board-indicator-chart" data-board-indicator-chart></div>
+      </div>
+      <div class="gaia-board-metric-strip" role="list" aria-label="Seleccionar indicador">
+        ${items.map((item) => `
+          <button type="button" role="listitem" class="${metricKey(item) === boardState.metric ? "active" : ""}" data-board-metric="${metricKey(item)}">
+            <strong>${item.display}</strong>
+            <span>${item.label}</span>
+          </button>
+        `).join("")}
+      </div>
+    </section>
+  `;
+  renderIndicatorChart(items);
+}
+
+function metricKey(item) {
+  return `${item.document}-${item.theme}-${item.label}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+function groupedIndicatorCounts(items) {
+  return items.reduce((groups, item) => {
+    const found = groups.find((group) => group.name === item.themeLabel);
+    if (found) {
+      found.value += 1;
+    } else {
+      groups.push({ name: item.themeLabel, value: 1 });
+    }
+    return groups;
+  }, []);
+}
+
+function renderIndicatorChart(items) {
+  const container = document.querySelector("[data-board-indicator-chart]");
+  if (!container) return;
+  const groups = groupedIndicatorCounts(items);
+  if (!window.Chart) {
+    container.innerHTML = groups.map((group) => `
+      <div class="gaia-board-bar">
+        <label><span>${group.name}</span><strong>${group.value}</strong></label>
+        <div class="gaia-board-bar-track"><span class="gaia-board-bar-fill" style="--percent:${Math.min(group.value * 18, 100)}"></span></div>
+      </div>
+    `).join("");
+    return;
+  }
+  if (boardChartRegistry.indicators) boardChartRegistry.indicators.destroy();
+  container.innerHTML = `
+    <div class="gaia-board-chart-head">
+      <h4>Indicadores por tema</h4>
+      <span>${items.length} visibles</span>
+    </div>
+    <div class="gaia-board-canvas-wrap"><canvas aria-label="Indicadores por tema" role="img"></canvas></div>
+  `;
+  const canvas = container.querySelector("canvas");
+  boardChartRegistry.indicators = new Chart(canvas, {
+    type: "polarArea",
+    data: {
+      labels: groups.map((group) => group.name),
+      datasets: [{
+        data: groups.map((group) => group.value),
+        backgroundColor: [
+          "rgba(47, 125, 98, 0.78)",
+          "rgba(216, 162, 58, 0.8)",
+          "rgba(93, 155, 183, 0.78)",
+          "rgba(143, 156, 60, 0.76)",
+          "rgba(196, 95, 60, 0.76)",
+          "rgba(23, 79, 82, 0.7)"
+        ],
+        borderColor: boardColors.cream,
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 850, easing: "easeOutQuart" },
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {
+            boxWidth: 12,
+            color: boardColors.teal,
+            font: { weight: "700" }
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: (context) => `${context.label}: ${context.raw} indicador(es)`
+          }
+        }
+      },
+      scales: {
+        r: {
+          ticks: { display: false, stepSize: 1 },
+          grid: { color: "rgba(23, 79, 82, 0.08)" },
+          angleLines: { color: "rgba(23, 79, 82, 0.08)" }
+        }
+      }
+    }
+  });
 }
 
 function renderBoardBars(selector, title, items) {
@@ -289,6 +403,12 @@ function initBoardFilters() {
   const board = document.querySelector("#junta-directiva");
   board?.addEventListener("click", (event) => {
     const target = event.target instanceof Element ? event.target : event.target.parentElement;
+    const metricButton = target?.closest("[data-board-metric]");
+    if (metricButton) {
+      boardState.metric = metricButton.dataset.boardMetric;
+      renderBoardKpis();
+      return;
+    }
     const tabButton = target?.closest("[data-board-tab]");
     if (tabButton) setBoardTab(tabButton.dataset.boardTab);
   });
@@ -305,6 +425,7 @@ function initBoardFilters() {
       });
       if (group === "document") boardState.document = value;
       if (group === "theme") boardState.theme = value;
+      boardState.metric = "";
       renderBoardKpis();
       renderBoardDocuments();
     });
