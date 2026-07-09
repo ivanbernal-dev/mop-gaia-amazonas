@@ -108,7 +108,6 @@ function renderBoardKpis() {
           <span class="gaia-eyebrow">Indicadores clave</span>
           <h3>${items.length} indicadores para la consulta actual</h3>
         </div>
-        <p>Selecciona un indicador para ver la lectura ejecutiva sin desplegar todas las tarjetas a la vez.</p>
       </div>
       <div class="gaia-board-indicator-layout">
         <article class="gaia-board-featured-kpi" data-document="${activeMetric.document}" data-theme="${activeMetric.theme}">
