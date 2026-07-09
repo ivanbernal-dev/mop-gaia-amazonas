@@ -21,16 +21,16 @@ const boardDashboardData = {
     }
   ],
   kpis: [
-    { label: "Año gravable", display: "2025", source: "Memoria Económica 2025", theme: "gobierno", themeLabel: "Gobierno corporativo", document: "memoria", description: "Vigencia del tablero institucional." },
-    { label: "Ingresos por subvenciones", display: "$23.339.824.252", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Recursos registrados para la vigencia." },
-    { label: "Inversión de impacto", display: "88 %", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Recursos orientados directamente a impacto misional." },
-    { label: "Administración y operación", display: "12 %", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Costos para sostener la operación institucional." },
-    { label: "Excedentes fiscales aprobados", display: "$1.245.179.482", source: "Memoria Económica 2025 / Acta No. 60", theme: "excedentes", themeLabel: "Excedentes", document: "memoria", description: "Destinación aprobada por Junta Directiva." },
-    { label: "Inversiones vigentes", display: "$13.038.278.456", source: "Memoria Económica 2025", theme: "finanzas", themeLabel: "Finanzas", document: "memoria", description: "Suma de dos CDT Davivienda." },
-    { label: "Patrimonio institucional", display: "$15.868.350.937", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Patrimonio reportado para la vigencia." },
-    { label: "Convenios 2025", display: "$9.234.818.510", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Convenios recibidos durante 2025." },
-    { label: "Subvenciones 2025", display: "$22.535.590.139", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Subvenciones reportadas en el informe." },
-    { label: "Contratación institucional", display: "$20.426.543.978", source: "Informe de Gestión 2025", theme: "contratacion", themeLabel: "Contratación", document: "gestion", description: "Contratación institucional consolidada." },
+    { label: "Año gravable", display: "2025", fullValue: "2025", source: "Memoria Económica 2025", theme: "gobierno", themeLabel: "Gobierno corporativo", document: "memoria", description: "Vigencia del tablero institucional." },
+    { label: "Ingresos por subvenciones", display: "$23.340 M", fullValue: "$23.339.824.252", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Recursos registrados para la vigencia." },
+    { label: "Inversión de impacto", display: "88 %", fullValue: "88 %", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Recursos orientados directamente a impacto misional." },
+    { label: "Administración y operación", display: "12 %", fullValue: "12 %", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Costos para sostener la operación institucional." },
+    { label: "Excedentes fiscales aprobados", display: "$1.245 M", fullValue: "$1.245.179.482", source: "Memoria Económica 2025 / Acta No. 60", theme: "excedentes", themeLabel: "Excedentes", document: "memoria", description: "Destinación aprobada por Junta Directiva." },
+    { label: "Inversiones vigentes", display: "$13.038 M", fullValue: "$13.038.278.456", source: "Memoria Económica 2025", theme: "finanzas", themeLabel: "Finanzas", document: "memoria", description: "Suma de dos CDT Davivienda." },
+    { label: "Patrimonio institucional", display: "$15.868 M", fullValue: "$15.868.350.937", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Patrimonio reportado para la vigencia." },
+    { label: "Convenios 2025", display: "$9.235 M", fullValue: "$9.234.818.510", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Convenios recibidos durante 2025." },
+    { label: "Subvenciones 2025", display: "$22.536 M", fullValue: "$22.535.590.139", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Subvenciones reportadas en el informe." },
+    { label: "Contratación institucional", display: "$20.427 M", fullValue: "$20.426.543.978", source: "Informe de Gestión 2025", theme: "contratacion", themeLabel: "Contratación", document: "gestion", description: "Contratación institucional consolidada." },
     { label: "ETI formalizadas", display: "8", source: "Informe de Gestión 2025", theme: "misional", themeLabel: "Gestión misional", document: "gestion", description: "Entidades Territoriales Indígenas formalizadas o reconocidas." },
     { label: "Acuerdos interculturales", display: "8", source: "Informe de Gestión 2025", theme: "misional", themeLabel: "Gestión misional", document: "gestion", description: "Acuerdos interculturales reportados." },
     { label: "Cumplimiento auditoría", display: "93 %", source: "Informe de Gestión 2025", theme: "control", themeLabel: "Control interno", document: "gestion", description: "Recomendaciones aplicadas o en implementación." }
@@ -59,7 +59,22 @@ const boardDashboardData = {
     { name: "Prestación de servicios", value: "$13.138.697.420", percent: 64 },
     { name: "Órdenes de servicio y compra", value: "$5.113.528.077", percent: 25 },
     { name: "Contratos laborales", value: "$2.174.318.481", percent: 11 }
+  ],
+  governanceMix: [
+    { name: "Gestión misional", value: 88 },
+    { name: "Administración y operación", value: 12 }
   ]
+};
+
+const boardChartRegistry = {};
+const boardColors = {
+  teal: "#174f52",
+  green: "#2f7d62",
+  olive: "#8f9c3c",
+  gold: "#d8a23a",
+  blue: "#5d9bb7",
+  coral: "#c45f3c",
+  cream: "#fffdf8"
 };
 
 const boardState = {
@@ -87,7 +102,7 @@ function renderBoardKpis() {
       <p>${item.description}</p>
       <details>
         <summary>Ver fuente</summary>
-        <small>Fuente: ${item.source}.</small>
+        <small>Valor completo: ${item.fullValue || item.display}. Fuente: ${item.source}.</small>
       </details>
     </article>
   `).join("") || `<p class="gaia-board-note">No hay indicadores para el filtro seleccionado. Ajusta documento o tema para ampliar la consulta.</p>`;
@@ -96,6 +111,10 @@ function renderBoardKpis() {
 function renderBoardBars(selector, title, items) {
   const container = document.querySelector(`[data-board-chart="${selector}"]`);
   if (!container) return;
+  if (window.Chart) {
+    renderBoardChart(selector, title, items);
+    return;
+  }
   container.innerHTML = `
     <h4>${title}</h4>
     ${items.map((item) => `
@@ -106,6 +125,128 @@ function renderBoardBars(selector, title, items) {
       </div>
     `).join("")}
   `;
+}
+
+function renderBoardChart(selector, title, items) {
+  const container = document.querySelector(`[data-board-chart="${selector}"]`);
+  if (!container || !window.Chart) return;
+  if (boardChartRegistry[selector]) boardChartRegistry[selector].destroy();
+  container.innerHTML = `
+    <div class="gaia-board-chart-head">
+      <h4>${title}</h4>
+      <span>${selector === "funding" ? "Participación %" : "Distribución %"}</span>
+    </div>
+    <div class="gaia-board-canvas-wrap"><canvas aria-label="${title}" role="img"></canvas></div>
+  `;
+  const canvas = container.querySelector("canvas");
+  const isMany = items.length > 5;
+  const type = selector === "funding" ? "bar" : "doughnut";
+  const labels = items.map((item) => item.name);
+  const values = items.map((item) => item.percent ?? item.value);
+  boardChartRegistry[selector] = new Chart(canvas, {
+    type,
+    data: {
+      labels,
+      datasets: [{
+        label: title,
+        data: values,
+        backgroundColor: [
+          boardColors.green,
+          boardColors.gold,
+          boardColors.blue,
+          boardColors.olive,
+          boardColors.coral,
+          "#9fb8a6",
+          "#6b8f7c",
+          "#b9a868",
+          "#4e7a90",
+          "#a7c6b0",
+          "#d0b978",
+          "#7d6f58"
+        ],
+        borderColor: boardColors.cream,
+        borderWidth: type === "doughnut" ? 3 : 0,
+        borderRadius: type === "bar" ? 7 : 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: type === "bar" ? "y" : "x",
+      cutout: type === "doughnut" ? "62%" : undefined,
+      animation: {
+        duration: 900,
+        easing: "easeOutQuart"
+      },
+      plugins: {
+        legend: {
+          display: type === "doughnut",
+          position: "bottom",
+          labels: {
+            boxWidth: 12,
+            color: boardColors.teal,
+            font: { weight: "700" }
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: (context) => `${context.label}: ${Number(context.raw).toLocaleString("es-CO")} %`
+          }
+        }
+      },
+      scales: type === "bar" ? {
+        x: {
+          beginAtZero: true,
+          grid: { color: "rgba(23, 79, 82, 0.1)" },
+          ticks: {
+            color: boardColors.teal,
+            callback: (value) => `${value} %`
+          }
+        },
+        y: {
+          grid: { display: false },
+          ticks: {
+            color: boardColors.teal,
+            font: { weight: "700" },
+            autoSkip: false
+          }
+        }
+      } : {}
+    }
+  });
+  container.classList.toggle("gaia-board-chart--many", isMany);
+}
+
+function renderHeroChart() {
+  const canvas = document.querySelector("[data-board-hero-chart]");
+  if (!canvas || !window.Chart) return;
+  if (boardChartRegistry.hero) boardChartRegistry.hero.destroy();
+  boardChartRegistry.hero = new Chart(canvas, {
+    type: "doughnut",
+    data: {
+      labels: boardDashboardData.governanceMix.map((item) => item.name),
+      datasets: [{
+        data: boardDashboardData.governanceMix.map((item) => item.value),
+        backgroundColor: [boardColors.gold, boardColors.blue],
+        borderColor: "rgba(255, 253, 248, 0.92)",
+        borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: "68%",
+      animation: { duration: 1000, easing: "easeOutQuart" },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (context) => `${context.label}: ${context.raw} %`
+          }
+        }
+      }
+    }
+  });
 }
 
 function renderBoardDocuments() {
@@ -173,8 +314,11 @@ function initBoardFilters() {
 }
 
 renderBoardKpis();
+renderBoardBars("impact", "Destino de subvenciones", boardDashboardData.governanceMix);
+renderBoardBars("impactOverview", "Destino general de recursos", boardDashboardData.governanceMix);
 renderBoardBars("allocation", "Distribución por línea estratégica", boardDashboardData.allocation);
 renderBoardBars("funding", "Fuentes de financiación por participación", boardDashboardData.fundingSources);
 renderBoardBars("contracting", "Contratación institucional 2025", boardDashboardData.contracting);
+renderHeroChart();
 renderBoardDocuments();
 initBoardFilters();

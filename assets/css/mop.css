@@ -1144,6 +1144,154 @@ body.dark .gaia-top-nav a.active {
   color: #fff;
 }
 
+.gaia-board-hero-panel--dashboard {
+  grid-template-columns: minmax(0, 1fr) minmax(150px, 0.62fr);
+  align-content: stretch;
+  gap: 14px;
+  min-height: auto;
+  background:
+    linear-gradient(160deg, rgba(255, 253, 248, 0.18), rgba(255, 253, 248, 0.07));
+}
+
+.gaia-board-hero-panel--dashboard::before {
+  content: none;
+}
+
+.gaia-board-hero-panel-copy {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.gaia-board-hero-panel-copy strong {
+  max-width: 11ch;
+  font-size: clamp(1.75rem, 3.8vw, 2.65rem);
+  line-height: 0.98;
+}
+
+.gaia-board-hero-chart {
+  position: relative;
+  display: grid;
+  min-height: 186px;
+  place-items: center;
+}
+
+.gaia-board-hero-chart canvas {
+  max-width: 180px;
+  max-height: 180px;
+}
+
+.gaia-board-hero-chart span {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 74px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255, 253, 248, 0.92);
+  color: var(--gaia-teal-900);
+  font-weight: 900;
+  text-align: center;
+}
+
+.gaia-board-hero-list {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.gaia-board-hero-list span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.14);
+  color: rgba(255, 253, 248, 0.9);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.gaia-board-hero-list strong {
+  color: #fffdf8;
+  font-size: 0.95rem;
+}
+
+.gaia-board-kpi {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.gaia-board-kpi strong {
+  max-width: 100%;
+  font-size: clamp(1.75rem, 3vw, 2.55rem);
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.gaia-board-kpi p {
+  margin: 0;
+}
+
+.gaia-board-chart {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.gaia-board-chart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gaia-board-chart-head h4 {
+  margin: 0;
+}
+
+.gaia-board-chart-head span {
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(47, 125, 98, 0.12);
+  color: var(--gaia-teal-900);
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.gaia-board-canvas-wrap {
+  position: relative;
+  height: 300px;
+  min-width: 0;
+}
+
+.gaia-board-chart--many .gaia-board-canvas-wrap {
+  height: 430px;
+}
+
+.gaia-board-chart--compact {
+  margin: 12px 0;
+  background: rgba(255, 253, 248, 0.16);
+}
+
+.gaia-board-chart--compact .gaia-board-canvas-wrap {
+  height: 230px;
+}
+
+.gaia-board-map .gaia-board-chart {
+  border-color: rgba(255, 253, 248, 0.24);
+}
+
+.gaia-board-map .gaia-board-chart-head h4,
+.gaia-board-map .gaia-board-chart-head span {
+  color: #fffdf8;
+}
+
+.gaia-board-map .gaia-board-chart-head span {
+  background: rgba(255, 253, 248, 0.14);
+}
+
 .gaia-feature-card,
 .gaia-monitoring {
   padding: 16px;
@@ -1404,6 +1552,18 @@ body.dark .gaia-board-hero-stats article {
 body.dark .gaia-board-doc-actions a {
   background: #d8a23a;
   color: #13231e;
+}
+
+body.dark .gaia-board-hero-chart span,
+body.dark .gaia-board-chart-head span,
+body.dark .gaia-board-kpi small:first-child {
+  background: rgba(216, 162, 58, 0.16);
+  color: #edf6f2;
+}
+
+body.dark .gaia-board-hero-list span {
+  background: rgba(143, 227, 186, 0.08);
+  color: #d8f0e5;
 }
 
 body.dark .gaia-board-kpi strong,
@@ -3528,6 +3688,14 @@ body.dark .gaia-councils-list summary {
     flex-direction: column;
   }
 
+  .gaia-board-hero-panel--dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .gaia-board-hero-list {
+    grid-template-columns: 1fr;
+  }
+
   .admin-manager-grid {
     grid-template-columns: 1fr;
   }
@@ -3589,6 +3757,19 @@ body.dark .gaia-councils-list summary {
 
   .gaia-section {
     padding: 18px;
+  }
+
+  .gaia-board-hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .gaia-board-kpi strong {
+    font-size: clamp(1.55rem, 9vw, 2.1rem);
+  }
+
+  .gaia-board-canvas-wrap,
+  .gaia-board-chart--many .gaia-board-canvas-wrap {
+    height: 340px;
   }
 
   .gaia-timeline-hero,

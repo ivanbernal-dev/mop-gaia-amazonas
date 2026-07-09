@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas</title>
-<link rel="stylesheet" href="assets/css/mop.css?v=20260708-board2">
+<link rel="stylesheet" href="assets/css/mop.css?v=20260708-board3">
 </head>
 <body>
 <main class="page">
@@ -249,10 +249,21 @@
           <button type="button" data-board-tab="documentos">Descargar documentos</button>
         </div>
       </div>
-      <div class="gaia-board-hero-panel" aria-label="Enfoque del tablero">
-        <strong>Tablero de gobierno</strong>
-        <span>Datos, hitos y decisiones antes que repositorio documental.</span>
-        <small>Documentos originales disponibles al final cuando sean publicados.</small>
+      <div class="gaia-board-hero-panel gaia-board-hero-panel--dashboard" aria-label="Lectura ejecutiva del tablero">
+        <div class="gaia-board-hero-panel-copy">
+          <span class="gaia-eyebrow">Lectura ejecutiva</span>
+          <strong>Recursos, decisiones y control</strong>
+          <p>El tablero resume la información clave para que la Junta Directiva revise datos, hitos y alertas antes de abrir los documentos fuente.</p>
+        </div>
+        <div class="gaia-board-hero-chart" aria-label="Distribución general de recursos">
+          <canvas data-board-hero-chart role="img" aria-label="88 por ciento gestión misional y 12 por ciento administración y operación"></canvas>
+          <span>88 % impacto</span>
+        </div>
+        <div class="gaia-board-hero-list">
+          <span><strong>Acta 60</strong> Excedentes fiscales aprobados.</span>
+          <span><strong>2025</strong> Memoria e informe de gestión vinculados.</span>
+          <span><strong>IGAC</strong> Consulta oficial de capa ETI.</span>
+        </div>
       </div>
     </div>
 
@@ -297,11 +308,7 @@
         <article class="gaia-board-map">
           <span class="gaia-eyebrow">Mapa amazónico de la gestión</span>
           <h3>Los recursos se orientan al cuidado de la Amazonía y al fortalecimiento de gobiernos indígenas</h3>
-          <div class="gaia-board-map-visual" aria-hidden="true">
-            <span>Consolidación ETI</span>
-            <span>Protección regional de la Amazonía</span>
-            <span>Fortalecimiento institucional</span>
-          </div>
+          <div class="gaia-board-chart gaia-board-chart--compact" data-board-chart="impactOverview"></div>
           <p class="gaia-board-note">Visualización conceptual. No sustituye cartografía oficial.</p>
           <p class="gaia-board-note">La capa oficial de ETI formalizadas está disponible en Colombia en Mapas del IGAC como “Territorios Indígenas con Fines Político - Administrativos Especiales”. <a href="https://www.colombiaenmapas.gov.co/" target="_blank" rel="noopener">Consultar portal oficial</a>.</p>
         </article>
@@ -332,7 +339,7 @@
         </article>
         <article class="gaia-board-card">
           <h4>Destinación de subvenciones</h4>
-          <div class="gaia-board-donut" style="--impact:88" role="img" aria-label="88 por ciento inversión de impacto y 12 por ciento administración y operación"><span>88 %</span></div>
+          <div class="gaia-board-chart gaia-board-chart--compact" data-board-chart="impact"></div>
           <p><strong>Inversión de impacto:</strong> recursos destinados directamente a actividades, equipos, acciones e insumos misionales.</p>
           <p><strong>Administración y operación:</strong> 12 %.</p>
         </article>
@@ -1215,7 +1222,8 @@
 <script src="assets/documentos-mop.js"></script>
 <script src="assets/excedentes-mop.js"></script>
 <script src="assets/data/auditoria-mop.js"></script>
-<script src="assets/js/junta-directiva.js?v=20260708-board2"></script>
-<script src="assets/js/app.js?v=20260708-board2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
+<script src="assets/js/junta-directiva.js?v=20260708-board3"></script>
+<script src="assets/js/app.js?v=20260708-board3"></script>
 </body>
 </html>
