@@ -434,6 +434,36 @@ body.dark .gaia-top-nav a.active {
   gap: 10px;
 }
 
+.gaia-sde-structure {
+  display: grid;
+  gap: 16px;
+}
+
+.gaia-sde-level {
+  display: grid;
+  gap: 10px;
+}
+
+.gaia-sde-level-title {
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(158, 218, 226, 0.18);
+  color: var(--gaia-teal-900);
+  font-family: var(--gaia-heading-font);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.gaia-sde-grid--primary {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gaia-sde-grid--secondary {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .gaia-summary-grid article,
 .gaia-sde-grid article,
 .gaia-org-spine span,
@@ -444,6 +474,21 @@ body.dark .gaia-top-nav a.active {
   background: rgba(255, 253, 248, 0.88);
   color: var(--gaia-teal-900);
   font-weight: 900;
+}
+
+.gaia-sde-grid--primary article {
+  min-height: 118px;
+  border-color: rgba(216, 162, 58, 0.5);
+  background:
+    linear-gradient(180deg, rgba(216, 162, 58, 0.16), rgba(255, 253, 248, 0.9));
+  box-shadow: 0 12px 26px rgba(18, 55, 47, 0.08);
+}
+
+.gaia-sde-grid--secondary article {
+  min-height: 92px;
+  border-style: dashed;
+  background: rgba(255, 253, 248, 0.62);
+  font-size: 0.96rem;
 }
 
 .gaia-eti-entry {
@@ -1715,6 +1760,21 @@ body.dark .gaia-board-featured-kpi p {
 body.dark .gaia-board-featured-kpi strong,
 body.dark .gaia-board-featured-kpi details summary {
   color: #edf6f2;
+}
+
+body.dark .gaia-sde-level-title {
+  background: rgba(216, 162, 58, 0.16);
+  color: #edf6f2;
+}
+
+body.dark .gaia-sde-grid--primary article {
+  border-color: rgba(216, 162, 58, 0.45);
+  background: rgba(216, 162, 58, 0.12);
+}
+
+body.dark .gaia-sde-grid--secondary article {
+  border-color: rgba(143, 227, 186, 0.24);
+  background: rgba(143, 227, 186, 0.07);
 }
 
 body.dark .gaia-board-metric-strip button {
@@ -3936,6 +3996,14 @@ body.dark .gaia-councils-list summary {
     grid-template-columns: 1fr;
   }
 
+  .gaia-sde-grid--primary {
+    grid-template-columns: 1fr;
+  }
+
+  .gaia-sde-grid--secondary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .admin-manager-grid {
     grid-template-columns: 1fr;
   }
@@ -4018,6 +4086,10 @@ body.dark .gaia-councils-list summary {
 
   .gaia-board-metric-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gaia-sde-grid--secondary {
+    grid-template-columns: 1fr;
   }
 
   .gaia-timeline-hero,
