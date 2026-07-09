@@ -4,34 +4,36 @@ const boardDashboardData = {
     {
       id: "memoria-economica-2025",
       title: "Memoria Económica 2025",
-      type: "Memoria Económica",
-      status: "Pendiente de aprobación/publicación final",
-      docx: "",
+      type: "memoria",
+      typeLabel: "Memoria Económica",
+      status: "Documento fuente cargado / versión para revisión",
+      docx: "assets/docs/junta-directiva/memoria-economica-2025.docx",
       pdf: ""
     },
     {
       id: "informe-gestion-2025",
-      title: "Informe de Gestión 2025",
-      type: "Informe de Gestión",
-      status: "Pendiente de aprobación/publicación final",
-      docx: "",
+      title: "Informe de Gestión GAIA 2025",
+      type: "gestion",
+      typeLabel: "Informe de Gestión",
+      status: "Documento fuente cargado / versión para revisión",
+      docx: "assets/docs/junta-directiva/informe-gestion-gaia-2025.docx",
       pdf: ""
     }
   ],
   kpis: [
-    { label: "Año gravable", display: "2025", source: "Memoria Económica 2025", theme: "Gobierno corporativo", document: "Memoria Económica", description: "Vigencia del tablero institucional." },
-    { label: "Ingresos por subvenciones", display: "$23.339.824.252", source: "Memoria Económica 2025", theme: "Subvenciones", document: "Memoria Económica", description: "Recursos registrados para la vigencia." },
-    { label: "Inversión de impacto", display: "88 %", source: "Memoria Económica 2025", theme: "Subvenciones", document: "Memoria Económica", description: "Recursos orientados directamente a impacto misional." },
-    { label: "Administración y operación", display: "12 %", source: "Memoria Económica 2025", theme: "Subvenciones", document: "Memoria Económica", description: "Costos para sostener la operación institucional." },
-    { label: "Excedentes fiscales aprobados", display: "$1.245.179.482", source: "Memoria Económica 2025 / Acta No. 60", theme: "Excedentes", document: "Memoria Económica", description: "Destinación aprobada por Junta Directiva." },
-    { label: "Inversiones vigentes", display: "$13.038.278.456", source: "Memoria Económica 2025", theme: "Finanzas", document: "Memoria Económica", description: "Suma de dos CDT Davivienda." },
-    { label: "Patrimonio institucional", display: "$15.868.350.937", source: "Informe de Gestión 2025", theme: "Finanzas", document: "Informe de Gestión", description: "Patrimonio reportado para la vigencia." },
-    { label: "Convenios 2025", display: "$9.234.818.510", source: "Informe de Gestión 2025", theme: "Finanzas", document: "Informe de Gestión", description: "Convenios recibidos durante 2025." },
-    { label: "Subvenciones 2025", display: "$22.535.590.139", source: "Informe de Gestión 2025", theme: "Finanzas", document: "Informe de Gestión", description: "Subvenciones reportadas en el informe." },
-    { label: "Contratación institucional", display: "$20.426.543.978", source: "Informe de Gestión 2025", theme: "Contratación", document: "Informe de Gestión", description: "Contratación institucional consolidada." },
-    { label: "ETI formalizadas", display: "8", source: "Informe de Gestión 2025", theme: "Gestión misional", document: "Informe de Gestión", description: "Entidades Territoriales Indígenas formalizadas o reconocidas." },
-    { label: "Acuerdos interculturales", display: "8", source: "Informe de Gestión 2025", theme: "Gestión misional", document: "Informe de Gestión", description: "Acuerdos interculturales reportados." },
-    { label: "Cumplimiento auditoría", display: "93 %", source: "Informe de Gestión 2025", theme: "Control interno", document: "Informe de Gestión", description: "Recomendaciones aplicadas o en implementación." }
+    { label: "Año gravable", display: "2025", source: "Memoria Económica 2025", theme: "gobierno", themeLabel: "Gobierno corporativo", document: "memoria", description: "Vigencia del tablero institucional." },
+    { label: "Ingresos por subvenciones", display: "$23.339.824.252", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Recursos registrados para la vigencia." },
+    { label: "Inversión de impacto", display: "88 %", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Recursos orientados directamente a impacto misional." },
+    { label: "Administración y operación", display: "12 %", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Costos para sostener la operación institucional." },
+    { label: "Excedentes fiscales aprobados", display: "$1.245.179.482", source: "Memoria Económica 2025 / Acta No. 60", theme: "excedentes", themeLabel: "Excedentes", document: "memoria", description: "Destinación aprobada por Junta Directiva." },
+    { label: "Inversiones vigentes", display: "$13.038.278.456", source: "Memoria Económica 2025", theme: "finanzas", themeLabel: "Finanzas", document: "memoria", description: "Suma de dos CDT Davivienda." },
+    { label: "Patrimonio institucional", display: "$15.868.350.937", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Patrimonio reportado para la vigencia." },
+    { label: "Convenios 2025", display: "$9.234.818.510", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Convenios recibidos durante 2025." },
+    { label: "Subvenciones 2025", display: "$22.535.590.139", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Subvenciones reportadas en el informe." },
+    { label: "Contratación institucional", display: "$20.426.543.978", source: "Informe de Gestión 2025", theme: "contratacion", themeLabel: "Contratación", document: "gestion", description: "Contratación institucional consolidada." },
+    { label: "ETI formalizadas", display: "8", source: "Informe de Gestión 2025", theme: "misional", themeLabel: "Gestión misional", document: "gestion", description: "Entidades Territoriales Indígenas formalizadas o reconocidas." },
+    { label: "Acuerdos interculturales", display: "8", source: "Informe de Gestión 2025", theme: "misional", themeLabel: "Gestión misional", document: "gestion", description: "Acuerdos interculturales reportados." },
+    { label: "Cumplimiento auditoría", display: "93 %", source: "Informe de Gestión 2025", theme: "control", themeLabel: "Control interno", document: "gestion", description: "Recomendaciones aplicadas o en implementación." }
   ],
   fundingSources: [
     { name: "Moore", percent: 38.14 },
@@ -61,14 +63,15 @@ const boardDashboardData = {
 };
 
 const boardState = {
-  document: "Todos",
-  theme: "Todos",
+  document: "all",
+  theme: "all",
   tab: "resumen"
 };
 
 function boardMatches(item) {
-  const documentOk = boardState.document === "Todos" || item.document === boardState.document || item.type === boardState.document;
-  const themeOk = boardState.theme === "Todos" || item.theme === boardState.theme;
+  const itemDocument = item.document || item.type;
+  const documentOk = boardState.document === "all" || itemDocument === boardState.document;
+  const themeOk = boardState.theme === "all" || item.theme === boardState.theme;
   return documentOk && themeOk;
 }
 
@@ -78,15 +81,16 @@ function renderBoardKpis() {
   const items = boardDashboardData.kpis.filter(boardMatches);
   container.innerHTML = items.map((item) => `
     <article class="gaia-board-kpi" data-document="${item.document}" data-theme="${item.theme}">
+      <small>${item.themeLabel}</small>
       <strong>${item.display}</strong>
       <span>${item.label}</span>
       <p>${item.description}</p>
       <details>
-        <summary>Ver más</summary>
-        <small>Fuente: ${item.source}. Tema: ${item.theme}.</small>
+        <summary>Ver fuente</summary>
+        <small>Fuente: ${item.source}.</small>
       </details>
     </article>
-  `).join("") || `<p class="gaia-board-note">No hay indicadores para el filtro seleccionado.</p>`;
+  `).join("") || `<p class="gaia-board-note">No hay indicadores para el filtro seleccionado. Ajusta documento o tema para ampliar la consulta.</p>`;
 }
 
 function renderBoardBars(selector, title, items) {
@@ -107,19 +111,19 @@ function renderBoardBars(selector, title, items) {
 function renderBoardDocuments() {
   const container = document.querySelector("[data-board-documents]");
   if (!container) return;
-  const documents = boardDashboardData.documents.filter(boardMatches);
+  const documents = boardDashboardData.documents.filter((doc) => boardState.document === "all" || doc.type === boardState.document);
   container.innerHTML = documents.map((doc) => `
     <article class="gaia-board-document-card" data-document="${doc.type}">
       <span class="gaia-status-badge">${doc.status}</span>
       <h3>${doc.title}</h3>
-      <p>${doc.type === "Memoria Económica"
+      <p>${doc.type === "memoria"
         ? "Certificación del Representante Legal y Revisor Fiscal sobre información económica, subvenciones, excedentes e inversiones de la vigencia 2025."
         : "Informe institucional con resultados misionales, gobierno corporativo, gestión financiera, contratación, control interno y transparencia."}</p>
-      <p class="gaia-board-doc-meta">Documento fuente pendiente de publicación en assets/docs/junta-directiva/.</p>
+      <p class="gaia-board-doc-meta">${doc.typeLabel} disponible como documento fuente para consulta interna y revisión.</p>
       <div class="gaia-board-doc-actions">
-        <button type="button" data-board-tab="${doc.type === "Memoria Económica" ? "memoria" : "gestion"}">Ver resumen visual</button>
-        <span>DOCX pendiente</span>
-        <span>PDF pendiente</span>
+        <button type="button" data-board-tab="${doc.type}">Ver resumen visual</button>
+        ${doc.docx ? `<a href="${doc.docx}" download>Descargar DOCX</a>` : "<span>DOCX pendiente</span>"}
+        ${doc.pdf ? `<a href="${doc.pdf}" download>Descargar PDF</a>` : "<span>PDF pendiente</span>"}
       </div>
     </article>
   `).join("");
@@ -143,7 +147,8 @@ function setBoardTab(tab) {
 function initBoardFilters() {
   const board = document.querySelector("#junta-directiva");
   board?.addEventListener("click", (event) => {
-    const tabButton = event.target.closest("[data-board-tab]");
+    const target = event.target instanceof Element ? event.target : event.target.parentElement;
+    const tabButton = target?.closest("[data-board-tab]");
     if (tabButton) setBoardTab(tabButton.dataset.boardTab);
   });
 

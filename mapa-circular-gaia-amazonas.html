@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas</title>
-<link rel="stylesheet" href="assets/css/mop.css?v=20260706-reason">
+<link rel="stylesheet" href="assets/css/mop.css?v=20260708-board2">
 </head>
 <body>
 <main class="page">
@@ -236,6 +236,11 @@
         <h2 id="titulo-junta-directiva">Junta Directiva</h2>
         <p class="gaia-board-lead">Gobierno institucional, memoria económica, gestión anual y transparencia para la toma de decisiones.</p>
         <p>La Junta Directiva es un espacio clave para orientar, revisar y fortalecer la gobernanza institucional de GAIA Amazonas. Esta sección organiza la información de gestión, memoria económica, excedentes, subvenciones, contratación, control interno y documentos de referencia en un formato visual, navegable y fácil de consultar.</p>
+        <div class="gaia-board-hero-stats" aria-label="Indicadores destacados de Junta Directiva">
+          <article><strong>$23.339 millones</strong><span>Ingresos por subvenciones</span></article>
+          <article><strong>88 %</strong><span>Inversión de impacto</span></article>
+          <article><strong>8</strong><span>ETI formalizadas o reconocidas</span></article>
+        </div>
         <div class="gaia-board-actions">
           <button type="button" data-board-tab="resumen">Explorar tablero completo</button>
           <button type="button" data-board-tab="resumen">Ver tablero 2025</button>
@@ -258,21 +263,21 @@
       </div>
       <div>
         <span>Documento</span>
-        <button type="button" class="gaia-board-filter active" data-board-filter="document" data-value="Todos" aria-pressed="true">Todos</button>
-        <button type="button" class="gaia-board-filter" data-board-filter="document" data-value="Memoria Económica" aria-pressed="false">Memoria Económica</button>
-        <button type="button" class="gaia-board-filter" data-board-filter="document" data-value="Informe de Gestión" aria-pressed="false">Informe de Gestión</button>
+        <button type="button" class="gaia-board-filter active" data-board-filter="document" data-value="all" aria-pressed="true">Todos</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="document" data-value="memoria" aria-pressed="false">Memoria Económica</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="document" data-value="gestion" aria-pressed="false">Informe de Gestión</button>
       </div>
       <div>
         <span>Tema</span>
-        <button type="button" class="gaia-board-filter active" data-board-filter="theme" data-value="Todos" aria-pressed="true">Todos</button>
-        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="Gobierno corporativo" aria-pressed="false">Gobierno corporativo</button>
-        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="Subvenciones" aria-pressed="false">Subvenciones</button>
-        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="Excedentes" aria-pressed="false">Excedentes</button>
-        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="Gestión misional" aria-pressed="false">Gestión misional</button>
-        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="Finanzas" aria-pressed="false">Finanzas</button>
-        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="Contratación" aria-pressed="false">Contratación</button>
-        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="Control interno" aria-pressed="false">Control interno</button>
-        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="Transparencia" aria-pressed="false">Transparencia</button>
+        <button type="button" class="gaia-board-filter active" data-board-filter="theme" data-value="all" aria-pressed="true">Todos</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="gobierno" aria-pressed="false">Gobierno corporativo</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="subvenciones" aria-pressed="false">Subvenciones</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="excedentes" aria-pressed="false">Excedentes</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="misional" aria-pressed="false">Gestión misional</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="finanzas" aria-pressed="false">Finanzas</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="contratacion" aria-pressed="false">Contratación</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="control" aria-pressed="false">Control interno</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="transparencia" aria-pressed="false">Transparencia</button>
       </div>
     </div>
 
@@ -298,6 +303,7 @@
             <span>Fortalecimiento institucional</span>
           </div>
           <p class="gaia-board-note">Visualización conceptual. No sustituye cartografía oficial.</p>
+          <p class="gaia-board-note">La capa oficial de ETI formalizadas está disponible en Colombia en Mapas del IGAC como “Territorios Indígenas con Fines Político - Administrativos Especiales”. <a href="https://www.colombiaenmapas.gov.co/" target="_blank" rel="noopener">Consultar portal oficial</a>.</p>
         </article>
         <article class="gaia-board-card">
           <h3>Decisiones y seguimiento de Junta</h3>
@@ -1209,7 +1215,7 @@
 <script src="assets/documentos-mop.js"></script>
 <script src="assets/excedentes-mop.js"></script>
 <script src="assets/data/auditoria-mop.js"></script>
-<script src="assets/js/junta-directiva.js?v=20260708-board"></script>
-<script src="assets/js/app.js?v=20260708-board"></script>
+<script src="assets/js/junta-directiva.js?v=20260708-board2"></script>
+<script src="assets/js/app.js?v=20260708-board2"></script>
 </body>
 </html>

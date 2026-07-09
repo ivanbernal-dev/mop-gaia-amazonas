@@ -997,6 +997,153 @@ body.dark .gaia-top-nav a.active {
   opacity: 0.72;
 }
 
+.gaia-board-hero {
+  position: relative;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+  box-shadow: 0 22px 55px rgba(18, 55, 47, 0.22);
+}
+
+.gaia-board-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 26px 18px auto;
+  width: min(280px, 38vw);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 253, 248, 0.7));
+}
+
+.gaia-board-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.gaia-board-hero-stats article {
+  display: grid;
+  gap: 6px;
+  min-height: 104px;
+  align-content: center;
+  padding: 16px;
+  border: 1px solid rgba(255, 253, 248, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.13);
+  box-shadow: inset 0 1px 0 rgba(255, 253, 248, 0.16);
+}
+
+.gaia-board-hero-stats strong {
+  color: #fffdf8;
+  font-size: clamp(1.38rem, 2.8vw, 2rem);
+  line-height: 1;
+}
+
+.gaia-board-hero-stats span {
+  color: rgba(255, 253, 248, 0.86);
+  font-weight: 900;
+}
+
+.gaia-board-actions button:first-child {
+  background: var(--gaia-gold);
+  color: #14251f;
+}
+
+.gaia-board-filters {
+  position: relative;
+  grid-template-columns: minmax(120px, 0.34fr) minmax(220px, 0.66fr) minmax(360px, 1.3fr);
+  align-items: start;
+  padding-top: 48px;
+  background:
+    linear-gradient(90deg, rgba(216, 162, 58, 0.16), rgba(255, 253, 248, 0.86) 28%),
+    rgba(255, 253, 248, 0.92);
+  box-shadow: 0 16px 38px rgba(18, 55, 47, 0.09);
+}
+
+.gaia-board-filters::before {
+  content: "Explora los resultados";
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: var(--gaia-teal-900);
+  font-family: var(--gaia-heading-font);
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.gaia-board-filters div {
+  align-content: start;
+  min-width: 0;
+}
+
+.gaia-board-filter,
+.gaia-board-tabs button {
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.gaia-board-filter:hover,
+.gaia-board-tabs button:hover,
+.gaia-board-actions button:hover,
+.gaia-board-doc-actions button:hover,
+.gaia-board-doc-actions a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(18, 55, 47, 0.13);
+}
+
+.gaia-board-tabs {
+  position: sticky;
+  top: 10px;
+  z-index: 2;
+  padding: 10px;
+  border: 1px solid rgba(28, 75, 81, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.92);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 26px rgba(18, 55, 47, 0.08);
+}
+
+.gaia-board-kpis {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.gaia-board-kpi {
+  min-height: 184px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(247, 244, 236, 0.92));
+  box-shadow: 0 14px 34px rgba(18, 55, 47, 0.08);
+}
+
+.gaia-board-kpi small:first-child {
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(47, 125, 98, 0.11);
+  color: var(--gaia-teal-900);
+}
+
+.gaia-board-kpi details summary {
+  color: var(--gaia-teal-900);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.gaia-board-map a {
+  color: #fffdf8;
+  font-weight: 900;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.gaia-board-document-card {
+  display: grid;
+  gap: 10px;
+}
+
+.gaia-board-doc-actions a {
+  background: var(--gaia-teal-900);
+  color: #fff;
+}
+
 .gaia-feature-card,
 .gaia-monitoring {
   padding: 16px;
@@ -1234,6 +1381,27 @@ body.dark .gaia-board-doc-actions span {
 
 body.dark .gaia-board-filter.active,
 body.dark .gaia-board-tabs button[aria-selected="true"] {
+  background: #d8a23a;
+  color: #13231e;
+}
+
+body.dark .gaia-board-filters {
+  background:
+    linear-gradient(90deg, rgba(216, 162, 58, 0.12), rgba(38, 53, 47, 0.94) 32%),
+    #26352f;
+}
+
+body.dark .gaia-board-tabs {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: rgba(19, 35, 30, 0.9);
+}
+
+body.dark .gaia-board-hero-stats article {
+  border-color: rgba(143, 227, 186, 0.22);
+  background: rgba(143, 227, 186, 0.08);
+}
+
+body.dark .gaia-board-doc-actions a {
   background: #d8a23a;
   color: #13231e;
 }
@@ -3345,6 +3513,7 @@ body.dark .gaia-councils-list summary {
   .gaia-reason__grid,
   .gaia-monitoring-system__steps,
   .gaia-board-hero,
+  .gaia-board-filters,
   .gaia-board-grid.three,
   .gaia-board-grid.four,
   .gaia-board-audit-grid,
@@ -3398,6 +3567,8 @@ body.dark .gaia-councils-list summary {
   .gaia-reason__grid,
   .gaia-monitoring-system__steps,
   .gaia-board-hero,
+  .gaia-board-hero-stats,
+  .gaia-board-filters,
   .gaia-board-grid.two,
   .gaia-board-grid.three,
   .gaia-board-grid.four,
