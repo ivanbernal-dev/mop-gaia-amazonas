@@ -1555,6 +1555,149 @@ body.dark .gaia-top-nav a.active {
   background: rgba(255, 253, 248, 0.14);
 }
 
+.gaia-accounting-explorer {
+  display: grid;
+  gap: 16px;
+}
+
+.gaia-accounting-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: end;
+}
+
+.gaia-accounting-head h3,
+.gaia-accounting-head p {
+  margin: 0;
+}
+
+.gaia-accounting-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.gaia-accounting-selector button {
+  min-height: 42px;
+  padding: 9px 14px;
+  border: 1px solid rgba(28, 75, 81, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.8);
+  color: var(--gaia-teal-900);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.gaia-accounting-selector button.active,
+.gaia-accounting-selector button:hover {
+  border-color: var(--gaia-teal-900);
+  background: var(--gaia-teal-900);
+  color: #fffdf8;
+}
+
+.gaia-accounting-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gaia-accounting-summary article,
+.gaia-accounting-table-card {
+  min-width: 0;
+  border: 1px solid rgba(28, 75, 81, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.86);
+}
+
+.gaia-accounting-summary article {
+  display: grid;
+  gap: 5px;
+  padding: 14px;
+  box-shadow: 0 10px 22px rgba(18, 55, 47, 0.06);
+}
+
+.gaia-accounting-summary small {
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(47, 125, 98, 0.12);
+  color: var(--gaia-teal-900);
+  font-weight: 900;
+}
+
+.gaia-accounting-summary strong {
+  color: var(--gaia-teal-900);
+  font-size: clamp(1.55rem, 3vw, 2.4rem);
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.gaia-accounting-summary span {
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.gaia-accounting-layout {
+  display: grid;
+  grid-template-columns: minmax(420px, 1.1fr) minmax(320px, 0.9fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.gaia-accounting-chart .gaia-board-canvas-wrap {
+  height: 450px;
+}
+
+.gaia-accounting-table-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.gaia-accounting-table-wrap {
+  max-height: 450px;
+  overflow: auto;
+  border: 1px solid rgba(28, 75, 81, 0.1);
+  border-radius: 8px;
+}
+
+.gaia-accounting-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.gaia-accounting-table th,
+.gaia-accounting-table td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(28, 75, 81, 0.08);
+  text-align: left;
+  vertical-align: top;
+}
+
+.gaia-accounting-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--gaia-teal-900);
+  color: #fffdf8;
+}
+
+.gaia-accounting-table td:first-child,
+.gaia-accounting-table td:last-child {
+  white-space: nowrap;
+  font-weight: 900;
+}
+
+.gaia-accounting-table td:last-child {
+  color: var(--gaia-teal-900);
+  text-align: right;
+}
+
 .gaia-feature-card,
 .gaia-monitoring {
   padding: 16px;
@@ -1787,6 +1930,45 @@ body.dark .gaia-board-metric-strip button.active,
 body.dark .gaia-board-metric-strip button:hover {
   border-color: rgba(216, 162, 58, 0.5);
   background: rgba(216, 162, 58, 0.14);
+}
+
+body.dark .gaia-accounting-selector button {
+  border-color: rgba(143, 227, 186, 0.22);
+  background: rgba(143, 227, 186, 0.08);
+  color: #edf6f2;
+}
+
+body.dark .gaia-accounting-selector button.active,
+body.dark .gaia-accounting-selector button:hover {
+  border-color: rgba(216, 162, 58, 0.72);
+  background: rgba(216, 162, 58, 0.22);
+  color: #ffffff;
+}
+
+body.dark .gaia-accounting-summary article,
+body.dark .gaia-accounting-table-card {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: rgba(143, 227, 186, 0.08);
+}
+
+body.dark .gaia-accounting-summary small {
+  background: rgba(216, 162, 58, 0.18);
+  color: #ffffff;
+}
+
+body.dark .gaia-accounting-summary strong,
+body.dark .gaia-accounting-table td:last-child {
+  color: #ffffff;
+}
+
+body.dark .gaia-accounting-table-wrap,
+body.dark .gaia-accounting-table th,
+body.dark .gaia-accounting-table td {
+  border-color: rgba(143, 227, 186, 0.14);
+}
+
+body.dark .gaia-accounting-table th {
+  background: rgba(18, 55, 47, 0.96);
 }
 
 body.dark .gaia-reason-step h3,
@@ -3991,9 +4173,15 @@ body.dark .gaia-councils-list summary {
   }
 
   .gaia-board-indicator-head,
-  .gaia-board-indicator-layout {
+  .gaia-board-indicator-layout,
+  .gaia-accounting-head,
+  .gaia-accounting-layout {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .gaia-accounting-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .gaia-sde-grid--primary {
@@ -4086,6 +4274,18 @@ body.dark .gaia-councils-list summary {
 
   .gaia-board-metric-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gaia-accounting-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .gaia-accounting-selector {
+    justify-content: flex-start;
+  }
+
+  .gaia-accounting-chart .gaia-board-canvas-wrap {
+    height: 380px;
   }
 
   .gaia-sde-grid--secondary {

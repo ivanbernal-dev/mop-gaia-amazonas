@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas</title>
-<link rel="stylesheet" href="assets/css/mop.css?v=20260708-board7">
+<link rel="stylesheet" href="assets/css/mop.css?v=20260714-board8">
 </head>
 <body>
 <main class="page">
@@ -250,8 +250,10 @@
           <article><strong>$23.339 millones</strong><span>Ingresos por subvenciones</span></article>
           <article><strong>88 %</strong><span>Inversión de impacto</span></article>
           <article><strong>8</strong><span>ETI formalizadas o reconocidas</span></article>
+          <article><strong>$6.880 millones</strong><span>Saldos territoriales 2025-2026</span></article>
         </div>
         <div class="gaia-board-actions">
+          <button type="button" data-board-tab="contabilidad">Ver Explorador Contable</button>
           <button type="button" data-board-tab="memoria">Ver Memoria Económica</button>
           <button type="button" data-board-tab="gestion">Ver Informe de Gestión</button>
           <button type="button" data-board-tab="documentos">Documentos fuente</button>
@@ -306,6 +308,7 @@
         <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="gobierno" aria-pressed="false">Gobierno corporativo</button>
         <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="subvenciones" aria-pressed="false">Subvenciones</button>
         <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="excedentes" aria-pressed="false">Excedentes</button>
+        <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="territorial" aria-pressed="false">Transferencias territoriales</button>
         <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="misional" aria-pressed="false">Gestión misional</button>
         <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="finanzas" aria-pressed="false">Finanzas</button>
         <button type="button" class="gaia-board-filter" data-board-filter="theme" data-value="contratacion" aria-pressed="false">Contratación</button>
@@ -316,6 +319,7 @@
 
     <div class="gaia-board-tabs" role="tablist" aria-label="Vistas del tablero de Junta Directiva">
       <button type="button" role="tab" aria-selected="true" data-board-tab="resumen">Resumen</button>
+      <button type="button" role="tab" aria-selected="false" data-board-tab="contabilidad">Explorador contable</button>
       <button type="button" role="tab" aria-selected="false" data-board-tab="memoria">Memoria Económica</button>
       <button type="button" role="tab" aria-selected="false" data-board-tab="gestion">Informe de Gestión</button>
       <button type="button" role="tab" aria-selected="false" data-board-tab="gobierno">Gobierno corporativo</button>
@@ -340,6 +344,10 @@
           <div class="gaia-board-decision"><strong>Seguimiento institucional</strong><span>Control interno, gestión documental, trazabilidad financiera y actualización de actas.</span></div>
         </article>
       </div>
+    </div>
+
+    <div class="gaia-board-panel" role="tabpanel" hidden data-board-panel="contabilidad">
+      <div data-board-accounting-explorer></div>
     </div>
 
     <div class="gaia-board-panel" role="tabpanel" hidden data-board-panel="memoria">
@@ -1244,7 +1252,7 @@
 <script src="assets/excedentes-mop.js"></script>
 <script src="assets/data/auditoria-mop.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
-<script src="assets/js/junta-directiva.js?v=20260708-board6"></script>
-<script src="assets/js/app.js?v=20260708-board6"></script>
+<script src="assets/js/junta-directiva.js?v=20260714-board8"></script>
+<script src="assets/js/app.js?v=20260714-board8"></script>
 </body>
 </html>

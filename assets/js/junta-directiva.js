@@ -31,6 +31,7 @@ const boardDashboardData = {
     { label: "Convenios 2025", display: "$9.235 M", fullValue: "$9.234.818.510", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Convenios recibidos durante 2025." },
     { label: "Subvenciones 2025", display: "$22.536 M", fullValue: "$22.535.590.139", source: "Informe de Gestión 2025", theme: "finanzas", themeLabel: "Finanzas", document: "gestion", description: "Subvenciones reportadas en el informe." },
     { label: "Contratación institucional", display: "$20.427 M", fullValue: "$20.426.543.978", source: "Informe de Gestión 2025", theme: "contratacion", themeLabel: "Contratación", document: "gestion", description: "Contratación institucional consolidada." },
+    { label: "Transferencias territoriales 2025-2026", display: "$6.880 M", fullValue: "$6.879.546.693", source: "Explorador de contabilidad 2025-2026", theme: "territorial", themeLabel: "Transferencias territoriales", document: "memoria", description: "Saldos consolidados por tercero para organizaciones y consejos indígenas." },
     { label: "ETI formalizadas", display: "8", source: "Informe de Gestión 2025", theme: "misional", themeLabel: "Gestión misional", document: "gestion", description: "Entidades Territoriales Indígenas formalizadas o reconocidas." },
     { label: "Acuerdos interculturales", display: "8", source: "Informe de Gestión 2025", theme: "misional", themeLabel: "Gestión misional", document: "gestion", description: "Acuerdos interculturales reportados." },
     { label: "Cumplimiento auditoría", display: "93 %", source: "Informe de Gestión 2025", theme: "control", themeLabel: "Control interno", document: "gestion", description: "Recomendaciones aplicadas o en implementación." }
@@ -63,7 +64,23 @@ const boardDashboardData = {
   governanceMix: [
     { name: "Gestión misional", value: 88 },
     { name: "Administración y operación", value: 12 }
-  ]
+  ],
+  accountingExplorer: {
+    source: "2025_2026Explorador de contabilidad.xlsx / Hoja3",
+    rows: [
+      { code: "838000236", name: "Asociación de Capitanes Indígenas de El Mirití Amazonas", y2025: 957122620, y2026: 362364546, total: 1319487166 },
+      { code: "838000242", name: "Asociación de Capitanes Indígenas Yaigojé Apaporis", y2025: 1206316000, y2026: 327152226, total: 1533468226 },
+      { code: "901749047", name: "Consejo Indígena del Territorio Indígena del Río Tiquié", y2025: 823689000, y2026: 466102064, total: 1289791064 },
+      { code: "901752006", name: "Consejo Indígena del Territorio Indígena Unido de los Ríos I", y2025: 182254600, y2026: 0, total: 182254600 },
+      { code: "901821426", name: "Consejo de Autoridades Indígenas Tradicionales de Tarapacá", y2025: 133240000, y2026: 57712000, total: 190952000 },
+      { code: "901826366", name: "Consejo Indígena del Territorio Indígena Bajo Río Caquetá", y2025: 208216000, y2026: 54862200, total: 263078200 },
+      { code: "901826383", name: "Consejo Indígena del Territorio Pani", y2025: 245250000, y2026: 40166196, total: 285416196 },
+      { code: "901826423", name: "Consejo Indígena de Unidad, Pensamiento y Sabiduría de La PA", y2025: 271074500, y2026: 51358000, total: 322432500 },
+      { code: "901873742", name: "Consejo Indígena del Territorio Indígena del Río Pirá Paraná", y2025: 774074155, y2026: 336872500, total: 1110946655 },
+      { code: "901608798", name: "Consejo Indígena Mayor de Tarapacá-Cimtar TI", y2025: 113586000, y2026: 22076000, total: 135662000 },
+      { code: "901876072", name: "Esquema Asociativo de los Territorios Indígenas del Macroterritorio de los Jaguares del Yuruparí", y2025: 0, y2026: 246058086, total: 246058086 }
+    ]
+  }
 };
 
 const boardChartRegistry = {};
@@ -81,8 +98,32 @@ const boardState = {
   document: "all",
   theme: "all",
   tab: "resumen",
-  metric: ""
+  metric: "",
+  accountingYear: "total"
 };
+
+const accountingYearLabels = {
+  total: "Total general",
+  y2025: "2025",
+  y2026: "2026"
+};
+
+function formatCOP(value) {
+  return new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+    maximumFractionDigits: 0
+  }).format(value);
+}
+
+function compactCOP(value) {
+  const millions = value / 1000000;
+  return `$${new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 }).format(millions)} M`;
+}
+
+function accountingValue(row, year = boardState.accountingYear) {
+  return row[year] ?? row.total;
+}
 
 function boardMatches(item) {
   const itemDocument = item.document || item.type;
@@ -330,6 +371,153 @@ function renderBoardChart(selector, title, items) {
   container.classList.toggle("gaia-board-chart--many", isMany);
 }
 
+function renderAccountingExplorer() {
+  const container = document.querySelector("[data-board-accounting-explorer]");
+  if (!container) return;
+  const rows = [...boardDashboardData.accountingExplorer.rows]
+    .sort((a, b) => accountingValue(b) - accountingValue(a));
+  const total = rows.reduce((sum, row) => sum + accountingValue(row), 0);
+  const total2025 = rows.reduce((sum, row) => sum + row.y2025, 0);
+  const total2026 = rows.reduce((sum, row) => sum + row.y2026, 0);
+  const top = rows[0];
+  const activeLabel = accountingYearLabels[boardState.accountingYear];
+  container.innerHTML = `
+    <section class="gaia-accounting-explorer" aria-label="Explorador contable territorial">
+      <div class="gaia-accounting-head">
+        <div>
+          <span class="gaia-eyebrow">Explorador contable territorial</span>
+          <h3>Saldos por organización o consejo indígena</h3>
+          <p>Lectura consolidada de saldos 2025-2026 por tercero, diseñada para revisar concentración, vigencia y trazabilidad sin depender de una tabla dinámica externa.</p>
+        </div>
+        <div class="gaia-accounting-selector" aria-label="Seleccionar vigencia del explorador">
+          ${Object.entries(accountingYearLabels).map(([key, label]) => `
+            <button type="button" class="${boardState.accountingYear === key ? "active" : ""}" data-board-accounting-year="${key}" aria-pressed="${boardState.accountingYear === key}">
+              ${label}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+      <div class="gaia-accounting-summary" aria-label="Resumen de saldos territoriales">
+        <article><small>${activeLabel}</small><strong>${compactCOP(total)}</strong><span>Saldos consolidados</span></article>
+        <article><small>2025</small><strong>${compactCOP(total2025)}</strong><span>Saldo registrado</span></article>
+        <article><small>2026</small><strong>${compactCOP(total2026)}</strong><span>Saldo registrado</span></article>
+        <article><small>Mayor saldo</small><strong>${compactCOP(accountingValue(top))}</strong><span>${top.name}</span></article>
+      </div>
+      <div class="gaia-accounting-layout">
+        <article class="gaia-board-chart gaia-accounting-chart" data-accounting-chart></article>
+        <article class="gaia-accounting-table-card">
+          <div class="gaia-board-chart-head">
+            <h4>Detalle por tercero</h4>
+            <span>${rows.length} registros</span>
+          </div>
+          <div class="gaia-accounting-table-wrap">
+            <table class="gaia-accounting-table">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Organización / consejo indígena</th>
+                  <th>${activeLabel}</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows.map((row) => `
+                  <tr>
+                    <td>${row.code}</td>
+                    <td>${row.name}</td>
+                    <td>${formatCOP(accountingValue(row))}</td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+          <p class="gaia-board-note">Fuente: ${boardDashboardData.accountingExplorer.source}.</p>
+        </article>
+      </div>
+    </section>
+  `;
+  renderAccountingChart(rows, activeLabel);
+}
+
+function renderAccountingChart(rows, activeLabel) {
+  const container = document.querySelector("[data-accounting-chart]");
+  if (!container) return;
+  const chartRows = rows.slice(0, 11);
+  if (!window.Chart) {
+    const max = Math.max(...chartRows.map((row) => accountingValue(row)), 1);
+    container.innerHTML = `
+      <div class="gaia-board-chart-head">
+        <h4>Ranking territorial</h4>
+        <span>${activeLabel}</span>
+      </div>
+      ${chartRows.map((row) => `
+        <div class="gaia-board-bar">
+          <label><span>${row.name}</span><strong>${compactCOP(accountingValue(row))}</strong></label>
+          <div class="gaia-board-bar-track"><span class="gaia-board-bar-fill" style="--percent:${(accountingValue(row) / max) * 100}"></span></div>
+        </div>
+      `).join("")}
+    `;
+    return;
+  }
+  if (boardChartRegistry.accounting) boardChartRegistry.accounting.destroy();
+  container.innerHTML = `
+    <div class="gaia-board-chart-head">
+      <h4>Ranking territorial</h4>
+      <span>${activeLabel}</span>
+    </div>
+    <div class="gaia-board-canvas-wrap"><canvas aria-label="Ranking de saldos territoriales" role="img"></canvas></div>
+  `;
+  const canvas = container.querySelector("canvas");
+  boardChartRegistry.accounting = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: chartRows.map((row) => row.name),
+      datasets: [{
+        label: activeLabel,
+        data: chartRows.map((row) => accountingValue(row)),
+        backgroundColor: chartRows.map((_, index) => index < 3 ? boardColors.gold : boardColors.green),
+        borderRadius: 8,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: "y",
+      animation: { duration: 850, easing: "easeOutQuart" },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (context) => formatCOP(Number(context.raw || 0))
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: { color: "rgba(23, 79, 82, 0.1)" },
+          ticks: {
+            color: boardColors.teal,
+            callback: (value) => compactCOP(Number(value))
+          }
+        },
+        y: {
+          grid: { display: false },
+          ticks: {
+            color: boardColors.teal,
+            font: { weight: "700" },
+            autoSkip: false,
+            callback(value) {
+              const label = this.getLabelForValue(value);
+              return label.length > 38 ? `${label.slice(0, 38)}...` : label;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
 function renderHeroChart() {
   const canvas = document.querySelector("[data-board-hero-chart]");
   if (!canvas || !window.Chart) return;
@@ -410,6 +598,11 @@ function initBoardFilters() {
     }
     const tabButton = target?.closest("[data-board-tab]");
     if (tabButton) setBoardTab(tabButton.dataset.boardTab);
+    const accountingButton = target?.closest("[data-board-accounting-year]");
+    if (accountingButton) {
+      boardState.accountingYear = accountingButton.dataset.boardAccountingYear;
+      renderAccountingExplorer();
+    }
   });
 
   document.querySelectorAll(".gaia-board-filter").forEach((button) => {
@@ -439,6 +632,7 @@ renderBoardBars("impactOverview", "Destino general de recursos", boardDashboardD
 renderBoardBars("allocation", "Distribución por línea estratégica", boardDashboardData.allocation);
 renderBoardBars("funding", "Fuentes de financiación por participación", boardDashboardData.fundingSources);
 renderBoardBars("contracting", "Contratación institucional 2025", boardDashboardData.contracting);
+renderAccountingExplorer();
 renderHeroChart();
 renderBoardDocuments();
 initBoardFilters();
