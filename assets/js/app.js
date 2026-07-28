@@ -14,7 +14,11 @@ const dependencyRelevant = document.getElementById("dependencyRelevant");
 const backToMacroPanel = document.getElementById("backToMacroPanel");
 const toggleDark = document.getElementById("toggleDark");
 const documentData = window.DOCUMENTOS_MOP_DATA || { documentos: [], resumenTipoDocumental: [] };
-const remoteDocumentMatrixUrl = "https://docs.google.com/spreadsheets/d/11RG5MBjFDrfYq5_QtDG8_bb-LEVG0nFEZETuQ954hwI/gviz/tq?tqx=out:csv&gid=0";
+const remoteDocumentMatrixBaseUrl = "https://docs.google.com/spreadsheets/d/11RG5MBjFDrfYq5_QtDG8_bb-LEVG0nFEZETuQ954hwI/gviz/tq";
+const remoteDocumentMatrixCsvUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:csv&gid=0`;
+const remoteDocumentMatrixJsonUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:json&gid=0`;
+const remoteDocumentMatrixHtmlUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:html&gid=0`;
+const documentMatrixStorageKey = "gaia-document-matrix-v2";
 let documentRecords = documentData.documentos || [];
 let documentSummaryRecords = documentData.resumenTipoDocumental || [];
 const documentControls = {
@@ -401,6 +405,24 @@ function cleanDocValue(value, fallback = "Por clasificar") {
   return cleaned || fallback;
 }
 
+function decodeHtmlEntities(value) {
+  const textarea = document.createElement("textarea");
+  textarea.innerHTML = String(value || "");
+  return textarea.value;
+}
+
+function extractHref(value) {
+  const text = String(value || "");
+  const hrefMatch = text.match(/href=["']([^"']+)["']/i);
+  if (hrefMatch) return decodeHtmlEntities(hrefMatch[1]);
+  const urlMatch = text.match(/https?:\/\/[^\s"'<>]+/i);
+  return urlMatch ? urlMatch[0] : "";
+}
+
+function normalizeDocumentLink(value) {
+  return cleanDocValue(extractHref(value) || value, "");
+}
+
 function getDocumentKey(record) {
   return normalizeText(`${record.codigo || "sin-codigo"}|${record.nombre || ""}|${record.proceso || ""}`);
 }
@@ -516,6 +538,30 @@ function parseCsv(text) {
   return rows;
 }
 
+function googleVisualizationToRows(text) {
+  const match = String(text || "").match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?/);
+  if (!match) return [];
+  const payload = JSON.parse(match[1]);
+  const table = payload.table || {};
+  const headers = (table.cols || []).map((column) => cleanDocValue(column.label || column.id, ""));
+  const rows = (table.rows || []).map((row) => (row.c || []).map((cell) => {
+    if (!cell) return "";
+    return extractHref(cell.f) || cleanDocValue(cell.v, "") || cleanDocValue(cell.f, "");
+  }));
+  return [headers, ...rows].filter((row) => row.some(Boolean));
+}
+
+function googleHtmlToRows(text) {
+  if (!window.DOMParser) return [];
+  const parsed = new DOMParser().parseFromString(String(text || ""), "text/html");
+  return Array.from(parsed.querySelectorAll("tr")).map((row) => (
+    Array.from(row.querySelectorAll("th, td")).map((cell) => {
+      const anchor = cell.querySelector("a[href]");
+      return anchor ? anchor.href : cell.textContent.trim();
+    })
+  )).filter((row) => row.some(Boolean));
+}
+
 function mapMatrixRows(rows) {
   const headerIndex = rows.findIndex((row) => normalizeText(row[0]) === "macroproceso" || row.some((cell) => normalizeText(cell) === "codigo del documento"));
   if (headerIndex < 0) return [];
@@ -540,24 +586,48 @@ function mapMatrixRows(rows) {
       estado: getFieldFromRow(row, ["ESTADO"]),
       dependencia: getFieldFromRow(row, ["DEPENDENCIA"]),
       soporte: getFieldFromRow(row, ["SOPORTE"]),
-      linkDocumento: getFieldFromRow(row, ["LINK DEL DOCUMENTO"]),
+      linkDocumento: normalizeDocumentLink(getFieldFromRow(row, [
+        "LINK DEL DOCUMENTO",
+        "LINK DOCUMENTO",
+        "ENLACE DEL DOCUMENTO",
+        "ENLACE DOCUMENTO",
+        "ENLACE",
+        "URL",
+        "URL DEL DOCUMENTO",
+        "REFERENCIA DOCUMENTAL",
+        "HIPERVINCULO",
+        "HIPERVÃNCULO"
+      ])),
       observaciones: getFieldFromRow(row, ["OBSERVACIONES"])
     };
   }).filter((record) => record.nombre || record.codigo || record.proceso);
 }
 
 async function loadRemoteDocumentMatrix(manual = false) {
-  if (!remoteDocumentMatrixUrl || !window.fetch) return false;
+  if (!remoteDocumentMatrixCsvUrl || !window.fetch) return false;
   if (documentControls.uploadStatus) {
     documentControls.uploadStatus.textContent = manual
       ? "Consultando el listado maestro en Google Sheets..."
       : "Consultando listado maestro actualizado en Google Sheets...";
   }
   try {
-    const response = await fetch(remoteDocumentMatrixUrl, { cache: "no-store" });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const text = await response.text();
-    const parsedRecords = mapMatrixRows(parseCsv(text));
+    let parsedRecords = [];
+    const loaders = [
+      { url: remoteDocumentMatrixJsonUrl, parser: googleVisualizationToRows },
+      { url: remoteDocumentMatrixHtmlUrl, parser: googleHtmlToRows },
+      { url: remoteDocumentMatrixCsvUrl, parser: parseCsv }
+    ];
+
+    for (const loader of loaders) {
+      try {
+        const response = await fetch(loader.url, { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        parsedRecords = mapMatrixRows(loader.parser(await response.text()));
+        if (parsedRecords.length) break;
+      } catch {
+        parsedRecords = [];
+      }
+    }
     if (!parsedRecords.length) throw new Error("Estructura no reconocida");
     documentRecords = parsedRecords;
     documentSummaryRecords = buildDocumentSummary(documentRecords);
@@ -703,11 +773,13 @@ function getDocumentStatusClass(status) {
 }
 
 function getDocumentReference(record) {
+  const sheetLink = normalizeDocumentLink(record.linkDocumento);
+  if (/^https?:\/\//i.test(sheetLink)) return sheetLink;
   const name = normalizeText(record.nombre);
   if (name.includes("manual") && name.includes("contratacion")) {
     return "https://docs.google.com/document/d/1mCP1r6sSxIPcVAjB_qRtfEUAgmedBnpX/edit?usp=drive_link&ouid=116206044109975997527&rtpof=true&sd=true";
   }
-  return cleanDocValue(record.linkDocumento, "");
+  return sheetLink;
 }
 
 function renderDocumentCard(record) {
@@ -767,7 +839,7 @@ function renderDocumentList() {
 
 function initDocumentModule() {
   if (!documentControls.list) return;
-  const storedMatrix = localStorage.getItem("gaia-document-matrix");
+  const storedMatrix = localStorage.getItem(documentMatrixStorageKey);
   let hasStoredMatrix = false;
   if (storedMatrix) {
     try {
@@ -776,7 +848,7 @@ function initDocumentModule() {
       hasStoredMatrix = true;
       if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz actualizada cargada desde este navegador.";
     } catch {
-      localStorage.removeItem("gaia-document-matrix");
+      localStorage.removeItem(documentMatrixStorageKey);
     }
   }
   refreshDocumentModule();
@@ -802,7 +874,7 @@ function initDocumentModule() {
     }
     documentRecords = parsedRecords;
     documentSummaryRecords = buildDocumentSummary(documentRecords);
-    localStorage.setItem("gaia-document-matrix", JSON.stringify(documentRecords));
+    localStorage.setItem(documentMatrixStorageKey, JSON.stringify(documentRecords));
     resetDocumentFilters();
     refreshDocumentModule();
     if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = `Matriz actualizada cargada: ${documentRecords.length} documentos. Esta versión quedó guardada en este navegador.`;
@@ -815,7 +887,7 @@ function initDocumentModule() {
   documentControls.restore?.addEventListener("click", () => {
     documentRecords = documentData.documentos || [];
     documentSummaryRecords = documentData.resumenTipoDocumental || [];
-    localStorage.removeItem("gaia-document-matrix");
+    localStorage.removeItem(documentMatrixStorageKey);
     resetDocumentFilters();
     refreshDocumentModule();
     if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz base restaurada.";
