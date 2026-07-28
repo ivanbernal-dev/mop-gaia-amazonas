@@ -18,6 +18,7 @@ const remoteDocumentMatrixBaseUrl = "https://docs.google.com/spreadsheets/d/11RG
 const remoteDocumentMatrixCsvUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:csv&gid=0`;
 const remoteDocumentMatrixJsonUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:json&gid=0`;
 const remoteDocumentMatrixHtmlUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:html&gid=0`;
+const remoteDocumentMatrixJsonpTimeout = 12000;
 const documentMatrixStorageKey = "gaia-document-matrix-v2";
 const legacyDocumentMatrixStorageKey = "gaia-document-matrix";
 let documentRecords = documentData.documentos || [];
@@ -540,9 +541,12 @@ function parseCsv(text) {
 }
 
 function googleVisualizationToRows(text) {
-  const match = String(text || "").match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?/);
-  if (!match) return [];
-  const payload = JSON.parse(match[1]);
+  let payload = text;
+  if (typeof text === "string") {
+    const match = String(text || "").match(/(?:google\.visualization\.Query\.setResponse|[\w.]+)\(([\s\S]*)\);?/);
+    if (!match) return [];
+    payload = JSON.parse(match[1]);
+  }
   const table = payload.table || {};
   const headers = (table.cols || []).map((column) => cleanDocValue(column.label || column.id, ""));
   const rows = (table.rows || []).map((row) => (row.c || []).map((cell) => {
@@ -561,6 +565,35 @@ function googleHtmlToRows(text) {
       return anchor ? anchor.href : cell.textContent.trim();
     })
   )).filter((row) => row.some(Boolean));
+}
+
+function loadGoogleVisualizationJsonp() {
+  return new Promise((resolve, reject) => {
+    const callbackName = `gaiaDocumentMatrixCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    const script = document.createElement("script");
+    const timeout = window.setTimeout(() => {
+      cleanup();
+      reject(new Error("Tiempo de espera agotado al consultar Google Sheets"));
+    }, remoteDocumentMatrixJsonpTimeout);
+
+    function cleanup() {
+      window.clearTimeout(timeout);
+      delete window[callbackName];
+      script.remove();
+    }
+
+    window[callbackName] = (payload) => {
+      cleanup();
+      resolve(payload);
+    };
+
+    script.onerror = () => {
+      cleanup();
+      reject(new Error("No fue posible cargar Google Sheets por JSONP"));
+    };
+    script.src = `${remoteDocumentMatrixBaseUrl}?gid=0&tqx=${encodeURIComponent(`out:json;responseHandler:${callbackName}`)}&cacheBust=${Date.now()}`;
+    document.head.appendChild(script);
+  });
 }
 
 function mapMatrixRows(rows) {
@@ -613,13 +646,19 @@ async function loadRemoteDocumentMatrix(manual = false) {
   }
   try {
     let parsedRecords = [];
+    try {
+      parsedRecords = mapMatrixRows(googleVisualizationToRows(await loadGoogleVisualizationJsonp()));
+    } catch {
+      parsedRecords = [];
+    }
+
     const loaders = [
       { url: remoteDocumentMatrixJsonUrl, parser: googleVisualizationToRows },
       { url: remoteDocumentMatrixHtmlUrl, parser: googleHtmlToRows },
       { url: remoteDocumentMatrixCsvUrl, parser: parseCsv }
     ];
 
-    for (const loader of loaders) {
+    for (const loader of parsedRecords.length ? [] : loaders) {
       try {
         const response = await fetch(loader.url, { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
