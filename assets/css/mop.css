@@ -2154,9 +2154,8 @@ body.dark .lane-yellow {
   border-radius: 8px;
   border: 1px solid rgba(28, 75, 81, 0.22);
   background:
-    radial-gradient(circle at 78% 18%, rgba(216, 162, 58, 0.18), transparent 30%),
-    radial-gradient(circle at 12% 88%, rgba(93, 155, 183, 0.22), transparent 34%),
-    linear-gradient(135deg, #12372f, #1c4b51 58%, #3b2431);
+    linear-gradient(90deg, rgba(28, 75, 81, 0.88), rgba(28, 75, 81, 0.48), rgba(126, 18, 44, 0.22)),
+    url("../mop-nucleo.jpg") center / cover;
   box-shadow: 0 22px 54px rgba(28, 75, 81, 0.2);
 }
 
