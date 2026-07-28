@@ -522,6 +522,17 @@ body.dark .gaia-top-nav a.active {
   background: rgba(238, 241, 238, 0.78);
 }
 
+.gaia-integrated-teams {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(28, 75, 81, 0.12);
+}
+
+.gaia-integrated-teams p {
+  max-width: 860px;
+  margin: 0;
+}
+
 .gaia-eti-entry {
   display: flex;
   min-height: 100%;
@@ -1962,6 +1973,10 @@ body.dark .gaia-sde-grid--secondary article:nth-child(3) {
 body.dark .gaia-sde-grid--secondary article:nth-child(4) {
   border-color: rgba(237, 246, 242, 0.22);
   background: rgba(237, 246, 242, 0.08);
+}
+
+body.dark .gaia-integrated-teams {
+  border-top-color: rgba(143, 227, 186, 0.18);
 }
 
 body.dark .gaia-board-metric-strip button {

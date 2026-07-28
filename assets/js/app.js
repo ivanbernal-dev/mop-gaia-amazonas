@@ -359,8 +359,7 @@ const gaiaViews = document.querySelectorAll(".gaia-view");
 const gaiaViewTitles = {
   "conoce-gaia": "Esto es GAIA Amazonas",
   "ruta-2030": "GAIA Amazonas y su Modelo de Operación",
-  "arquitectura-gaia": "Arquitectura organizacional de GAIA",
-  "coordinaciones-gaia": "Coordinaciones y equipos",
+  "arquitectura-gaia": "Arquitectura organizacional y equipos de GAIA",
   "junta-directiva": "Junta Directiva",
   "mop-anillos": defaultPageTitle
 };
