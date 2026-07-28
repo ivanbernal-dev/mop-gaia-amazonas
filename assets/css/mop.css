@@ -478,17 +478,48 @@ body.dark .gaia-top-nav a.active {
 
 .gaia-sde-grid--primary article {
   min-height: 118px;
-  border-color: rgba(216, 162, 58, 0.5);
-  background:
-    linear-gradient(180deg, rgba(216, 162, 58, 0.16), rgba(255, 253, 248, 0.9));
   box-shadow: 0 12px 26px rgba(18, 55, 47, 0.08);
+}
+
+.gaia-sde-grid--primary article:nth-child(1) {
+  border-color: rgba(216, 162, 58, 0.5);
+  background: linear-gradient(180deg, #f7e8c9, rgba(255, 253, 248, 0.92));
+}
+
+.gaia-sde-grid--primary article:nth-child(2) {
+  border-color: rgba(93, 155, 183, 0.38);
+  background: linear-gradient(180deg, #dfeef6, rgba(255, 253, 248, 0.92));
+}
+
+.gaia-sde-grid--primary article:nth-child(3) {
+  border-color: rgba(47, 125, 98, 0.34);
+  background: linear-gradient(180deg, #e1f1dc, rgba(255, 253, 248, 0.92));
 }
 
 .gaia-sde-grid--secondary article {
   min-height: 92px;
   border-style: dashed;
-  background: rgba(255, 253, 248, 0.62);
   font-size: 0.96rem;
+}
+
+.gaia-sde-grid--secondary article:nth-child(1) {
+  border-color: rgba(216, 162, 58, 0.38);
+  background: rgba(247, 232, 201, 0.64);
+}
+
+.gaia-sde-grid--secondary article:nth-child(2) {
+  border-color: rgba(93, 155, 183, 0.34);
+  background: rgba(223, 238, 246, 0.66);
+}
+
+.gaia-sde-grid--secondary article:nth-child(3) {
+  border-color: rgba(47, 125, 98, 0.3);
+  background: rgba(225, 241, 220, 0.66);
+}
+
+.gaia-sde-grid--secondary article:nth-child(4) {
+  border-color: rgba(28, 75, 81, 0.18);
+  background: rgba(238, 241, 238, 0.78);
 }
 
 .gaia-eti-entry {
@@ -1910,14 +1941,27 @@ body.dark .gaia-sde-level-title {
   color: #edf6f2;
 }
 
-body.dark .gaia-sde-grid--primary article {
-  border-color: rgba(216, 162, 58, 0.45);
-  background: rgba(216, 162, 58, 0.12);
+body.dark .gaia-sde-grid--primary article:nth-child(1),
+body.dark .gaia-sde-grid--secondary article:nth-child(1) {
+  border-color: rgba(216, 162, 58, 0.5);
+  background: rgba(216, 162, 58, 0.14);
 }
 
-body.dark .gaia-sde-grid--secondary article {
-  border-color: rgba(143, 227, 186, 0.24);
-  background: rgba(143, 227, 186, 0.07);
+body.dark .gaia-sde-grid--primary article:nth-child(2),
+body.dark .gaia-sde-grid--secondary article:nth-child(2) {
+  border-color: rgba(93, 155, 183, 0.5);
+  background: rgba(93, 155, 183, 0.16);
+}
+
+body.dark .gaia-sde-grid--primary article:nth-child(3),
+body.dark .gaia-sde-grid--secondary article:nth-child(3) {
+  border-color: rgba(143, 227, 186, 0.34);
+  background: rgba(143, 227, 186, 0.12);
+}
+
+body.dark .gaia-sde-grid--secondary article:nth-child(4) {
+  border-color: rgba(237, 246, 242, 0.22);
+  background: rgba(237, 246, 242, 0.08);
 }
 
 body.dark .gaia-board-metric-strip button {
