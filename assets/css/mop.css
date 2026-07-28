@@ -2875,6 +2875,72 @@ body.dark .org-person .org-email {
   gap: 10px;
 }
 
+.document-source-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(28, 75, 81, 0.18);
+  border-left: 5px solid var(--gaia-blue-900);
+  border-radius: 8px;
+  background: rgba(67, 115, 154, 0.08);
+}
+
+.document-source-panel strong {
+  display: block;
+  color: var(--acento-legible);
+  font-weight: 900;
+}
+
+.document-source-panel p {
+  margin: 3px 0 0;
+  color: #48645c;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.document-source-panel p[data-state="ok"] {
+  color: var(--gaia-green-800);
+}
+
+.document-source-panel p[data-state="error"] {
+  color: var(--gaia-wine-900);
+}
+
+.document-source-panel p[data-state="loading"] {
+  color: var(--gaia-blue-900);
+}
+
+.document-source-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.document-upload-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid rgba(28, 75, 81, 0.24);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--gaia-teal-900);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.document-upload-inline input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .document-kpi,
 .document-summary,
 .document-card,
@@ -3816,6 +3882,30 @@ body.dark .document-controls {
   background: rgba(143, 227, 186, 0.08);
 }
 
+body.dark .document-source-panel {
+  border-color: rgba(143, 227, 186, 0.18);
+  border-left-color: #8fcdf0;
+  background: rgba(143, 227, 186, 0.08);
+}
+
+body.dark .document-source-panel p {
+  color: #bed1ca;
+}
+
+body.dark .document-source-panel p[data-state="ok"] {
+  color: #9cf2c0;
+}
+
+body.dark .document-source-panel p[data-state="error"] {
+  color: #ffb0b0;
+}
+
+body.dark .document-upload-inline {
+  border-color: rgba(143, 227, 186, 0.24);
+  background: #26352f;
+  color: #edf6f2;
+}
+
 body.dark .document-upload,
 body.dark .access-card,
 body.dark .admin-gate {
@@ -4278,6 +4368,15 @@ body.dark .gaia-councils-list summary {
 
   .subdirection-strip {
     grid-template-columns: 1fr;
+  }
+
+  .document-source-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .document-source-actions {
+    justify-content: flex-start;
   }
 
   .gaia-top-nav {

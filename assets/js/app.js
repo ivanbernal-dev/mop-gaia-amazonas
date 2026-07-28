@@ -30,6 +30,9 @@ const documentControls = {
   tipo: document.getElementById("docTipo"),
   estado: document.getElementById("docEstado"),
   reset: document.getElementById("docReset"),
+  publicUpload: document.getElementById("docPublicMatrixUpload"),
+  publicRemoteSync: document.getElementById("docPublicRemoteSync"),
+  sourceStatus: document.getElementById("docSourceStatus"),
   upload: document.getElementById("docMatrixUpload"),
   remoteSync: document.getElementById("docRemoteSync"),
   restore: document.getElementById("docRestoreBase"),
@@ -637,6 +640,40 @@ function mapMatrixRows(rows) {
   }).filter((record) => record.nombre || record.codigo || record.proceso);
 }
 
+function setDocumentSourceStatus(message, state = "info") {
+  if (!documentControls.sourceStatus) return;
+  documentControls.sourceStatus.textContent = message;
+  documentControls.sourceStatus.dataset.state = state;
+}
+
+function applyDocumentMatrix(records, sourceMessage, persist = true) {
+  documentRecords = records;
+  documentSummaryRecords = buildDocumentSummary(documentRecords);
+  if (persist) {
+    localStorage.setItem(documentMatrixStorageKey, JSON.stringify(documentRecords));
+    localStorage.removeItem(legacyDocumentMatrixStorageKey);
+  }
+  resetDocumentFilters();
+  refreshDocumentModule();
+  setDocumentSourceStatus(sourceMessage, documentRecords.length > (documentData.documentos || []).length ? "ok" : "info");
+}
+
+async function loadDocumentMatrixFile(file, sourceLabel) {
+  if (!file) return;
+  const text = await file.text();
+  const parsedRecords = mapMatrixRows(parseCsv(text));
+  if (!parsedRecords.length) {
+    const message = "No pude reconocer la estructura de la matriz. Descarga la pestaña como CSV y conserva los encabezados del listado maestro.";
+    setDocumentSourceStatus(message, "error");
+    if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = message;
+    return;
+  }
+  applyDocumentMatrix(parsedRecords, `${sourceLabel}: ${parsedRecords.length} documentos cargados.`, true);
+  if (documentControls.uploadStatus) {
+    documentControls.uploadStatus.textContent = `${sourceLabel}: ${parsedRecords.length} documentos cargados. Esta versión quedó guardada en este navegador.`;
+  }
+}
+
 async function loadRemoteDocumentMatrix(manual = false) {
   if (!remoteDocumentMatrixCsvUrl || !window.fetch) return false;
   if (documentControls.uploadStatus) {
@@ -644,6 +681,7 @@ async function loadRemoteDocumentMatrix(manual = false) {
       ? "Consultando el listado maestro en Google Sheets..."
       : "Consultando listado maestro actualizado en Google Sheets...";
   }
+  setDocumentSourceStatus("Consultando el listado maestro actualizado desde Google Sheets...", "loading");
   try {
     let parsedRecords = [];
     try {
@@ -669,17 +707,13 @@ async function loadRemoteDocumentMatrix(manual = false) {
       }
     }
     if (!parsedRecords.length) throw new Error("Estructura no reconocida");
-    documentRecords = parsedRecords;
-    documentSummaryRecords = buildDocumentSummary(documentRecords);
-    localStorage.setItem(documentMatrixStorageKey, JSON.stringify(documentRecords));
-    localStorage.removeItem(legacyDocumentMatrixStorageKey);
-    resetDocumentFilters();
-    refreshDocumentModule();
+    applyDocumentMatrix(parsedRecords, `Listado maestro actualizado desde Google Sheets: ${parsedRecords.length} documentos cargados.`, true);
     if (documentControls.uploadStatus) {
       documentControls.uploadStatus.textContent = `Listado maestro actualizado desde Google Sheets: ${documentRecords.length} documentos cargados.`;
     }
     return true;
   } catch {
+    setDocumentSourceStatus(`No fue posible leer Google Sheets. Se muestra la matriz local con ${documentRecords.length} documentos. Verifica que la hoja esté compartida como lector o carga el CSV actualizado.`, "error");
     if (documentControls.uploadStatus) {
       documentControls.uploadStatus.textContent = "No fue posible leer Google Sheets. Verifica que el archivo esté compartido como lector o carga la pestaña en CSV.";
     }
@@ -887,6 +921,7 @@ function initDocumentModule() {
     try {
       documentRecords = JSON.parse(storedMatrix);
       documentSummaryRecords = buildDocumentSummary(documentRecords);
+      setDocumentSourceStatus(`Matriz cargada desde este navegador: ${documentRecords.length} documentos.`, "info");
       if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz actualizada cargada desde este navegador.";
     } catch {
       localStorage.removeItem(documentMatrixStorageKey);
@@ -904,21 +939,16 @@ function initDocumentModule() {
     renderDocumentList();
   });
 
+  documentControls.publicRemoteSync?.addEventListener("click", () => {
+    loadRemoteDocumentMatrix(true);
+  });
+
+  documentControls.publicUpload?.addEventListener("change", (event) => {
+    loadDocumentMatrixFile(event.target.files?.[0], "CSV actualizado cargado");
+  });
+
   documentControls.upload?.addEventListener("change", async (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    const text = await file.text();
-    const parsedRecords = mapMatrixRows(parseCsv(text));
-    if (!parsedRecords.length) {
-      if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "No pude reconocer la estructura de la matriz. Verifica que sea CSV UTF-8 y conserve los encabezados del listado maestro.";
-      return;
-    }
-    documentRecords = parsedRecords;
-    documentSummaryRecords = buildDocumentSummary(documentRecords);
-    localStorage.setItem(documentMatrixStorageKey, JSON.stringify(documentRecords));
-    resetDocumentFilters();
-    refreshDocumentModule();
-    if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = `Matriz actualizada cargada: ${documentRecords.length} documentos. Esta versión quedó guardada en este navegador.`;
+    await loadDocumentMatrixFile(event.target.files?.[0], "Matriz actualizada cargada");
   });
 
   documentControls.remoteSync?.addEventListener("click", () => {
@@ -932,8 +962,10 @@ function initDocumentModule() {
     localStorage.removeItem(legacyDocumentMatrixStorageKey);
     resetDocumentFilters();
     refreshDocumentModule();
+    setDocumentSourceStatus(`Matriz base restaurada: ${documentRecords.length} documentos locales.`, "info");
     if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz base restaurada.";
     if (documentControls.upload) documentControls.upload.value = "";
+    if (documentControls.publicUpload) documentControls.publicUpload.value = "";
   });
 
   loadRemoteDocumentMatrix(false);

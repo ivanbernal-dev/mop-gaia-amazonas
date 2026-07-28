@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas</title>
-<link rel="stylesheet" href="assets/css/mop.css?v=20260727-mop-background">
+<link rel="stylesheet" href="assets/css/mop.css?v=20260727-document-source">
 </head>
 <body>
 <main class="page">
@@ -835,6 +835,19 @@
       <p>Esta aplicación permite revisar los procesos, procedimientos, manuales, políticas, formatos y demás documentos asociados al Modelo de Operación por Procesos. La información se toma del listado maestro de control de información documentada y del resumen documental por tipo.</p>
 
       <div class="document-app" aria-label="Aplicación de consulta documental">
+        <section class="document-source-panel" aria-label="Fuente de datos documental">
+          <div>
+            <strong>Fuente del listado maestro</strong>
+            <p id="docSourceStatus">Intentando cargar el listado maestro actualizado desde Google Sheets...</p>
+          </div>
+          <div class="document-source-actions">
+            <button class="document-reset secondary" type="button" id="docPublicRemoteSync">Actualizar desde Google Sheets</button>
+            <label class="document-upload-inline">
+              Cargar CSV actualizado
+              <input id="docPublicMatrixUpload" type="file" accept=".csv,.txt">
+            </label>
+          </div>
+        </section>
         <details class="admin-gate admin-login" id="docAdminGate">
           <summary>Acceso administrador MOP</summary>
           <p>El perfil administrador permite gestionar visibilidad documental, cargar matrices actualizadas y preparar cambios de responsables, equipos o firmas auditoras antes de publicarlos.</p>
@@ -1236,6 +1249,6 @@
 <script src="assets/data/auditoria-mop.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
 <script src="assets/js/junta-directiva.js?v=20260714-board8"></script>
-<script src="assets/js/app.js?v=20260727-document-jsonp"></script>
+<script src="assets/js/app.js?v=20260727-document-source"></script>
 </body>
 </html>
