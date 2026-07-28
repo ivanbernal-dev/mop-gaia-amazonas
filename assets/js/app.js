@@ -14,6 +14,7 @@ const dependencyRelevant = document.getElementById("dependencyRelevant");
 const backToMacroPanel = document.getElementById("backToMacroPanel");
 const toggleDark = document.getElementById("toggleDark");
 const documentData = window.DOCUMENTOS_MOP_DATA || { documentos: [], resumenTipoDocumental: [] };
+const remoteDocumentMatrixUrl = "https://docs.google.com/spreadsheets/d/11RG5MBjFDrfYq5_QtDG8_bb-LEVG0nFEZETuQ954hwI/gviz/tq?tqx=out:csv&gid=0";
 let documentRecords = documentData.documentos || [];
 let documentSummaryRecords = documentData.resumenTipoDocumental || [];
 const documentControls = {
@@ -24,6 +25,7 @@ const documentControls = {
   estado: document.getElementById("docEstado"),
   reset: document.getElementById("docReset"),
   upload: document.getElementById("docMatrixUpload"),
+  remoteSync: document.getElementById("docRemoteSync"),
   restore: document.getElementById("docRestoreBase"),
   uploadStatus: document.getElementById("docUploadStatus"),
   list: document.getElementById("docList"),
@@ -544,6 +546,35 @@ function mapMatrixRows(rows) {
   }).filter((record) => record.nombre || record.codigo || record.proceso);
 }
 
+async function loadRemoteDocumentMatrix(manual = false) {
+  if (!remoteDocumentMatrixUrl || !window.fetch) return false;
+  if (documentControls.uploadStatus) {
+    documentControls.uploadStatus.textContent = manual
+      ? "Consultando el listado maestro en Google Sheets..."
+      : "Consultando listado maestro actualizado en Google Sheets...";
+  }
+  try {
+    const response = await fetch(remoteDocumentMatrixUrl, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const text = await response.text();
+    const parsedRecords = mapMatrixRows(parseCsv(text));
+    if (!parsedRecords.length) throw new Error("Estructura no reconocida");
+    documentRecords = parsedRecords;
+    documentSummaryRecords = buildDocumentSummary(documentRecords);
+    resetDocumentFilters();
+    refreshDocumentModule();
+    if (documentControls.uploadStatus) {
+      documentControls.uploadStatus.textContent = `Listado maestro actualizado desde Google Sheets: ${documentRecords.length} documentos cargados.`;
+    }
+    return true;
+  } catch {
+    if (documentControls.uploadStatus) {
+      documentControls.uploadStatus.textContent = "No fue posible leer Google Sheets. Verifica que el archivo esté compartido como lector o carga la pestaña en CSV.";
+    }
+    return false;
+  }
+}
+
 function buildDocumentSummary(records) {
   const types = Array.from(new Set(records.map((record) => cleanDocValue(record.tipoDocumental)))).sort((a, b) => a.localeCompare(b, "es"));
   return types.map((tipoDocumental) => {
@@ -737,10 +768,12 @@ function renderDocumentList() {
 function initDocumentModule() {
   if (!documentControls.list) return;
   const storedMatrix = localStorage.getItem("gaia-document-matrix");
+  let hasStoredMatrix = false;
   if (storedMatrix) {
     try {
       documentRecords = JSON.parse(storedMatrix);
       documentSummaryRecords = buildDocumentSummary(documentRecords);
+      hasStoredMatrix = true;
       if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz actualizada cargada desde este navegador.";
     } catch {
       localStorage.removeItem("gaia-document-matrix");
@@ -775,6 +808,10 @@ function initDocumentModule() {
     if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = `Matriz actualizada cargada: ${documentRecords.length} documentos. Esta versión quedó guardada en este navegador.`;
   });
 
+  documentControls.remoteSync?.addEventListener("click", () => {
+    loadRemoteDocumentMatrix(true);
+  });
+
   documentControls.restore?.addEventListener("click", () => {
     documentRecords = documentData.documentos || [];
     documentSummaryRecords = documentData.resumenTipoDocumental || [];
@@ -784,6 +821,10 @@ function initDocumentModule() {
     if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz base restaurada.";
     if (documentControls.upload) documentControls.upload.value = "";
   });
+
+  if (!hasStoredMatrix) {
+    loadRemoteDocumentMatrix(false);
+  }
 }
 
 function getAdminVisibilityRecords() {
