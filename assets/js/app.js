@@ -19,6 +19,7 @@ const remoteDocumentMatrixCsvUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:csv&g
 const remoteDocumentMatrixJsonUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:json&gid=0`;
 const remoteDocumentMatrixHtmlUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:html&gid=0`;
 const documentMatrixStorageKey = "gaia-document-matrix-v2";
+const legacyDocumentMatrixStorageKey = "gaia-document-matrix";
 let documentRecords = documentData.documentos || [];
 let documentSummaryRecords = documentData.resumenTipoDocumental || [];
 const documentControls = {
@@ -631,6 +632,8 @@ async function loadRemoteDocumentMatrix(manual = false) {
     if (!parsedRecords.length) throw new Error("Estructura no reconocida");
     documentRecords = parsedRecords;
     documentSummaryRecords = buildDocumentSummary(documentRecords);
+    localStorage.setItem(documentMatrixStorageKey, JSON.stringify(documentRecords));
+    localStorage.removeItem(legacyDocumentMatrixStorageKey);
     resetDocumentFilters();
     refreshDocumentModule();
     if (documentControls.uploadStatus) {
@@ -839,13 +842,12 @@ function renderDocumentList() {
 
 function initDocumentModule() {
   if (!documentControls.list) return;
+  localStorage.removeItem(legacyDocumentMatrixStorageKey);
   const storedMatrix = localStorage.getItem(documentMatrixStorageKey);
-  let hasStoredMatrix = false;
   if (storedMatrix) {
     try {
       documentRecords = JSON.parse(storedMatrix);
       documentSummaryRecords = buildDocumentSummary(documentRecords);
-      hasStoredMatrix = true;
       if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz actualizada cargada desde este navegador.";
     } catch {
       localStorage.removeItem(documentMatrixStorageKey);
@@ -888,15 +890,14 @@ function initDocumentModule() {
     documentRecords = documentData.documentos || [];
     documentSummaryRecords = documentData.resumenTipoDocumental || [];
     localStorage.removeItem(documentMatrixStorageKey);
+    localStorage.removeItem(legacyDocumentMatrixStorageKey);
     resetDocumentFilters();
     refreshDocumentModule();
     if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz base restaurada.";
     if (documentControls.upload) documentControls.upload.value = "";
   });
 
-  if (!hasStoredMatrix) {
-    loadRemoteDocumentMatrix(false);
-  }
+  loadRemoteDocumentMatrix(false);
 }
 
 function getAdminVisibilityRecords() {
