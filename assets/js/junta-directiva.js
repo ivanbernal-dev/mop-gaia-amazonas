@@ -7,7 +7,7 @@ const boardDashboardData = {
       type: "memoria",
       typeLabel: "Memoria Económica",
       status: "Documento fuente cargado / versión para revisión",
-      docx: "assets/docs/junta-directiva/memoria-economica-2025.docx",
+      docx: "",
       pdf: ""
     },
     {
@@ -16,7 +16,7 @@ const boardDashboardData = {
       type: "gestion",
       typeLabel: "Informe de Gestión",
       status: "Documento fuente cargado / versión para revisión",
-      docx: "assets/docs/junta-directiva/informe-gestion-gaia-2025.docx",
+      docx: "",
       pdf: ""
     }
   ],
@@ -122,7 +122,7 @@ function compactCOP(value) {
 }
 
 function accountingValue(row, year = boardState.accountingYear) {
-  return row[year] ?? row.total;
+  return row[year] != null ? row[year] : row.total;
 }
 
 function boardMatches(item) {
@@ -273,8 +273,8 @@ function renderBoardBars(selector, title, items) {
     <h4>${title}</h4>
     ${items.map((item) => `
       <div class="gaia-board-bar">
-        <label><span>${item.name}</span><strong>${item.percent.toLocaleString("es-CO")} %</strong></label>
-        <div class="gaia-board-bar-track"><span class="gaia-board-bar-fill" style="--percent:${item.percent}"></span></div>
+        <label><span>${item.name}</span><strong>${Number(item.percent != null ? item.percent : (item.value != null ? item.value : 0)).toLocaleString("es-CO")} %</strong></label>
+        <div class="gaia-board-bar-track"><span class="gaia-board-bar-fill" style="--percent:${Number(item.percent != null ? item.percent : (item.value != null ? item.value : 0))}"></span></div>
         ${item.value ? `<small>${item.value}</small>` : ""}
       </div>
     `).join("")}
@@ -296,7 +296,7 @@ function renderBoardChart(selector, title, items) {
   const isMany = items.length > 5;
   const type = selector === "funding" ? "bar" : "doughnut";
   const labels = items.map((item) => item.name);
-  const values = items.map((item) => item.percent ?? item.value);
+  const values = items.map((item) => item.percent != null ? item.percent : item.value);
   boardChartRegistry[selector] = new Chart(canvas, {
     type,
     data: {
@@ -564,8 +564,7 @@ function renderBoardDocuments() {
       <p class="gaia-board-doc-meta">${doc.typeLabel} disponible como documento fuente para consulta interna y revisión.</p>
       <div class="gaia-board-doc-actions">
         <button type="button" data-board-tab="${doc.type}">Ver resumen visual</button>
-        ${doc.docx ? `<a href="${doc.docx}" download>Descargar DOCX</a>` : "<span>DOCX pendiente</span>"}
-        ${doc.pdf ? `<a href="${doc.pdf}" download>Descargar PDF</a>` : "<span>PDF pendiente</span>"}
+        <span>Documento reservado</span>
       </div>
     </article>
   `).join("");

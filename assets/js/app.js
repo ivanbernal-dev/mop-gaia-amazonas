@@ -13,11 +13,45 @@ const dependencyContact = document.getElementById("dependencyContact");
 const dependencyRelevant = document.getElementById("dependencyRelevant");
 const backToMacroPanel = document.getElementById("backToMacroPanel");
 const toggleDark = document.getElementById("toggleDark");
-const documentData = window.DOCUMENTOS_MOP_DATA || { documentos: [], resumenTipoDocumental: [] };
-const remoteDocumentMatrixBaseUrl = "https://docs.google.com/spreadsheets/d/11RG5MBjFDrfYq5_QtDG8_bb-LEVG0nFEZETuQ954hwI/gviz/tq";
-const remoteDocumentMatrixCsvUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:csv&gid=0`;
-const remoteDocumentMatrixJsonUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:json&gid=0`;
-const remoteDocumentMatrixHtmlUrl = `${remoteDocumentMatrixBaseUrl}?tqx=out:html&gid=0`;
+const canonicalDocumentData = window.MOP_CANONICAL_DATA || null;
+const documentData = canonicalDocumentData
+  ? {
+    fuente: "Exportación canónica validada del Listado Maestro",
+    hojaListado: canonicalDocumentData.source?.master_sheet_id || "",
+    fechaExtraccion: canonicalDocumentData.generated_at || "",
+    documentos: (canonicalDocumentData.documents || []).map((doc) => ({
+      macroproceso: doc.layer || "",
+      proceso: doc.process_id || "",
+      subproceso: doc.subprocess_id || "",
+      tipoDocumental: doc.document_type || "",
+      descripcionTematica: doc.description || "",
+      codigo: doc.code || "",
+      nombre: doc.title || "",
+      fechaAprobacion: doc.approval_date || "",
+      anio: (doc.effective_date || doc.approval_date || "").slice(0, 4),
+      version: doc.version || "",
+      estado: doc.status || "",
+      dependencia: doc.owner_role || "",
+      soporte: doc.format || "",
+      linkDocumento: "",
+      canonicalUrl: "",
+      accessClass: doc.access_class || "",
+      clasificacion: doc.access_class || "",
+      publish: doc.publish === true,
+      publicable: doc.publish === true ? "Sí" : "No",
+      ownerRole: doc.owner_role || "",
+      custodianRole: doc.custodian_role || "",
+      validationValid: doc.validation?.valid === true,
+      observaciones: doc.notes || ""
+    })),
+    resumenTipoDocumental: []
+  }
+  : (window.DOCUMENTOS_MOP_DATA || { documentos: [], resumenTipoDocumental: [] });
+const mopValidationReport = window.MOP_VALIDATION_REPORT || null;
+const remoteDocumentMatrixBaseUrl = "";
+const remoteDocumentMatrixCsvUrl = "";
+const remoteDocumentMatrixJsonUrl = "";
+const remoteDocumentMatrixHtmlUrl = "";
 const remoteDocumentMatrixJsonpTimeout = 12000;
 const documentMatrixStorageKey = "gaia-document-matrix-v2";
 const legacyDocumentMatrixStorageKey = "gaia-document-matrix";
@@ -83,6 +117,10 @@ const documentSuggestion = {
 };
 const excessData = window.EXCEDENTES_MOP_DATA || { proyectos: [], informes: [] };
 const auditData = window.AUDITORIA_MOP_DATA || { auditoriaExterna: [], revisoriaFiscal: [], planesMejoramiento: [] };
+const processCatalogData = window.MOP_PROCESS_CATALOG || { estrategico: [] };
+const processCatalog = {
+  estrategico: Array.isArray(processCatalogData.estrategico) ? processCatalogData.estrategico : []
+};
 const defaultAuditFirms = {
   externalFirm: "CIP. REVISORES FISCALES AUDITORES & CONSULTORES LTDA. - CIP LTDA.",
   fiscalFirm: "SAS AUDITORES & CONSULTORES SAS."
@@ -147,26 +185,26 @@ const narrationTexts = {
 };
 const dependencyDetails = {
   "Subdirección Técnica y Política (STP)": {
-    responsible: "Julieth Rojas",
+    responsible: "Rol por ratificar",
     team: "<p>Espacio preparado para equipos territoriales, laboratorio sociojurídico, sistemas de información, gestión pública, ordenamiento territorial y estrategias transversales.</p>",
     contact: "<p>Correos institucionales por completar.</p>",
     relevant: "<p>Ubicación en el MOP: anillo misional. Función articuladora entre la Dirección y la operación territorial para convertir la estrategia en acompañamiento técnico-político a los pueblos indígenas y ETI.</p>"
   },
   "Subdirección de Desarrollo Estratégico (SDE)": {
-    responsible: "Nini Cárdenas",
+    responsible: "Rol por ratificar",
     team: "<p>Integra Coordinación Financiera, CIP, Servicios Logísticos, THB, TIC, GPC y Asesoría Jurídica y Legal como condiciones habilitantes de la operación institucional.</p>",
-    contact: "<p>Correos institucionales por completar.</p>",
+    contact: "<p>Consultar directorio interno autorizado.</p>",
     relevant: "<p>Ubicación en el MOP: anillo de apoyo, con conexión estratégica. Articula recursos, capacidades internas, planeación financiera y procesos de soporte para que las prioridades misionales puedan ejecutarse.</p>"
   },
   "Dirección General": {
-    responsible: "FRANCIS PHILIP VON HILDEBRAND REICHEL",
+    responsible: "Dirección Ejecutiva vigente",
     team: "<p>Espacio preparado para equipo directivo, fotografía institucional y canales de relacionamiento.</p>",
     contact: "<p>Correo y datos de contacto por completar.</p>",
     relevant: "<p>Orientación estratégica, representación institucional, relación con aliados y conducción política de la Ruta 2030.</p>"
   },
   "Junta Directiva": {
     responsible: "Órgano colegiado",
-    team: "<ol><li>Jerónimo Rodríguez Rodríguez</li><li>Luis Donisete Benzi Grupioni</li><li>Brigitte Baptiste</li><li>Biviany Rojas Garzón</li><li>Luisa Fernanda Bacca</li><li>Harold Andrés Ospino</li></ol>",
+    team: "<p>Consultar composición vigente en el directorio interno autorizado o en los registros institucionales aprobados para publicación.</p>",
     contact: "<p>Correos institucionales por completar.</p>",
     relevant: "<p>Órgano de gobierno encargado de lineamientos estratégicos, integridad institucional y orientación de alto nivel.</p>"
   },
@@ -177,21 +215,19 @@ const dependencyDetails = {
     relevant: "<p><a href=\"https://app.powerbi.com/view?r=eyJrIjoiZDBjMGYwMjQtN2JkNS00Yzg5LWFhMTAtMWI5N2QwNDg0NzliIiwidCI6Ijg5ZDZkZGU2LWUyNTctNDNmYS05M2IzLWZmZDU0ZDY4Mzc4YSIsImMiOjR9&pageName=ReportSection\" target=\"_blank\" rel=\"noopener\">Abrir tablero Power BI de donantes y socios estratégicos</a></p>"
   },
   "Coordinación Integral de Proyectos (CIP)": {
-    responsible: "Katherine Ramirez",
+    responsible: "Coordinación correspondiente",
     team: `
       <div class="org-chart">
         <div class="org-level">
-          <div class="org-person"><strong>Katherine Ramirez</strong><span>Coordinadora</span></div>
+          <div class="org-person"><strong>Coordinación Integral de Proyectos</strong><span>Responsable institucional</span></div>
         </div>
         <div class="org-level">
-          <div class="org-person"><strong>Janeth Calderon</strong><span>Líder de Planeación y Seguimiento Financiero</span></div>
-          <div class="org-person"><strong>Edwin Copete</strong><span>Líder de Operaciones</span></div>
+          <div class="org-person"><strong>Liderazgo de Planeación y Seguimiento Financiero</strong><span>Rol interno</span></div>
+          <div class="org-person"><strong>Liderazgo de Operaciones</strong><span>Rol interno</span></div>
         </div>
         <div class="org-level">
-          <div class="org-person"><strong>Alexander Franco Bernal</strong><span>Profesional de seguimiento financiero</span></div>
-          <div class="org-person"><strong>Nury Sánchez</strong><span>Profesional de Operaciones</span></div>
-          <div class="org-person"><strong>Lorena López</strong><span>Profesional de Operaciones</span></div>
-          <div class="org-person"><strong>Luisa Bonilla</strong><span>Profesional de Operaciones</span></div>
+          <div class="org-person"><strong>Equipo de seguimiento financiero</strong><span>Consultar directorio interno autorizado</span></div>
+          <div class="org-person"><strong>Equipo de operaciones</strong><span>Consultar directorio interno autorizado</span></div>
         </div>
       </div>
     `,
@@ -199,15 +235,15 @@ const dependencyDetails = {
     relevant: "<p>Gestión técnica, financiera y programática de proyectos; seguimiento financiero; monitoreo; y soporte operativo a la ejecución institucional.</p>"
   },
   "THB - Talento Humano, Bienestar y Cultura Organizacional": {
-    responsible: "Sandra Moreno",
+    responsible: "Coordinación correspondiente",
     team: `
       <div class="org-chart">
         <div class="org-level">
-          <div class="org-person"><strong>Sandra Moreno</strong><span>Coordinadora THB</span></div>
+          <div class="org-person"><strong>Coordinación THB</strong><span>Responsable institucional</span></div>
         </div>
         <div class="org-level">
-          <div class="org-person"><strong>Aura Cristina Daza</strong><span>Profesional junior de Seguridad y Salud en el Trabajo</span></div>
-          <div class="org-person"><strong>Catherine Gaitán</strong><span>Asesora senior de género y derechos</span></div>
+          <div class="org-person"><strong>Seguridad y Salud en el Trabajo</strong><span>Rol interno</span></div>
+          <div class="org-person"><strong>Género y derechos</strong><span>Rol interno</span></div>
           <div class="org-person"><strong>Asesor Integral de Riesgo</strong><span>Gestión preventiva y cuidado organizacional</span></div>
         </div>
       </div>
@@ -216,24 +252,23 @@ const dependencyDetails = {
     relevant: "<p>Gestión del talento humano, bienestar, cultura organizacional, seguridad y salud en el trabajo, enfoque de género, derechos y gestión integral del riesgo.</p>"
   },
   "CFI - Coordinación Financiera": {
-    responsible: "Humberto Buitrago",
+    responsible: "Coordinación correspondiente",
     team: `
       <div class="org-chart">
         <div class="org-level">
-          <div class="org-person"><strong>Humberto Buitrago</strong><span>Coordinador Financiero (e)</span></div>
+          <div class="org-person"><strong>Coordinación Financiera</strong><span>Responsable institucional</span></div>
         </div>
         <div class="org-level">
           <div class="org-person"><strong>Por contratar</strong><span>Líder Presupuesto</span></div>
-          <div class="org-person"><strong>Jennifer Ríos</strong><span>Líder Contabilidad</span></div>
-          <div class="org-person"><strong>Diego Galeano</strong><span>Asesor Financiero</span></div>
-          <div class="org-person"><strong>Arley Romero</strong><span>Tesorería</span></div>
+          <div class="org-person"><strong>Liderazgo de Contabilidad</strong><span>Rol interno</span></div>
+          <div class="org-person"><strong>Asesoría financiera</strong><span>Rol interno</span></div>
+          <div class="org-person"><strong>Tesorería</strong><span>Rol interno</span></div>
         </div>
         <div class="org-level">
           <div class="org-person"><strong>Por contratar</strong><span>Profesional Junior Presupuesto</span></div>
           <div class="org-person"><strong>Por contratar</strong><span>Analista contable</span></div>
-          <div class="org-person"><strong>Santiago Chavez</strong><span>Auxiliar Contable</span></div>
-          <div class="org-person"><strong>Karen Lamprea</strong><span>Auxiliar Contable</span></div>
-          <div class="org-person"><strong>Camilo Meneses</strong><span>Auxiliar de Archivo Contable</span></div>
+          <div class="org-person"><strong>Auxiliares contables</strong><span>Consultar directorio interno autorizado</span></div>
+          <div class="org-person"><strong>Archivo contable</strong><span>Rol interno</span></div>
           <div class="org-person"><strong>Por contratar</strong><span>Auxiliar tesorería</span></div>
         </div>
       </div>
@@ -242,21 +277,20 @@ const dependencyDetails = {
     relevant: "<p>Contabilidad, tesorería, presupuesto, asesoría financiera, archivo contable, reportes y soporte financiero a programas y proyectos.</p>"
   },
   "SLS - Servicios Logísticos, Sedes y Compras": {
-    responsible: "Alexandra Prada",
+    responsible: "Coordinación correspondiente",
     team: `
       <div class="org-chart">
         <div class="org-level">
-          <div class="org-person"><strong>Alexandra Prada</strong><span>Líder Servicios Logísticos</span></div>
+          <div class="org-person"><strong>Servicios Logísticos, Sedes y Compras</strong><span>Responsable institucional</span></div>
         </div>
         <div class="org-level">
-          <div class="org-person"><strong>Henry</strong><span>Conductor Presidencia y Dirección</span></div>
+          <div class="org-person"><strong>Transporte institucional</strong><span>Rol interno</span></div>
           <div class="org-person"><strong>Por contratar</strong><span>Profesional Compras</span></div>
         </div>
         <div class="org-level">
-          <div class="org-person"><strong>Martha Acosta</strong><span>Administración Mitú</span></div>
-          <div class="org-person"><strong>Elvis Casallas</strong><span>Administración Cúcuta</span></div>
-          <div class="org-person"><strong>Dario Nieves</strong><span>Auxiliar Logística Bogotá</span></div>
-          <div class="org-person"><strong>Lisandro</strong><span>Mantenimiento y reparaciones Bogotá</span></div>
+          <div class="org-person"><strong>Administración de sedes</strong><span>Consultar directorio interno autorizado</span></div>
+          <div class="org-person"><strong>Logística</strong><span>Rol interno</span></div>
+          <div class="org-person"><strong>Mantenimiento y reparaciones</strong><span>Rol interno</span></div>
         </div>
       </div>
     `,
@@ -333,7 +367,7 @@ function populateVoiceSelectors() {
 
     const preferred = getSpanishColombiaVoice();
     select.value = current || preferred?.voiceURI || spanishVoices[0]?.voiceURI || "";
-    select.closest("[data-voice-panel]").classList.toggle("is-visible", spanishVoices.length > 1);
+    select.closest("[data-voice-panel]")?.classList.toggle("is-visible", spanishVoices.length > 1);
   });
 }
 
@@ -388,8 +422,17 @@ function setActiveGaiaView(targetId) {
   });
 }
 
+function updateRouteHash(targetId, replace = false) {
+  if (!targetId || !window.history?.pushState) return;
+  const nextUrl = `${window.location.pathname}${window.location.search}#${targetId}`;
+  const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  if (nextUrl === currentUrl) return;
+  const method = replace ? "replaceState" : "pushState";
+  window.history[method]({ gaiaRoute: targetId }, "", nextUrl);
+}
+
 function escapeHtml(value) {
-  return String(value ?? "")
+  return String(value == null ? "" : value)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -408,6 +451,11 @@ function normalizeText(value) {
 function cleanDocValue(value, fallback = "Por clasificar") {
   const cleaned = String(value || "").trim();
   return cleaned || fallback;
+}
+
+function parseBooleanValue(value) {
+  const key = normalizeText(value);
+  return ["si", "sí", "true", "1", "publicable", "publicar"].includes(key);
 }
 
 function decodeHtmlEntities(value) {
@@ -459,7 +507,35 @@ function isDocumentVisible(record) {
 }
 
 function getVisibleDocumentRecords() {
-  return documentRecords.filter(isDocumentVisible);
+  return documentRecords.filter((record) => isDocumentVisible(record) && isDocumentPublishable(record));
+}
+
+function hasPublicationMetadata(record) {
+  return [
+    record.publish,
+    record.publicable,
+    record.accessClass,
+    record.clasificacion,
+    record.canonicalUrl
+  ].some((value) => String(value == null ? "" : value).trim() !== "");
+}
+
+function isDocumentPublishable(record) {
+  if (!hasPublicationMetadata(record)) return false;
+  const status = normalizeText(record.estado);
+  const access = normalizeText(record.accessClass || record.clasificacion);
+  const publish = typeof record.publish === "boolean" ? record.publish : parseBooleanValue(record.publicable || record.publish);
+  const link = getDocumentReference(record);
+  return (
+    publish &&
+    status === "vigente" &&
+    (access === "publico" || access === "interno") &&
+    /^https:\/\//i.test(link)
+  );
+}
+
+function getPublicationBlockedCount() {
+  return documentRecords.filter(isDocumentVisible).length - getVisibleDocumentRecords().length;
 }
 
 function hasActiveDocumentFilter() {
@@ -633,8 +709,26 @@ function mapMatrixRows(rows) {
         "URL DEL DOCUMENTO",
         "REFERENCIA DOCUMENTAL",
         "HIPERVINCULO",
-        "HIPERVÃNCULO"
+        "HIPERV\u00cdNCULO"
       ])),
+      capa: getFieldFromRow(row, ["CAPA", "LAYER"]),
+      publicable: getFieldFromRow(row, ["PUBLICABLE", "PUBLICAR", "PUBLISH", "PUBLICACION"]),
+      publish: parseBooleanValue(getFieldFromRow(row, ["PUBLICABLE", "PUBLICAR", "PUBLISH", "PUBLICACION"])),
+      clasificacion: getFieldFromRow(row, ["CLASIFICACION", "ACCESS_CLASS", "CLASE DE ACCESO"]),
+      accessClass: getFieldFromRow(row, ["CLASIFICACION", "ACCESS_CLASS", "CLASE DE ACCESO"]),
+      canonicalUrl: normalizeDocumentLink(getFieldFromRow(row, [
+        "ENLACE CANONICO",
+        "CANONICAL_URL",
+        "URL CANONICA",
+        "LINK DEL DOCUMENTO",
+        "LINK DOCUMENTO",
+        "ENLACE DEL DOCUMENTO",
+        "REFERENCIA DOCUMENTAL"
+      ])),
+      ownerRole: getFieldFromRow(row, ["PROPIETARIO POR ROL", "PROPIETARIO_ROL", "OWNER_ROLE"]),
+      custodianRole: getFieldFromRow(row, ["CUSTODIO POR ROL", "CUSTODIO_ROL", "CUSTODIAN_ROLE"]),
+      codigoLegado: getFieldFromRow(row, ["CODIGO LEGADO", "LEGACY_CODE"]),
+      validationValid: parseBooleanValue(getFieldFromRow(row, ["VALIDADO", "VALIDATION_VALID", "VALIDACION"])),
       observaciones: getFieldFromRow(row, ["OBSERVACIONES"])
     };
   }).filter((record) => record.nombre || record.codigo || record.proceso);
@@ -646,6 +740,12 @@ function setDocumentSourceStatus(message, state = "info") {
   documentControls.sourceStatus.dataset.state = state;
 }
 
+function formatMopValidationStatus(report) {
+  if (!report) return "";
+  const summary = report.summary || {};
+  return `Estado de salud del MOP: ${report.decision}. Esquema ${report.schema_version}. ${summary.records_total || 0} registros evaluados, ${summary.publishable_records || 0} publicables, ${summary.p0_open || 0} P0 abiertos. Fuente: ${report.source?.kind || "no identificada"}.`;
+}
+
 function applyDocumentMatrix(records, sourceMessage, persist = true) {
   documentRecords = records;
   documentSummaryRecords = buildDocumentSummary(documentRecords);
@@ -655,7 +755,7 @@ function applyDocumentMatrix(records, sourceMessage, persist = true) {
   }
   resetDocumentFilters();
   refreshDocumentModule();
-  setDocumentSourceStatus(sourceMessage, documentRecords.length > (documentData.documentos || []).length ? "ok" : "info");
+  setDocumentSourceStatus(`${sourceMessage} Pendiente validar contra el contrato canónico antes de publicar.`, "error");
 }
 
 async function loadDocumentMatrixFile(file, sourceLabel) {
@@ -675,7 +775,14 @@ async function loadDocumentMatrixFile(file, sourceLabel) {
 }
 
 async function loadRemoteDocumentMatrix(manual = false) {
-  if (!remoteDocumentMatrixCsvUrl || !window.fetch) return false;
+  if (!remoteDocumentMatrixCsvUrl || !window.fetch) {
+    if (manual) {
+      const message = "La sincronización remota está deshabilitada en la versión pública. La consulta documental permanece cerrada hasta autorización institucional.";
+      setDocumentSourceStatus(message, "error");
+      if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = message;
+    }
+    return false;
+  }
   if (documentControls.uploadStatus) {
     documentControls.uploadStatus.textContent = manual
       ? "Consultando el listado maestro en Google Sheets..."
@@ -713,7 +820,8 @@ async function loadRemoteDocumentMatrix(manual = false) {
     }
     return true;
   } catch {
-    setDocumentSourceStatus(`No fue posible leer Google Sheets. Se muestra la matriz local con ${documentRecords.length} documentos. Verifica que la hoja esté compartida como lector o carga el CSV actualizado.`, "error");
+    const validationMessage = mopValidationReport ? ` ${formatMopValidationStatus(mopValidationReport)}` : "";
+    setDocumentSourceStatus(`No fue posible leer Google Sheets. La matriz local tiene ${documentRecords.length} registros, pero no se publica como fuente 5.0 sin validación canónica. Verifica que la hoja esté compartida como lector o carga el CSV actualizado.${validationMessage}`, "error");
     if (documentControls.uploadStatus) {
       documentControls.uploadStatus.textContent = "No fue posible leer Google Sheets. Verifica que el archivo esté compartido como lector o carga la pestaña en CSV.";
     }
@@ -849,13 +957,7 @@ function getDocumentStatusClass(status) {
 }
 
 function getDocumentReference(record) {
-  const sheetLink = normalizeDocumentLink(record.linkDocumento);
-  if (/^https?:\/\//i.test(sheetLink)) return sheetLink;
-  const name = normalizeText(record.nombre);
-  if (name.includes("manual") && name.includes("contratacion")) {
-    return "https://docs.google.com/document/d/1mCP1r6sSxIPcVAjB_qRtfEUAgmedBnpX/edit?usp=drive_link&ouid=116206044109975997527&rtpof=true&sd=true";
-  }
-  return sheetLink;
+  return normalizeDocumentLink(record.canonicalUrl || record.linkDocumento);
 }
 
 function renderDocumentCard(record) {
@@ -896,6 +998,18 @@ function renderDocumentCard(record) {
 function renderDocumentList() {
   if (!documentControls.list || !documentControls.meta) return;
   const visibleRecords = getVisibleDocumentRecords();
+  const blockedCount = getPublicationBlockedCount();
+  if (!visibleRecords.length && documentRecords.length) {
+    documentControls.meta.textContent = `0 documentos publicables de ${documentRecords.length} registros evaluados.`;
+    documentControls.list.innerHTML = `
+      <article class="document-card document-empty-state">
+        <h3>Publicación documental bloqueada por control de calidad</h3>
+        <p>La matriz cargada contiene ${documentRecords.length} registros, pero ${blockedCount} no cumplen las reglas mínimas de publicación: clasificación de acceso, publicable = sí, estado vigente y enlace canónico HTTPS validado.</p>
+        <p>Actualiza el Listado Maestro o carga un CSV con esos campos para habilitar la consulta pública de documentos.</p>
+      </article>
+    `;
+    return;
+  }
   if (!hasActiveDocumentFilter()) {
     documentControls.meta.textContent = `${visibleRecords.length} documentos visibles. Usa los filtros para consultar el listado.`;
     documentControls.list.innerHTML = `
@@ -928,6 +1042,9 @@ function initDocumentModule() {
     }
   }
   refreshDocumentModule();
+  if (mopValidationReport) {
+    setDocumentSourceStatus(formatMopValidationStatus(mopValidationReport), mopValidationReport.decision === "GO" ? "ok" : "error");
+  }
 
   [documentControls.search, documentControls.macro, documentControls.proceso, documentControls.tipo, documentControls.estado].forEach((control) => {
     control?.addEventListener("input", renderDocumentList);
@@ -962,7 +1079,7 @@ function initDocumentModule() {
     localStorage.removeItem(legacyDocumentMatrixStorageKey);
     resetDocumentFilters();
     refreshDocumentModule();
-    setDocumentSourceStatus(`Matriz base restaurada: ${documentRecords.length} documentos locales.`, "info");
+    setDocumentSourceStatus(mopValidationReport ? formatMopValidationStatus(mopValidationReport) : `Matriz base restaurada: ${documentRecords.length} documentos locales.`, mopValidationReport?.decision === "GO" ? "ok" : "error");
     if (documentControls.uploadStatus) documentControls.uploadStatus.textContent = "Matriz base restaurada.";
     if (documentControls.upload) documentControls.upload.value = "";
     if (documentControls.publicUpload) documentControls.publicUpload.value = "";
@@ -1293,7 +1410,7 @@ function buildDocumentSuggestion() {
 
   const subject = `Sugerencia de nuevo documento MOP - ${fields.nombre}`;
   const body = [
-    "Hola Ivan,",
+    "Hola equipo GPC,",
     "",
     "Comparto una sugerencia de nuevo documento para revisión de GPC - Gestión de Procesos y Cumplimiento Institucional.",
     "",
@@ -1344,7 +1461,12 @@ function buildDocumentSuggestion() {
     </dl>
   `;
   documentSuggestion.draft.hidden = false;
-  documentSuggestion.send.href = `mailto:ivan.bernal@gaiaamazonas.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  documentSuggestion.send.removeAttribute("href");
+  documentSuggestion.send.setAttribute("role", "button");
+  documentSuggestion.send.setAttribute("aria-disabled", "true");
+  documentSuggestion.send.title = "Canal interno pendiente de configuración para publicación.";
+  documentSuggestion.send.dataset.subject = subject;
+  documentSuggestion.send.dataset.body = body;
   documentSuggestion.send.hidden = false;
 }
 
@@ -1574,10 +1696,123 @@ function initAuditModule() {
   initAuditYearSelector("auditImprovementYearActions", "auditImprovementDocs", auditData.planesMejoramiento || [], "Plan de mejoramiento");
 }
 
-function showGaiaView(targetId, shouldScroll = true) {
+function getMopProcessById(processId) {
+  return Object.values(processCatalog)
+    .flat()
+    .find((item) => item.id === processId);
+}
+
+function renderProcessList(items) {
+  return `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+}
+
+function clearProcessDetail() {
+  const detail = document.getElementById("strategicProcessDetail");
+  if (!detail) return;
+  detail.hidden = true;
+  detail.innerHTML = "";
+  document.querySelectorAll("[data-process-id]").forEach((button) => {
+    button.classList.remove("active");
+    button.setAttribute("aria-expanded", "false");
+  });
+}
+
+function renderProcessDetail(process) {
+  const detail = document.getElementById("strategicProcessDetail");
+  if (!detail || !process) return;
+  detail.hidden = false;
+  detail.innerHTML = `
+    <div class="process-detail-header">
+      <span class="process-code">${escapeHtml(process.shortCode)}</span>
+      <span class="process-status" aria-label="Estado del proceso: ${escapeHtml(process.status)}">${escapeHtml(process.status)}</span>
+    </div>
+    <h4>${escapeHtml(process.name)}</h4>
+    <p class="process-nature">Proceso de Dirección y Gestión Estratégica.</p>
+    <div class="process-detail-grid">
+      <article>
+        <h5>Propósito</h5>
+        <p>${escapeHtml(process.purpose)}</p>
+      </article>
+      <article>
+        <h5>Inicio</h5>
+        <p>${escapeHtml(process.start)}</p>
+      </article>
+      <article>
+        <h5>Fin</h5>
+        <p>${escapeHtml(process.end)}</p>
+      </article>
+      <article>
+        <h5>Propietario por rol</h5>
+        <p>${escapeHtml(process.ownerRole || "Rol por ratificar")}</p>
+      </article>
+      <article>
+        <h5>Interacciones</h5>
+        ${renderProcessList(process.interactions || [])}
+      </article>
+      <article>
+        <h5>Exclusiones</h5>
+        ${renderProcessList(process.exclusions || [])}
+      </article>
+      <article>
+        <h5>Aporte a Ruta 2030</h5>
+        <p>${escapeHtml(process.ruta2030 || "")}</p>
+      </article>
+      <article>
+        <h5>Estado documental</h5>
+        ${renderProcessList(process.documentaryStatus || [])}
+      </article>
+    </div>
+    <p class="process-document-notice">${escapeHtml(process.documentNotice)}</p>
+  `;
+  document.querySelectorAll("[data-process-id]").forEach((button) => {
+    const isActive = button.dataset.processId === process.id;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-expanded", String(isActive));
+  });
+}
+
+function openProcessDetail(processId, shouldScroll = true, shouldUpdateHash = true) {
+  const process = getMopProcessById(processId);
+  if (!process) return false;
+  showPanel("panel-estrategico", false, false);
+  renderProcessDetail(process);
+  pageTitle.textContent = process.name;
+  if (shouldUpdateHash) updateRouteHash(process.id);
+  if (shouldScroll) {
+    const detail = document.getElementById("strategicProcessDetail");
+    detail?.scrollIntoView({ behavior: "smooth", block: "start" });
+    detail?.focus({ preventScroll: true });
+  }
+  return true;
+}
+
+function renderStrategicProcessCatalog() {
+  const target = document.getElementById("strategicProcessCatalog");
+  if (!target) return;
+  const records = processCatalog.estrategico;
+  target.innerHTML = records.map((process) => `
+    <button class="process-card" type="button" data-process-id="${escapeHtml(process.id)}" aria-expanded="false" aria-controls="strategicProcessDetail">
+      <span class="process-code">${escapeHtml(process.shortCode)}</span>
+      <strong>${escapeHtml(process.name)}</strong>
+      <span class="process-card-nature">${escapeHtml(process.nature)}</span>
+      <span class="process-status" aria-label="Estado del proceso: ${escapeHtml(process.status)}">${escapeHtml(process.status)}</span>
+    </button>
+  `).join("");
+  target.querySelectorAll("[data-process-id]").forEach((button) => {
+    button.addEventListener("click", () => openProcessDetail(button.dataset.processId));
+    button.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " " && event.key !== "Spacebar") return;
+      event.preventDefault();
+      openProcessDetail(button.dataset.processId);
+    });
+  });
+}
+
+function showGaiaView(targetId, shouldScroll = true, shouldUpdateHash = true) {
   document.body.classList.remove("panel-view");
   panels.forEach((panel) => panel.classList.remove("is-visible"));
   dependencySite.classList.remove("is-visible");
+  clearProcessDetail();
   document.querySelectorAll(".sidebar details").forEach((details) => {
     details.open = false;
   });
@@ -1595,16 +1830,19 @@ function showGaiaView(targetId, shouldScroll = true) {
   activePanelId = "";
   setActiveNav("");
   setActiveGaiaView(targetId);
+  if (shouldUpdateHash) updateRouteHash(targetId);
 
   if (shouldScroll) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
 
-function showPanel(panelId) {
+function showPanel(panelId, shouldScroll = true, shouldUpdateHash = true) {
   document.body.classList.add("panel-view");
+  gaiaViews.forEach((view) => view.classList.remove("is-active"));
   mapSection.style.display = "none";
   dependencySite.classList.remove("is-visible");
+  clearProcessDetail();
   document.querySelectorAll(".sidebar details").forEach((details) => {
     details.open = false;
   });
@@ -1616,12 +1854,16 @@ function showPanel(panelId) {
   activePanelId = panelId;
   setActiveNav(panelId);
   setActiveGaiaView("");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  if (shouldUpdateHash) updateRouteHash(panelId);
+  if (shouldScroll) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 }
 
 function volver() {
   panels.forEach((panel) => panel.classList.remove("is-visible"));
   dependencySite.classList.remove("is-visible");
+  clearProcessDetail();
   document.querySelectorAll(".sidebar details").forEach((details) => {
     details.open = false;
   });
@@ -1631,13 +1873,30 @@ function volver() {
   showGaiaView("mop-anillos");
 }
 
+function routeFromHash(shouldScroll = false) {
+  const route = window.location.hash.slice(1);
+  if (route && getMopProcessById(route)) {
+    openProcessDetail(route, shouldScroll, false);
+    return;
+  }
+  if (route && document.getElementById(route)?.classList.contains("panel")) {
+    showPanel(route, shouldScroll, false);
+    return;
+  }
+  if (route && gaiaViewTitles[route]) {
+    showGaiaView(route, shouldScroll, false);
+    return;
+  }
+  showGaiaView("conoce-gaia", shouldScroll, false);
+}
+
 function getDependencyData(card) {
   const title = card.querySelector("strong")?.textContent?.trim() || "Dependencia";
   const detail = getMergedDependencyDetail(title);
   const lines = card.innerText.split("\n").map((line) => line.trim()).filter(Boolean);
   const responsibleLine = lines.find((line) => /^Responsables?:|^Responsable técnico:/i.test(line)) || "Responsable: por completar";
   const summary = lines
-    .filter((line) => line !== title && line !== responsibleLine && !line.includes("Abrir micrositio"))
+    .filter((line) => line !== title && line !== responsibleLine && !line.includes("Abrir ficha de"))
     .join(" ");
 
   return {
@@ -1664,6 +1923,7 @@ function addTeamContactPlaceholders() {
 function openDependencySite(card) {
   const data = getDependencyData(card);
   document.body.classList.add("panel-view");
+  gaiaViews.forEach((view) => view.classList.remove("is-active"));
   panels.forEach((panel) => panel.classList.remove("is-visible"));
   mapSection.style.display = "none";
   dependencyTitle.textContent = data.title;
@@ -1722,6 +1982,10 @@ gaiaViewButtons.forEach((button) => {
 });
 
 document.querySelectorAll(".dependency-grid li").forEach((card) => {
+  const title = card.querySelector("strong")?.textContent?.trim() || "esta dependencia";
+  const actionText = `Abrir ficha de ${title}`;
+  card.dataset.cardAction = actionText;
+  card.setAttribute("aria-label", actionText);
   card.setAttribute("role", "button");
   card.setAttribute("tabindex", "0");
   card.addEventListener("click", (event) => {
@@ -1774,8 +2038,10 @@ initDocumentAdmin();
 initDocumentSuggestion();
 initExcessModule();
 initAuditModule();
-const initialGaiaView = gaiaViewTitles[window.location.hash.slice(1)] ? window.location.hash.slice(1) : "conoce-gaia";
-showGaiaView(initialGaiaView, false);
+renderStrategicProcessCatalog();
+routeFromHash(false);
+window.addEventListener("popstate", () => routeFromHash(false));
+window.addEventListener("hashchange", () => routeFromHash(false));
 
 document.querySelectorAll("[data-audio]").forEach((button) => {
   button.addEventListener("click", async () => {
