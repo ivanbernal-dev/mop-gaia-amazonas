@@ -3,20 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2F5048">
 <title>Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas</title>
-<link rel="stylesheet" href="assets/css/mop.css?v=20260728-prepub2">
+<link rel="stylesheet" href="assets/css/mop.css?v=20260803-toolkit-dis1">
 </head>
 <body>
 <main class="page">
-  <header>
+  <header class="site-header">
     <div class="brand-header">
       <img class="brand-logo" src="assets/gaia-logo-black.png" alt="Gaia Amazonas">
     </div>
-    <div class="toggle-container" aria-label="Controles de visualización">
-      <span>Modo</span>
-      <button type="button" id="toggleDark" aria-pressed="false">Claro / Oscuro</button>
+    <div class="site-heading">
+      <span class="site-kicker">Modelo de Operación por Procesos</span>
+      <h1 id="pageTitle">Esto es GAIA Amazonas</h1>
     </div>
-    <h1 id="pageTitle">Esto es GAIA Amazonas</h1>
+    <div class="toggle-container" aria-label="Controles de visualización">
+      <button type="button" id="toggleDark" aria-pressed="false" aria-label="Cambiar a tema oscuro" title="Cambiar tema">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path class="theme-icon-moon" d="M20 15.4A8.4 8.4 0 0 1 8.6 4a8.4 8.4 0 1 0 11.4 11.4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path class="theme-icon-sun" d="M12 4V2m0 20v-2M4 12H2m20 0h-2m-2.3-5.7 1.4-1.4M4.9 19.1l1.4-1.4m0-11.4L4.9 4.9m14.2 14.2-1.4-1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+        </svg>
+        <span class="theme-toggle-label">Tema</span>
+      </button>
+    </div>
   </header>
 
   <nav class="gaia-top-nav" aria-label="Navegación principal del sitio">
@@ -203,7 +212,7 @@
             <article><strong>Servicios Logísticos, Sedes y Compras</strong><span>Liderazgo transversal por rol</span></article>
             <article><strong>Tecnologías de la Información</strong><span>Liderazgo transversal por rol</span></article>
             <article><strong>Gestión de Procesos y Cumplimiento Institucional</strong><span>Liderazgo transversal por rol</span></article>
-            <article><strong>Asesoría Jurídica y Legal</strong><span>Liderazgo transversal por rol</span></article>
+            <article><strong>Asesoría Jurídica y Contractual</strong><span>Liderazgo transversal por rol</span></article>
           </div>
         </div>
       </div>
@@ -278,6 +287,46 @@
         </div>
       </div>
     </div>
+
+    <section class="gaia-transition-governance" aria-labelledby="titulo-direccion-transitoria">
+      <div class="gaia-transition-governance__heading">
+        <div>
+          <span class="gaia-eyebrow">Aporte de consultoría DIS al MOP</span>
+          <h3 id="titulo-direccion-transitoria">Modelo de Dirección Transitoria</h3>
+        </div>
+        <span class="gaia-status-badge gaia-status-badge--review">Insumo para validación de Junta Directiva</span>
+      </div>
+      <p class="gaia-transition-governance__lead">Se incorpora como una capa temporal de gobernanza y decisión. No crea un nuevo proceso ni reemplaza la arquitectura de procesos: aclara quién decide, qué asuntos se escalan y cómo se mantiene la trazabilidad mientras se define el modelo de dirección futuro.</p>
+
+      <div class="gaia-transition-governance__tracks" aria-label="Arquitectura transitoria de decisión">
+        <article>
+          <span>01</span>
+          <h4>Operación ordinaria</h4>
+          <p>La Dirección General encargada conduce la operación dentro del presupuesto, las políticas y las delegaciones vigentes. El Comité Directivo acompaña y coordina.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h4>Evolución estratégica 2030</h4>
+          <p>El Comité Directivo prepara recomendaciones sobre propósito, foco, intervención y narrativa. La Junta Directiva valida o aprueba las decisiones estratégicas.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h4>Gobernanza de transición</h4>
+          <p>La Junta Directiva conserva los asuntos reservados: modelo de dirección futuro, sucesión, composición de Junta, estatutos y posiciones públicas sensibles.</p>
+        </article>
+      </div>
+
+      <div class="gaia-transition-governance__controls">
+        <strong>Controles mínimos propuestos</strong>
+        <ul>
+          <li>Dirección unitaria y vocería institucional centralizada.</li>
+          <li>Matriz de delegación, límites y criterios de escalamiento.</li>
+          <li>Registro de decisiones y reporte ejecutivo mensual.</li>
+          <li>Tablero compartido que conecte Ruta 2030, portafolio, indicadores, recursos y seguimiento.</li>
+        </ul>
+      </div>
+      <p class="gaia-source-note"><strong>Estado de la fuente:</strong> materiales preparatorios del taller de inducción y actualización de Junta Directiva del 31 de julio de 2026. Su inclusión en esta vista es informativa y no equivale a una decisión formal adoptada; su vigencia depende de la formalización institucional correspondiente.</p>
+    </section>
 
     <div class="gaia-board-filters" aria-label="Filtros del tablero de Junta Directiva">
       <div>
@@ -403,8 +452,8 @@
     <div class="gaia-board-panel" role="tabpanel" hidden data-board-panel="gobierno">
       <div class="gaia-board-grid four">
         <article class="gaia-board-card"><h3>Dirección / Representación legal</h3><p>Consulta institucional mediante los canales autorizados de gobierno corporativo.</p></article>
-        <article class="gaia-board-card"><h3>Subdirector / Representante Legal Suplente</h3><p>Camilo Andrés Guio Rodríguez</p></article>
-        <article class="gaia-board-card"><h3>Revisor Fiscal</h3><p>Edgar Gonzalo Carrillo</p></article>
+        <article class="gaia-board-card"><h3>Subdirección / Representación Legal Suplente</h3><p>Consulta institucional mediante los canales autorizados de gobierno corporativo.</p></article>
+        <article class="gaia-board-card"><h3>Revisoría Fiscal</h3><p>Consulta institucional mediante los canales autorizados de gobierno corporativo.</p></article>
         <article class="gaia-board-card"><h3>Firma</h3><p>SAS Auditores & Consultores S.A.S.</p></article>
       </div>
       <p class="gaia-board-note">La estructura registrada corresponde a la certificación registral vigente expedida por la Cámara de Comercio de Bogotá. La Junta Directiva, mediante Acta No. 57, adoptó decisiones relacionadas con la actualización de la estructura institucional y de gobierno.</p>
@@ -590,6 +639,15 @@
         <li><strong>Donantes y socios estratégicos</strong><br>Responsables: aliados de cooperación y socios institucionales<br>Sostienen la viabilidad financiera y política de la Ruta 2030.<br><a href="https://app.powerbi.com/view?r=eyJrIjoiZDBjMGYwMjQtN2JkNS00Yzg5LWFhMTAtMWI5N2QwNDg0NzliIiwidCI6Ijg5ZDZkZGU2LWUyNTctNDNmYS05M2IzLWZmZDU0ZDY4Mzc4YSIsImMiOjR9&pageName=ReportSection" target="_blank" rel="noopener">Ver tablero de donantes y socios</a></li>
       </ul>
 
+      <article class="governance-transition-summary">
+        <div>
+          <span class="gaia-eyebrow">Gobernanza en transición</span>
+          <h3>Arquitectura temporal de decisión</h3>
+          <p>Los insumos de la consultoría DIS distinguen operación ordinaria, evolución estratégica 2030 y decisiones reservadas de Junta. El MOP las presenta como marco temporal sujeto a formalización, no como procesos nuevos.</p>
+        </div>
+        <button type="button" class="gaia-btn gaia-btn--secondary" data-gaia-target="junta-directiva">Ver modelo de dirección transitoria</button>
+      </article>
+
       <h3>Aporte a la Ruta 2030</h3>
       <p>Su aporte es mantener una orientación clara para la Fundación: cuidar la coherencia entre el propósito, las decisiones institucionales y la relación respetuosa con las AATI, los donantes y los socios estratégicos.</p>
     </div>
@@ -692,7 +750,7 @@
         <li><strong>CFI - Coordinación Financiera</strong><br>Responsable institucional: Coordinación Financiera<br>Contabilidad, tesorería, presupuesto, impuestos, costos indirectos, reportes y soporte financiero a programas y proyectos.</li>
         <li><strong>SLS - Servicios Logísticos, Sedes y Compras</strong><br>Responsable institucional: Coordinación de Servicios Logísticos, Sedes y Compras<br>Compras, viajes, anticipos, legalizaciones, sedes, inventarios y logística operativa para equipos y territorios.</li>
         <li><strong>TIC - Tecnologías de la Información</strong><br>Responsable institucional: Tecnologías de la Información<br>Transformación digital, infraestructura, seguridad, intranet, administración web, gobierno de datos y soporte a sistemas internos.</li>
-        <li><strong>AJL - Asesoría Jurídica y Legal</strong><br>Responsable institucional: Asesoría Jurídica y Contractual<br>Seguridad jurídica, contratación, lineamientos preventivos, protección de datos, gestión contractual y soporte a alianzas.</li>
+        <li><strong>AJC - Asesoría Jurídica y Contractual</strong><br>Responsable institucional: Asesoría Jurídica y Contractual<br>Seguridad jurídica, contratación, lineamientos preventivos, protección de datos, gestión contractual y soporte a alianzas.</li>
         <li><strong>GPC - Gestión de Procesos y Cumplimiento Institucional</strong><br>Responsable institucional: Gestión de Procesos y Cumplimiento Institucional<br>Procesos, cumplimiento, ética, transparencia, riesgos, control interno, mejora continua y gestión documental.</li>
       </ul>
 
@@ -969,7 +1027,7 @@
                   <option>CFI - Coordinación Financiera</option>
                   <option>SLS - Servicios Logísticos, Sedes y Compras</option>
                   <option>TIC - Tecnologías de la Información</option>
-                  <option>AJL - Asesoría Jurídica y Legal</option>
+                  <option>AJC - Asesoría Jurídica y Contractual</option>
                   <option>GPC - Gestión de Procesos y Cumplimiento Institucional</option>
                   <option>Auditoría externa de proyectos</option>
                   <option>Revisoría Fiscal</option>
@@ -1256,9 +1314,9 @@
 
 <script src="assets/documentos-mop.js"></script>
 <script src="assets/excedentes-mop.js"></script>
-<script src="assets/data/mop-process-catalog.js?v=20260728-prepub2"></script>
+<script src="assets/data/mop-process-catalog.js?v=20260803-toolkit-dis1"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
-<script src="assets/js/junta-directiva.js?v=20260728-prepub2"></script>
-<script src="assets/js/app.js?v=20260728-prepub2"></script>
+<script src="assets/js/junta-directiva.js?v=20260803-toolkit-dis1"></script>
+<script src="assets/js/app.js?v=20260803-toolkit-dis1"></script>
 </body>
 </html>

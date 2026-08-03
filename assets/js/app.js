@@ -178,7 +178,7 @@ const sidebarItems = [
   }
 ];
 const narrationTexts = {
-  nucleo: "El Macroproceso de Gobernanza y Propósito representa la razón de ser de la Fundación Gaia Amazonas. Desde aquí se orienta la gobernanza territorial amazónica, se cuida el Acuerdo Intercultural y se mantiene la relación con las AATI, la Junta Directiva, la Dirección General, los donantes y los socios estratégicos.",
+  nucleo: "El Macroproceso de Gobernanza y Propósito representa la razón de ser de la Fundación Gaia Amazonas. Desde aquí se orienta la gobernanza territorial amazónica, se cuida el Acuerdo Intercultural y se mantiene la relación con las AATI, la Junta Directiva, la Dirección General, los donantes y los socios estratégicos. Durante la transición institucional, el MOP distingue la operación ordinaria, la evolución estratégica hacia 2030 y las decisiones reservadas de la Junta Directiva.",
   misional: "El Macroproceso Misional es el corazón operativo de Gaia Amazonas. Aquí la estrategia se convierte en acompañamiento territorial, consolidación de Entidades Territoriales Indígenas, seguimiento a convenios, gestión de proyectos y cooperación alineada con las prioridades de los pueblos.",
   apoyo: "El Macroproceso de Apoyo garantiza que la Fundación tenga las condiciones para trabajar bien: equipos acompañados, recursos administrados con cuidado, logística territorial, tecnología disponible, soporte jurídico y cumplimiento institucional.",
   estrategico: "El Macroproceso Estratégico ayuda a cuidar el rumbo de Gaia Amazonas. Asegura ética, transparencia, planeación, gestión de riesgos y alianzas pertinentes para avanzar hacia la Ruta 2030 con una visión amazónica de largo plazo."
@@ -192,7 +192,7 @@ const dependencyDetails = {
   },
   "Subdirección de Desarrollo Estratégico (SDE)": {
     responsible: "Rol por ratificar",
-    team: "<p>Integra Coordinación Financiera, CIP, Servicios Logísticos, THB, TIC, GPC y Asesoría Jurídica y Legal como condiciones habilitantes de la operación institucional.</p>",
+    team: "<p>Integra Coordinación Financiera, CIP, Servicios Logísticos, THB, TIC, GPC y Asesoría Jurídica y Contractual como condiciones habilitantes de la operación institucional.</p>",
     contact: "<p>Consultar directorio interno autorizado.</p>",
     relevant: "<p>Ubicación en el MOP: anillo de apoyo, con conexión estratégica. Articula recursos, capacidades internas, planeación financiera y procesos de soporte para que las prioridades misionales puedan ejecutarse.</p>"
   },
@@ -2023,6 +2023,8 @@ document.querySelectorAll("[data-scroll-suggestion]").forEach((button) => {
 function setDarkMode(isDark) {
   document.body.classList.toggle("dark", isDark);
   toggleDark.setAttribute("aria-pressed", isDark ? "true" : "false");
+  toggleDark.setAttribute("aria-label", isDark ? "Cambiar a tema claro" : "Cambiar a tema oscuro");
+  toggleDark.setAttribute("title", isDark ? "Cambiar a tema claro" : "Cambiar a tema oscuro");
   localStorage.setItem("gaia-map-dark-mode", isDark ? "true" : "false");
 }
 
