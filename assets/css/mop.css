@@ -850,6 +850,17 @@ body.dark .gaia-top-nav a.active {
   scroll-margin-top: 108px;
 }
 
+#modelo-direccion-transitoria {
+  scroll-margin-top: 108px;
+}
+
+.gaia-transition-governance-page {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 .gaia-transition-governance,
 .governance-transition-summary {
   border: 1px solid rgba(47, 80, 72, 0.18);
@@ -874,6 +885,7 @@ body.dark .gaia-top-nav a.active {
   justify-content: space-between;
 }
 
+.gaia-transition-governance__heading h2,
 .gaia-transition-governance__heading h3,
 .governance-transition-summary h3 {
   margin: 4px 0 0;
@@ -926,15 +938,28 @@ body.dark .gaia-top-nav a.active {
   font-weight: 700;
 }
 
+.gaia-transition-governance__tracks h3,
 .gaia-transition-governance__tracks h4 {
   margin: 0;
   color: var(--gaia-teal-900);
   font-size: 1.22rem;
 }
 
+.gaia-decision-owner {
+  color: var(--gaia-teal-700);
+  font-size: 0.94rem;
+  line-height: 1.4;
+}
+
 .gaia-transition-governance__tracks p,
 .gaia-source-note {
   margin: 0;
+}
+
+.gaia-transition-governance__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .gaia-transition-governance__controls {
@@ -4816,11 +4841,17 @@ body.dark .governance-transition-summary p {
   color: #bed1ca;
 }
 
+body.dark .gaia-transition-governance__heading h2,
 body.dark .gaia-transition-governance__heading h3,
+body.dark .gaia-transition-governance__tracks h3,
 body.dark .gaia-transition-governance__tracks h4,
 body.dark .gaia-transition-governance__controls strong,
 body.dark .governance-transition-summary h3 {
   color: #edf6f2;
+}
+
+body.dark .gaia-decision-owner {
+  color: #8fe3ba;
 }
 
 body.dark .gaia-transition-governance__controls {

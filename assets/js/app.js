@@ -405,6 +405,7 @@ const gaiaViewTitles = {
   "conoce-gaia": "Esto es GAIA Amazonas",
   "ruta-2030": "GAIA Amazonas y su Modelo de Operación",
   "arquitectura-gaia": "Arquitectura organizacional y equipos de GAIA",
+  "modelo-direccion-transitoria": "Quién decide qué durante la transición",
   "junta-directiva": "Junta Directiva",
   "mop-anillos": defaultPageTitle
 };
