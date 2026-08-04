@@ -78,11 +78,8 @@ const documentControls = {
 const documentAdmin = {
   gate: document.getElementById("docAdminGate"),
   area: document.getElementById("docAdminArea"),
-  key: document.getElementById("docAdminKey"),
-  unlock: document.getElementById("docAdminUnlock"),
   logout: document.getElementById("docAdminLogout"),
-  status: document.getElementById("docAdminStatus"),
-  expectedKey: "GAIA-GPC-2026"
+  status: document.getElementById("docAdminStatus")
 };
 const adminControls = {
   visibilitySearch: document.getElementById("adminDocVisibilitySearch"),
@@ -127,13 +124,8 @@ const defaultAuditFirms = {
 };
 const excessAccess = {
   card: document.getElementById("excessAccessCard"),
-  profile: document.getElementById("excessProfile"),
-  key: document.getElementById("excessAccessKey"),
-  button: document.getElementById("excessAccessButton"),
   message: document.getElementById("excessAccessMessage"),
-  content: document.getElementById("excessRestrictedContent"),
-  expectedHash: "965cebb3a483747b2e5733b0daa1d00e5b20da7407a6b39a0a04c1dd661f5e86",
-  fallbackKeyParts: ["GAIA", "EXCEDENTES", "2026"]
+  content: document.getElementById("excessRestrictedContent")
 };
 const defaultPageTitle = "Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas";
 let activePanelId = "";
@@ -181,7 +173,7 @@ const narrationTexts = {
   nucleo: "El Macroproceso de Gobernanza y Propósito representa la razón de ser de la Fundación Gaia Amazonas. Desde aquí se orienta la gobernanza territorial amazónica, se cuida el Acuerdo Intercultural y se mantiene la relación con las AATI, la Junta Directiva, la Dirección General, los donantes y los socios estratégicos. Durante la transición institucional, el MOP distingue la operación ordinaria, la evolución estratégica hacia 2030 y las decisiones reservadas de la Junta Directiva.",
   misional: "El Macroproceso Misional es el corazón operativo de Gaia Amazonas. Aquí la estrategia se convierte en acompañamiento territorial, consolidación de Entidades Territoriales Indígenas, seguimiento a convenios, gestión de proyectos y cooperación alineada con las prioridades de los pueblos.",
   apoyo: "El Macroproceso de Apoyo garantiza que la Fundación tenga las condiciones para trabajar bien: equipos acompañados, recursos administrados con cuidado, logística territorial, tecnología disponible, soporte jurídico y cumplimiento institucional.",
-  estrategico: "El Macroproceso Estratégico ayuda a cuidar el rumbo de Gaia Amazonas. Asegura ética, transparencia, planeación, gestión de riesgos y alianzas pertinentes para avanzar hacia la Ruta 2030 con una visión amazónica de largo plazo."
+  estrategico: "La vista de Dirección y Gestión Estratégica organiza cinco funciones que deben validarse con las áreas reales de Gaia Amazonas. Las fichas explican cómo podrían conectarse planeación, alianzas, gestión pública, comunicaciones y aprendizaje, sin presentarlas todavía como procesos aprobados."
 };
 const dependencyDetails = {
   "Subdirección Técnica y Política (STP)": {
@@ -405,6 +397,7 @@ const gaiaViewTitles = {
   "conoce-gaia": "Esto es GAIA Amazonas",
   "ruta-2030": "GAIA Amazonas y su Modelo de Operación",
   "arquitectura-gaia": "Arquitectura organizacional y equipos de GAIA",
+  "que-es-mop": "Qué es el MOP y para qué sirve",
   "modelo-direccion-transitoria": "Quién decide qué durante la transición",
   "junta-directiva": "Junta Directiva",
   "mop-anillos": defaultPageTitle
@@ -1274,59 +1267,13 @@ async function importAdminConfig(event) {
   }
 }
 
-function unlockDocumentAdmin() {
-  if (!documentAdmin.area) return;
-  documentAdmin.area.hidden = false;
-  if (documentAdmin.gate) documentAdmin.gate.open = false;
-  document.body.classList.add("admin-mode");
-  if (documentAdmin.status) documentAdmin.status.textContent = "Modo administrador activo.";
-  sessionStorage.setItem("gaia-document-admin", "true");
-  populateAdminContentTargets();
-  renderAdminVisibilityList();
-}
-
-function logoutDocumentAdmin() {
+function initDocumentAdmin() {
   if (documentAdmin.area) documentAdmin.area.hidden = true;
-  if (documentAdmin.gate) documentAdmin.gate.open = false;
-  if (documentAdmin.key) documentAdmin.key.value = "";
   document.body.classList.remove("admin-mode");
   sessionStorage.removeItem("gaia-document-admin");
-  if (documentAdmin.status) documentAdmin.status.textContent = "Sesión de administrador cerrada. La administración vuelve a quedar oculta.";
-}
-
-function initDocumentAdmin() {
-  if (!documentAdmin.unlock) return;
-  if (sessionStorage.getItem("gaia-document-admin") === "true") {
-    unlockDocumentAdmin();
+  if (documentAdmin.status) {
+    documentAdmin.status.textContent = "Administración deshabilitada en GitHub Pages. Usa la intranet autenticada.";
   }
-  documentAdmin.unlock.addEventListener("click", () => {
-    const key = documentAdmin.key?.value?.trim() || "";
-    if (key === documentAdmin.expectedKey) {
-      unlockDocumentAdmin();
-      return;
-    }
-    if (documentAdmin.status) documentAdmin.status.textContent = "Clave no válida. La administración sigue oculta.";
-  });
-  adminControls.visibilitySearch?.addEventListener("input", renderAdminVisibilityList);
-  adminControls.visibilityList?.addEventListener("change", (event) => {
-    const input = event.target.closest("[data-admin-doc-key]");
-    if (!input) return;
-    if (input.checked) {
-      delete documentVisibility[input.dataset.adminDocKey];
-    } else {
-      documentVisibility[input.dataset.adminDocKey] = false;
-    }
-    saveAdminSettings();
-    refreshDocumentModule();
-  });
-  adminControls.showFiltered?.addEventListener("click", () => setVisibilityForAdminFiltered(true));
-  adminControls.hideFiltered?.addEventListener("click", () => setVisibilityForAdminFiltered(false));
-  adminControls.contentTarget?.addEventListener("change", loadAdminContentEditor);
-  adminControls.saveContent?.addEventListener("click", saveAdminContent);
-  adminControls.resetContent?.addEventListener("click", resetAdminContent);
-  adminControls.exportConfig?.addEventListener("click", exportAdminConfig);
-  adminControls.importConfig?.addEventListener("change", importAdminConfig);
-  documentAdmin.logout?.addEventListener("click", logoutDocumentAdmin);
 }
 
 function getSuggestionValue(formData, name, fallback = "Por completar") {
@@ -1549,43 +1496,12 @@ function renderExecutionReport(report) {
   `;
 }
 
-async function sha256(text) {
-  if (!window.crypto?.subtle) return "";
-  const encoded = new TextEncoder().encode(text);
-  const hashBuffer = await window.crypto.subtle.digest("SHA-256", encoded);
-  return Array.from(new Uint8Array(hashBuffer)).map((byte) => byte.toString(16).padStart(2, "0")).join("");
-}
-
-function unlockExcessContent(profile) {
-  if (!excessAccess.content || !excessAccess.card) return;
-  excessAccess.content.hidden = false;
-  excessAccess.card.style.display = "none";
-  sessionStorage.setItem("gaia-excess-access", profile || "perfil autorizado");
-}
-
 function initExcessAccess() {
-  if (!excessAccess.button) return;
-  const storedProfile = sessionStorage.getItem("gaia-excess-access");
-  if (storedProfile) {
-    unlockExcessContent(storedProfile);
-    return;
+  if (excessAccess.content) excessAccess.content.hidden = true;
+  sessionStorage.removeItem("gaia-excess-access");
+  if (excessAccess.message) {
+    excessAccess.message.textContent = "Contenido restringido y deshabilitado en GitHub Pages.";
   }
-
-  excessAccess.button.addEventListener("click", async () => {
-    const profile = excessAccess.profile?.value || "";
-    const key = excessAccess.key?.value || "";
-    if (!profile || !key) {
-      if (excessAccess.message) excessAccess.message.textContent = "Selecciona un perfil y escribe la clave de visualización.";
-      return;
-    }
-    const hash = await sha256(key.trim());
-    const fallbackKey = excessAccess.fallbackKeyParts.join("-");
-    if ((hash && hash === excessAccess.expectedHash) || key.trim() === fallbackKey) {
-      unlockExcessContent(profile);
-      return;
-    }
-    if (excessAccess.message) excessAccess.message.textContent = "Clave no válida para visualizar esta sección.";
-  });
 }
 
 function initExcessModule() {
@@ -1593,8 +1509,8 @@ function initExcessModule() {
   const reportList = document.getElementById("excessReportList");
   if (!projectList || !reportList) return;
 
-  projectList.innerHTML = (excessData.proyectos || []).map(renderProjectDestination).join("");
-  reportList.innerHTML = (excessData.informes || []).map(renderExecutionReport).join("");
+  projectList.innerHTML = "";
+  reportList.innerHTML = "";
 
   document.querySelectorAll("[data-excess-tab]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -1724,11 +1640,11 @@ function renderProcessDetail(process) {
   detail.hidden = false;
   detail.innerHTML = `
     <div class="process-detail-header">
-      <span class="process-code">${escapeHtml(process.shortCode)}</span>
-      <span class="process-status" aria-label="Estado del proceso: ${escapeHtml(process.status)}">${escapeHtml(process.status)}</span>
+      <span class="process-code">Área ${escapeHtml(process.shortCode)}</span>
+      <span class="process-status" aria-label="Estado de la ficha: ${escapeHtml(process.status)}">${escapeHtml(process.status)}</span>
     </div>
     <h4>${escapeHtml(process.name)}</h4>
-    <p class="process-nature">Proceso de Dirección y Gestión Estratégica.</p>
+    <p class="process-nature">${escapeHtml(process.nature || "Ficha de entendimiento funcional para validación")}</p>
     <div class="process-detail-grid">
       <article>
         <h5>Propósito</h5>
@@ -1743,8 +1659,8 @@ function renderProcessDetail(process) {
         <p>${escapeHtml(process.end)}</p>
       </article>
       <article>
-        <h5>Propietario por rol</h5>
-        <p>${escapeHtml(process.ownerRole || "Rol por ratificar")}</p>
+        <h5>Área referente o responsable</h5>
+        <p>${escapeHtml(process.ownerRole || "Ubicación institucional por ratificar")}</p>
       </article>
       <article>
         <h5>Interacciones</h5>
@@ -1793,10 +1709,10 @@ function renderStrategicProcessCatalog() {
   const records = processCatalog.estrategico;
   target.innerHTML = records.map((process) => `
     <button class="process-card" type="button" data-process-id="${escapeHtml(process.id)}" aria-expanded="false" aria-controls="strategicProcessDetail">
-      <span class="process-code">${escapeHtml(process.shortCode)}</span>
+      <span class="process-code">Área ${escapeHtml(process.shortCode)}</span>
       <strong>${escapeHtml(process.name)}</strong>
       <span class="process-card-nature">${escapeHtml(process.nature)}</span>
-      <span class="process-status" aria-label="Estado del proceso: ${escapeHtml(process.status)}">${escapeHtml(process.status)}</span>
+      <span class="process-status" aria-label="Estado de la ficha: ${escapeHtml(process.status)}">${escapeHtml(process.status)}</span>
     </button>
   `).join("");
   target.querySelectorAll("[data-process-id]").forEach((button) => {

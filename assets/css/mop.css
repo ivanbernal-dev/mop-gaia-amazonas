@@ -384,6 +384,7 @@ body.dark .intro {
 .gaia-view.is-active.gaia-hero,
 .gaia-view.is-active.gaia-route,
 .gaia-view.is-active.gaia-reason,
+.gaia-view.is-active.gaia-mop-definition,
 .gaia-view.is-active.gaia-board,
 .gaia-view.is-active .map-section {
   display: grid !important;
@@ -830,6 +831,112 @@ body.dark .gaia-top-nav a.active {
 }
 
 .gaia-reason__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gaia-mop-definition {
+  display: grid;
+  gap: 22px;
+  scroll-margin-top: 108px;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(190, 209, 130, 0.2), transparent 24%),
+    var(--panel);
+}
+
+.gaia-mop-definition__intro {
+  max-width: 980px;
+}
+
+.gaia-mop-definition__intro h2 {
+  margin: 10px 0 8px;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+}
+
+.gaia-mop-definition__intro .gaia-lead {
+  max-width: 940px;
+  margin-bottom: 0;
+}
+
+.gaia-mop-definition__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.gaia-mop-definition__step {
+  min-height: 250px;
+  padding: 22px;
+  border: 1px solid rgba(47, 80, 72, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 14px 28px rgba(47, 80, 72, 0.06);
+}
+
+.gaia-mop-definition__step > span {
+  display: inline-grid;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 24px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gaia-teal-700);
+  color: #fff;
+  font-weight: 900;
+}
+
+.gaia-mop-definition__step h3 {
+  margin: 0 0 18px;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+}
+
+.gaia-mop-definition__step p {
+  margin: 0;
+  color: #52665f;
+  line-height: 1.55;
+}
+
+.gaia-mop-definition__step--primary {
+  border-color: var(--gaia-teal-900);
+  background: var(--gaia-teal-900);
+}
+
+.gaia-mop-definition__step--primary > span {
+  background: var(--gaia-olive);
+  color: #111b16;
+}
+
+.gaia-mop-definition__step--primary h3,
+.gaia-mop-definition__step--primary p {
+  color: #fff;
+}
+
+.gaia-mop-definition__clarification {
+  padding: 18px 22px;
+  border: 1px solid rgba(154, 161, 58, 0.24);
+  border-radius: 8px;
+  background: rgba(190, 209, 130, 0.2);
+  text-align: center;
+}
+
+.gaia-mop-definition__clarification strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--gaia-teal-900);
+  font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.gaia-mop-definition__clarification p {
+  max-width: 900px;
+  margin: 0 auto;
+  color: var(--gaia-teal-900);
+  font-weight: 800;
+}
+
+.gaia-mop-definition__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -2143,6 +2250,36 @@ body.dark .gaia-reason {
     radial-gradient(circle at 10% 0%, rgba(227, 170, 86, 0.12), transparent 32%),
     radial-gradient(circle at 92% 12%, rgba(143, 227, 186, 0.08), transparent 30%),
     #18231f;
+}
+
+body.dark .gaia-mop-definition {
+  background:
+    radial-gradient(circle at 88% 18%, rgba(190, 209, 130, 0.1), transparent 24%),
+    #18231f;
+}
+
+body.dark .gaia-mop-definition__step {
+  border-color: rgba(143, 227, 186, 0.18);
+  background: #26352f;
+}
+
+body.dark .gaia-mop-definition__step--primary {
+  border-color: rgba(143, 227, 186, 0.32);
+  background: #0f4c40;
+}
+
+body.dark .gaia-mop-definition__step p,
+body.dark .gaia-mop-definition__clarification p {
+  color: #d7e5df;
+}
+
+body.dark .gaia-mop-definition__clarification {
+  border-color: rgba(190, 209, 130, 0.18);
+  background: rgba(190, 209, 130, 0.1);
+}
+
+body.dark .gaia-mop-definition__clarification strong {
+  color: #edf6f2;
 }
 
 body.dark .gaia-reason .gaia-lead,
@@ -4895,6 +5032,7 @@ body.dark .gaia-transition-governance__controls {
   .gaia-reason__path,
   .gaia-reason__grid,
   .gaia-monitoring-system__steps,
+  .gaia-mop-definition__steps,
   .gaia-board-hero,
   .gaia-board-filters,
   .gaia-board-grid.three,
@@ -5015,6 +5153,7 @@ body.dark .gaia-transition-governance__controls {
   .gaia-reason__path,
   .gaia-reason__grid,
   .gaia-monitoring-system__steps,
+  .gaia-mop-definition__steps,
   .gaia-board-hero,
   .gaia-board-hero-stats,
   .gaia-board-filters,
@@ -5029,6 +5168,10 @@ body.dark .gaia-transition-governance__controls {
   .gaia-transition-governance__controls,
   .gaia-transition-governance__controls ul {
     grid-template-columns: 1fr;
+  }
+
+  .gaia-mop-definition__step {
+    min-height: 0;
   }
 
   .gaia-transition-governance__tracks article:last-child {
