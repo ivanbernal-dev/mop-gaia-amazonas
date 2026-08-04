@@ -903,8 +903,8 @@ body.dark .gaia-top-nav a.active {
 }
 
 .gaia-mop-definition__step--primary > span {
-  background: var(--gaia-olive);
-  color: #111b16;
+  background: #dce9b4;
+  color: var(--gaia-teal-900);
 }
 
 .gaia-mop-definition__step--primary h3,
