@@ -1702,6 +1702,11 @@ body.dark .gaia-top-nav a.active {
 .gaia-eti-map {
   display: grid;
   gap: 12px;
+  width: 100%;
+}
+
+.gaia-amazon-map-stage .gaia-eti-map {
+  min-width: 0;
 }
 
 .gaia-eti-map-visual {
