@@ -313,27 +313,10 @@
             <strong>Amazonía colombiana</strong>
             <p>Los datos de gobierno se leen frente al territorio donde se concentran los procesos de fortalecimiento de gobiernos indígenas y ETI.</p>
           </div>
-          <div class="gaia-amazon-map-stage" aria-label="Mapa de referencia de la Amazonía colombiana">
-            <svg viewBox="0 0 420 360" role="img" aria-labelledby="amazon-map-title">
-              <title id="amazon-map-title">Mapa de referencia de la Amazonía colombiana</title>
-              <path class="gaia-colombia-shape" d="M157 19 204 32 236 20 279 51 305 92 292 137 324 174 310 218 341 269 318 325 270 341 230 319 181 335 142 306 105 315 74 277 87 226 55 198 78 151 63 106 101 73z"/>
-              <path class="gaia-amazon-shape" d="M91 213 137 188 183 204 231 184 286 203 321 242 312 305 269 327 229 305 183 323 141 292 105 301 78 269z"/>
-              <path class="gaia-river-line" d="M92 253 C139 230 175 260 217 238 S282 225 318 263"/>
-              <path class="gaia-river-line secondary" d="M151 207 C177 225 194 226 224 210"/>
-              <g class="gaia-map-points">
-                <circle cx="114" cy="279" r="5"/><text x="126" y="283">Putumayo</text>
-                <circle cx="176" cy="262" r="5"/><text x="188" y="266">Caquetá</text>
-                <circle cx="238" cy="286" r="5"/><text x="250" y="290">Amazonas</text>
-                <circle cx="255" cy="220" r="5"/><text x="267" y="224">Vaupés</text>
-                <circle cx="199" cy="210" r="5"/><text x="211" y="214">Guaviare</text>
-              </g>
-            </svg>
-            <div class="gaia-board-hero-chart" aria-label="Distribución general de recursos">
-              <canvas data-board-hero-chart role="img" aria-label="88 por ciento gestión misional y 12 por ciento administración y operación"></canvas>
-              <span>88 % impacto</span>
-            </div>
+          <div class="gaia-amazon-map-stage" data-eti-map="hero" aria-label="Mapa interactivo de ETI formalizadas">
+            <p class="gaia-board-note">Cargando capa territorial ETI...</p>
           </div>
-          <p class="gaia-amazon-map-note">Mapa esquemático de referencia. La capa oficial de ETI se consulta en Colombia en Mapas del IGAC.</p>
+          <p class="gaia-amazon-map-note">Mapa interactivo simplificado. Selecciona un territorio para ver su lectura territorial; no sustituye cartografía oficial.</p>
         </div>
       </div>
     </div>
@@ -377,12 +360,11 @@
     <div class="gaia-board-panel active" role="tabpanel" data-board-panel="resumen">
       <div class="gaia-board-kpis" data-board-kpis></div>
       <div class="gaia-board-grid two">
-        <article class="gaia-board-map">
-          <span class="gaia-eyebrow">Mapa amazónico de la gestión</span>
-          <h3>Los recursos se orientan al cuidado de la Amazonía y al fortalecimiento de gobiernos indígenas</h3>
-          <div class="gaia-board-chart gaia-board-chart--compact" data-board-chart="impactOverview"></div>
-          <p class="gaia-board-note">Visualización conceptual. No sustituye cartografía oficial.</p>
-          <p class="gaia-board-note">La capa oficial de ETI formalizadas está disponible en Colombia en Mapas del IGAC como “Territorios Indígenas con Fines Político - Administrativos Especiales”. <a href="https://www.colombiaenmapas.gov.co/" target="_blank" rel="noopener">Consultar portal oficial</a>.</p>
+        <article class="gaia-board-map gaia-board-map--eti">
+          <span class="gaia-eyebrow">Mapa territorial ETI</span>
+          <h3>Ocho territorios indígenas formalizados en la lectura de Junta Directiva</h3>
+          <div class="gaia-eti-dashboard-map" data-eti-map="dashboard" aria-label="Mapa interactivo de territorios indígenas formalizados"></div>
+          <p class="gaia-board-note">La capa fue recibida como insumo local para visualización. La cartografía oficial se consulta en Colombia en Mapas del IGAC.</p>
         </article>
         <article class="gaia-board-card">
           <h3>Decisiones y seguimiento de Junta</h3>
@@ -1341,6 +1323,7 @@
 
 <script src="assets/documentos-mop.js"></script>
 <script src="assets/data/mop-process-catalog.js?v=20260804-explica-mop1"></script>
+<script src="assets/data/eti-territories.js?v=20260811-etis"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
 <script src="assets/js/junta-directiva.js?v=20260804-explica-mop1"></script>
 <script src="assets/js/app.js?v=20260804-explica-mop1"></script>

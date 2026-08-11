@@ -99,7 +99,8 @@ const boardState = {
   theme: "all",
   tab: "resumen",
   metric: "",
-  accountingYear: "total"
+  accountingYear: "total",
+  etiCode: ""
 };
 
 const accountingYearLabels = {
@@ -550,6 +551,119 @@ function renderHeroChart() {
   });
 }
 
+function escapeBoardHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function formatArea(value) {
+  return new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 }).format(Number(value || 0));
+}
+
+function etiProjectPoint(point, bbox, width, height, padding) {
+  const [minX, minY, maxX, maxY] = bbox;
+  const [lon, lat] = point;
+  const x = padding + ((lon - minX) / Math.max(maxX - minX, 0.00001)) * (width - padding * 2);
+  const y = padding + ((maxY - lat) / Math.max(maxY - minY, 0.00001)) * (height - padding * 2);
+  return [Number(x.toFixed(2)), Number(y.toFixed(2))];
+}
+
+function etiPathFromGeometry(geometry, bbox, width, height, padding) {
+  return (geometry || []).map((ring) => ring.map((point, index) => {
+    const [x, y] = etiProjectPoint(point, bbox, width, height, padding);
+    return `${index === 0 ? "M" : "L"}${x} ${y}`;
+  }).join(" ") + " Z").join(" ");
+}
+
+function etiFeatureCenter(feature, bbox, width, height, padding) {
+  const points = (feature.geometry || []).flat();
+  const sum = points.reduce((acc, point) => {
+    acc[0] += point[0];
+    acc[1] += point[1];
+    return acc;
+  }, [0, 0]);
+  const center = points.length ? [sum[0] / points.length, sum[1] / points.length] : [bbox[0], bbox[1]];
+  return etiProjectPoint(center, bbox, width, height, padding);
+}
+
+function selectedEtiFeature(features) {
+  if (!features.length) return null;
+  return features.find((feature) => feature.code === boardState.etiCode) || features[0];
+}
+
+function renderEtiTerritoryMap() {
+  const data = window.GAIA_ETI_TERRITORIES;
+  const containers = document.querySelectorAll("[data-eti-map]");
+  if (!containers.length) return;
+  const features = data?.features || [];
+  if (!features.length) {
+    containers.forEach((container) => {
+      container.innerHTML = `<p class="gaia-board-note">La capa territorial ETI no está disponible en esta versión local.</p>`;
+    });
+    return;
+  }
+  if (!boardState.etiCode) boardState.etiCode = features[0].code;
+  const selected = selectedEtiFeature(features);
+  const width = 640;
+  const height = 520;
+  const padding = 28;
+  const bbox = data.bbox;
+  const totalArea = data.stats?.totalAreaHa || features.reduce((sum, feature) => sum + Number(feature.areaHa || 0), 0);
+  const paths = features.map((feature, index) => {
+    const active = feature.code === selected.code;
+    const [cx, cy] = etiFeatureCenter(feature, bbox, width, height, padding);
+    return `
+      <path class="gaia-eti-map-shape ${active ? "is-active" : ""}" d="${etiPathFromGeometry(feature.geometry, bbox, width, height, padding)}" data-eti-code="${escapeBoardHtml(feature.code)}" tabindex="0" role="button" aria-pressed="${active}" aria-label="${escapeBoardHtml(feature.name)}"></path>
+      <text class="gaia-eti-map-label" x="${cx}" y="${cy}" aria-hidden="true">${index + 1}</text>
+    `;
+  }).join("");
+  const list = features.map((feature, index) => `
+    <button type="button" class="${feature.code === selected.code ? "active" : ""}" data-eti-code="${escapeBoardHtml(feature.code)}" aria-pressed="${feature.code === selected.code}">
+      <strong>${index + 1}. ${escapeBoardHtml(feature.name.replace(/^Territorio Indígena de?\\s*/i, ""))}</strong>
+      <span>${formatArea(feature.areaHa)} ha</span>
+    </button>
+  `).join("");
+  const detail = `
+    <article class="gaia-eti-map-detail">
+      <span class="gaia-eyebrow">ETI seleccionada</span>
+      <h4>${escapeBoardHtml(selected.name)}</h4>
+      <p>${escapeBoardHtml(selected.council)}</p>
+      <dl>
+        <div><dt>Área aproximada</dt><dd>${formatArea(selected.areaHa)} ha</dd></div>
+        <div><dt>Código de capa</dt><dd>${escapeBoardHtml(selected.code)}</dd></div>
+        <div><dt>Soporte</dt><dd>${escapeBoardHtml(selected.decree || "Decreto 632 de 2018")}</dd></div>
+        <div><dt>Acto / acuerdo</dt><dd>${escapeBoardHtml(selected.agreement || "Por validar")}</dd></div>
+      </dl>
+    </article>
+  `;
+  containers.forEach((container) => {
+    const mode = container.dataset.etiMap || "dashboard";
+    container.innerHTML = `
+      <section class="gaia-eti-map gaia-eti-map--${escapeBoardHtml(mode)}">
+        <div class="gaia-eti-map-visual">
+          <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Mapa simplificado de ocho territorios indígenas formalizados">
+            <rect class="gaia-eti-map-water" x="0" y="0" width="${width}" height="${height}" rx="18"></rect>
+            <g>${paths}</g>
+          </svg>
+          <div class="gaia-eti-map-total">
+            <strong>${features.length}</strong>
+            <span>ETI</span>
+          </div>
+        </div>
+        ${detail}
+        <div class="gaia-eti-map-list" aria-label="Seleccionar territorio indígena">
+          ${list}
+        </div>
+        <p class="gaia-eti-map-source">Fuente local: ${escapeBoardHtml(data.source || "TerritoriosIndigenas.geojson")}. Geometría simplificada para visualización; área total aproximada: ${formatArea(totalArea)} ha.</p>
+      </section>
+    `;
+  });
+}
+
 function renderBoardDocuments() {
   const container = document.querySelector("[data-board-documents]");
   if (!container) return;
@@ -602,6 +716,21 @@ function initBoardFilters() {
       boardState.accountingYear = accountingButton.dataset.boardAccountingYear;
       renderAccountingExplorer();
     }
+    const etiButton = target?.closest("[data-eti-code]");
+    if (etiButton) {
+      boardState.etiCode = etiButton.dataset.etiCode;
+      renderEtiTerritoryMap();
+    }
+  });
+
+  board?.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const target = event.target instanceof Element ? event.target : null;
+    const etiTarget = target?.closest("[data-eti-code]");
+    if (!etiTarget) return;
+    event.preventDefault();
+    boardState.etiCode = etiTarget.dataset.etiCode;
+    renderEtiTerritoryMap();
   });
 
   document.querySelectorAll(".gaia-board-filter").forEach((button) => {
@@ -633,5 +762,6 @@ renderBoardBars("funding", "Fuentes de financiación por participación", boardD
 renderBoardBars("contracting", "Contratación institucional 2025", boardDashboardData.contracting);
 renderAccountingExplorer();
 renderHeroChart();
+renderEtiTerritoryMap();
 renderBoardDocuments();
 initBoardFilters();

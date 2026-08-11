@@ -14,6 +14,7 @@ const dependencyRelevant = document.getElementById("dependencyRelevant");
 const backToMacroPanel = document.getElementById("backToMacroPanel");
 const toggleDark = document.getElementById("toggleDark");
 const canonicalDocumentData = window.MOP_CANONICAL_DATA || null;
+const documentDownloadsEnabled = false;
 const documentData = canonicalDocumentData
   ? {
     fuente: "Exportación canónica validada del Listado Maestro",
@@ -951,6 +952,7 @@ function getDocumentStatusClass(status) {
 }
 
 function getDocumentReference(record) {
+  if (!documentDownloadsEnabled) return "";
   return normalizeDocumentLink(record.canonicalUrl || record.linkDocumento);
 }
 
