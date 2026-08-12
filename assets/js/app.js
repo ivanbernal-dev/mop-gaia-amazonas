@@ -1554,10 +1554,10 @@ function initExcessModule() {
 
   projectList.innerHTML = excessData.proyectos?.length
     ? excessData.proyectos.map(renderProjectDestination).join("")
-    : `<p class="gaia-board-note">No hay proyectos de destinaciÃ³n cargados para esta vista.</p>`;
+    : `<p class="gaia-board-note">No hay proyectos de destinación cargados para esta vista.</p>`;
   reportList.innerHTML = excessData.informes?.length
     ? excessData.informes.map(renderExecutionReport).join("")
-    : `<p class="gaia-board-note">No hay informes de ejecuciÃ³n cargados para esta vista.</p>`;
+    : `<p class="gaia-board-note">No hay informes de ejecución cargados para esta vista.</p>`;
 
   document.querySelectorAll("[data-excess-tab]").forEach((button) => {
     button.addEventListener("click", () => {
