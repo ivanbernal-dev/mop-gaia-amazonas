@@ -1709,6 +1709,20 @@ body.dark .gaia-top-nav a.active {
   min-width: 0;
 }
 
+.gaia-eti-map--hero {
+  align-content: start;
+}
+
+.gaia-eti-map--hero .gaia-eti-map-detail,
+.gaia-eti-map--hero .gaia-eti-map-list,
+.gaia-eti-map--hero .gaia-eti-map-source {
+  display: none;
+}
+
+.gaia-eti-map--hero .gaia-eti-map-visual {
+  min-height: 360px;
+}
+
 .gaia-eti-map-visual {
   position: relative;
   min-height: 300px;
@@ -1870,6 +1884,11 @@ body.dark .gaia-top-nav a.active {
   opacity: 0.78;
 }
 
+.gaia-eti-map-list strong {
+  font-size: 0.88rem;
+  line-height: 1.12;
+}
+
 .gaia-eti-map-source {
   margin: 0;
   color: rgba(255, 253, 248, 0.76);
@@ -1890,6 +1909,10 @@ body.dark .gaia-top-nav a.active {
 .gaia-board-map--eti .gaia-eti-map-list,
 .gaia-board-map--eti .gaia-eti-map-source {
   grid-column: 1 / -1;
+}
+
+.gaia-board-map--eti .gaia-eti-map-list {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 
 @media (max-width: 720px) {
@@ -5237,7 +5260,6 @@ body.dark .gaia-transition-governance__controls {
   .gaia-reason__grid,
   .gaia-monitoring-system__steps,
   .gaia-mop-definition__steps,
-  .gaia-board-hero,
   .gaia-board-filters,
   .gaia-board-grid.three,
   .gaia-board-grid.four,
@@ -5247,6 +5269,10 @@ body.dark .gaia-transition-governance__controls {
   .gaia-accordion-grid,
   .gaia-transition-governance__tracks {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gaia-board-hero {
+    grid-template-columns: 1fr;
   }
 
   .gaia-transition-governance__tracks article:last-child {
@@ -5396,6 +5422,42 @@ body.dark .gaia-transition-governance__controls {
 
   .gaia-board-hero-stats {
     grid-template-columns: 1fr;
+  }
+
+  .gaia-board-hero,
+  .gaia-board-hero-panel,
+  .gaia-amazon-map-stage,
+  .gaia-eti-map,
+  .gaia-eti-map-visual {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .gaia-board-hero {
+    padding: 16px;
+    overflow-wrap: anywhere;
+  }
+
+  .gaia-board-hero h2 {
+    font-size: clamp(2rem, 12vw, 2.85rem);
+  }
+
+  .gaia-board-hero p,
+  .gaia-board-lead {
+    font-size: 1rem;
+    line-height: 1.42;
+  }
+
+  .gaia-board-hero-panel {
+    padding: 14px;
+  }
+
+  .gaia-eti-map--hero .gaia-eti-map-visual,
+  .gaia-eti-map-visual,
+  .gaia-eti-map-visual svg {
+    min-height: 230px;
   }
 
   .gaia-board-kpi strong {
