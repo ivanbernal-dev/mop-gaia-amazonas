@@ -623,8 +623,8 @@ function renderEtiTerritoryMap() {
   }).join("");
   const list = features.map((feature, index) => `
     <button type="button" class="${feature.code === selected.code ? "active" : ""}" data-eti-code="${escapeBoardHtml(feature.code)}" aria-pressed="${feature.code === selected.code}">
-      <strong>${index + 1}. ${escapeBoardHtml(feature.name.replace(/^Territorio Indígena de?\\s*/i, ""))}</strong>
-      <span>${formatArea(feature.areaHa)} ha</span>
+      <strong>${index + 1}</strong>
+      <span>${escapeBoardHtml(feature.name.replace(/^Territorio Indígena de?\\s*/i, ""))}</span>
     </button>
   `).join("");
   const detail = `
@@ -634,9 +634,7 @@ function renderEtiTerritoryMap() {
       <p>${escapeBoardHtml(selected.council)}</p>
       <dl>
         <div><dt>Área aproximada</dt><dd>${formatArea(selected.areaHa)} ha</dd></div>
-        <div><dt>Código de capa</dt><dd>${escapeBoardHtml(selected.code)}</dd></div>
-        <div><dt>Soporte</dt><dd>${escapeBoardHtml(selected.decree || "Decreto 632 de 2018")}</dd></div>
-        <div><dt>Acto / acuerdo</dt><dd>${escapeBoardHtml(selected.agreement || "Por validar")}</dd></div>
+        <div><dt>Soporte normativo</dt><dd>${escapeBoardHtml(selected.decree || "Decreto 632 de 2018")} · ${escapeBoardHtml(selected.agreement || "acto por validar")}</dd></div>
       </dl>
     </article>
   `;

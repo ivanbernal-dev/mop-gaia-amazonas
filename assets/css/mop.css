@@ -1442,6 +1442,7 @@ body.dark .gaia-top-nav a.active {
 }
 
 .gaia-board-territory-layout {
+  display: grid;
   align-items: start;
 }
 
@@ -1888,6 +1889,7 @@ body.dark .gaia-top-nav a.active {
   display: grid;
   gap: 12px;
   width: 100%;
+  min-width: 0;
 }
 
 .gaia-amazon-map-stage .gaia-eti-map {
@@ -1910,7 +1912,8 @@ body.dark .gaia-top-nav a.active {
 
 .gaia-eti-map-visual {
   position: relative;
-  min-height: 300px;
+  min-height: 460px;
+  min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 253, 248, 0.22);
   border-radius: 8px;
@@ -1922,7 +1925,7 @@ body.dark .gaia-top-nav a.active {
 .gaia-eti-map-visual svg {
   width: 100%;
   height: 100%;
-  min-height: 300px;
+  min-height: 460px;
   display: block;
 }
 
@@ -1986,8 +1989,11 @@ body.dark .gaia-top-nav a.active {
 
 .gaia-eti-map-detail {
   display: grid;
-  gap: 8px;
-  padding: 14px;
+  grid-template-columns: minmax(170px, 0.45fr) minmax(220px, 0.7fr) minmax(260px, 1fr);
+  gap: 8px 14px;
+  align-items: center;
+  min-width: 0;
+  padding: 12px 14px;
   border: 1px solid rgba(255, 253, 248, 0.22);
   border-radius: 8px;
   background: rgba(255, 253, 248, 0.1);
@@ -2002,7 +2008,7 @@ body.dark .gaia-top-nav a.active {
 
 .gaia-eti-map-detail h4 {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .gaia-eti-map-detail p {
@@ -2020,7 +2026,7 @@ body.dark .gaia-top-nav a.active {
 .gaia-eti-map-detail div {
   display: grid;
   gap: 2px;
-  padding: 8px;
+  padding: 7px 9px;
   border-radius: 8px;
   background: rgba(255, 253, 248, 0.08);
 }
@@ -2038,17 +2044,20 @@ body.dark .gaia-top-nav a.active {
 }
 
 .gaia-eti-map-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
   gap: 8px;
 }
 
 .gaia-eti-map-list button {
-  display: grid;
-  gap: 3px;
-  padding: 9px 10px;
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
   border: 1px solid rgba(255, 253, 248, 0.22);
-  border-radius: 8px;
+  border-radius: 999px;
   background: rgba(255, 253, 248, 0.1);
   color: #fffdf8;
   cursor: pointer;
@@ -2064,14 +2073,20 @@ body.dark .gaia-top-nav a.active {
 }
 
 .gaia-eti-map-list span {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 900;
   opacity: 0.78;
 }
 
 .gaia-eti-map-list strong {
-  font-size: 0.88rem;
-  line-height: 1.12;
+  display: grid;
+  width: 24px;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 253, 248, 0.18);
+  font-size: 0.78rem;
+  line-height: 1;
 }
 
 .gaia-eti-map-source {
@@ -2084,10 +2099,12 @@ body.dark .gaia-top-nav a.active {
 .gaia-board-map--eti {
   display: grid;
   gap: 12px;
+  min-height: auto;
+  min-width: 0;
 }
 
 .gaia-board-map--eti .gaia-eti-map {
-  grid-template-columns: minmax(280px, 1.05fr) minmax(220px, 0.95fr);
+  grid-template-columns: 1fr;
   align-items: start;
 }
 
@@ -2097,7 +2114,16 @@ body.dark .gaia-top-nav a.active {
 }
 
 .gaia-board-map--eti .gaia-eti-map-list {
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  max-height: none;
+}
+
+.gaia-board-map--eti,
+.gaia-board-map--eti .gaia-eti-map,
+.gaia-board-map--eti .gaia-eti-map-visual,
+.gaia-board-map--eti .gaia-eti-map-detail,
+.gaia-board-map--eti .gaia-eti-map-list {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 @media (max-width: 720px) {
@@ -2118,8 +2144,36 @@ body.dark .gaia-top-nav a.active {
 
   .gaia-eti-map-detail dl,
   .gaia-eti-map-list,
+  .gaia-eti-map-detail,
   .gaia-board-map--eti .gaia-eti-map {
     grid-template-columns: 1fr;
+  }
+
+  .gaia-board-map--eti {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 12px;
+  }
+
+  .gaia-eti-map-detail {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .gaia-eti-map-detail dl,
+  .gaia-eti-map-detail div {
+    min-width: 0;
+  }
+
+  .gaia-eti-map-list button {
+    flex: 1 1 min(100%, 220px);
+    max-width: 100%;
+  }
+
+  .gaia-eti-map-list span {
+    overflow-wrap: anywhere;
   }
 
   .gaia-eti-map-visual,
