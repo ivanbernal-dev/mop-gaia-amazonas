@@ -172,44 +172,45 @@ const sidebarItems = [
 ];
 const mopSidebarItems = sidebarItems.filter((item) => item.id !== "panel-excedentes");
 const narrationTexts = {
-  nucleo: "El Macroproceso de Gobernanza y Propósito representa la razón de ser de la Fundación Gaia Amazonas. Desde aquí se orienta la gobernanza territorial amazónica, se cuida el Acuerdo Intercultural y se mantiene la relación con las AATI, la Junta Directiva, la Dirección General, los donantes y los socios estratégicos. Durante la transición institucional, el MOP distingue la operación ordinaria, la evolución estratégica hacia 2030 y las decisiones reservadas de la Junta Directiva.",
+  nucleo: "El Macroproceso de Gobernanza y Propósito representa la razón de ser de la Fundación Gaia Amazonas. Distingue las instancias internas que deciden y ejecutan de los actores externos con quienes GAIA concierta, coopera y rinde cuentas. Su ciclo orienta, analiza, decide, formaliza y hace seguimiento.",
   misional: "El Macroproceso Misional es el corazón operativo de Gaia Amazonas. Aquí la estrategia se convierte en acompañamiento territorial, consolidación de Entidades Territoriales Indígenas, seguimiento a convenios, gestión de proyectos y cooperación alineada con las prioridades de los pueblos.",
   apoyo: "El Macroproceso de Apoyo garantiza que la Fundación tenga las condiciones para trabajar bien: equipos acompañados, recursos administrados con cuidado, logística territorial, tecnología disponible, soporte jurídico y cumplimiento institucional.",
-  estrategico: "La vista de Dirección y Gestión Estratégica organiza cinco funciones que deben validarse con las áreas reales de Gaia Amazonas. Las fichas explican cómo podrían conectarse planeación, alianzas, gestión pública, comunicaciones y aprendizaje, sin presentarlas todavía como procesos aprobados."
+  estrategico: "Dirección y Gestión Estratégica conecta la Ruta 2030 con planeación, alianzas, relacionamiento público, comunicaciones, monitoreo y aprendizaje. Sus instrumentos están en construcción y permanecen protegidos hasta su validación y aprobación.",
+  auditoria: "Aseguramiento Independiente organiza auditorías institucionales, auditorías de proyectos y donantes, revisoría fiscal y revisiones especializadas. GAIA entrega soportes, consolida la respuesta institucional, revisa el borrador, recibe el informe definitivo y gestiona las recomendaciones hasta validar la eficacia de las acciones."
 };
 const dependencyDetails = {
   "Subdirección Técnica y Política (STP)": {
-    responsible: "Rol por ratificar",
-    team: "<p>Espacio preparado para equipos territoriales, laboratorio sociojurídico, sistemas de información, gestión pública, ordenamiento territorial y estrategias transversales.</p>",
-    contact: "<p>Correos institucionales por completar.</p>",
+    responsible: "Subdirección Técnica y Política",
+    team: "<p>Articula equipos territoriales y capacidades de laboratorio sociojurídico, sistemas de información, gestión pública, ordenamiento territorial y estrategias transversales. La composición nominal se consulta en el directorio interno vigente.</p>",
+    contact: "<p>Consultar el directorio institucional autorizado.</p>",
     relevant: "<p>Ubicación en el MOP: anillo misional. Función articuladora entre la Dirección y la operación territorial para convertir la estrategia en acompañamiento técnico-político a los pueblos indígenas y ETI.</p>"
   },
   "Subdirección de Desarrollo Estratégico (SDE)": {
-    responsible: "Rol por ratificar",
+    responsible: "Subdirección de Desarrollo Estratégico",
     team: "<p>Integra Coordinación Financiera, CIP, Servicios Logísticos, THB, TIC, GPC y Asesoría Jurídica y Contractual como condiciones habilitantes de la operación institucional.</p>",
     contact: "<p>Consultar directorio interno autorizado.</p>",
     relevant: "<p>Ubicación en el MOP: anillo de apoyo, con conexión estratégica. Articula recursos, capacidades internas, planeación financiera y procesos de soporte para que las prioridades misionales puedan ejecutarse.</p>"
   },
-  "Dirección General": {
-    responsible: "Dirección Ejecutiva vigente",
-    team: "<p>Espacio preparado para equipo directivo, fotografía institucional y canales de relacionamiento.</p>",
-    contact: "<p>Correo y datos de contacto por completar.</p>",
+  "Dirección Ejecutiva": {
+    responsible: "Dirección Ejecutiva",
+    team: "<p>Conduce la operación institucional y articula las subdirecciones y áreas responsables. La composición nominal se consulta en el directorio interno vigente.</p>",
+    contact: "<p>Consultar el directorio institucional autorizado.</p>",
     relevant: "<p>Orientación estratégica, representación institucional, relación con aliados y conducción política de la Ruta 2030.</p>"
   },
   "Junta Directiva": {
     responsible: "Órgano colegiado",
     team: "<p>Consultar composición vigente en el directorio interno autorizado o en los registros institucionales aprobados para publicación.</p>",
-    contact: "<p>Correos institucionales por completar.</p>",
+    contact: "<p>Consultar los canales institucionales autorizados.</p>",
     relevant: "<p>Órgano de gobierno encargado de lineamientos estratégicos, integridad institucional y orientación de alto nivel.</p>"
   },
   "Donantes y socios estratégicos": {
     responsible: "Aliados de cooperación y socios institucionales",
-    team: "<p>Espacio preparado para clasificar donantes, socios estratégicos y aliados de cooperación.</p>",
-    contact: "<p>Canales de relacionamiento y responsables por completar.</p>",
+    team: "<p>Actores externos vinculados mediante acuerdos, convenios y mecanismos de cooperación. La relación actualizada se consulta en el tablero institucional autorizado.</p>",
+    contact: "<p>La interlocución se realiza mediante los responsables institucionales de cada alianza.</p>",
     relevant: "<p><a href=\"https://app.powerbi.com/view?r=eyJrIjoiZDBjMGYwMjQtN2JkNS00Yzg5LWFhMTAtMWI5N2QwNDg0NzliIiwidCI6Ijg5ZDZkZGU2LWUyNTctNDNmYS05M2IzLWZmZDU0ZDY4Mzc4YSIsImMiOjR9&pageName=ReportSection\" target=\"_blank\" rel=\"noopener\">Abrir tablero Power BI de donantes y socios estratégicos</a></p>"
   },
   "Coordinación Integral de Proyectos (CIP)": {
-    responsible: "Coordinación correspondiente",
+    responsible: "Coordinación Integral de Proyectos",
     team: `
       <div class="org-chart">
         <div class="org-level">
@@ -225,11 +226,11 @@ const dependencyDetails = {
         </div>
       </div>
     `,
-    contact: "<p>Correos institucionales por completar.</p>",
+    contact: "<p>Consultar el directorio institucional autorizado.</p>",
     relevant: "<p>Gestión técnica, financiera y programática de proyectos; seguimiento financiero; monitoreo; y soporte operativo a la ejecución institucional.</p>"
   },
   "THB - Talento Humano, Bienestar y Cultura Organizacional": {
-    responsible: "Coordinación correspondiente",
+    responsible: "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
     team: `
       <div class="org-chart">
         <div class="org-level">
@@ -242,36 +243,36 @@ const dependencyDetails = {
         </div>
       </div>
     `,
-    contact: "<p>Correos institucionales por completar.</p>",
+    contact: "<p>Consultar el directorio institucional autorizado.</p>",
     relevant: "<p>Gestión del talento humano, bienestar, cultura organizacional, seguridad y salud en el trabajo, enfoque de género, derechos y gestión integral del riesgo.</p>"
   },
   "CFI - Coordinación Financiera": {
-    responsible: "Coordinación correspondiente",
+    responsible: "Coordinación Financiera",
     team: `
       <div class="org-chart">
         <div class="org-level">
           <div class="org-person"><strong>Coordinación Financiera</strong><span>Responsable institucional</span></div>
         </div>
         <div class="org-level">
-          <div class="org-person"><strong>Por contratar</strong><span>Líder Presupuesto</span></div>
+          <div class="org-person"><strong>Planeación presupuestal</strong><span>Capacidad institucional</span></div>
           <div class="org-person"><strong>Liderazgo de Contabilidad</strong><span>Rol interno</span></div>
           <div class="org-person"><strong>Asesoría financiera</strong><span>Rol interno</span></div>
           <div class="org-person"><strong>Tesorería</strong><span>Rol interno</span></div>
         </div>
         <div class="org-level">
-          <div class="org-person"><strong>Por contratar</strong><span>Profesional Junior Presupuesto</span></div>
-          <div class="org-person"><strong>Por contratar</strong><span>Analista contable</span></div>
+          <div class="org-person"><strong>Seguimiento presupuestal</strong><span>Capacidad institucional</span></div>
+          <div class="org-person"><strong>Análisis contable</strong><span>Capacidad institucional</span></div>
           <div class="org-person"><strong>Auxiliares contables</strong><span>Consultar directorio interno autorizado</span></div>
           <div class="org-person"><strong>Archivo contable</strong><span>Rol interno</span></div>
-          <div class="org-person"><strong>Por contratar</strong><span>Auxiliar tesorería</span></div>
+          <div class="org-person"><strong>Soporte de tesorería</strong><span>Capacidad institucional</span></div>
         </div>
       </div>
     `,
-    contact: "<p>Correos institucionales por completar.</p>",
+    contact: "<p>Consultar el directorio institucional autorizado.</p>",
     relevant: "<p>Contabilidad, tesorería, presupuesto, asesoría financiera, archivo contable, reportes y soporte financiero a programas y proyectos.</p>"
   },
   "SLS - Servicios Logísticos, Sedes y Compras": {
-    responsible: "Coordinación correspondiente",
+    responsible: "Coordinación de Servicios Logísticos, Sedes y Compras",
     team: `
       <div class="org-chart">
         <div class="org-level">
@@ -279,7 +280,7 @@ const dependencyDetails = {
         </div>
         <div class="org-level">
           <div class="org-person"><strong>Transporte institucional</strong><span>Rol interno</span></div>
-          <div class="org-person"><strong>Por contratar</strong><span>Profesional Compras</span></div>
+          <div class="org-person"><strong>Gestión de compras</strong><span>Capacidad institucional</span></div>
         </div>
         <div class="org-level">
           <div class="org-person"><strong>Administración de sedes</strong><span>Consultar directorio interno autorizado</span></div>
@@ -288,7 +289,7 @@ const dependencyDetails = {
         </div>
       </div>
     `,
-    contact: "<p>Correos institucionales por completar.</p>",
+    contact: "<p>Consultar el directorio institucional autorizado.</p>",
     relevant: "<p>Gestión logística, sedes, compras, transporte institucional, administración territorial, mantenimiento y soporte operativo para los equipos.</p>"
   }
 };
@@ -550,6 +551,8 @@ function hasPublicationMetadata(record) {
   return [
     record.publish,
     record.publicable,
+    record.catalogVisible,
+    record.downloadAuthorized,
     record.accessClass,
     record.clasificacion,
     record.canonicalUrl
@@ -560,6 +563,13 @@ function isDocumentPublishable(record) {
   if (!hasPublicationMetadata(record)) return false;
   const status = normalizeText(record.estado);
   const access = normalizeText(record.accessClass || record.clasificacion);
+  if (typeof record.catalogVisible === "boolean") {
+    return (
+      record.catalogVisible &&
+      !status.includes("obsoleto") &&
+      ["publico", "publica", "interno", "interna"].includes(access)
+    );
+  }
   const publish = typeof record.publish === "boolean" ? record.publish : parseBooleanValue(record.publicable || record.publish);
   const link = getDocumentReference(record);
   return (
@@ -1247,7 +1257,7 @@ function saveAdminContent() {
       responsible,
       summary: adminControls.contentSummary?.value.trim() || "",
       team: textToHtml(adminControls.contentTeam?.value || ""),
-      contact: getMergedDependencyDetail(title).contact || "<p>Correos institucionales por completar.</p>",
+      contact: getMergedDependencyDetail(title).contact || "<p>Consultar el directorio institucional autorizado.</p>",
       relevant: textToHtml(adminControls.contentRelevant?.value || "")
     };
   }
@@ -1463,7 +1473,10 @@ function buildDocumentSuggestion() {
 
 function initDocumentSuggestion() {
   if (!documentSuggestion.preview || !documentSuggestion.form) return;
-  documentSuggestion.preview.addEventListener("click", buildDocumentSuggestion);
+  documentSuggestion.form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    buildDocumentSuggestion();
+  });
   documentSuggestion.form.addEventListener("input", () => {
     if (documentSuggestion.send) documentSuggestion.send.hidden = true;
     if (documentSuggestion.draft) documentSuggestion.draft.hidden = true;
@@ -1581,40 +1594,6 @@ function renderAuditDocumentItem(documentItem, emptyText) {
   `;
 }
 
-function renderAuditProjectYear(year) {
-  const target = document.getElementById("auditProjectDocs");
-  if (!target) return;
-  const record = (auditData.auditoriaExterna || []).find((item) => String(item.anio) === String(year));
-  const docs = record?.documentos || [];
-  target.innerHTML = docs.length
-    ? docs.map((item) => renderAuditDocumentItem(item, `Auditoría externa ${year}`)).join("")
-    : renderAuditDocumentItem({ titulo: `Auditoría externa de proyectos ${year}` }, `Auditoría externa de proyectos ${year}`);
-}
-
-function renderAuditStaticList(targetId, records, emptyText) {
-  const target = document.getElementById(targetId);
-  if (!target) return;
-  target.innerHTML = records?.length
-    ? records.map((item) => renderAuditDocumentItem(item, emptyText)).join("")
-    : renderAuditDocumentItem({ titulo: emptyText }, emptyText);
-}
-
-function initAuditModule() {
-  const yearActions = document.getElementById("auditYearActions");
-  if (!yearActions) return;
-  const years = ["2021", "2022", "2023", "2024", "2025", "2026"];
-  yearActions.innerHTML = years.map((year, index) => `<button type="button" data-audit-year="${year}" class="${index === years.length - 1 ? "active" : ""}">${year}</button>`).join("");
-  yearActions.querySelectorAll("[data-audit-year]").forEach((button) => {
-    button.addEventListener("click", () => {
-      yearActions.querySelectorAll("[data-audit-year]").forEach((item) => item.classList.toggle("active", item === button));
-      renderAuditProjectYear(button.dataset.auditYear);
-    });
-  });
-  renderAuditProjectYear("2026");
-  renderAuditStaticList("auditFiscalDocs", auditData.revisoriaFiscal || [], "Informe de revisoría fiscal pendiente de carga");
-  renderAuditStaticList("auditImprovementDocs", auditData.planesMejoramiento || [], "Plan de mejoramiento pendiente de carga");
-}
-
 function getAuditDocumentsByYear(records, year) {
   const directRecords = (records || []).filter((item) => String(item.anio) === String(year));
   if (directRecords.length && directRecords.some((item) => Array.isArray(item.documentos))) {
@@ -1631,7 +1610,7 @@ function renderAuditYearList(targetId, records, year, emptyTitle) {
     ? docs.map((item) => renderAuditDocumentItem(item, `${emptyTitle} ${year}`)).join("")
     : renderAuditDocumentItem({
       titulo: `${emptyTitle} ${year}`,
-      descripcion: `Vigencia auditada ${year}. Año de ejecución o seguimiento por confirmar en el repositorio interno.`
+      descripcion: `Vigencia ${year}. El inventario, el año de ejecución, la firma auditora y el expediente se administran en el repositorio interno protegido.`
     }, `${emptyTitle} ${year}`);
 }
 
@@ -1682,7 +1661,7 @@ function renderProcessDetail(process) {
   detail.hidden = false;
   detail.innerHTML = `
     <div class="process-detail-header">
-      <span class="process-code">Área ${escapeHtml(process.shortCode)}</span>
+      <span class="process-code">${escapeHtml(process.documentCode || process.shortCode)}</span>
       <span class="process-status" aria-label="Estado de la ficha: ${escapeHtml(process.status)}">${escapeHtml(process.status)}</span>
     </div>
     <h4>${escapeHtml(process.name)}</h4>
@@ -1702,7 +1681,7 @@ function renderProcessDetail(process) {
       </article>
       <article>
         <h5>Área referente o responsable</h5>
-        <p>${escapeHtml(process.ownerRole || "Ubicación institucional por ratificar")}</p>
+        <p>${escapeHtml(process.ownerRole || "Responsabilidad definida en la ficha del proceso")}</p>
       </article>
       <article>
         <h5>Interacciones</h5>
@@ -1751,7 +1730,7 @@ function renderStrategicProcessCatalog() {
   const records = processCatalog.estrategico;
   target.innerHTML = records.map((process) => `
     <button class="process-card" type="button" data-process-id="${escapeHtml(process.id)}" aria-expanded="false" aria-controls="strategicProcessDetail">
-      <span class="process-code">Área ${escapeHtml(process.shortCode)}</span>
+      <span class="process-code">${escapeHtml(process.documentCode || process.shortCode)}</span>
       <strong>${escapeHtml(process.name)}</strong>
       <span class="process-card-nature">${escapeHtml(process.nature)}</span>
       <span class="process-status" aria-label="Estado de la ficha: ${escapeHtml(process.status)}">${escapeHtml(process.status)}</span>
@@ -1815,7 +1794,9 @@ function showPanel(panelId, shouldScroll = true, shouldUpdateHash = true) {
   setActiveGaiaView("");
   if (shouldUpdateHash) updateRouteHash(panelId);
   if (shouldScroll) {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.requestAnimationFrame(() => {
+      document.getElementById(panelId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 }
 
@@ -1832,7 +1813,7 @@ function volver() {
   showGaiaView("mop-anillos");
 }
 
-function routeFromHash(shouldScroll = false) {
+function routeFromHash(shouldScroll = true) {
   const route = window.location.hash.slice(1);
   if (route && getMopProcessById(route)) {
     openProcessDetail(route, shouldScroll, false);
@@ -1853,18 +1834,18 @@ function getDependencyData(card) {
   const title = card.querySelector("strong")?.textContent?.trim() || "Dependencia";
   const detail = getMergedDependencyDetail(title);
   const lines = card.innerText.split("\n").map((line) => line.trim()).filter(Boolean);
-  const responsibleLine = lines.find((line) => /^Responsables?:|^Responsable técnico:/i.test(line)) || "Responsable: por completar";
+  const responsibleLine = lines.find((line) => /^(Responsables?|Responsable técnico|Responsable institucional|Articulación institucional):/i.test(line)) || "Responsabilidad institucional definida en la ficha del proceso";
   const summary = lines
     .filter((line) => line !== title && line !== responsibleLine && !line.includes("Abrir ficha de"))
     .join(" ");
 
   return {
     title,
-    responsible: detail.responsible || responsibleLine.replace(/^Responsables?:\s*/i, "").replace(/^Responsable técnico:\s*/i, ""),
-    summary: detail.summary || summary || "Espacio preparado para ampliar la función, alcance, equipo y datos relevantes de esta dependencia.",
-    team: detail.team || "<p>Espacio preparado para nombres, cargos y fotografías.</p>",
-    contact: detail.contact || "<p>Espacio preparado para correos institucionales y canales de contacto.</p>",
-    relevant: detail.relevant || "<p>Espacio preparado para indicadores, documentos, procesos y enlaces clave.</p>"
+    responsible: detail.responsible || responsibleLine.replace(/^(Responsables?|Responsable técnico|Responsable institucional|Articulación institucional):\s*/i, ""),
+    summary: detail.summary || summary || "Esta ficha resume la función, el alcance y las interacciones de la capacidad dentro del MOP.",
+    team: detail.team || "<p>La composición nominal se consulta en el directorio interno vigente.</p>",
+    contact: detail.contact || "<p>Consultar el directorio institucional autorizado.</p>",
+    relevant: detail.relevant || "<p>La documentación y los indicadores se consultan según su clasificación y autorización de acceso.</p>"
   };
 }
 
@@ -1873,7 +1854,7 @@ function addTeamContactPlaceholders() {
     if (!person.querySelector(".org-email")) {
       const email = document.createElement("span");
       email.className = "org-email";
-      email.textContent = "Correo por completar";
+      email.textContent = "Directorio interno";
       person.appendChild(email);
     }
   });
@@ -2001,9 +1982,9 @@ initExcessModule();
 initAuditModule();
 renderMopUpdates();
 renderStrategicProcessCatalog();
-routeFromHash(false);
-window.addEventListener("popstate", () => routeFromHash(false));
-window.addEventListener("hashchange", () => routeFromHash(false));
+routeFromHash(true);
+window.addEventListener("popstate", () => routeFromHash(true));
+window.addEventListener("hashchange", () => routeFromHash(true));
 
 document.querySelectorAll("[data-audio]").forEach((button) => {
   button.addEventListener("click", async () => {

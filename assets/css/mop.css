@@ -3027,6 +3027,16 @@ body.dark .lane-yellow {
   font-weight: 700;
 }
 
+.map-context .map-help {
+  max-width: 650px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+  background: rgba(10, 50, 42, 0.28);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
 .map-tags {
   display: flex;
   flex-wrap: wrap;
@@ -3165,6 +3175,7 @@ body.dark .subdirection-card p {
   transition: transform 280ms ease, box-shadow 280ms ease, filter 280ms ease;
   transform-style: preserve-3d;
   backdrop-filter: blur(4px);
+  pointer-events: none;
 }
 
 .circle-mark {
@@ -3179,6 +3190,7 @@ body.dark .subdirection-card p {
   max-width: 78%;
   transform: translateX(-50%);
   pointer-events: auto;
+  cursor: pointer;
   z-index: 9;
 }
 
@@ -3343,6 +3355,7 @@ body.dark .subdirection-card p {
   display: none;
   max-width: 940px;
   margin: 28px auto 0;
+  scroll-margin-top: 104px;
   background: var(--panel);
   border: 1px solid var(--linea);
   border-left: 6px solid var(--marca-vino);
@@ -3563,6 +3576,133 @@ body.dark .dependency-grid li:focus-visible {
 
 .dependency-grid li p {
   margin: 8px 0 0;
+}
+
+.actor-type {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 8px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: rgba(68, 147, 122, 0.14);
+  color: var(--acento-legible);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.actor-type--external {
+  background: rgba(216, 162, 58, 0.16);
+}
+
+.ring-explainer,
+.protected-instruments {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid rgba(47, 80, 72, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(68, 147, 122, 0.08), rgba(216, 162, 58, 0.07)),
+    var(--panel-suave);
+}
+
+.ring-explainer__heading h3,
+.protected-instruments h3 {
+  margin: 3px 0 0;
+}
+
+.protected-instruments p {
+  margin: 6px 0 0;
+}
+
+.ring-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ring-step;
+}
+
+.ring-flow li {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-height: 142px;
+  padding: 42px 11px 12px;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.ring-flow li::before {
+  counter-increment: ring-step;
+  content: counter(ring-step, decimal-leading-zero);
+  position: absolute;
+  left: 11px;
+  top: 10px;
+  display: grid;
+  width: 25px;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gaia-teal-900);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.ring-flow strong {
+  color: var(--acento-legible);
+  line-height: 1.15;
+}
+
+.ring-flow span {
+  color: #48645c;
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.instrument-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.instrument-grid article {
+  display: grid;
+  gap: 6px;
+  min-height: 100px;
+  padding: 13px;
+  border: 1px solid var(--linea);
+  border-left: 4px solid #44937a;
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.instrument-grid strong {
+  color: var(--acento-legible);
+}
+
+.instrument-grid span {
+  color: #48645c;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+body.dark .ring-flow span,
+body.dark .instrument-grid span {
+  color: #bed1ca;
+}
+
+body.dark .ring-explainer,
+body.dark .protected-instruments {
+  border-color: rgba(143, 227, 186, 0.18);
 }
 
 .dependency-role {
@@ -5544,6 +5684,15 @@ body.dark .gaia-transition-governance__controls {
 }
 
 @media (max-width: 980px) {
+  .ring-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ring-flow li:last-child {
+    grid-column: 1 / -1;
+    min-height: 0;
+  }
+
   .site-header {
     grid-template-columns: auto minmax(0, 1fr);
   }
@@ -5656,6 +5805,16 @@ body.dark .gaia-transition-governance__controls {
 }
 
 @media (max-width: 720px) {
+  .ring-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .ring-flow li,
+  .ring-flow li:last-child {
+    grid-column: auto;
+    min-height: 0;
+  }
+
   .page {
     width: min(100% - 20px, 1120px);
     padding-top: 10px;

@@ -14,10 +14,17 @@ window.GAIA_MOP_UPDATES = {
     },
     {
       type: "Arquitectura estratégica",
-      title: "Cinco procesos estratégicos en construcción",
+      title: "Cinco procesos y funciones estratégicas en construcción",
       date: "Ruta 2030",
       status: "En construcción",
-      text: "El macroproceso Dirección y Gestión Estratégica presenta PDE, GAO, GPR, COM y MEA como procesos de arquitectura, diferenciando existencia del proceso, documentación controlada y autorización de publicación."
+      text: "El macroproceso Dirección y Gestión Estratégica presenta PDE, GAO, GPR, COM y MEA con sus códigos documentales, diferenciando metadatos visibles, instrumentos internos y aprobación definitiva."
+    },
+    {
+      type: "Aseguramiento independiente",
+      title: "Ciclo de auditorías y mejora documentado",
+      date: "Auditoría institucional 2025 · seguimiento 2026",
+      status: "En construcción",
+      text: "El MOP explica la preparación de soportes, respuesta institucional, revisión del borrador, informe definitivo, plan de mejoramiento y validación de eficacia. Los expedientes y enlaces internos permanecen protegidos."
     },
     {
       type: "Junta Directiva",

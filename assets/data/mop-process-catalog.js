@@ -2,10 +2,11 @@ window.MOP_PROCESS_CATALOG = {
   estrategico: [
     {
       id: "pde",
-      shortCode: "SDE",
+      shortCode: "PDE",
+      documentCode: "FGA-PDE-CR-01",
       name: "Planeación y Desarrollo Estratégico",
-      status: "Por validar",
-      nature: "Ficha V0.2 asociada a la Subdirección de Desarrollo Estratégico (SDE)",
+      status: "En construcción",
+      nature: "Caracterización controlada V0.1 asociada a la Subdirección de Desarrollo Estratégico (SDE)",
       purpose: "Orientar la formulación, actualización, despliegue y ajuste de la estrategia institucional para que las prioridades de GAIA se traduzcan en decisiones, lineamientos y capacidades coherentes.",
       start: "Necesidad de formular, revisar, ajustar o desplegar la estrategia institucional.",
       end: "Lineamientos, prioridades o ajustes estratégicos aprobados y entregados a los procesos responsables para su implementación y seguimiento.",
@@ -16,7 +17,7 @@ window.MOP_PROCESS_CATALOG = {
         "Programa de Alianzas e Innovación (PAI)",
         "Gestión Pública y Relacionamiento Estratégico (STP)",
         "Comunicaciones Estratégicas (STP)",
-        "Monitoreo y Evaluación (función transversal por ubicar)",
+        "Monitoreo, Evaluación y Aprendizaje",
         "Gestión de Procesos y Cumplimiento Institucional"
       ],
       exclusions: [
@@ -27,12 +28,12 @@ window.MOP_PROCESS_CATALOG = {
       ],
       ruta2030: "Convierte la Ruta 2030 en prioridades, decisiones y lineamientos que orientan la arquitectura institucional y el despliegue de los procesos.",
       documentaryStatus: [
-        "Ficha V0.2",
+        "FGA-PDE-CR-01 · V0.1",
         "Clasificación Interno",
         "Validación institucional pendiente",
-        "Publicación no autorizada"
+        "Metadatos visibles; descarga no autorizada"
       ],
-      documentNotice: "Esta ficha organiza una hipótesis de trabajo asociada a un área real. No constituye un proceso aprobado y su documentación interna no está autorizada para publicación.",
+      documentNotice: "Instrumento controlado en construcción. Se publican únicamente sus metadatos; el contenido permanece interno hasta su validación y aprobación.",
       visibilityModel: {
         processVisible: true,
         controlledDocumentationExists: true,
@@ -42,14 +43,15 @@ window.MOP_PROCESS_CATALOG = {
     },
     {
       id: "gao",
-      shortCode: "PAI",
+      shortCode: "GAO",
+      documentCode: "FGA-GAO-CR-01",
       name: "Gestión de Alianzas y Oportunidades de Cooperación",
-      status: "Por validar",
-      nature: "Ficha V0.2 asociada al Programa de Alianzas e Innovación (PAI)",
+      status: "En construcción",
+      nature: "Caracterización V0.1 asociada al Programa de Alianzas e Innovación (PAI)",
       purpose: "Gobernar la identificación, evaluación, decisión, formulación y presentación de oportunidades de cooperación alineadas con la estrategia institucional y las capacidades de la Fundación.",
       start: "Identificación o recepción de una oportunidad de cooperación.",
       end: "Cierre documentado de la oportunidad o entrega aceptada del expediente aprobado al proceso responsable de formalización, planeación y seguimiento.",
-      ownerRole: "Programa de Alianzas e Innovación (PAI), responsabilidad por ratificar",
+      ownerRole: "Programa de Alianzas e Innovación (PAI), área referente para validación",
       interactions: [
         "Dirección Ejecutiva",
         "Programa de Alianzas e Innovación",
@@ -69,12 +71,13 @@ window.MOP_PROCESS_CATALOG = {
       ],
       ruta2030: "Asegura que la cooperación y las alianzas fortalezcan la estrategia institucional sin desbordar las capacidades técnicas, financieras y territoriales de GAIA.",
       documentaryStatus: [
-        "Ficha V0.2",
+        "FGA-GAO-CR-01 · V0.1",
+        "Instrumentos asociados: FGA-GAO-PR-01, FGA-GAO-GU-01 y FGA-GAO-MT-01",
         "Clasificación Interno",
         "Validación institucional pendiente",
-        "Publicación no autorizada"
+        "Metadatos visibles; descargas no autorizadas"
       ],
-      documentNotice: "Esta ficha organiza una hipótesis de trabajo asociada a un área real. No constituye un proceso aprobado y su documentación interna no está autorizada para publicación.",
+      documentNotice: "Instrumento controlado en construcción. Se publican únicamente sus metadatos; el contenido permanece interno hasta su validación y aprobación.",
       visibilityModel: {
         processVisible: true,
         controlledDocumentationExists: true,
@@ -84,10 +87,11 @@ window.MOP_PROCESS_CATALOG = {
     },
     {
       id: "gpr",
-      shortCode: "STP",
+      shortCode: "GPR",
+      documentCode: "FGA-GPR-CR-01",
       name: "Gestión Pública y Relacionamiento Estratégico",
-      status: "Por validar",
-      nature: "Ficha V0.2 asociada a la Subdirección Técnica y Política (STP)",
+      status: "En construcción",
+      nature: "Caracterización V0.1 asociada a la Subdirección Técnica y Política (STP)",
       purpose: "Gestionar relacionamiento institucional, incidencia y articulación con actores públicos, privados y sociales para habilitar decisiones y condiciones estratégicas a favor del propósito institucional.",
       start: "Necesidad institucional de relacionamiento, incidencia, articulación de actores o gestión de agenda pública.",
       end: "Relación, acuerdo, incidencia, recomendación o condición habilitante documentada y entregada al proceso o instancia correspondiente.",
@@ -108,12 +112,12 @@ window.MOP_PROCESS_CATALOG = {
       ],
       ruta2030: "Abre condiciones de diálogo, incidencia y articulación pública para que la Ruta 2030 tenga interlocución, legitimidad y respaldo institucional.",
       documentaryStatus: [
-        "Ficha V0.2",
+        "FGA-GPR-CR-01 · V0.1",
         "Clasificación Interno",
         "Validación institucional pendiente",
-        "Publicación no autorizada"
+        "Metadatos visibles; descarga no autorizada"
       ],
-      documentNotice: "Esta ficha organiza una hipótesis de trabajo asociada a un área real. No constituye un proceso aprobado y su documentación interna no está autorizada para publicación.",
+      documentNotice: "Instrumento controlado en construcción. Se publican únicamente sus metadatos; el contenido permanece interno hasta su validación y aprobación.",
       visibilityModel: {
         processVisible: true,
         controlledDocumentationExists: true,
@@ -123,10 +127,11 @@ window.MOP_PROCESS_CATALOG = {
     },
     {
       id: "com",
-      shortCode: "STP",
+      shortCode: "COM",
+      documentCode: "FGA-COM-CR-01",
       name: "Comunicaciones Estratégicas",
-      status: "Por validar",
-      nature: "Ficha V0.2 asociada a la Subdirección Técnica y Política (STP)",
+      status: "En construcción",
+      nature: "Caracterización V0.1 asociada a la Subdirección Técnica y Política (STP)",
       purpose: "Gestionar la comunicación institucional estratégica, contenidos, canales, reputación, divulgación y comunicación de crisis alineadas con el propósito y las decisiones institucionales.",
       start: "Necesidad de comunicar, posicionar, divulgar, responder a una coyuntura o fortalecer la narrativa institucional.",
       end: "Mensaje, contenido, canal, pauta de vocería o acción comunicacional implementada y evaluada según el objetivo definido.",
@@ -137,7 +142,7 @@ window.MOP_PROCESS_CATALOG = {
         "Gestión Pública y Relacionamiento Estratégico (STP)",
         "Programa de Alianzas e Innovación (PAI)",
         "Áreas técnicas y territoriales",
-        "Monitoreo y Evaluación (función transversal por ubicar)"
+        "Monitoreo, Evaluación y Aprendizaje"
       ],
       exclusions: [
         "No valida contenido técnico de otros procesos.",
@@ -147,12 +152,12 @@ window.MOP_PROCESS_CATALOG = {
       ],
       ruta2030: "Ayuda a que la Ruta 2030 sea comprendida, apropiada y comunicada con una narrativa coherente frente a equipos, aliados y actores estratégicos.",
       documentaryStatus: [
-        "Ficha V0.2",
+        "FGA-COM-CR-01 · V0.1",
         "Clasificación Interno",
         "Validación institucional pendiente",
-        "Publicación no autorizada"
+        "Metadatos visibles; descarga no autorizada"
       ],
-      documentNotice: "Esta ficha organiza una hipótesis de trabajo asociada a un área real. No constituye un proceso aprobado y su documentación interna no está autorizada para publicación.",
+      documentNotice: "Instrumento controlado en construcción. Se publican únicamente sus metadatos; el contenido permanece interno hasta su validación y aprobación.",
       visibilityModel: {
         processVisible: true,
         controlledDocumentationExists: true,
@@ -162,14 +167,15 @@ window.MOP_PROCESS_CATALOG = {
     },
     {
       id: "mea",
-      shortCode: "M&E",
+      shortCode: "MEA",
+      documentCode: "FGA-MEA-CR-01",
       name: "Monitoreo, Evaluación y Aprendizaje",
-      status: "Por ubicar",
-      nature: "Ficha V0.2 de una función transversal cuya ubicación institucional debe confirmarse",
+      status: "En construcción",
+      nature: "Caracterización V0.1 de una función transversal en validación institucional",
       purpose: "Consolidar medición, evaluación y aprendizaje institucional para revisar avances, generar evidencia, identificar alertas y alimentar decisiones de mejora estratégica.",
       start: "Necesidad de medir avances, evaluar resultados, analizar aprendizajes o consolidar evidencia para la toma de decisiones.",
       end: "Lectura evaluativa, reporte, recomendación o aprendizaje institucional entregado a las instancias y procesos responsables.",
-      ownerRole: "Función transversal de Monitoreo y Evaluación, ubicación y responsabilidad por definir",
+      ownerRole: "Función transversal de Monitoreo, Evaluación y Aprendizaje; articulación institucional en validación",
       interactions: [
         "Dirección Ejecutiva",
         "Planeación y Desarrollo Estratégico (SDE)",
@@ -186,12 +192,12 @@ window.MOP_PROCESS_CATALOG = {
       ],
       ruta2030: "Permite leer avances, aprendizajes y alertas de la Ruta 2030 para ajustar la estrategia y fortalecer la rendición de cuentas institucional.",
       documentaryStatus: [
-        "Ficha V0.2",
+        "FGA-MEA-CR-01 · V0.1",
         "Clasificación Interno",
         "Validación institucional pendiente",
-        "Publicación no autorizada"
+        "Metadatos visibles; descarga no autorizada"
       ],
-      documentNotice: "Esta ficha organiza una hipótesis funcional pendiente de ubicación institucional. No constituye un proceso aprobado y su documentación interna no está autorizada para publicación.",
+      documentNotice: "Instrumento controlado en construcción. Se publican únicamente sus metadatos; el contenido permanece interno hasta su validación y aprobación.",
       visibilityModel: {
         processVisible: true,
         controlledDocumentationExists: true,
