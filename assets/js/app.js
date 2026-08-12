@@ -170,6 +170,7 @@ const sidebarItems = [
     description: "Programas y proyectos de destinación de excedentes al objeto social."
   }
 ];
+const mopSidebarItems = sidebarItems.filter((item) => item.id !== "panel-excedentes");
 const narrationTexts = {
   nucleo: "El Macroproceso de Gobernanza y Propósito representa la razón de ser de la Fundación Gaia Amazonas. Desde aquí se orienta la gobernanza territorial amazónica, se cuida el Acuerdo Intercultural y se mantiene la relación con las AATI, la Junta Directiva, la Dirección General, los donantes y los socios estratégicos. Durante la transición institucional, el MOP distingue la operación ordinaria, la evolución estratégica hacia 2030 y las decisiones reservadas de la Junta Directiva.",
   misional: "El Macroproceso Misional es el corazón operativo de Gaia Amazonas. Aquí la estrategia se convierte en acompañamiento territorial, consolidación de Entidades Territoriales Indígenas, seguimiento a convenios, gestión de proyectos y cooperación alineada con las prioridades de los pueblos.",
@@ -381,7 +382,7 @@ document.querySelectorAll("[data-voice-select]").forEach((select) => {
 document.querySelectorAll(".sidebar").forEach((sidebar) => {
   sidebar.innerHTML = `
     <h3>Menú</h3>
-    ${sidebarItems.map((item) => `
+    ${mopSidebarItems.map((item) => `
       <details>
         <summary>${item.title}</summary>
         <p>${item.description}</p>
@@ -401,6 +402,7 @@ const gaiaViewTitles = {
   "que-es-mop": "Qué es el MOP y para qué sirve",
   "modelo-direccion-transitoria": "Quién decide qué durante la transición",
   "junta-directiva": "Junta Directiva",
+  "novedades-mop": "Novedades del MOP",
   "mop-anillos": defaultPageTitle
 };
 
@@ -457,6 +459,45 @@ function decodeHtmlEntities(value) {
   const textarea = document.createElement("textarea");
   textarea.innerHTML = String(value || "");
   return textarea.value;
+}
+
+function renderMopUpdates() {
+  const data = window.GAIA_MOP_UPDATES;
+  const summary = document.querySelector("[data-mop-updates-summary]");
+  const list = document.querySelector("[data-mop-updates-list]");
+  const next = document.querySelector("[data-mop-updates-next]");
+  if (!data || (!summary && !list && !next)) return;
+
+  if (summary) {
+    summary.innerHTML = `
+      <article>
+        <span>${escapeHtml(data.currentWeek?.label || "Esta semana en el MOP")}</span>
+        <strong>${escapeHtml(data.currentWeek?.period || "Seguimiento institucional")}</strong>
+        <p>${escapeHtml(data.currentWeek?.summary || "")}</p>
+      </article>
+    `;
+  }
+
+  if (list) {
+    const highlights = data.highlights || [];
+    list.innerHTML = highlights.length
+      ? highlights.map((item) => `
+          <article class="gaia-update-card">
+            <div class="gaia-update-card__meta">
+              <span>${escapeHtml(item.type)}</span>
+              <span>${escapeHtml(item.date)}</span>
+            </div>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.text)}</p>
+            <strong>${escapeHtml(item.status)}</strong>
+          </article>
+        `).join("")
+      : `<p class="gaia-board-note">No hay novedades cargadas para esta semana.</p>`;
+  }
+
+  if (next) {
+    next.innerHTML = (data.nextActions || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+  }
 }
 
 function extractHref(value) {
@@ -1511,8 +1552,12 @@ function initExcessModule() {
   const reportList = document.getElementById("excessReportList");
   if (!projectList || !reportList) return;
 
-  projectList.innerHTML = "";
-  reportList.innerHTML = "";
+  projectList.innerHTML = excessData.proyectos?.length
+    ? excessData.proyectos.map(renderProjectDestination).join("")
+    : `<p class="gaia-board-note">No hay proyectos de destinaciÃ³n cargados para esta vista.</p>`;
+  reportList.innerHTML = excessData.informes?.length
+    ? excessData.informes.map(renderExecutionReport).join("")
+    : `<p class="gaia-board-note">No hay informes de ejecuciÃ³n cargados para esta vista.</p>`;
 
   document.querySelectorAll("[data-excess-tab]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -1959,6 +2004,7 @@ initDocumentAdmin();
 initDocumentSuggestion();
 initExcessModule();
 initAuditModule();
+renderMopUpdates();
 renderStrategicProcessCatalog();
 routeFromHash(false);
 window.addEventListener("popstate", () => routeFromHash(false));

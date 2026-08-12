@@ -726,6 +726,12 @@ function initBoardFilters() {
   board?.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" && event.key !== " ") return;
     const target = event.target instanceof Element ? event.target : null;
+    const tabTarget = target?.closest("[data-board-tab]");
+    if (tabTarget) {
+      event.preventDefault();
+      setBoardTab(tabTarget.dataset.boardTab);
+      return;
+    }
     const etiTarget = target?.closest("[data-eti-code]");
     if (!etiTarget) return;
     event.preventDefault();
