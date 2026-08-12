@@ -3178,7 +3178,7 @@ body.dark .subdirection-card p {
   width: max-content;
   max-width: 78%;
   transform: translateX(-50%);
-  pointer-events: none;
+  pointer-events: auto;
   z-index: 9;
 }
 
@@ -3220,6 +3220,12 @@ body.dark .subdirection-card p {
 
 .ring-estrategico .circle-mark > span {
   max-width: 180px;
+  white-space: normal;
+  text-align: center;
+}
+
+.ring-auditoria .circle-mark > span {
+  max-width: 190px;
   white-space: normal;
   text-align: center;
 }
@@ -4589,6 +4595,10 @@ body.dark .process-document-notice {
   gap: 12px;
 }
 
+.audit-grid--assurance {
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
 .suggestion-grid label,
 .suggestion-full {
   display: grid;
@@ -4702,6 +4712,62 @@ body.dark .process-document-notice {
 .audit-library h3,
 .audit-library p {
   margin: 0;
+}
+
+.audit-flow {
+  background:
+    linear-gradient(135deg, rgba(68, 147, 122, 0.09), rgba(216, 162, 58, 0.08)),
+    var(--panel-suave);
+}
+
+.audit-flow-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: audit-step;
+}
+
+.audit-flow-list li {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  min-height: 104px;
+  padding: 14px 12px 12px 44px;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.audit-flow-list li::before {
+  counter-increment: audit-step;
+  content: counter(audit-step);
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  display: grid;
+  width: 24px;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gaia-teal-900);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.audit-protected-note {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(173, 31, 63, 0.1);
+  color: var(--marca-vino);
+  font-size: 0.84rem;
+  font-weight: 900;
 }
 
 .audit-year-actions {

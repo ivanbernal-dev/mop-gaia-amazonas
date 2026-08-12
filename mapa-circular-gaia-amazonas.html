@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#2F5048">
 <title>Modelo de Operación por Procesos (MOP) - Fundación Gaia Amazonas</title>
-<link rel="stylesheet" href="assets/css/mop.css?v=20260812-junta1">
+<link rel="stylesheet" href="assets/css/mop.css?v=20260812-ain1">
 </head>
 <body>
 <main class="page">
@@ -504,15 +504,15 @@
     <div id="mapa" class="circular-container">
       <button class="circle ring-auditoria"
               type="button"
-              data-title="Revisoría y Auditoría"
-              data-tooltip="<strong>Revisoría y Auditoría</strong><br>Anillo de aseguramiento independiente del MOP.<br><em>Rol:</em> informes de auditoría, revisoría fiscal y planes de mejoramiento."
+              data-title="Aseguramiento Independiente"
+              data-tooltip="<strong>Aseguramiento Independiente</strong><br>Anillo de revisión objetiva del MOP.<br><em>Rol:</em> auditorías institucionales, auditorías de proyectos, revisoría fiscal, revisiones especializadas y planes de mejoramiento."
               data-target="panel-auditoria">
         <span class="circle-mark">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6 3h9l3 3v15H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
             <path d="M15 3v4h4M9 12l2 2 4-5M9 18h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
-          <span>Revisoría y Auditoría</span>
+          <span>Aseguramiento Independiente</span>
         </span>
       </button>
 
@@ -830,49 +830,73 @@
           Regresar al mapa principal
         </button>
       </div>
-      <h2 id="titulo-auditoria">Macroproceso de Revisoría y Auditoría</h2>
-      <p>Este macroproceso reúne las revisiones independientes que ayudan a verificar la gestión de la Fundación, fortalecer la confianza institucional y convertir los hallazgos en planes de mejoramiento trazables.</p>
+      <h2 id="titulo-auditoria">Macroproceso de Aseguramiento Independiente</h2>
+      <p>El proceso de Aseguramiento Independiente organiza las auditorías institucionales, las auditorías exigidas por proyectos y donantes, la revisoría fiscal y otras revisiones especializadas. GAIA centraliza los soportes, consolida una respuesta institucional, revisa el borrador, recibe el informe definitivo y convierte las recomendaciones en acciones con responsables, plazos y evidencias. El cierre se produce cuando se implementa la acción y se valida su eficacia.</p>
 
-      <div class="audit-grid" aria-label="Componentes de revisoría y auditoría">
+      <div class="audit-grid audit-grid--assurance" aria-label="Componentes de aseguramiento independiente">
         <article class="audit-card">
-          <span class="audit-tag">Auditoría externa de proyectos</span>
-          <h3>Auditores externos de proyectos</h3>
-          <p><strong>Quién es nuestro auditor:</strong> <span id="auditExternalFirm">CIP. REVISORES FISCALES AUDITORES & CONSULTORES LTDA. - CIP LTDA.</span></p>
-          <p>Aquí se podrán consultar y descargar los informes de auditoría externa por proyecto y por año, junto con soportes, observaciones relevantes y estado de cierre.</p>
+          <span class="audit-tag">Auditoría institucional</span>
+          <h3>Lectura integral de la gestión</h3>
+          <p>Revisa la gestión institucional por vigencia, identifica hallazgos, recomendaciones y compromisos de mejora. El plan 2026 deriva de la auditoría institucional 2025 y se gestiona como plan de mejoramiento protegido.</p>
+        </article>
+
+        <article class="audit-card">
+          <span class="audit-tag">Proyectos y donantes</span>
+          <h3>Auditorías por encargo</h3>
+          <p>Incluye auditorías externas de proyectos, auditorías específicas de donantes y revisiones contractuales. Cada encargo puede tener auditor, alcance, muestra y calendario propio.</p>
         </article>
 
         <article class="audit-card">
           <span class="audit-tag">Revisoría fiscal</span>
-          <h3>Revisor fiscal</h3>
-          <p><strong>Quién es nuestro revisor fiscal:</strong> <span id="auditFiscalFirm">SAS AUDITORES & CONSULTORES SAS.</span></p>
-          <p>Esta sección organizará los informes del revisor fiscal, certificaciones, dictámenes y comunicaciones formales por vigencia.</p>
+          <h3>Dictámenes y certificaciones</h3>
+          <p>Organiza el ciclo de revisoría fiscal, dictámenes, certificaciones y comunicaciones formales. La firma o persona responsable puede variar según designación institucional.</p>
+        </article>
+
+        <article class="audit-card">
+          <span class="audit-tag">Revisiones especializadas</span>
+          <h3>Revisiones técnicas o temáticas</h3>
+          <p>Cubre encargos especializados sobre cumplimiento, riesgos, datos, sistemas, salvaguardas u otros asuntos que requieran una revisión objetiva y trazable.</p>
         </article>
       </div>
 
+      <section class="audit-library audit-flow" aria-labelledby="titulo-ciclo-ain">
+        <h3 id="titulo-ciclo-ain">Cómo fluye una revisión independiente</h3>
+        <ol class="audit-flow-list">
+          <li><strong>Solicitud de información:</strong> se reciben requerimientos, muestras y cronograma.</li>
+          <li><strong>Entrega de soportes:</strong> las áreas responsables preparan evidencias y trazabilidad.</li>
+          <li><strong>Respuesta institucional:</strong> GAIA consolida aclaraciones y soportes desde las áreas competentes.</li>
+          <li><strong>Revisión del borrador:</strong> se analizan hallazgos preliminares, diferencias y oportunidades de ajuste.</li>
+          <li><strong>Informe definitivo:</strong> se recibe el informe final, dictamen o comunicación formal.</li>
+          <li><strong>Plan de mejoramiento:</strong> cada recomendación se convierte en acción, responsable, plazo y evidencia.</li>
+          <li><strong>Validación de eficacia:</strong> el cierre se realiza cuando la acción está implementada y su eficacia queda verificada.</li>
+        </ol>
+        <p class="audit-protected-note">Instrumentos controlados internos: FGA-AIN-CR-01, FGA-AIN-PR-01 y FGA-AIN-MT-01. La consulta documental pública está bloqueada; no se publican informes, respuestas, hallazgos, matrices ni enlaces de Drive.</p>
+      </section>
+
       <section class="audit-library" aria-labelledby="titulo-auditoria-proyectos">
         <div>
-          <h3 id="titulo-auditoria-proyectos">Auditoría externa de proyectos</h3>
-          <p>Selecciona una vigencia para consultar los documentos disponibles. Cuando se carguen archivos, aparecerán como botones de descarga o apertura.</p>
+          <h3 id="titulo-auditoria-proyectos">Auditorías de proyectos y donantes</h3>
+          <p>Selecciona la vigencia auditada para ver el estado descriptivo. Los documentos, muestras, respuestas y enlaces permanecen protegidos.</p>
         </div>
-        <div class="audit-year-actions" id="auditYearActions" aria-label="Años de auditoría externa"></div>
+        <div class="audit-year-actions" id="auditYearActions" aria-label="Vigencias auditadas de proyectos y donantes"></div>
         <div class="audit-document-list" id="auditProjectDocs"></div>
       </section>
 
       <section class="audit-library" aria-labelledby="titulo-revisoria-fiscal">
         <div>
           <h3 id="titulo-revisoria-fiscal">Informes de revisoría fiscal</h3>
-          <p>Selecciona una vigencia para consultar dictámenes, informes, certificaciones y comunicaciones formales de la revisoría fiscal.</p>
+          <p>Selecciona la vigencia auditada para ver el estado descriptivo. Dictámenes, informes, certificaciones y comunicaciones formales no se publican en esta vista.</p>
         </div>
-        <div class="audit-year-actions" id="auditFiscalYearActions" aria-label="Años de revisoría fiscal"></div>
+        <div class="audit-year-actions" id="auditFiscalYearActions" aria-label="Vigencias auditadas de revisoría fiscal"></div>
         <div class="audit-document-list" id="auditFiscalDocs"></div>
       </section>
 
       <section class="audit-library" aria-labelledby="titulo-planes-mejoramiento">
         <div>
           <h3 id="titulo-planes-mejoramiento">Planes de mejoramiento</h3>
-          <p>Selecciona una vigencia para consultar hallazgos, responsables, acciones, fechas, evidencia de cierre y estado de avance.</p>
+          <p>Selecciona la vigencia de seguimiento para ver el estado descriptivo. Hallazgos, responsables, acciones, fechas y evidencias de cierre permanecen protegidos.</p>
         </div>
-        <div class="audit-year-actions" id="auditImprovementYearActions" aria-label="Años de planes de mejoramiento"></div>
+        <div class="audit-year-actions" id="auditImprovementYearActions" aria-label="Vigencias de planes de mejoramiento"></div>
         <div class="audit-document-list" id="auditImprovementDocs"></div>
       </section>
     </div>
@@ -1229,12 +1253,12 @@
 </main>
 
 <script src="assets/documentos-mop.js"></script>
-<script src="assets/excedentes-mop.js?v=20260812-junta1"></script>
+<script src="assets/excedentes-mop.js?v=20260812-ain1"></script>
 <script src="assets/data/mop-process-catalog.js?v=20260811-eti2"></script>
 <script src="assets/data/eti-territories.js?v=20260811-eti2"></script>
-<script src="assets/data/mop-updates.js?v=20260812-junta1"></script>
+<script src="assets/data/mop-updates.js?v=20260812-ain1"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
-<script src="assets/js/junta-directiva.js?v=20260812-junta1"></script>
-<script src="assets/js/app.js?v=20260812-junta1"></script>
+<script src="assets/js/junta-directiva.js?v=20260812-ain1"></script>
+<script src="assets/js/app.js?v=20260812-ain1"></script>
 </body>
 </html>

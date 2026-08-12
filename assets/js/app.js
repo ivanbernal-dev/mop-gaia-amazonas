@@ -120,8 +120,8 @@ const processCatalog = {
   estrategico: Array.isArray(processCatalogData.estrategico) ? processCatalogData.estrategico : []
 };
 const defaultAuditFirms = {
-  externalFirm: "CIP. REVISORES FISCALES AUDITORES & CONSULTORES LTDA. - CIP LTDA.",
-  fiscalFirm: "SAS AUDITORES & CONSULTORES SAS."
+  externalFirm: "Auditor externo según encargo, vigencia y contrato aplicable.",
+  fiscalFirm: "Revisor fiscal vigente según designación institucional."
 };
 const excessAccess = {
   card: document.getElementById("excessAccessCard"),
@@ -156,8 +156,8 @@ const sidebarItems = [
   },
   {
     id: "panel-auditoria",
-    title: "Revisoría y auditoría",
-    description: "Auditorías externas, revisoría fiscal y planes de mejoramiento."
+    title: "Aseguramiento Independiente",
+    description: "Auditorías, revisoría fiscal, revisiones especializadas y planes de mejoramiento."
   },
   {
     id: "panel-documentos",
@@ -1336,7 +1336,7 @@ function inferMacroprocess(dependency) {
     return "Apoyo";
   }
   if (["auditoria", "revisoria"].some((term) => normalized.includes(term))) {
-    return "Revisoría y Auditoría";
+    return "Aseguramiento Independiente";
   }
   return "Por validar con GPC";
 }
@@ -1572,19 +1572,11 @@ function initExcessModule() {
 }
 
 function renderAuditDocumentItem(documentItem, emptyText) {
-  if (!documentItem?.url) {
-    return `
-      <article class="audit-document-item">
-        <h4>${escapeHtml(documentItem?.titulo || emptyText)}</h4>
-        <p>${escapeHtml(documentItem?.descripcion || "Documento pendiente de carga por el administrador del MOP.")}</p>
-      </article>
-    `;
-  }
   return `
     <article class="audit-document-item">
-      <h4>${escapeHtml(documentItem.titulo || "Documento de auditoría")}</h4>
-      <p>${escapeHtml(documentItem.descripcion || `Vigencia ${documentItem.anio || "por clasificar"}`)}</p>
-      <a href="${escapeHtml(documentItem.url)}" target="_blank" rel="noopener">Abrir o descargar documento</a>
+      <h4>${escapeHtml(documentItem?.titulo || emptyText)}</h4>
+      <p>${escapeHtml(documentItem?.descripcion || "Información documental protegida. El repositorio público solo muestra el estado descriptivo del proceso.")}</p>
+      <span class="audit-protected-note">Documentos, respuestas, hallazgos, matrices y enlaces internos no autorizados para publicación.</span>
     </article>
   `;
 }
@@ -1637,7 +1629,10 @@ function renderAuditYearList(targetId, records, year, emptyTitle) {
   const docs = getAuditDocumentsByYear(records, year);
   target.innerHTML = docs.length
     ? docs.map((item) => renderAuditDocumentItem(item, `${emptyTitle} ${year}`)).join("")
-    : renderAuditDocumentItem({ titulo: `${emptyTitle} ${year}` }, `${emptyTitle} ${year}`);
+    : renderAuditDocumentItem({
+      titulo: `${emptyTitle} ${year}`,
+      descripcion: `Vigencia auditada ${year}. Año de ejecución o seguimiento por confirmar en el repositorio interno.`
+    }, `${emptyTitle} ${year}`);
 }
 
 function initAuditYearSelector(actionsId, targetId, records, emptyTitle) {
@@ -1655,7 +1650,7 @@ function initAuditYearSelector(actionsId, targetId, records, emptyTitle) {
 }
 
 function initAuditModule() {
-  initAuditYearSelector("auditYearActions", "auditProjectDocs", auditData.auditoriaExterna || [], "Auditoría externa de proyectos");
+  initAuditYearSelector("auditYearActions", "auditProjectDocs", auditData.auditoriaExterna || [], "Auditoría de proyectos y donantes");
   initAuditYearSelector("auditFiscalYearActions", "auditFiscalDocs", auditData.revisoriaFiscal || [], "Informe de revisoría fiscal");
   initAuditYearSelector("auditImprovementYearActions", "auditImprovementDocs", auditData.planesMejoramiento || [], "Plan de mejoramiento");
 }
