@@ -1303,7 +1303,7 @@ body.dark .gaia-top-nav a.active {
 }
 
 .gaia-board-hero--focused {
-  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .gaia-board-hero-panel--story {
@@ -1599,6 +1599,214 @@ body.dark .gaia-top-nav a.active {
   opacity: 0.72;
 }
 
+.gaia-commitments-dashboard {
+  display: grid;
+  gap: 14px;
+}
+
+.gaia-commitments-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gaia-commitments-summary article,
+.gaia-commitments-card {
+  border: 1px solid rgba(47, 80, 72, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.92);
+  box-shadow: 0 12px 28px rgba(18, 55, 47, 0.06);
+}
+
+.gaia-commitments-summary article {
+  display: grid;
+  gap: 6px;
+  min-height: 116px;
+  align-content: center;
+  padding: 16px;
+  border-top: 4px solid var(--gaia-olive);
+}
+
+.gaia-commitments-summary article.is-critical {
+  border-top-color: var(--gaia-red);
+}
+
+.gaia-commitments-summary span,
+.gaia-commitments-summary small {
+  color: #52665f;
+  font-weight: 800;
+}
+
+.gaia-commitments-summary strong {
+  color: var(--gaia-teal-900);
+  font-size: clamp(1.75rem, 3vw, 2.45rem);
+  line-height: 1;
+}
+
+.gaia-commitments-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.gaia-commitments-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+}
+
+.gaia-commitments-card--wide {
+  grid-column: 1 / -1;
+}
+
+.gaia-commitment-bar {
+  display: grid;
+  gap: 6px;
+}
+
+.gaia-commitment-bar label,
+.gaia-commitment-acta header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--gaia-teal-900);
+  font-weight: 900;
+}
+
+.gaia-commitment-track {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(47, 80, 72, 0.1);
+}
+
+.gaia-commitment-track span {
+  display: block;
+  width: calc(var(--percent) * 1%);
+  height: 100%;
+  min-width: 4px;
+  border-radius: inherit;
+  background: var(--gaia-olive);
+}
+
+.gaia-commitment-bar--done .gaia-commitment-track span,
+.gaia-commitment-stack .completed {
+  background: #4c9a72;
+}
+
+.gaia-commitment-bar--progress .gaia-commitment-track span,
+.gaia-commitment-stack .open {
+  background: #d8a23a;
+}
+
+.gaia-commitment-bar--pending .gaia-commitment-track span,
+.gaia-commitment-bar--critical .gaia-commitment-track span {
+  background: var(--gaia-red);
+}
+
+.gaia-commitment-bar--recurring .gaia-commitment-track span,
+.gaia-commitment-bar--high .gaia-commitment-track span {
+  background: #5d9bb7;
+}
+
+.gaia-commitment-bar--closed .gaia-commitment-track span,
+.gaia-commitment-stack .canceled {
+  background: #8a928a;
+}
+
+.gaia-commitment-bar--medium .gaia-commitment-track span {
+  background: #8f9c3c;
+}
+
+.gaia-commitment-bar--low .gaia-commitment-track span {
+  background: #9fb8a6;
+}
+
+.gaia-commitment-actas {
+  display: grid;
+  gap: 10px;
+}
+
+.gaia-commitment-acta {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.22fr) minmax(180px, 0.48fr) minmax(200px, 0.3fr);
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid rgba(47, 80, 72, 0.11);
+  border-radius: 8px;
+  background: rgba(47, 80, 72, 0.04);
+}
+
+.gaia-commitment-acta header {
+  display: grid;
+  justify-content: start;
+  gap: 2px;
+}
+
+.gaia-commitment-acta header span {
+  color: #52665f;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.gaia-commitment-stack {
+  display: flex;
+  min-height: 16px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(47, 80, 72, 0.09);
+}
+
+.gaia-commitment-stack span {
+  width: calc(var(--width) * 1%);
+  min-width: 0;
+}
+
+.gaia-commitment-acta dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+}
+
+.gaia-commitment-acta dl div {
+  display: grid;
+  gap: 2px;
+}
+
+.gaia-commitment-acta dt {
+  color: #52665f;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.gaia-commitment-acta dd {
+  margin: 0;
+  color: var(--gaia-teal-900);
+  font-weight: 900;
+}
+
+.gaia-commitments-card--rules ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.gaia-commitments-card--rules p {
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px solid rgba(47, 80, 72, 0.12);
+  color: #52665f;
+  font-weight: 800;
+}
+
 .gaia-board-hero {
   position: relative;
   grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
@@ -1616,7 +1824,7 @@ body.dark .gaia-top-nav a.active {
 
 .gaia-board-hero-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin: 18px 0;
 }
@@ -5874,6 +6082,9 @@ body.dark .gaia-transition-governance__controls {
   .gaia-board-hero,
   .gaia-board-hero-stats,
   .gaia-board-filters,
+  .gaia-commitments-summary,
+  .gaia-commitments-layout,
+  .gaia-commitment-acta,
   .gaia-board-grid.two,
   .gaia-board-grid.three,
   .gaia-board-grid.four,
@@ -5962,6 +6173,10 @@ body.dark .gaia-transition-governance__controls {
 
   .gaia-board-indicator-chart .gaia-board-canvas-wrap {
     height: 240px;
+  }
+
+  .gaia-commitment-acta dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .gaia-board-metric-strip {

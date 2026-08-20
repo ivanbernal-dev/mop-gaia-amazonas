@@ -307,21 +307,12 @@
           <article><strong>$1.245 millones</strong><span>Excedentes fiscales aprobados</span></article>
         </div>
       </div>
-      <div class="gaia-board-hero-panel gaia-board-hero-panel--story" role="group" aria-label="C&oacute;mo leer esta secci&oacute;n">
-        <span class="gaia-eyebrow">Lectura sugerida</span>
-        <h3>Del dato a la decisi&oacute;n</h3>
-        <ol class="gaia-board-reading-path">
-          <li><strong>1. Lectura ejecutiva:</strong> identifica el asunto y la se&ntilde;al de seguimiento.</li>
-          <li><strong>2. Mapa ETI:</strong> conecta la informaci&oacute;n con los territorios y consejos acompa&ntilde;ados.</li>
-          <li><strong>3. Excedentes:</strong> revisa destinaci&oacute;n, ejecuci&oacute;n y relaci&oacute;n con el objeto social.</li>
-          <li><strong>4. Soportes:</strong> ubica documentos fuente solo cuando sea necesario.</li>
-        </ol>
-      </div>
     </div>
 
     <div class="gaia-board-tabs gaia-board-tabs--guided" role="tablist" aria-label="Vistas de Junta Directiva">
       <button type="button" role="tab" aria-selected="true" data-board-tab="resumen">Lectura ejecutiva</button>
       <button type="button" role="tab" aria-selected="false" data-board-tab="territorio">Mapa ETI y territorio</button>
+      <button type="button" role="tab" aria-selected="false" data-board-tab="compromisos">Compromisos</button>
       <button type="button" role="tab" aria-selected="false" data-board-tab="excedentes">Excedentes</button>
       <button type="button" role="tab" aria-selected="false" data-board-tab="contabilidad">Explorador contable</button>
       <button type="button" role="tab" aria-selected="false" data-board-tab="documentos">Documentos de soporte</button>
@@ -365,6 +356,15 @@
           <p class="gaia-board-note">Este mapa ayuda a ubicar territorios y consejos para conectar decisiones, recursos y seguimiento misional. La fuente oficial se consulta en Colombia en Mapas del IGAC.</p>
         </article>
       </div>
+    </div>
+
+    <div class="gaia-board-panel" role="tabpanel" hidden data-board-panel="compromisos">
+      <div class="gaia-board-heading">
+        <span class="gaia-eyebrow">Seguimiento de compromisos</span>
+        <h3>Tablero ejecutivo de compromisos de Junta Directiva</h3>
+        <p>Vista agregada para priorizar seguimiento sin exponer responsables, evidencias, actas internas ni soportes documentales. La matriz detallada debe permanecer en el entorno institucional autorizado.</p>
+      </div>
+      <div data-board-commitments></div>
     </div>
 
     <div class="gaia-board-panel" role="tabpanel" hidden data-board-panel="excedentes">
@@ -1347,8 +1347,9 @@
 <script src="assets/data/mop-process-catalog.js?v=20260811-eti2"></script>
 <script src="assets/data/eti-territories.js?v=20260811-eti2"></script>
 <script src="assets/data/mop-updates.js?v=20260812-ain1"></script>
+<script src="assets/data/junta-compromisos.js?v=20260820-jd1"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
-<script src="assets/js/junta-directiva.js?v=20260812-ain1"></script>
+<script src="assets/js/junta-directiva.js?v=20260820-jd1"></script>
 <script src="assets/js/app.js?v=20260812-ain1"></script>
 </body>
 </html>

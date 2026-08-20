@@ -21,7 +21,6 @@ const boardDashboardData = {
     }
   ],
   kpis: [
-    { label: "Año gravable", display: "2025", fullValue: "2025", source: "Memoria Económica 2025", theme: "gobierno", themeLabel: "Gobierno corporativo", document: "memoria", description: "Vigencia del tablero institucional." },
     { label: "Ingresos por subvenciones", display: "$23.340 M", fullValue: "$23.339.824.252", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Recursos registrados para la vigencia." },
     { label: "Inversión de impacto", display: "88 %", fullValue: "88 %", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Recursos orientados directamente a impacto misional." },
     { label: "Administración y operación", display: "12 %", fullValue: "12 %", source: "Memoria Económica 2025", theme: "subvenciones", themeLabel: "Subvenciones", document: "memoria", description: "Costos para sostener la operación institucional." },
@@ -662,6 +661,126 @@ function renderEtiTerritoryMap() {
   });
 }
 
+function commitmentPercent(value, total) {
+  if (!total) return 0;
+  return Math.round((Number(value || 0) / Number(total || 1)) * 100);
+}
+
+function renderCommitmentBars(items, total, label) {
+  return items.map((item) => {
+    const percent = commitmentPercent(item.count, total);
+    return `
+      <div class="gaia-commitment-bar gaia-commitment-bar--${escapeBoardHtml(item.tone || "default")}">
+        <label>
+          <span>${escapeBoardHtml(item.name)}</span>
+          <strong>${Number(item.count || 0).toLocaleString("es-CO")}</strong>
+        </label>
+        <div class="gaia-commitment-track" aria-label="${escapeBoardHtml(item.name)}: ${percent} % ${escapeBoardHtml(label)}">
+          <span style="--percent:${percent}"></span>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderActaCommitmentRows(items) {
+  const max = Math.max(...items.map((item) => item.total), 1);
+  return items.map((item) => `
+    <article class="gaia-commitment-acta">
+      <header>
+        <strong>${escapeBoardHtml(item.acta)}</strong>
+        <span>${Number(item.total || 0).toLocaleString("es-CO")} compromisos</span>
+      </header>
+      <div class="gaia-commitment-stack" aria-label="${escapeBoardHtml(item.acta)}: ${item.open} abiertos, ${item.completed} cumplidos, ${item.canceled} cancelados">
+        <span class="open" style="--width:${commitmentPercent(item.open, max)}"></span>
+        <span class="completed" style="--width:${commitmentPercent(item.completed, max)}"></span>
+        <span class="canceled" style="--width:${commitmentPercent(item.canceled, max)}"></span>
+      </div>
+      <dl>
+        <div><dt>Abiertos</dt><dd>${Number(item.open || 0).toLocaleString("es-CO")}</dd></div>
+        <div><dt>Cumplidos</dt><dd>${Number(item.completed || 0).toLocaleString("es-CO")}</dd></div>
+        <div><dt>Cancelados</dt><dd>${Number(item.canceled || 0).toLocaleString("es-CO")}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+}
+
+function renderBoardCommitments() {
+  const container = document.querySelector("[data-board-commitments]");
+  if (!container) return;
+  const data = window.GAIA_JUNTA_COMPROMISOS;
+  if (!data) {
+    container.innerHTML = `<p class="gaia-board-note">El tablero agregado de compromisos no está disponible en esta versión local.</p>`;
+    return;
+  }
+  const totals = data.totals || {};
+  const records = Number(totals.records || 0);
+  const active = Number(totals.activeFollowUp || 0);
+  const closed = Number(totals.completed || 0) + Number(totals.canceled || 0);
+  container.innerHTML = `
+    <section class="gaia-commitments-dashboard" aria-label="Dashboard agregado de compromisos de Junta Directiva">
+      <div class="gaia-commitments-summary">
+        <article>
+          <span>Universo revisado</span>
+          <strong>${records.toLocaleString("es-CO")}</strong>
+          <small>${escapeBoardHtml(data.scopeLabel || "Actas de Junta Directiva")}</small>
+        </article>
+        <article>
+          <span>En seguimiento</span>
+          <strong>${active.toLocaleString("es-CO")}</strong>
+          <small>Pendientes, en curso o recurrentes</small>
+        </article>
+        <article>
+          <span>Cerrados</span>
+          <strong>${closed.toLocaleString("es-CO")}</strong>
+          <small>Cumplidos o cancelados</small>
+        </article>
+        <article class="is-critical">
+          <span>Críticos abiertos</span>
+          <strong>${Number(totals.criticalOpen || 0).toLocaleString("es-CO")}</strong>
+          <small>Requieren priorización ejecutiva</small>
+        </article>
+      </div>
+      <div class="gaia-commitments-layout">
+        <article class="gaia-commitments-card">
+          <div class="gaia-board-chart-head">
+            <h4>Estado de compromisos</h4>
+            <span>${records.toLocaleString("es-CO")} registros</span>
+          </div>
+          ${renderCommitmentBars(data.status || [], records, "del total")}
+        </article>
+        <article class="gaia-commitments-card">
+          <div class="gaia-board-chart-head">
+            <h4>Prioridad de abiertos</h4>
+            <span>${active.toLocaleString("es-CO")} en seguimiento</span>
+          </div>
+          ${renderCommitmentBars(data.priorityOpen || [], active, "de compromisos abiertos")}
+        </article>
+        <article class="gaia-commitments-card gaia-commitments-card--wide">
+          <div class="gaia-board-chart-head">
+            <h4>Lectura por acta</h4>
+            <span>Abiertos · cumplidos · cancelados</span>
+          </div>
+          <div class="gaia-commitment-actas">
+            ${renderActaCommitmentRows(data.byActa || [])}
+          </div>
+        </article>
+        <article class="gaia-commitments-card gaia-commitments-card--rules">
+          <div class="gaia-board-chart-head">
+            <h4>Criterios de uso</h4>
+            <span>Vista protegida</span>
+          </div>
+          <ul>
+            ${(data.reading || []).map((item) => `<li>${escapeBoardHtml(item)}</li>`).join("")}
+          </ul>
+          <p>${escapeBoardHtml(data.securityLabel || "La matriz detallada se consulta únicamente en el canal interno autorizado.")}</p>
+        </article>
+      </div>
+      <p class="gaia-board-note">Fuente: ${escapeBoardHtml(data.sourceLabel || "Dashboard interno")} · Actualización local: ${escapeBoardHtml(data.updatedAt || "Por validar")}.</p>
+    </section>
+  `;
+}
+
 function renderBoardDocuments() {
   const container = document.querySelector("[data-board-documents]");
   if (!container) return;
@@ -767,5 +886,6 @@ renderBoardBars("contracting", "Contratación institucional 2025", boardDashboar
 renderAccountingExplorer();
 renderHeroChart();
 renderEtiTerritoryMap();
+renderBoardCommitments();
 renderBoardDocuments();
 initBoardFilters();
