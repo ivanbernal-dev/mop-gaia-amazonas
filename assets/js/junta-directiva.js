@@ -99,7 +99,11 @@ const boardState = {
   tab: "resumen",
   metric: "",
   accountingYear: "total",
-  etiCode: ""
+  etiCode: "",
+  commitmentActa: "all",
+  commitmentStatus: "all",
+  commitmentPriority: "all",
+  commitmentSearch: ""
 };
 
 const accountingYearLabels = {
@@ -705,6 +709,103 @@ function renderActaCommitmentRows(items) {
   `).join("");
 }
 
+function uniqueCommitmentValues(rows, field) {
+  return [...new Set(rows.map((row) => row[field]).filter(Boolean))].sort((a, b) => String(a).localeCompare(String(b), "es-CO", { numeric: true }));
+}
+
+function commitmentStateClass(value) {
+  return String(value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function formatCommitmentDate(value) {
+  if (!value) return "Sin plazo";
+  const [year, month, day] = String(value).split("-");
+  if (!year || !month || !day) return escapeBoardHtml(value);
+  return `${day}/${month}/${year}`;
+}
+
+function filterCommitmentRows(rows) {
+  const search = boardState.commitmentSearch.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  return rows.filter((row) => {
+    const actaOk = boardState.commitmentActa === "all" || row.acta === boardState.commitmentActa;
+    const statusOk = boardState.commitmentStatus === "all" || row.estado === boardState.commitmentStatus;
+    const priorityOk = boardState.commitmentPriority === "all" || row.prioridad === boardState.commitmentPriority;
+    const haystack = `${row.id} ${row.acta} ${row.categoria} ${row.prioridad} ${row.estado}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const searchOk = !search || haystack.includes(search);
+    return actaOk && statusOk && priorityOk && searchOk;
+  });
+}
+
+function renderCommitmentSelect(label, stateKey, values) {
+  return `
+    <label>
+      <span>${label}</span>
+      <select data-commitment-filter="${stateKey}">
+        <option value="all">Todos</option>
+        ${values.map((value) => `<option value="${escapeBoardHtml(value)}" ${boardState[stateKey] === value ? "selected" : ""}>${escapeBoardHtml(value)}</option>`).join("")}
+      </select>
+    </label>
+  `;
+}
+
+function renderCommitmentMatrix(data) {
+  const rows = data.matrix || [];
+  const filtered = filterCommitmentRows(rows);
+  return `
+    <article class="gaia-commitments-card gaia-commitments-card--matrix">
+      <div class="gaia-board-chart-head">
+        <h4>Matriz ejecutiva de seguimiento</h4>
+        <span>${filtered.length} de ${rows.length} registros</span>
+      </div>
+      <div class="gaia-commitment-filters" aria-label="Filtros de matriz de compromisos">
+        <label>
+          <span>Buscar</span>
+          <input type="search" value="${escapeBoardHtml(boardState.commitmentSearch)}" placeholder="ID, acta, categoria..." data-commitment-search>
+        </label>
+        ${renderCommitmentSelect("Acta", "commitmentActa", uniqueCommitmentValues(rows, "acta"))}
+        ${renderCommitmentSelect("Estado", "commitmentStatus", uniqueCommitmentValues(rows, "estado"))}
+        ${renderCommitmentSelect("Prioridad", "commitmentPriority", uniqueCommitmentValues(rows, "prioridad"))}
+      </div>
+      <div class="gaia-commitment-table-wrap">
+        <table class="gaia-commitment-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Acta</th>
+              <th>Fecha</th>
+              <th>Categoria</th>
+              <th>Prioridad</th>
+              <th>Estado</th>
+              <th>Plazo</th>
+              <th>Detalle</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filtered.map((row) => `
+              <tr>
+                <td><strong>${escapeBoardHtml(row.id)}</strong></td>
+                <td>${escapeBoardHtml(row.acta)}</td>
+                <td>${formatCommitmentDate(row.fecha)}</td>
+                <td>${escapeBoardHtml(row.categoria)}</td>
+                <td><span class="gaia-commitment-pill gaia-commitment-pill--${commitmentStateClass(row.prioridad)}">${escapeBoardHtml(row.prioridad)}</span></td>
+                <td><span class="gaia-commitment-pill gaia-commitment-pill--${commitmentStateClass(row.estado)}">${escapeBoardHtml(row.estado)}</span></td>
+                <td>${formatCommitmentDate(row.plazo)}</td>
+                <td><span class="gaia-commitment-reserved">Reservado para intranet</span></td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+      <p class="gaia-board-note">Matriz sanitizada para GitHub Pages: no incluye responsables, corresponsables, evidencias, observaciones, ubicaciones de acta ni enlaces.</p>
+    </article>
+  `;
+}
+
 function renderBoardCommitments() {
   const container = document.querySelector("[data-board-commitments]");
   if (!container) return;
@@ -775,6 +876,7 @@ function renderBoardCommitments() {
           </ul>
           <p>${escapeBoardHtml(data.securityLabel || "La matriz detallada se consulta únicamente en el canal interno autorizado.")}</p>
         </article>
+        ${renderCommitmentMatrix(data)}
       </div>
       <p class="gaia-board-note">Fuente: ${escapeBoardHtml(data.sourceLabel || "Dashboard interno")} · Actualización local: ${escapeBoardHtml(data.updatedAt || "Por validar")}.</p>
     </section>
@@ -854,6 +956,24 @@ function initBoardFilters() {
     event.preventDefault();
     boardState.etiCode = etiTarget.dataset.etiCode;
     renderEtiTerritoryMap();
+  });
+
+  board?.addEventListener("input", (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    const search = target?.closest("[data-commitment-search]");
+    if (!search) return;
+    boardState.commitmentSearch = search.value || "";
+    renderBoardCommitments();
+  });
+
+  board?.addEventListener("change", (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    const filter = target?.closest("[data-commitment-filter]");
+    if (!filter) return;
+    const key = filter.dataset.commitmentFilter;
+    if (!key || !(key in boardState)) return;
+    boardState[key] = filter.value || "all";
+    renderBoardCommitments();
   });
 
   document.querySelectorAll(".gaia-board-filter").forEach((button) => {

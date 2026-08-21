@@ -1661,6 +1661,131 @@ body.dark .gaia-top-nav a.active {
   grid-column: 1 / -1;
 }
 
+.gaia-commitments-card--matrix {
+  grid-column: 1 / -1;
+}
+
+.gaia-commitment-filters {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.1fr) repeat(3, minmax(140px, 0.6fr));
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(47, 80, 72, 0.12);
+  border-radius: 8px;
+  background: rgba(47, 80, 72, 0.04);
+}
+
+.gaia-commitment-filters label {
+  display: grid;
+  gap: 5px;
+}
+
+.gaia-commitment-filters span {
+  color: var(--gaia-teal-900);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.gaia-commitment-filters input,
+.gaia-commitment-filters select {
+  min-height: 38px;
+  width: 100%;
+  border: 1px solid rgba(47, 80, 72, 0.2);
+  border-radius: 8px;
+  background: #fffdf8;
+  color: var(--gaia-teal-900);
+  font: inherit;
+  font-weight: 800;
+}
+
+.gaia-commitment-filters input {
+  padding: 8px 10px;
+}
+
+.gaia-commitment-table-wrap {
+  max-height: 520px;
+  overflow: auto;
+  border: 1px solid rgba(47, 80, 72, 0.12);
+  border-radius: 8px;
+  background: #fffdf8;
+}
+
+.gaia-commitment-table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+}
+
+.gaia-commitment-table th,
+.gaia-commitment-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(47, 80, 72, 0.11);
+  color: var(--gaia-teal-900);
+  text-align: left;
+  vertical-align: top;
+}
+
+.gaia-commitment-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #eef3e9;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.gaia-commitment-table tbody tr:hover {
+  background: rgba(216, 162, 58, 0.08);
+}
+
+.gaia-commitment-pill,
+.gaia-commitment-reserved {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(47, 80, 72, 0.08);
+  color: var(--gaia-teal-900);
+  font-size: 0.82rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.gaia-commitment-pill--critica,
+.gaia-commitment-pill--pendiente {
+  background: rgba(180, 52, 75, 0.14);
+  color: #7e2033;
+}
+
+.gaia-commitment-pill--alta,
+.gaia-commitment-pill--en-curso {
+  background: rgba(216, 162, 58, 0.18);
+  color: #654819;
+}
+
+.gaia-commitment-pill--media,
+.gaia-commitment-pill--seguimiento-recurrente {
+  background: rgba(93, 155, 183, 0.18);
+  color: #174f52;
+}
+
+.gaia-commitment-pill--baja,
+.gaia-commitment-pill--cumplido {
+  background: rgba(76, 154, 114, 0.16);
+  color: #21533e;
+}
+
+.gaia-commitment-pill--cancelado,
+.gaia-commitment-reserved {
+  background: rgba(82, 102, 95, 0.12);
+  color: #3c4d47;
+}
+
 .gaia-commitment-bar {
   display: grid;
   gap: 6px;
@@ -6084,6 +6209,7 @@ body.dark .gaia-transition-governance__controls {
   .gaia-board-filters,
   .gaia-commitments-summary,
   .gaia-commitments-layout,
+  .gaia-commitment-filters,
   .gaia-commitment-acta,
   .gaia-board-grid.two,
   .gaia-board-grid.three,
