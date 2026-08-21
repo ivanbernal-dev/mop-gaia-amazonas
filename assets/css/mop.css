@@ -1949,15 +1949,16 @@ body.dark .gaia-top-nav a.active {
 
 .gaia-board-hero-stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  margin: 18px 0;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+  max-width: 920px;
+  margin: 22px 0 0;
 }
 
 .gaia-board-hero-stats article {
   display: grid;
   gap: 6px;
-  min-height: 104px;
+  min-height: 112px;
   align-content: center;
   padding: 16px;
   border: 1px solid rgba(255, 253, 248, 0.28);
@@ -1968,13 +1969,16 @@ body.dark .gaia-top-nav a.active {
 
 .gaia-board-hero-stats strong {
   color: #fffdf8;
-  font-size: clamp(1.38rem, 2.8vw, 2rem);
-  line-height: 1;
+  max-width: 100%;
+  font-size: clamp(1.28rem, 2.2vw, 1.85rem);
+  line-height: 1.04;
+  overflow-wrap: normal;
 }
 
 .gaia-board-hero-stats span {
   color: rgba(255, 253, 248, 0.86);
   font-weight: 900;
+  line-height: 1.25;
 }
 
 .gaia-board-actions button:first-child {
