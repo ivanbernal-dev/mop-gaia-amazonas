@@ -598,6 +598,32 @@ function selectedEtiFeature(features) {
   return features.find((feature) => feature.code === boardState.etiCode) || features[0];
 }
 
+function renderColombiaContextMap() {
+  const context = window.GAIA_COLOMBIA_CONTEXT;
+  if (!context?.paths?.length) {
+    return `
+      <div class="gaia-eti-map-context gaia-eti-map-context--empty">
+        <span>1. Contexto país no disponible</span>
+      </div>
+    `;
+  }
+  const box = context.amazonBox || {};
+  const marker = context.amazonMarker || [150, 214];
+  const countryPaths = context.paths.map((path) => `<path class="gaia-eti-colombia-shape" d="${path}"></path>`).join("");
+  return `
+    <div class="gaia-eti-map-context">
+      <svg viewBox="${escapeBoardHtml(context.viewBox || "0 0 220 260")}" role="img" aria-label="Mapa real simplificado de Colombia con ubicación aproximada de la Amazonia y los territorios ETI">
+        <g class="gaia-eti-colombia-shapes" aria-hidden="true">${countryPaths}</g>
+        ${box.width && box.height ? `<rect class="gaia-eti-amazon-area" x="${box.x}" y="${box.y}" width="${box.width}" height="${box.height}" rx="8"></rect>` : ""}
+        <circle class="gaia-eti-amazon-pulse" cx="${marker[0]}" cy="${marker[1]}" r="16"></circle>
+        <text x="56" y="34" class="gaia-eti-context-label">Colombia</text>
+        <text x="${marker[0]}" y="${Number(marker[1]) + 30}" class="gaia-eti-context-label gaia-eti-context-label--amazon">Amazonia / ETI</text>
+      </svg>
+      <span>1. Colombia completa</span>
+    </div>
+  `;
+}
+
 function renderEtiTerritoryMap() {
   const data = window.GAIA_ETI_TERRITORIES;
   const containers = document.querySelectorAll("[data-eti-map]");
@@ -646,16 +672,7 @@ function renderEtiTerritoryMap() {
     container.innerHTML = `
       <section class="gaia-eti-map gaia-eti-map--${escapeBoardHtml(mode)}">
         <div class="gaia-eti-map-stage">
-          <div class="gaia-eti-map-context">
-            <svg viewBox="0 0 220 260" role="img" aria-label="Contexto nacional: Colombia y ubicación aproximada de la Amazonia">
-              <path class="gaia-eti-colombia-shape" d="M95 14 L125 22 L139 43 L154 47 L148 69 L161 86 L152 111 L166 134 L153 158 L163 188 L151 219 L126 244 L102 224 L84 198 L62 189 L50 164 L35 149 L45 126 L31 105 L51 84 L48 61 L68 42 Z"></path>
-              <path class="gaia-eti-amazon-area" d="M91 146 L150 150 L158 185 L146 218 L120 230 L96 205 L73 192 L64 166 Z"></path>
-              <circle class="gaia-eti-amazon-pulse" cx="124" cy="188" r="18"></circle>
-              <text x="58" y="42" class="gaia-eti-context-label">Colombia</text>
-              <text x="124" y="214" class="gaia-eti-context-label gaia-eti-context-label--amazon">Amazonia</text>
-            </svg>
-            <span>1. Contexto país</span>
-          </div>
+          ${renderColombiaContextMap()}
           <div class="gaia-eti-map-visual">
             <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Zoom simplificado de ocho territorios indígenas formalizados">
               <rect class="gaia-eti-map-water" x="0" y="0" width="${width}" height="${height}" rx="18"></rect>

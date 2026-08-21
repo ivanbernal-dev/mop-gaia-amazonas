@@ -2275,7 +2275,7 @@ body.dark .gaia-top-nav a.active {
 .gaia-eti-map-context {
   display: grid;
   min-height: 340px;
-  padding: 14px;
+  padding: 12px;
   align-content: center;
   justify-items: center;
   background:
@@ -2283,9 +2283,18 @@ body.dark .gaia-top-nav a.active {
     linear-gradient(150deg, rgba(255, 253, 248, 0.1), rgba(255, 253, 248, 0.03));
 }
 
+.gaia-eti-map-context--empty {
+  align-content: center;
+}
+
 .gaia-eti-map-context svg {
-  width: min(100%, 210px);
+  width: min(100%, 205px);
   height: auto;
+  overflow: visible;
+}
+
+.gaia-eti-colombia-shapes {
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.16));
 }
 
 .gaia-eti-map-context > span,
@@ -2310,21 +2319,24 @@ body.dark .gaia-top-nav a.active {
 }
 
 .gaia-eti-colombia-shape {
-  fill: rgba(255, 253, 248, 0.28);
-  stroke: rgba(255, 253, 248, 0.84);
-  stroke-width: 2;
+  fill: rgba(255, 253, 248, 0.32);
+  stroke: rgba(255, 253, 248, 0.12);
+  stroke-width: 0.35;
+  vector-effect: non-scaling-stroke;
 }
 
 .gaia-eti-amazon-area {
   fill: rgba(216, 162, 58, 0.8);
   stroke: #fffdf8;
-  stroke-width: 1.6;
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
 }
 
 .gaia-eti-amazon-pulse {
   fill: none;
   stroke: rgba(216, 162, 58, 0.62);
-  stroke-width: 5;
+  stroke-width: 4;
+  vector-effect: non-scaling-stroke;
 }
 
 .gaia-eti-context-label {
