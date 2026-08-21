@@ -2237,19 +2237,32 @@ body.dark .gaia-top-nav a.active {
   align-content: start;
 }
 
+.gaia-eti-map--hero .gaia-eti-map-context,
 .gaia-eti-map--hero .gaia-eti-map-detail,
 .gaia-eti-map--hero .gaia-eti-map-list,
 .gaia-eti-map--hero .gaia-eti-map-source {
   display: none;
 }
 
+.gaia-eti-map--hero .gaia-eti-map-stage {
+  display: block;
+}
+
 .gaia-eti-map--hero .gaia-eti-map-visual {
   min-height: 360px;
 }
 
+.gaia-eti-map-stage {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr) minmax(220px, 0.42fr);
+  gap: 12px;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.gaia-eti-map-context,
 .gaia-eti-map-visual {
   position: relative;
-  min-height: 460px;
   min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 253, 248, 0.22);
@@ -2259,10 +2272,83 @@ body.dark .gaia-top-nav a.active {
     linear-gradient(145deg, rgba(9, 50, 54, 0.52), rgba(34, 102, 86, 0.3));
 }
 
+.gaia-eti-map-context {
+  display: grid;
+  min-height: 340px;
+  padding: 14px;
+  align-content: center;
+  justify-items: center;
+  background:
+    radial-gradient(circle at 72% 78%, rgba(216, 162, 58, 0.24), transparent 34%),
+    linear-gradient(150deg, rgba(255, 253, 248, 0.1), rgba(255, 253, 248, 0.03));
+}
+
+.gaia-eti-map-context svg {
+  width: min(100%, 210px);
+  height: auto;
+}
+
+.gaia-eti-map-context > span,
+.gaia-eti-map-phase {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.9);
+  color: var(--gaia-teal-900);
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+
+.gaia-eti-map-phase {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  margin: 0;
+}
+
+.gaia-eti-colombia-shape {
+  fill: rgba(255, 253, 248, 0.28);
+  stroke: rgba(255, 253, 248, 0.84);
+  stroke-width: 2;
+}
+
+.gaia-eti-amazon-area {
+  fill: rgba(216, 162, 58, 0.8);
+  stroke: #fffdf8;
+  stroke-width: 1.6;
+}
+
+.gaia-eti-amazon-pulse {
+  fill: none;
+  stroke: rgba(216, 162, 58, 0.62);
+  stroke-width: 5;
+}
+
+.gaia-eti-context-label {
+  fill: #fffdf8;
+  font-size: 14px;
+  font-weight: 900;
+  paint-order: stroke;
+  stroke: rgba(18, 55, 47, 0.72);
+  stroke-width: 3;
+}
+
+.gaia-eti-context-label--amazon {
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+.gaia-eti-map-visual {
+  min-height: 340px;
+}
+
 .gaia-eti-map-visual svg {
   width: 100%;
   height: 100%;
-  min-height: 460px;
+  min-height: 340px;
   display: block;
 }
 
@@ -2326,18 +2412,17 @@ body.dark .gaia-top-nav a.active {
 
 .gaia-eti-map-detail {
   display: grid;
-  grid-template-columns: minmax(170px, 0.45fr) minmax(220px, 0.7fr) minmax(260px, 1fr);
-  gap: 8px 14px;
-  align-items: center;
+  align-content: start;
+  gap: 12px;
   min-width: 0;
-  padding: 12px 14px;
+  padding: 16px;
   border: 1px solid rgba(255, 253, 248, 0.22);
   border-radius: 8px;
-  background: rgba(255, 253, 248, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.17), rgba(255, 253, 248, 0.08));
 }
 
 .gaia-eti-map-detail h4,
-.gaia-eti-map-detail p,
 .gaia-eti-map-detail dt,
 .gaia-eti-map-detail dd {
   color: #fffdf8;
@@ -2345,25 +2430,20 @@ body.dark .gaia-top-nav a.active {
 
 .gaia-eti-map-detail h4 {
   margin: 0;
-  font-size: 1rem;
-}
-
-.gaia-eti-map-detail p {
-  margin: 0;
-  color: rgba(255, 253, 248, 0.84);
+  font-size: clamp(1.05rem, 1.8vw, 1.45rem);
+  line-height: 1.08;
 }
 
 .gaia-eti-map-detail dl {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: 10px;
   margin: 0;
 }
 
 .gaia-eti-map-detail div {
   display: grid;
-  gap: 2px;
-  padding: 7px 9px;
+  gap: 4px;
+  padding: 11px 12px;
   border-radius: 8px;
   background: rgba(255, 253, 248, 0.08);
 }
@@ -2378,6 +2458,7 @@ body.dark .gaia-top-nav a.active {
 .gaia-eti-map-detail dd {
   margin: 0;
   font-weight: 900;
+  overflow-wrap: anywhere;
 }
 
 .gaia-eti-map-list {
@@ -2456,6 +2537,8 @@ body.dark .gaia-top-nav a.active {
 
 .gaia-board-map--eti,
 .gaia-board-map--eti .gaia-eti-map,
+.gaia-board-map--eti .gaia-eti-map-stage,
+.gaia-board-map--eti .gaia-eti-map-context,
 .gaia-board-map--eti .gaia-eti-map-visual,
 .gaia-board-map--eti .gaia-eti-map-detail,
 .gaia-board-map--eti .gaia-eti-map-list {
@@ -2482,6 +2565,7 @@ body.dark .gaia-top-nav a.active {
   .gaia-eti-map-detail dl,
   .gaia-eti-map-list,
   .gaia-eti-map-detail,
+  .gaia-eti-map-stage,
   .gaia-board-map--eti .gaia-eti-map {
     grid-template-columns: 1fr;
   }
@@ -2511,6 +2595,14 @@ body.dark .gaia-top-nav a.active {
 
   .gaia-eti-map-list span {
     overflow-wrap: anywhere;
+  }
+
+  .gaia-eti-map-context {
+    min-height: 190px;
+  }
+
+  .gaia-eti-map-context svg {
+    width: min(100%, 150px);
   }
 
   .gaia-eti-map-visual,
@@ -6256,6 +6348,8 @@ body.dark .gaia-transition-governance__controls {
   .gaia-board-hero-panel,
   .gaia-amazon-map-stage,
   .gaia-eti-map,
+  .gaia-eti-map-stage,
+  .gaia-eti-map-context,
   .gaia-eti-map-visual {
     max-width: 100%;
     min-width: 0;

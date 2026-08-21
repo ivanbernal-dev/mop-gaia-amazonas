@@ -616,6 +616,7 @@ function renderEtiTerritoryMap() {
   const padding = 28;
   const bbox = data.bbox;
   const totalArea = data.stats?.totalAreaHa || features.reduce((sum, feature) => sum + Number(feature.areaHa || 0), 0);
+  const selectedIndex = Math.max(features.findIndex((feature) => feature.code === selected.code), 0);
   const paths = features.map((feature, index) => {
     const active = feature.code === selected.code;
     const [cx, cy] = etiFeatureCenter(feature, bbox, width, height, padding);
@@ -631,13 +632,12 @@ function renderEtiTerritoryMap() {
     </button>
   `).join("");
   const detail = `
-    <article class="gaia-eti-map-detail">
+    <article class="gaia-eti-map-detail" aria-live="polite">
       <span class="gaia-eyebrow">ETI seleccionada</span>
-      <h4>${escapeBoardHtml(selected.name)}</h4>
-      <p>${escapeBoardHtml(selected.council)}</p>
+      <h4>${selectedIndex + 1}. ${escapeBoardHtml(selected.name)}</h4>
       <dl>
-        <div><dt>Área aproximada</dt><dd>${formatArea(selected.areaHa)} ha</dd></div>
-        <div><dt>Soporte normativo</dt><dd>${escapeBoardHtml(selected.decree || "Decreto 632 de 2018")} · ${escapeBoardHtml(selected.agreement || "acto por validar")}</dd></div>
+        <div><dt>Área</dt><dd>${formatArea(selected.areaHa)} ha</dd></div>
+        <div><dt>Decreto</dt><dd>${escapeBoardHtml(selected.decree || "Decreto 632 de 2018")}</dd></div>
       </dl>
     </article>
   `;
@@ -645,17 +645,30 @@ function renderEtiTerritoryMap() {
     const mode = container.dataset.etiMap || "dashboard";
     container.innerHTML = `
       <section class="gaia-eti-map gaia-eti-map--${escapeBoardHtml(mode)}">
-        <div class="gaia-eti-map-visual">
-          <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Mapa simplificado de ocho territorios indígenas formalizados">
-            <rect class="gaia-eti-map-water" x="0" y="0" width="${width}" height="${height}" rx="18"></rect>
-            <g>${paths}</g>
-          </svg>
-          <div class="gaia-eti-map-total">
-            <strong>${features.length}</strong>
-            <span>ETI</span>
+        <div class="gaia-eti-map-stage">
+          <div class="gaia-eti-map-context">
+            <svg viewBox="0 0 220 260" role="img" aria-label="Contexto nacional: Colombia y ubicación aproximada de la Amazonia">
+              <path class="gaia-eti-colombia-shape" d="M95 14 L125 22 L139 43 L154 47 L148 69 L161 86 L152 111 L166 134 L153 158 L163 188 L151 219 L126 244 L102 224 L84 198 L62 189 L50 164 L35 149 L45 126 L31 105 L51 84 L48 61 L68 42 Z"></path>
+              <path class="gaia-eti-amazon-area" d="M91 146 L150 150 L158 185 L146 218 L120 230 L96 205 L73 192 L64 166 Z"></path>
+              <circle class="gaia-eti-amazon-pulse" cx="124" cy="188" r="18"></circle>
+              <text x="58" y="42" class="gaia-eti-context-label">Colombia</text>
+              <text x="124" y="214" class="gaia-eti-context-label gaia-eti-context-label--amazon">Amazonia</text>
+            </svg>
+            <span>1. Contexto país</span>
           </div>
+          <div class="gaia-eti-map-visual">
+            <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Zoom simplificado de ocho territorios indígenas formalizados">
+              <rect class="gaia-eti-map-water" x="0" y="0" width="${width}" height="${height}" rx="18"></rect>
+              <g>${paths}</g>
+            </svg>
+            <div class="gaia-eti-map-total">
+              <strong>${features.length}</strong>
+              <span>ETI</span>
+            </div>
+            <span class="gaia-eti-map-phase">2. Zoom territorial</span>
+          </div>
+          ${detail}
         </div>
-        ${detail}
         <div class="gaia-eti-map-list" aria-label="Seleccionar territorio indígena">
           ${list}
         </div>
