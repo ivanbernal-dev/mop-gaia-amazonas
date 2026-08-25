@@ -1,0 +1,75 @@
+// Generado automáticamente por tools/build-cms-data.js a partir de assets/data/misional-panel.json.
+// Para editar este contenido usa el gestor de contenido en /admin, no este archivo.
+window.GAIA_MISIONAL_PANEL = {
+  "intro": [
+    "El Macroproceso Misional es el corazón operativo de la Fundación Gaia Amazonas. Aquí se materializa la misión de proteger la integridad territorial de la Amazonia oriental colombiana y fortalecer la autonomía de los gobiernos indígenas.",
+    "Este macroproceso permite conversar sobre cómo la estrategia se vuelve acompañamiento territorial concreto: consolidación de ETI, ordenamiento territorial indígena, seguimiento a convenios, gestión de proyectos y cooperación para avanzar con las comunidades."
+  ],
+  "procesos": [
+    {
+      "destacado": true,
+      "nombre": "Subdirección Técnica y Política (STP)",
+      "lineaSecundaria": "Responsable institucional: Subdirección Técnica y Política",
+      "descripcion": "Articula la misionalidad territorial: acompañamiento a ETI, ámbitos territoriales, ordenamiento territorial indígena, laboratorio sociojurídico, sistemas de información, gestión pública y relacionamiento técnico-político."
+    },
+    {
+      "destacado": false,
+      "nombre": "Coordinación Integral de Proyectos (CIP)",
+      "lineaSecundaria": "Responsable institucional: Coordinación Integral de Proyectos",
+      "descripcion": "Integra la gestión técnica, financiera y programática de los proyectos."
+    },
+    {
+      "destacado": false,
+      "nombre": "Gestión Territorial",
+      "lineaSecundaria": "Responsables: equipos Putumayo, Caquetá, Isana y ámbito macro",
+      "descripcion": "Acompaña a las ETI y fortalece el ordenamiento territorial indígena."
+    },
+    {
+      "destacado": false,
+      "nombre": "Convenios ETI",
+      "lineaSecundaria": "Articulación institucional: STP, CIP y áreas de apoyo según su competencia.",
+      "descripcion": "Gestiona seguimiento, modificación, soporte documental y liquidación de convenios."
+    },
+    {
+      "destacado": false,
+      "nombre": "Sistemas de Información y Análisis Territorial",
+      "lineaSecundaria": "Capacidad técnica transversal del trabajo territorial.",
+      "descripcion": "Articula SIGETI, gestión de información, monitoreo ambiental y análisis territorial."
+    },
+    {
+      "destacado": false,
+      "nombre": "Consolidación de los Gobiernos Indígenas",
+      "lineaSecundaria": "Capacidad misional articulada por la STP.",
+      "descripcion": "Acompaña la formalización, fortalecimiento y ejercicio de gobierno de las ETI."
+    },
+    {
+      "destacado": false,
+      "nombre": "Ordenamiento Territorial Indígena",
+      "lineaSecundaria": "Capacidad misional articulada con equipos territoriales y técnicos.",
+      "descripcion": "Contribuye a la formalización y posicionamiento del OTI en la Amazonia oriental colombiana."
+    }
+  ],
+  "cicloPasos": [
+    {
+      "titulo": "Concertar",
+      "descripcion": "Se parte de las prioridades y decisiones de los pueblos y autoridades indígenas."
+    },
+    {
+      "titulo": "Formular",
+      "descripcion": "Se definen resultados, actividades, recursos, riesgos y acuerdos."
+    },
+    {
+      "titulo": "Ejecutar",
+      "descripcion": "Los equipos desarrollan el acompañamiento técnico, político y territorial."
+    },
+    {
+      "titulo": "Monitorear",
+      "descripcion": "Se revisan avances, evidencias, alertas y uso de recursos."
+    },
+    {
+      "titulo": "Cerrar y aprender",
+      "descripcion": "Se consolidan resultados, compromisos, productos y aprendizajes."
+    }
+  ],
+  "aporteRuta2030": "Su aporte es asegurar que la Ruta 2030 se exprese en resultados territoriales: gobiernos indígenas más fuertes, acuerdos interculturales en marcha, información útil para decidir y una cooperación alineada con las prioridades de los pueblos."
+};
