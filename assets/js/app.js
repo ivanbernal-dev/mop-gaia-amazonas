@@ -615,6 +615,35 @@ function renderApoyoPanel() {
   }
 }
 
+function renderAseguramientoPanel() {
+  const data = window.GAIA_ASEGURAMIENTO_PANEL;
+  if (!data) return;
+
+  const introEl = document.querySelector("[data-aseguramiento-intro]");
+  const componentesEl = document.querySelector("[data-aseguramiento-componentes]");
+  const pasosEl = document.querySelector("[data-aseguramiento-flujo-pasos]");
+
+  if (introEl && Array.isArray(data.intro)) {
+    introEl.innerHTML = data.intro.map((parrafo) => `<p>${escapeHtml(parrafo)}</p>`).join("");
+  }
+
+  if (componentesEl && Array.isArray(data.componentes)) {
+    componentesEl.innerHTML = data.componentes.map((componente) => `
+      <article class="audit-card">
+        <span class="audit-tag">${escapeHtml(componente.etiqueta)}</span>
+        <h3>${escapeHtml(componente.titulo)}</h3>
+        <p>${escapeHtml(componente.descripcion)}</p>
+      </article>
+    `).join("");
+  }
+
+  if (pasosEl && Array.isArray(data.flujoPasos)) {
+    pasosEl.innerHTML = data.flujoPasos.map((paso) =>
+      `<li><strong>${escapeHtml(paso.titulo)}:</strong> ${escapeHtml(paso.descripcion)}</li>`
+    ).join("");
+  }
+}
+
 function extractHref(value) {
   const text = String(value || "");
   const hrefMatch = text.match(/href=["']([^"']+)["']/i);
@@ -2098,6 +2127,7 @@ renderMopUpdates();
 renderGobernanzaPanel();
 renderMisionalPanel();
 renderApoyoPanel();
+renderAseguramientoPanel();
 renderStrategicProcessCatalog();
 routeFromHash(true);
 window.addEventListener("popstate", () => routeFromHash(true));
