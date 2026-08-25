@@ -1,0 +1,66 @@
+# Configuración de Decap CMS — Fase 2 de la auditoría del módulo
+# administrador del MOP (agosto 2026).
+#
+# Este archivo define QUÉ es editable desde /admin. Cada colección
+# apunta a un archivo JSON en assets/data/; al guardar, Decap hace un
+# commit directo a ese JSON, y el flujo
+# .github/workflows/generar-datos-cms.yml regenera automáticamente el
+# .js que el sitio realmente carga (ver tools/build-cms-data.js).
+#
+# base_url debe apuntar al pequeño servidor de autenticación que TI
+# despliega siguiendo admin/README.md — sin eso, el botón de acceso no
+# funciona. Con base_url vacío, Decap muestra un error claro en vez de
+# fallar en silencio.
+
+backend:
+  name: github
+  repo: ivanbernal-dev/mop-gaia-amazonas
+  branch: main
+  base_url: "" # TI: pega aquí la URL del proxy de autenticación (admin/README.md)
+  auth_endpoint: auth
+
+# Antes de publicar, cada cambio queda como borrador visible solo para
+# quien lo hizo, hasta que alguien con permiso lo aprueba — así ningún
+# cambio llega al sitio público sin revisión.
+publish_mode: editorial_workflow
+
+media_folder: "assets/cms-uploads"
+public_folder: "/assets/cms-uploads"
+
+collections:
+  - name: "novedades"
+    label: "Novedades del MOP"
+    description: "Lo que se muestra en la sección 'Esta semana en el MOP'."
+    files:
+      - file: "assets/data/mop-updates.json"
+        label: "Novedades semanales"
+        name: "novedades"
+        fields:
+          - label: "Semana actual"
+            name: "currentWeek"
+            widget: "object"
+            fields:
+              - { label: "Etiqueta", name: "label", widget: "string" }
+              - { label: "Periodo", name: "period", widget: "string" }
+              - { label: "Resumen", name: "summary", widget: "text" }
+          - label: "Destacados de la semana"
+            name: "highlights"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "Tipo", name: "type", widget: "string" }
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Fecha o hito", name: "date", widget: "string" }
+              - label: "Estado"
+                name: "status"
+                widget: "select"
+                options:
+                  - "En control"
+                  - "En construcción"
+                  - "Publicado como visualización"
+                  - "Pendiente de validación institucional"
+              - { label: "Texto", name: "text", widget: "text" }
+          - label: "Próximas acciones"
+            name: "nextActions"
+            widget: "list"
+            allow_add: true

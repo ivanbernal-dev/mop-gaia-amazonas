@@ -1,0 +1,54 @@
+name: Generar datos desde el CMS
+
+# Fase 2 de la auditoría del módulo administrador (agosto 2026).
+# Cuando alguien guarda un cambio desde el gestor de contenido en
+# /admin (Decap CMS), lo que realmente se modifica en el repositorio
+# es un archivo JSON en assets/data/*.json. Este flujo regenera
+# automáticamente el archivo .js que el sitio realmente carga
+# (tools/build-cms-data.js) y lo publica en el mismo commit — nadie
+# necesita correr nada a mano ni saber que ese paso existe.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/data/*.json"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  generar:
+    name: generar-datos-cms
+    runs-on: ubuntu-latest
+    # Evita bucles: no vuelve a correr sobre un commit que ya generó este mismo flujo.
+    if: "!contains(github.event.head_commit.message, '[cms-datos]')"
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Regenerar los .js a partir de los JSON del CMS
+        run: node tools/build-cms-data.js
+
+      - name: Validar el sitio
+        run: node tools/validate-mop-rings.js
+
+      - name: Publicar si hubo cambios
+        run: |
+          if git diff --quiet; then
+            echo "Sin cambios que publicar."
+            exit 0
+          fi
+          git config user.name "mop-cms-bot"
+          git config user.email "actions@github.com"
+          git add assets/data/*.js
+          git commit -m "[cms-datos] Regenera datos publicados desde el CMS"
+          git push

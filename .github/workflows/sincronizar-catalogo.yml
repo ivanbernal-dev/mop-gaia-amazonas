@@ -1,0 +1,103 @@
+name: Sincronizar catálogo documental MOP
+
+# Fase 1 de la auditoría del módulo administrador (agosto 2026):
+# antes, alguien tenía que descargar el CSV a mano y correr
+# tools/build-document-catalog-from-import.js en su máquina. Este flujo
+# hace ese trabajo solo, todas las noches y también bajo demanda, leyendo
+# el Listado Maestro MOP directamente desde Google Sheets.
+#
+# Requisito único para TI: crear la variable de repositorio MOP_SHEET_ID
+# (Settings > Secrets and variables > Actions > Variables) con el ID de
+# la hoja de cálculo, compartida como "Cualquier persona con el enlace:
+# Lector". Sin esa variable, este flujo se detiene sin hacer cambios.
+
+on:
+  schedule:
+    # 09:00 UTC = 04:00 en Colombia (UTC-5). Fuera del horario laboral,
+    # para que cualquier PR generado esté listo cuando el equipo llegue.
+    - cron: "0 9 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sincronizar:
+    name: sincronizar-catalogo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verificar que MOP_SHEET_ID esté configurado
+        id: config
+        run: |
+          if [ -z "${{ vars.MOP_SHEET_ID }}" ]; then
+            echo "MOP_SHEET_ID no está configurado como variable de repositorio."
+            echo "Nada que sincronizar todavía — ver assets/config.js para instrucciones."
+            echo "configurado=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configurado=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Descargar el listado maestro desde Google Sheets
+        if: steps.config.outputs.configurado == 'true'
+        run: |
+          mkdir -p import
+          gid="${{ vars.MOP_SHEET_GID }}"
+          gid="${gid:-0}"
+          url="https://docs.google.com/spreadsheets/d/${{ vars.MOP_SHEET_ID }}/gviz/tq?tqx=out:csv&gid=${gid}"
+          curl -fsSL "$url" -o import/Listado_Maestro_MOP.csv
+          echo "Descargadas $(wc -l < import/Listado_Maestro_MOP.csv) líneas."
+
+      - name: Regenerar el catálogo documental
+        if: steps.config.outputs.configurado == 'true'
+        run: node tools/build-document-catalog-from-import.js
+
+      - name: Mantener assets/config.js sincronizado con la variable del repositorio
+        if: steps.config.outputs.configurado == 'true'
+        run: |
+          cat > assets/config.js << EOF
+          // Generado automáticamente por .github/workflows/sincronizar-catalogo.yml
+          // a partir de las variables de repositorio MOP_SHEET_ID y MOP_SHEET_GID.
+          // Para cambiar la hoja de origen, edita esas variables en GitHub
+          // (Settings > Secrets and variables > Actions > Variables) — no este archivo.
+          window.MOP_REMOTE_CONFIG = {
+            sheetId: "${{ vars.MOP_SHEET_ID }}",
+            sheetGid: "${{ vars.MOP_SHEET_GID }}"
+          };
+          EOF
+          if [ -z "${{ vars.MOP_SHEET_GID }}" ]; then
+            sed -i 's/sheetGid: ""/sheetGid: "0"/' assets/config.js
+          fi
+
+      - name: Validar el sitio antes de proponer el cambio
+        if: steps.config.outputs.configurado == 'true'
+        run: node tools/validate-mop-rings.js
+
+      - name: Abrir Pull Request si hubo cambios
+        if: steps.config.outputs.configurado == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Sincroniza catálogo documental desde Google Sheets"
+          title: "Sincronización automática del catálogo documental MOP"
+          body: |
+            Generado automáticamente por el flujo `sincronizar-catalogo.yml`.
+
+            Este PR actualiza `assets/documentos-mop.js` y
+            `assets/data/mop-document-catalog-report.js` con la lectura más
+            reciente del Listado Maestro MOP desde Google Sheets.
+
+            Revisa el resumen de conteos antes de aprobar y fusionar — este
+            flujo nunca publica directamente a `main` por sí solo.
+          branch: bot/sincronizar-catalogo
+          delete-branch: true
+          labels: |
+            catálogo-documental
+            automatización
