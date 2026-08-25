@@ -29,16 +29,22 @@ const MAPEOS = [
     json: "assets/data/mop-updates.json",
     js: "assets/data/mop-updates.js",
     globalName: "GAIA_MOP_UPDATES"
+  },
+  {
+    json: "assets/data/gobernanza-panel.json",
+    js: "assets/data/gobernanza-panel.js",
+    globalName: "GAIA_GOBERNANZA_PANEL"
   }
 ];
 
-function build({ json, js, globalName }) {
+function build({ json, js, globalName, transform }) {
   const jsonPath = path.join(ROOT, json);
   const jsPath = path.join(ROOT, js);
   if (!fs.existsSync(jsonPath)) {
     throw new Error(`No se encontró ${json}`);
   }
-  const data = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
+  const raw = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
+  const data = typeof transform === "function" ? transform(raw) : raw;
   const contents = `// Generado automáticamente por tools/build-cms-data.js a partir de ${json}.\n` +
     `// Para editar este contenido usa el gestor de contenido en /admin, no este archivo.\n` +
     `window.${globalName} = ${JSON.stringify(data, null, 2)};\n`;

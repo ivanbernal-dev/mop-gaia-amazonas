@@ -519,6 +519,40 @@ function renderMopUpdates() {
   }
 }
 
+function renderGobernanzaPanel() {
+  const data = window.GAIA_GOBERNANZA_PANEL;
+  if (!data) return;
+
+  const introEl = document.querySelector("[data-gobernanza-intro]");
+  const actoresEl = document.querySelector("[data-gobernanza-actores]");
+  const pasosEl = document.querySelector("[data-gobernanza-ciclo-pasos]");
+  const aporteEl = document.querySelector("[data-gobernanza-aporte]");
+
+  if (introEl && Array.isArray(data.intro)) {
+    introEl.innerHTML = data.intro.map((parrafo) => `<p>${escapeHtml(parrafo)}</p>`).join("");
+  }
+
+  if (actoresEl && Array.isArray(data.actores)) {
+    actoresEl.innerHTML = data.actores.map((actor) => {
+      const tipoClass = actor.externo ? "actor-type actor-type--external" : "actor-type";
+      const enlace = actor.enlaceUrl
+        ? `<br><a href="${escapeHtml(actor.enlaceUrl)}" target="_blank" rel="noopener">${escapeHtml(actor.enlaceTexto || actor.enlaceUrl)}</a>`
+        : "";
+      return `<li><span class="${tipoClass}">${escapeHtml(actor.tipo)}</span><strong>${escapeHtml(actor.nombre)}</strong><br>${escapeHtml(actor.descripcion)}${enlace}</li>`;
+    }).join("");
+  }
+
+  if (pasosEl && Array.isArray(data.cicloPasos)) {
+    pasosEl.innerHTML = data.cicloPasos.map((paso) =>
+      `<li><strong>${escapeHtml(paso.titulo)}</strong><span>${escapeHtml(paso.descripcion)}</span></li>`
+    ).join("");
+  }
+
+  if (aporteEl && data.aporteRuta2030) {
+    aporteEl.textContent = data.aporteRuta2030;
+  }
+}
+
 function extractHref(value) {
   const text = String(value || "");
   const hrefMatch = text.match(/href=["']([^"']+)["']/i);
@@ -1999,6 +2033,7 @@ initDocumentSuggestion();
 initExcessModule();
 initAuditModule();
 renderMopUpdates();
+renderGobernanzaPanel();
 renderStrategicProcessCatalog();
 routeFromHash(true);
 window.addEventListener("popstate", () => routeFromHash(true));
