@@ -1,0 +1,6 @@
+name = "mop-gaia-oauth"
+main = "worker.js"
+compatibility_date = "2026-08-01"
+
+# Los valores reales (OAUTH_CLIENT_ID / OAUTH_CLIENT_SECRET) NO van aquí:
+# se configuran como secretos con "wrangler secret put", según README.md.

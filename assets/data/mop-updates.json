@@ -1,6 +1,4 @@
-// Generado automáticamente por tools/build-cms-data.js a partir de assets/data/mop-updates.json.
-// Para editar este contenido usa el gestor de contenido en /admin, no este archivo.
-window.GAIA_MOP_UPDATES = {
+{
   "currentWeek": {
     "label": "Esta semana en el MOP",
     "period": "Semana de seguimiento institucional",
@@ -48,4 +46,4 @@ window.GAIA_MOP_UPDATES = {
     "Definir responsable por rol para actualizar semanalmente este módulo.",
     "Este módulo ya se actualiza mediante el gestor de contenido del MOP (CMS), sin editar código."
   ]
-};
+}
