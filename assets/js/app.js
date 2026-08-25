@@ -49,10 +49,28 @@ const documentData = canonicalDocumentData
   }
   : (window.DOCUMENTOS_MOP_DATA || { documentos: [], resumenTipoDocumental: [] });
 const mopValidationReport = window.MOP_VALIDATION_REPORT || null;
-const remoteDocumentMatrixBaseUrl = "";
-const remoteDocumentMatrixCsvUrl = "";
-const remoteDocumentMatrixJsonUrl = "";
-const remoteDocumentMatrixHtmlUrl = "";
+
+// Fase 1 de la auditoría del módulo administrador (agosto 2026): estas
+// URLs ya no están fijas en blanco. Se derivan del identificador de hoja
+// de cálculo que TI configura en assets/config.js (o en la variable de
+// repositorio MOP_SHEET_ID, que el flujo programado vuelca a ese mismo
+// archivo). Sin un sheetId configurado, el comportamiento es idéntico al
+// de antes: la sincronización remota permanece deshabilitada.
+const mopRemoteConfig = window.MOP_REMOTE_CONFIG || {};
+const remoteSheetId = String(mopRemoteConfig.sheetId || "").trim();
+const remoteSheetGid = String(mopRemoteConfig.sheetGid || "0").trim() || "0";
+const remoteDocumentMatrixBaseUrl = remoteSheetId
+  ? `https://docs.google.com/spreadsheets/d/${remoteSheetId}/gviz/tq`
+  : "";
+const remoteDocumentMatrixCsvUrl = remoteSheetId
+  ? `https://docs.google.com/spreadsheets/d/${remoteSheetId}/gviz/tq?tqx=out:csv&gid=${remoteSheetGid}`
+  : "";
+const remoteDocumentMatrixJsonUrl = remoteDocumentMatrixBaseUrl
+  ? `${remoteDocumentMatrixBaseUrl}?gid=${remoteSheetGid}&tqx=out:json`
+  : "";
+const remoteDocumentMatrixHtmlUrl = remoteSheetId
+  ? `https://docs.google.com/spreadsheets/d/${remoteSheetId}/gviz/tq?tqx=out:html&gid=${remoteSheetGid}`
+  : "";
 const remoteDocumentMatrixJsonpTimeout = 12000;
 const documentMatrixStorageKey = "gaia-document-matrix-v2";
 const legacyDocumentMatrixStorageKey = "gaia-document-matrix";
@@ -716,7 +734,7 @@ function loadGoogleVisualizationJsonp() {
       cleanup();
       reject(new Error("No fue posible cargar Google Sheets por JSONP"));
     };
-    script.src = `${remoteDocumentMatrixBaseUrl}?gid=0&tqx=${encodeURIComponent(`out:json;responseHandler:${callbackName}`)}&cacheBust=${Date.now()}`;
+    script.src = `${remoteDocumentMatrixBaseUrl}?gid=${remoteSheetGid}&tqx=${encodeURIComponent(`out:json;responseHandler:${callbackName}`)}&cacheBust=${Date.now()}`;
     document.head.appendChild(script);
   });
 }
