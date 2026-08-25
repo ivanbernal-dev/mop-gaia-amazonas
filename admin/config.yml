@@ -16,7 +16,7 @@ backend:
   name: github
   repo: ivanbernal-dev/mop-gaia-amazonas
   branch: main
-  base_url: "" # TI: pega aquí la URL del proxy de autenticación (admin/README.md)
+  base_url: "https://mop-gaia-oauth.ivan-bernal.workers.dev"
   auth_endpoint: auth
 
 # Antes de publicar, cada cambio queda como borrador visible solo para
