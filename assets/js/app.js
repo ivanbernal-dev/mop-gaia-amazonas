@@ -553,6 +553,37 @@ function renderGobernanzaPanel() {
   }
 }
 
+function renderMisionalPanel() {
+  const data = window.GAIA_MISIONAL_PANEL;
+  if (!data) return;
+
+  const introEl = document.querySelector("[data-misional-intro]");
+  const procesosEl = document.querySelector("[data-misional-procesos]");
+  const pasosEl = document.querySelector("[data-misional-ciclo-pasos]");
+  const aporteEl = document.querySelector("[data-misional-aporte]");
+
+  if (introEl && Array.isArray(data.intro)) {
+    introEl.innerHTML = data.intro.map((parrafo) => `<p>${escapeHtml(parrafo)}</p>`).join("");
+  }
+
+  if (procesosEl && Array.isArray(data.procesos)) {
+    procesosEl.innerHTML = data.procesos.map((proceso) => {
+      const claseDestacada = proceso.destacado ? ` class="featured-dependency"` : "";
+      return `<li${claseDestacada}><strong>${escapeHtml(proceso.nombre)}</strong><br>${escapeHtml(proceso.lineaSecundaria)}<br>${escapeHtml(proceso.descripcion)}</li>`;
+    }).join("");
+  }
+
+  if (pasosEl && Array.isArray(data.cicloPasos)) {
+    pasosEl.innerHTML = data.cicloPasos.map((paso) =>
+      `<li><strong>${escapeHtml(paso.titulo)}</strong><span>${escapeHtml(paso.descripcion)}</span></li>`
+    ).join("");
+  }
+
+  if (aporteEl && data.aporteRuta2030) {
+    aporteEl.textContent = data.aporteRuta2030;
+  }
+}
+
 function extractHref(value) {
   const text = String(value || "");
   const hrefMatch = text.match(/href=["']([^"']+)["']/i);
@@ -2034,6 +2065,7 @@ initExcessModule();
 initAuditModule();
 renderMopUpdates();
 renderGobernanzaPanel();
+renderMisionalPanel();
 renderStrategicProcessCatalog();
 routeFromHash(true);
 window.addEventListener("popstate", () => routeFromHash(true));

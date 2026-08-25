@@ -117,3 +117,47 @@ collections:
           - label: "Aporte a la Ruta 2030"
             name: "aporteRuta2030"
             widget: "text"
+
+  - name: "misional"
+    label: "Macroproceso Misional"
+    description: >-
+      Contenido del anillo Misional (panel "Misional" del mapa). Los
+      títulos de sección y la estructura de la página no se editan
+      aquí — solo los textos, la lista de procesos y capacidades, y
+      los pasos del ciclo de trabajo.
+    files:
+      - file: "assets/data/misional-panel.json"
+        label: "Panel Misional"
+        name: "misional"
+        fields:
+          - label: "Párrafos de introducción"
+            name: "intro"
+            widget: "list"
+            allow_add: true
+            field: { label: "Párrafo", name: "parrafo", widget: "text" }
+          - label: "Procesos y capacidades misionales"
+            name: "procesos"
+            widget: "list"
+            summary: "{{nombre}}"
+            fields:
+              - label: "¿Destacar este proceso?"
+                name: "destacado"
+                widget: "boolean"
+                default: false
+                hint: "Le da un estilo visual resaltado en la lista (úsalo para el proceso más central, hoy la STP)."
+              - { label: "Nombre del proceso o capacidad", name: "nombre", widget: "string" }
+              - label: "Línea secundaria (responsable, articulación o tipo de capacidad)"
+                name: "lineaSecundaria"
+                widget: "string"
+                hint: "Por ejemplo: 'Responsable institucional: ...', 'Responsables: ...', 'Articulación institucional: ...', o una frase que describa el tipo de capacidad."
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+          - label: "Cómo una prioridad se convierte en resultado territorial (pasos del ciclo)"
+            name: "cicloPasos"
+            widget: "list"
+            summary: "{{titulo}}"
+            fields:
+              - { label: "Paso", name: "titulo", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+          - label: "Aporte a la Ruta 2030"
+            name: "aporteRuta2030"
+            widget: "text"
