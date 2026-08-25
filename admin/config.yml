@@ -161,3 +161,51 @@ collections:
           - label: "Aporte a la Ruta 2030"
             name: "aporteRuta2030"
             widget: "text"
+
+  - name: "apoyo"
+    label: "Macroproceso de Apoyo"
+    description: >-
+      Contenido del anillo de Apoyo (panel "Apoyo" del mapa). Los
+      títulos de sección y la estructura de la página no se editan
+      aquí — solo los textos, la lista de dependencias y los pasos
+      del ciclo de servicio interno. La sección "Actualizaciones
+      documentales recientes" (con los códigos de instrumentos
+      protegidos) NO está aquí a propósito: esos códigos los verifica
+      automáticamente la validación del sitio y no deben editarse
+      desde este formulario.
+    files:
+      - file: "assets/data/apoyo-panel.json"
+        label: "Panel de Apoyo"
+        name: "apoyo"
+        fields:
+          - label: "Párrafos de introducción"
+            name: "intro"
+            widget: "list"
+            allow_add: true
+            field: { label: "Párrafo", name: "parrafo", widget: "text" }
+          - label: "Dependencias del Macroproceso de Apoyo"
+            name: "dependencias"
+            widget: "list"
+            summary: "{{nombre}}"
+            fields:
+              - label: "¿Destacar esta dependencia?"
+                name: "destacado"
+                widget: "boolean"
+                default: false
+                hint: "Le da un estilo visual resaltado en la lista (úsalo para la dependencia articuladora, hoy la SDE)."
+              - { label: "Nombre de la dependencia", name: "nombre", widget: "string" }
+              - label: "Línea secundaria (responsable institucional o rol)"
+                name: "lineaSecundaria"
+                widget: "string"
+                hint: "Por ejemplo: 'Responsable institucional: ...' o una frase que describa su rol dentro del macroproceso."
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+          - label: "Cómo se habilita la operación (pasos del ciclo)"
+            name: "cicloPasos"
+            widget: "list"
+            summary: "{{titulo}}"
+            fields:
+              - { label: "Paso", name: "titulo", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+          - label: "Aporte a la Ruta 2030"
+            name: "aporteRuta2030"
+            widget: "text"

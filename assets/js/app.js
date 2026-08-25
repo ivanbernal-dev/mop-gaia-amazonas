@@ -584,6 +584,37 @@ function renderMisionalPanel() {
   }
 }
 
+function renderApoyoPanel() {
+  const data = window.GAIA_APOYO_PANEL;
+  if (!data) return;
+
+  const introEl = document.querySelector("[data-apoyo-intro]");
+  const dependenciasEl = document.querySelector("[data-apoyo-dependencias]");
+  const pasosEl = document.querySelector("[data-apoyo-ciclo-pasos]");
+  const aporteEl = document.querySelector("[data-apoyo-aporte]");
+
+  if (introEl && Array.isArray(data.intro)) {
+    introEl.innerHTML = data.intro.map((parrafo) => `<p>${escapeHtml(parrafo)}</p>`).join("");
+  }
+
+  if (dependenciasEl && Array.isArray(data.dependencias)) {
+    dependenciasEl.innerHTML = data.dependencias.map((dependencia) => {
+      const claseDestacada = dependencia.destacado ? ` class="featured-dependency"` : "";
+      return `<li${claseDestacada}><strong>${escapeHtml(dependencia.nombre)}</strong><br>${escapeHtml(dependencia.lineaSecundaria)}<br>${escapeHtml(dependencia.descripcion)}</li>`;
+    }).join("");
+  }
+
+  if (pasosEl && Array.isArray(data.cicloPasos)) {
+    pasosEl.innerHTML = data.cicloPasos.map((paso) =>
+      `<li><strong>${escapeHtml(paso.titulo)}</strong><span>${escapeHtml(paso.descripcion)}</span></li>`
+    ).join("");
+  }
+
+  if (aporteEl && data.aporteRuta2030) {
+    aporteEl.textContent = data.aporteRuta2030;
+  }
+}
+
 function extractHref(value) {
   const text = String(value || "");
   const hrefMatch = text.match(/href=["']([^"']+)["']/i);
@@ -2066,6 +2097,7 @@ initAuditModule();
 renderMopUpdates();
 renderGobernanzaPanel();
 renderMisionalPanel();
+renderApoyoPanel();
 renderStrategicProcessCatalog();
 routeFromHash(true);
 window.addEventListener("popstate", () => routeFromHash(true));
