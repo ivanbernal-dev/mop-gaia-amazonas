@@ -64,3 +64,56 @@ collections:
             name: "nextActions"
             widget: "list"
             allow_add: true
+
+  - name: "gobernanza"
+    label: "Gobernanza y Propósito"
+    description: >-
+      Contenido del anillo de Gobernanza y Propósito (panel "Gobernanza"
+      del mapa). Los títulos de sección y la estructura de la página no
+      se editan aquí — solo los textos, la lista de actores y los pasos
+      del ciclo de decisión.
+    files:
+      - file: "assets/data/gobernanza-panel.json"
+        label: "Panel de Gobernanza"
+        name: "gobernanza"
+        fields:
+          - label: "Párrafos de introducción"
+            name: "intro"
+            widget: "list"
+            allow_add: true
+            field: { label: "Párrafo", name: "parrafo", widget: "text" }
+          - label: "Instancias, responsables y actores relacionados"
+            name: "actores"
+            widget: "list"
+            summary: "{{nombre}}"
+            fields:
+              - label: "Tipo de actor"
+                name: "tipo"
+                widget: "string"
+                hint: "Por ejemplo: Responsable interno, Instancia interna, Actor territorial, Actor externo."
+              - label: "¿Es un actor externo a la Fundación?"
+                name: "externo"
+                widget: "boolean"
+                default: false
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - label: "Texto del enlace (opcional)"
+                name: "enlaceTexto"
+                widget: "string"
+                required: false
+                default: ""
+              - label: "URL del enlace (opcional)"
+                name: "enlaceUrl"
+                widget: "string"
+                required: false
+                default: ""
+          - label: "Cómo se gobierna una decisión (pasos del ciclo)"
+            name: "cicloPasos"
+            widget: "list"
+            summary: "{{titulo}}"
+            fields:
+              - { label: "Paso", name: "titulo", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+          - label: "Aporte a la Ruta 2030"
+            name: "aporteRuta2030"
+            widget: "text"
