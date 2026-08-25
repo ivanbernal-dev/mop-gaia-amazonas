@@ -1,0 +1,32 @@
+name: Validar MOP
+
+# Fase 0 de la auditoría del módulo administrador (agosto 2026):
+# antes nadie validaba el sitio antes de publicarlo. Este flujo corre
+# tools/validate-mop-rings.js en cada push y en cada pull request hacia
+# main, y bloquea el merge si la validación falla.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: validate-mop-rings
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Ejecutar validación del MOP
+        run: node tools/validate-mop-rings.js
