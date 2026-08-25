@@ -209,3 +209,46 @@ collections:
           - label: "Aporte a la Ruta 2030"
             name: "aporteRuta2030"
             widget: "text"
+
+  - name: "aseguramiento"
+    label: "Aseguramiento Independiente"
+    description: >-
+      Contenido del anillo de Aseguramiento Independiente (panel
+      "Aseguramiento Independiente" del mapa). Los títulos de sección
+      y la estructura de la página no se editan aquí. Tampoco están
+      aquí, a propósito: la nota de instrumentos controlados ni la
+      sección "Instrumentos que gobiernan el ciclo" — contienen los
+      códigos FGA-AIN-CR-01, FGA-AIN-PR-01 y FGA-AIN-MT-01, que la
+      validación automática del sitio verifica textualmente y no deben
+      editarse desde este formulario. Las listas de auditorías por
+      vigencia (proyectos y donantes, revisoría fiscal, planes de
+      mejoramiento) tampoco están aquí: se generan con otro mecanismo
+      ya existente en el sitio, independiente de este CMS.
+    files:
+      - file: "assets/data/aseguramiento-panel.json"
+        label: "Panel de Aseguramiento Independiente"
+        name: "aseguramiento"
+        fields:
+          - label: "Párrafos de introducción"
+            name: "intro"
+            widget: "list"
+            allow_add: true
+            field: { label: "Párrafo", name: "parrafo", widget: "text" }
+          - label: "Componentes del aseguramiento independiente"
+            name: "componentes"
+            widget: "list"
+            summary: "{{titulo}}"
+            fields:
+              - { label: "Etiqueta", name: "etiqueta", widget: "string" }
+              - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+          - label: "Cómo fluye una revisión independiente (pasos)"
+            name: "flujoPasos"
+            widget: "list"
+            summary: "{{titulo}}"
+            fields:
+              - { label: "Paso", name: "titulo", widget: "string" }
+              - label: "Descripción"
+                name: "descripcion"
+                widget: "text"
+                hint: "Se muestra como '<Paso>: <Descripción>' — empieza en minúscula, como en los pasos actuales."

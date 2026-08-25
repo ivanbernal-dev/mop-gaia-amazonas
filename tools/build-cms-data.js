@@ -44,6 +44,11 @@ const MAPEOS = [
     json: "assets/data/apoyo-panel.json",
     js: "assets/data/apoyo-panel.js",
     globalName: "GAIA_APOYO_PANEL"
+  },
+  {
+    json: "assets/data/aseguramiento-panel.json",
+    js: "assets/data/aseguramiento-panel.js",
+    globalName: "GAIA_ASEGURAMIENTO_PANEL"
   }
 ];
 
