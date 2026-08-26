@@ -62,10 +62,31 @@ assert(/\.circle\s*\{[\s\S]*?pointer-events:\s*none;/m.test(css), "los círculos
 assert(/\.circle-mark\s*\{[\s\S]*?pointer-events:\s*auto;/m.test(css), "los rótulos de los anillos no están habilitados para interacción");
 assert((app.match(/function initAuditModule\s*\(/g) || []).length === 1, "initAuditModule está duplicada");
 
-assert(documents?.catalogStats?.catalogVisible === 22, "el catálogo autorizado no reporta 22 metadatos visibles");
-assert(documents?.documentos?.length === 22, "el catálogo no contiene exactamente los 22 metadatos autorizados");
-assert(documents?.documentos?.every((item) => item.downloadAuthorized === false), "algún documento habilita descarga");
-assert(documents?.documentos?.every((item) => !item.linkDocumento && !item.canonicalUrl), "algún metadato expone un enlace documental");
+// El Listado Maestro ahora se administra desde /admin (colección
+// "documentos"): la cantidad de registros cambia con normalidad cuando
+// alguien agrega, actualiza o da de baja un documento, así que ya no
+// tiene sentido validar un conteo fijo. En su lugar se valida lo que sí
+// debe cumplirse siempre, sea cual sea el tamaño del catálogo: que el
+// conteo reportado sea internamente consistente, que ningún documento
+// habilite descarga ni exponga un enlace real, y que ningún campo de
+// texto (agregado o editado por cualquier persona desde el CMS) traiga
+// pegado por error un link o correo — la misma revisión que antes hacía
+// tools/build-document-catalog-from-import.js al importar el CSV, pero
+// aplicada aquí para que cubra también las ediciones futuras desde /admin.
+const documentUnsafePattern = /(?:https?:\/\/|www\.|[\w.+-]+@[\w.-]+\.[a-z]{2,}|\b[a-z]:\\|(?:^|\s)\/(?:users|home|workspace|root)\/)/i;
+const documentRecords = documents?.documentos || [];
+assert(documentRecords.length > 0, "el Listado Maestro no contiene documentos");
+assert(documents?.catalogStats?.catalogVisible === documentRecords.length, "catalogStats.catalogVisible no coincide con la cantidad real de documentos");
+assert(documentRecords.every((item) => item.codigo && item.nombre), "algún documento del Listado Maestro carece de código o nombre");
+assert(documentRecords.every((item) => item.downloadAuthorized === false), "algún documento habilita descarga");
+assert(documentRecords.every((item) => !item.linkDocumento && !item.canonicalUrl), "algún metadato expone un enlace documental");
+documentRecords.forEach((item) => {
+  Object.entries(item).forEach(([field, value]) => {
+    if (documentUnsafePattern.test(String(value ?? ""))) {
+      failures.push(`el documento ${item.codigo || "sin código"} expone un valor sensible (link, correo o ruta local) en el campo ${field}`);
+    }
+  });
+});
 
 const strategicRecords = processes?.estrategico || [];
 assert(strategicRecords.length === 5, "el catálogo estratégico no contiene cinco procesos o funciones");
@@ -86,4 +107,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("Validación MOP superada: navegación, cinco ciclos, metadatos protegidos, catálogo de 22 registros y sintaxis JavaScript correctos.");
+console.log(`Validación MOP superada: navegación, cinco ciclos, metadatos protegidos, catálogo documental (${documentRecords.length} registros, sin enlaces expuestos) y sintaxis JavaScript correctos.`);

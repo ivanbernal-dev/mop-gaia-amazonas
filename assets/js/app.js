@@ -131,6 +131,7 @@ const documentSuggestion = {
   send: document.getElementById("docSuggestionSend"),
   draft: document.getElementById("docSuggestionDraft")
 };
+const DOCUMENT_SUGGESTION_EMAIL = "ivan.bernal@gaiaamazonas.org";
 const excessData = window.EXCEDENTES_MOP_DATA || { proyectos: [], informes: [] };
 const auditData = window.AUDITORIA_MOP_DATA || { auditoriaExterna: [], revisoriaFiscal: [], planesMejoramiento: [] };
 const processCatalogData = window.MOP_PROCESS_CATALOG || { estrategico: [] };
@@ -1605,13 +1606,18 @@ function buildDocumentSuggestion() {
     </dl>
   `;
   documentSuggestion.draft.hidden = false;
-  documentSuggestion.send.removeAttribute("href");
-  documentSuggestion.send.setAttribute("role", "button");
-  documentSuggestion.send.setAttribute("aria-disabled", "true");
-  documentSuggestion.send.title = "Canal interno pendiente de configuración para publicación.";
+  documentSuggestion.send.removeAttribute("aria-disabled");
+  documentSuggestion.send.title = `Se abrirá tu programa de correo, con el mensaje ya redactado hacia ${DOCUMENT_SUGGESTION_EMAIL}.`;
   documentSuggestion.send.dataset.subject = subject;
   documentSuggestion.send.dataset.body = body;
   documentSuggestion.send.hidden = false;
+}
+
+function sendDocumentSuggestionByEmail() {
+  const subject = documentSuggestion.send?.dataset.subject || "";
+  const body = documentSuggestion.send?.dataset.body || "";
+  const mailtoUrl = `mailto:${DOCUMENT_SUGGESTION_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailtoUrl;
 }
 
 function initDocumentSuggestion() {
@@ -1624,6 +1630,7 @@ function initDocumentSuggestion() {
     if (documentSuggestion.send) documentSuggestion.send.hidden = true;
     if (documentSuggestion.draft) documentSuggestion.draft.hidden = true;
   });
+  documentSuggestion.send?.addEventListener("click", sendDocumentSuggestionByEmail);
 }
 
 function findExcessValue(item, names) {

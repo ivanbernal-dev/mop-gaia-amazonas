@@ -43,6 +43,38 @@ const MAPEOS = [
     transform: buildJuntaCompromisos
   },
   {
+    json: "assets/data/documentos-mop.json",
+    js: "assets/documentos-mop.js",
+    globalName: "DOCUMENTOS_MOP_DATA",
+    // El CMS solo edita la matriz cruda del Listado Maestro (una fila
+    // por documento: proceso, código, nombre, versión, estado,
+    // dependencia...). Los indicadores (total, vigentes, en
+    // construcción...) y el resumen por tipo documental que muestra
+    // "Gestión Documental del MOP" son un resumen CALCULADO a partir de
+    // esa matriz. El link real de cada documento NUNCA se guarda aquí
+    // -- este archivo se publica en un repositorio público de GitHub, y
+    // el catálogo público solo expone metadatos, nunca el documento ni
+    // su enlace.
+    transform: buildDocumentCatalog,
+    // Este archivo, a diferencia de los demás generados aquí, también
+    // debe cargar el módulo de vista previa del catálogo (ver
+    // assets/js/document-catalog-preview.js) -- así lo hacía el script
+    // de importación anterior (tools/build-document-catalog-from-import.js,
+    // ahora reemplazado por este flujo del CMS).
+    extraFooter: `(function loadDocumentCatalogPreview() {\n` +
+      `  const load = () => {\n` +
+      `    const script = document.createElement("script");\n` +
+      `    script.src = "assets/js/document-catalog-preview.js?v=20260826";\n` +
+      `    document.body.appendChild(script);\n` +
+      `  };\n` +
+      `  if (document.readyState === "loading") {\n` +
+      `    window.addEventListener("DOMContentLoaded", load, { once: true });\n` +
+      `  } else {\n` +
+      `    load();\n` +
+      `  }\n` +
+      `})();\n`
+  },
+  {
     json: "assets/data/gobernanza-panel.json",
     js: "assets/data/gobernanza-panel.js",
     globalName: "GAIA_GOBERNANZA_PANEL"
@@ -141,7 +173,86 @@ function buildJuntaCompromisos(data) {
   };
 }
 
-function build({ json, js, globalName, transform }) {
+// Normaliza texto para comparaciones sin tildes/mayúsculas (igual que
+// normalizeText() en assets/js/app.js -- se duplica aquí porque este
+// script corre en Node, fuera del navegador).
+function normalizeDocText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function buildDocumentSummary(records) {
+  return Array.from(new Set(records.map((record) => record.tipoDocumental || "Por clasificar")))
+    .sort((left, right) => left.localeCompare(right, "es"))
+    .map((tipoDocumental) => {
+      const subset = records.filter((record) => (record.tipoDocumental || "Por clasificar") === tipoDocumental);
+      return {
+        tipoDocumental,
+        vigentes: subset.filter((record) => normalizeDocText(record.estado).includes("vigente")).length,
+        obsoletos: subset.filter((record) => normalizeDocText(record.estado).includes("obsoleto")).length,
+        enActualizacion: subset.filter((record) => normalizeDocText(record.estado).includes("actualizacion")).length,
+        // "En revisión" es un estado intermedio nuevo (borrador ya escrito,
+        // pendiente de aprobación) que no existía en el listado anterior.
+        // Para el resumen agregado se cuenta junto con "en construcción"
+        // -- ambos significan "todavía no es la versión vigente" -- pero
+        // cada ficha de documento sigue mostrando el estado real y exacto.
+        enConstruccion: subset.filter((record) => {
+          const estado = normalizeDocText(record.estado);
+          return estado.includes("construccion") || estado.includes("revision");
+        }).length
+      };
+    });
+}
+
+function buildDocumentCatalog(data) {
+  const documentos = Array.isArray(data.documentos) ? data.documentos : [];
+
+  // El catálogo público expone la metadata de todos los documentos del
+  // Listado Maestro; lo que NUNCA se expone es el link real ni la
+  // descarga -- por diseño, porque este archivo se publica en un
+  // repositorio público de GitHub. clasificacion/accessClass se
+  // mantiene por compatibilidad con la lógica ya existente en
+  // assets/js/document-catalog-preview.js (que decide qué se muestra
+  // según ese campo), pero aquí siempre queda en un valor visible.
+  const enrichedDocumentos = documentos.map((record) => ({
+    ...record,
+    accessClass: record.clasificacion || "Interna",
+    catalogVisible: true,
+    downloadAuthorized: false,
+    linkDocumento: "",
+    canonicalUrl: ""
+  }));
+
+  const visibleStatusCounts = {
+    vigentes: enrichedDocumentos.filter((record) => normalizeDocText(record.estado).includes("vigente")).length,
+    enActualizacion: enrichedDocumentos.filter((record) => normalizeDocText(record.estado).includes("actualizacion")).length,
+    enConstruccion: enrichedDocumentos.filter((record) => {
+      const estado = normalizeDocText(record.estado);
+      return estado.includes("construccion") || estado.includes("revision");
+    }).length
+  };
+
+  return {
+    fuente: data.fuente,
+    hojaListado: data.hojaListado,
+    hojaResumen: data.hojaResumen,
+    fechaExtraccion: data.fechaExtraccion,
+    catalogStats: {
+      recordsTotal: enrichedDocumentos.length,
+      catalogVisible: enrichedDocumentos.length,
+      catalogHidden: 0,
+      downloadsAuthorized: 0,
+      visibleStatusCounts
+    },
+    documentos: enrichedDocumentos,
+    resumenTipoDocumental: buildDocumentSummary(enrichedDocumentos)
+  };
+}
+
+function build({ json, js, globalName, transform, extraFooter }) {
   const jsonPath = path.join(ROOT, json);
   const jsPath = path.join(ROOT, js);
   if (!fs.existsSync(jsonPath)) {
@@ -151,7 +262,8 @@ function build({ json, js, globalName, transform }) {
   const data = typeof transform === "function" ? transform(raw) : raw;
   const contents = `// Generado automáticamente por tools/build-cms-data.js a partir de ${json}.\n` +
     `// Para editar este contenido usa el gestor de contenido en /admin, no este archivo.\n` +
-    `window.${globalName} = ${JSON.stringify(data, null, 2)};\n`;
+    `window.${globalName} = ${JSON.stringify(data, null, 2)};\n` +
+    (extraFooter || "");
   fs.writeFileSync(jsPath, contents, "utf8");
   console.log(`${js} generado desde ${json}.`);
 }

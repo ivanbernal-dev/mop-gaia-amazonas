@@ -113,6 +113,80 @@ collections:
             widget: "list"
             allow_add: true
 
+  - name: "documentos"
+    label: "Listado Maestro (Gestión Documental)"
+    description: >-
+      Matriz del Listado Maestro de Control de Información Documentada
+      (GPCIFT001). Alimenta la sección "Gestión Documental del MOP": el
+      catálogo público, sus indicadores (total, vigentes, en
+      construcción...) y el resumen por tipo documental se calculan
+      automáticamente a partir de esta matriz al guardar. Para dar de
+      baja una versión y publicar la siguiente, cambia el Estado del
+      registro anterior a "Obsoleto" y agrega un nuevo registro con el
+      mismo código y la versión nueva. IMPORTANTE: este repositorio es
+      público, así que aquí NUNCA se guarda el link real del documento
+      — solo su metadata (proceso, código, nombre, versión, estado,
+      dependencia). El documento y su enlace se consultan por el canal
+      interno autorizado.
+    files:
+      - file: "assets/data/documentos-mop.json"
+        label: "Listado Maestro"
+        name: "documentos"
+        fields:
+          - { label: "Fuente", name: "fuente", widget: "string" }
+          - label: "Hoja de origen"
+            name: "hojaListado"
+            widget: "string"
+            required: false
+          - label: "Hoja de resumen"
+            name: "hojaResumen"
+            widget: "string"
+            required: false
+          - { label: "Fecha de extracción (AAAA-MM-DD)", name: "fechaExtraccion", widget: "string" }
+          - label: "Documentos"
+            name: "documentos"
+            widget: "list"
+            summary: "{{codigo}} — {{nombre}} ({{estado}})"
+            fields:
+              - label: "Macroproceso"
+                name: "macroproceso"
+                widget: "select"
+                options: ["Estratégico", "Gobernanza", "Misional", "Apoyo", "Aseguramiento independiente"]
+              - { label: "Proceso", name: "proceso", widget: "string" }
+              - { label: "Subproceso", name: "subproceso", widget: "string", required: false }
+              - label: "Tipo documental"
+                name: "tipoDocumental"
+                widget: "select"
+                options: ["Política", "Plan", "Programa", "Sistema", "Anexo", "Caracterización", "Manual", "Procedimiento", "Guía", "Formato", "Matriz", "Instructivo", "Acta", "Informe", "Estatuto", "Reglamento", "Video"]
+              - label: "Descripción temática (palabras clave para búsqueda)"
+                name: "descripcionTematica"
+                widget: "text"
+                required: false
+              - { label: "Código del documento", name: "codigo", widget: "string" }
+              - { label: "Nombre del documento", name: "nombre", widget: "string" }
+              - label: "Fecha de aprobación (AAAA-MM-DD, dejar vacío si no aplica)"
+                name: "fechaAprobacion"
+                widget: "string"
+                required: false
+                default: ""
+              - { label: "Año", name: "anio", widget: "string", required: false }
+              - { label: "Versión", name: "version", widget: "string", required: false }
+              - label: "Estado"
+                name: "estado"
+                widget: "select"
+                options: ["Vigente", "En revisión", "En construcción", "En actualización", "Obsoleto"]
+              - { label: "Dependencia", name: "dependencia", widget: "string", required: false }
+              - { label: "Soporte", name: "soporte", widget: "string", required: false }
+              - label: "Observaciones"
+                name: "observaciones"
+                widget: "text"
+                required: false
+              - label: "Clasificación"
+                name: "clasificacion"
+                widget: "select"
+                options: ["Interna", "Pública"]
+                default: "Interna"
+
   - name: "gobernanza"
     label: "Gobernanza y Propósito"
     description: >-
