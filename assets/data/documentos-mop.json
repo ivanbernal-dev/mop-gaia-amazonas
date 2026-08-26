@@ -1,21 +1,8 @@
-// Generado automáticamente por tools/build-cms-data.js a partir de assets/data/documentos-mop.json.
-// Para editar este contenido usa el gestor de contenido en /admin, no este archivo.
-window.DOCUMENTOS_MOP_DATA = {
+{
   "fuente": "Listado Maestro Control de Información Documentada (GPCIFT001)",
   "hojaListado": "Listado de Información Document",
   "hojaResumen": "Resumen calculado desde los registros",
   "fechaExtraccion": "2026-08-26",
-  "catalogStats": {
-    "recordsTotal": 109,
-    "catalogVisible": 109,
-    "catalogHidden": 0,
-    "downloadsAuthorized": 0,
-    "visibleStatusCounts": {
-      "vigentes": 49,
-      "enActualizacion": 12,
-      "enConstruccion": 48
-    }
-  },
   "documentos": [
     {
       "macroproceso": "Apoyo",
@@ -32,12 +19,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -54,12 +36,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -76,12 +53,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -98,12 +70,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -120,12 +87,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -142,12 +104,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -164,12 +121,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -186,12 +138,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -208,12 +155,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -230,12 +172,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -252,12 +189,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -274,12 +206,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -296,12 +223,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -318,12 +240,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -340,12 +257,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -362,12 +274,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -384,12 +291,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -406,12 +308,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -428,12 +325,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -450,12 +342,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -472,12 +359,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -494,12 +376,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -516,12 +393,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -538,12 +410,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -560,12 +427,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -582,12 +444,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -604,12 +461,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -626,12 +478,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Legal",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -648,12 +495,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -670,12 +512,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -692,12 +529,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -714,12 +546,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -736,12 +563,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -758,12 +580,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -780,12 +597,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -802,12 +614,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Tecnologías de la Información",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -824,12 +631,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -846,12 +648,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -868,12 +665,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -890,12 +682,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -912,12 +699,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -934,12 +716,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -956,12 +733,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -978,12 +750,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1000,12 +767,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "La politica está siendo sujeta de actaulización",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1022,12 +784,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "El procedimiento está a la espera de ser validado",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1044,12 +801,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1066,12 +818,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1088,12 +835,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1110,12 +852,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1132,12 +869,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1154,12 +886,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1176,12 +903,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1198,12 +920,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1220,12 +937,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -1242,12 +954,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -1264,12 +971,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -1286,12 +988,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1308,12 +1005,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Logística y Compras",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -1330,12 +1022,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -1352,12 +1039,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación Integral de Proyectos",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1374,12 +1056,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Estratégico",
@@ -1396,12 +1073,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -1418,12 +1090,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1440,12 +1107,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1462,12 +1124,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación de Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1484,12 +1141,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1506,12 +1158,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1528,12 +1175,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1550,12 +1192,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1572,12 +1209,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1594,12 +1226,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "",
       "soporte": "",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1616,12 +1243,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación Integral de Proyectos",
       "soporte": "",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1638,12 +1260,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación Integral de Proyectos",
       "soporte": "Magnético",
       "observaciones": "Reemplaza los denominados otrosíes aclaratorios cuando el ajuste es exclusivamente presupuestal. No aplica si el centro de costos o rubro define un perfil, rol, actividad o producto, ni cuando se modifica alguna condición contractual.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1660,12 +1277,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Contractual",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1682,12 +1294,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Contractual",
       "soporte": "Magnético",
       "observaciones": "Código asignado de manera independiente a la certificación de prestación de servicios.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1704,12 +1311,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1726,12 +1328,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1748,12 +1345,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Contractual",
       "soporte": "Magnético",
       "observaciones": "",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Gobernanza",
@@ -1770,12 +1362,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Dirección Ejecutiva",
       "soporte": "Magnético",
       "observaciones": "Borrador elaborado con base en los Estatutos y los lineamientos gráficos institucionales; sujeto a validación jurídica y aprobación institucional.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Gobernanza",
@@ -1792,12 +1379,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Dirección Ejecutiva",
       "soporte": "Magnético",
       "observaciones": "Borrador elaborado con base en los Estatutos y los lineamientos gráficos institucionales; sujeto a validación jurídica y aprobación institucional.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1814,12 +1396,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Contractual",
       "soporte": "Magnético",
       "observaciones": "Borrador elaborado con base en los Estatutos y los lineamientos gráficos institucionales; sujeto a validación jurídica y aprobación institucional.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1836,12 +1413,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "Registro separado de la certificación de prestación de servicios; pendiente de publicación del enlace definitivo en Drive.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1858,12 +1430,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "Se corrigió la duplicidad de código y el nombre incompleto del registro anterior; pendiente de publicación del enlace definitivo en Drive.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -1880,12 +1447,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Contractual",
       "soporte": "Magnético",
       "observaciones": "Plantilla elaborada; pendiente de publicación del enlace definitivo en Drive.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Misional",
@@ -1902,12 +1464,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Coordinación Integral de Proyectos",
       "soporte": "Magnético",
       "observaciones": "Plantilla elaborada; pendiente de publicación del enlace definitivo en Drive.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Estratégico",
@@ -1924,12 +1481,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Programa de Alianzas e Innovación",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Borrador controlado creado el 28/07/2026 para validación institucional.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Estratégico",
@@ -1946,12 +1498,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Programa de Alianzas e Innovación",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Borrador controlado creado el 28/07/2026 para validación institucional.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Estratégico",
@@ -1968,12 +1515,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Programa de Alianzas e Innovación",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Borrador controlado creado el 28/07/2026 para validación institucional.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Estratégico",
@@ -1990,12 +1532,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Programa de Alianzas e Innovación",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Matriz propuesta sujeta a validación del propietario, la Dirección y las áreas involucradas.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Estratégico",
@@ -2012,12 +1549,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Subdirección de Desarrollo Estratégico",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Canal pendiente. Propietario por rol aprobado: Subdirector(a) de Desarrollo Estratégico. Borrador controlado v0.1 incorporado el 28/07/2026 para validación institucional; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Estratégico",
@@ -2034,12 +1566,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Gestión Pública y Relacionamiento Estratégico",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Canal pendiente. Propietario por rol aprobado: Responsable de Gestión Pública y Relacionamiento Estratégico. Borrador controlado v0.1 incorporado el 28/07/2026 para validación institucional; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Estratégico",
@@ -2056,12 +1583,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Comunicaciones Estratégicas",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Canal pendiente. Propietario por rol aprobado: Responsable de Comunicaciones Estratégicas. Borrador controlado v0.1 incorporado el 28/07/2026 para validación institucional; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Estratégico",
@@ -2078,12 +1600,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Monitoreo, Evaluación y Aprendizaje",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Canal pendiente. Propietario por rol aprobado: Responsable de Monitoreo, Evaluación y Aprendizaje. Borrador controlado v0.1 incorporado el 28/07/2026 para validación institucional; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Estratégico",
@@ -2100,12 +1617,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Gestión de Procesos y Cumplimiento Institucional",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Versión 2.3 actualizada el 06/08/2026; incorpora el macroproceso TIC y el flujo de terminación contractual, paz y salvo y cierre tecnológico.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2122,12 +1634,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Tecnologías de la Información y las Comunicaciones",
       "soporte": "Magnético",
       "observaciones": "Formato utilizado operativamente y contrastado con un acta emitida el 21/07/2026. Requiere normalización, aprobación del propietario TIC y definición del campo “Autorizado por”. Clasificación: Interno; publicación no autorizada.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2144,12 +1651,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Tecnologías de la Información y las Comunicaciones",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Canal pendiente. Propietario por rol pendiente de ratificación: Coordinador(a) de Tecnología o rol formal equivalente. Borrador controlado v0.1 incorporado el 06/08/2026 para validación institucional; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2166,12 +1668,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Borrador controlado v0.1 incorporado el 06/08/2026. Fuentes: correos “RRHH - Aviso de selección y Solicitud documentos - Asesor(a) Senior en Gestión Integral del Riesgo Territorial y Seguridad Operacional” (CPS) y “TH - Solicitud documentos - Fundación Gaia Amazonas” (laboral). Pendientes: lista de órdenes, corrección de denominaciones Procuraduría/Policía, vigencias, ARL, examen ocupacional, opcionales y equivalentes para personas extranjeras; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2188,12 +1685,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Contractual",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Borrador controlado v0.1 creado el 06/08/2026 a partir del caso FEFN324063. Requiere validación de Asesoría Jurídica y Contractual, Coordinación Financiera y Contable y Coordinación Integral de Proyectos; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2210,12 +1702,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Borrador controlado v0.1 creado el 06/08/2026 a partir del antecedente RRHH-PSV-001. Requiere validación de Talento Humano, Coordinación Financiera y Contable y Asesoría Jurídica y Contractual. No reemplaza formalmente el antecedente hasta su aprobación; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2232,12 +1719,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno en blanco; restringido cuando se diligencia. Plantilla canónica v0.1 creada el 06/08/2026 en XLSX; elimina la base salarial y los saldos de terceros e incorpora cálculo de días hábiles, reintegro, validaciones y parámetros anuales. El XLSM anterior se conserva como antecedente no vigente. Requiere validación de uso; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2254,12 +1736,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Restringido. Matriz operativa renombrada y normalizada a locale es_CO y zona horaria America/Bogota. Los saldos y fórmulas históricas se conservaron sin modificación; requieren conciliación de soportes, eliminación de correcciones incrustadas y diseño de un registro transaccional antes de V1.0; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2276,12 +1753,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Talento Humano, Bienestar y Cultura Organizacional",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Restringido. Generador exclusivo de Talento Humano V0.1 creado el 06/08/2026. Autocompleta datos laborales disponibles y saldos copiados de SDE-THB-MT-02 al corte 06/08/2026; no recalcula ni declara conciliados los derechos. Incluye calendario de 19 festivos nacionales de 2026, validaciones y prueba de días hábiles/reintegro. Identificación parcial tomada de antecedente histórico; cargo, área y jefatura requieren validación de TH. El archivo permanece privado hasta autorización expresa de las cuentas destinatarias; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Aseguramiento independiente",
@@ -2298,12 +1770,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Dirección Ejecutiva",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Borrador controlado V0.1 creado el 11/08/2026 a partir de correos y expedientes de auditorías 2022-2026. Propietario propuesto: Dirección Ejecutiva; requiere validación de Dirección, SDE, Financiera y Contable, Proyectos, Jurídica, TI y GPCI; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Aseguramiento independiente",
@@ -2320,12 +1787,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Dirección Ejecutiva",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Borrador controlado V0.1 creado el 11/08/2026. Documenta la práctica observada entre 2022 y 2026 y diferencia auditoría institucional, proyectos integrados, auditorías específicas de donante y revisiones especializadas; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Aseguramiento independiente",
@@ -2342,12 +1804,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Gestión de Procesos y Cumplimiento Institucional",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Restringido. Matriz histórica actualizada el 11/08/2026; conserva el plan 2024 y seguimientos anteriores, añade AUDITORÍA 2025 con 16 recomendaciones y un inventario inicial de auditorías institucionales, de proyectos y especializadas. Los estados son preliminares y requieren validación con responsables; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2364,12 +1821,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Asesoría Jurídica y Contractual",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Restringido. Formato diligenciable elaborado a partir del acuerdo remitido por Asesoría Jurídica y Contractual el 18/08/2026; pendiente de validación jurídica, aprobación institucional y carga autorizada a Drive. Publicación no autorizada; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2386,12 +1838,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Tecnologías de la Información y las Comunicaciones",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Procedimiento anexo técnico-operativo al Manual de Contratación; incorpora la radicación de solicitudes por Raíz Digital o por correo del responsable de la dependencia o proyecto. Propietario propuesto: Coordinador(a) de Tecnología o rol formal equivalente. Borrador controlado v0.1 incorporado el 18/08/2026; pendiente de revisión y aprobación del Líder de TI; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
+      "clasificacion": "Interna"
     },
     {
       "macroproceso": "Apoyo",
@@ -2408,110 +1855,7 @@ window.DOCUMENTOS_MOP_DATA = {
       "dependencia": "Tecnologías de la Información y las Comunicaciones",
       "soporte": "Magnético",
       "observaciones": "Clasificación: Interno. Publicación no autorizada. Formato asociado a FGA-TIC-PR-01 para consolidar cada necesidad tecnológica por solución, dependencia o proyecto. Propietario propuesto: Coordinador(a) de Tecnología o rol formal equivalente. Borrador controlado v0.1 incorporado el 18/08/2026; pendiente de revisión y aprobación del Líder de TI; publish=false.",
-      "clasificacion": "Interna",
-      "accessClass": "Interna",
-      "catalogVisible": true,
-      "downloadAuthorized": false,
-      "linkDocumento": "",
-      "canonicalUrl": ""
-    }
-  ],
-  "resumenTipoDocumental": [
-    {
-      "tipoDocumental": "Acta",
-      "vigentes": 3,
-      "obsoletos": 0,
-      "enActualizacion": 0,
-      "enConstruccion": 0
-    },
-    {
-      "tipoDocumental": "Caracterización",
-      "vigentes": 0,
-      "obsoletos": 0,
-      "enActualizacion": 0,
-      "enConstruccion": 7
-    },
-    {
-      "tipoDocumental": "Estatuto",
-      "vigentes": 1,
-      "obsoletos": 0,
-      "enActualizacion": 0,
-      "enConstruccion": 0
-    },
-    {
-      "tipoDocumental": "Formato",
-      "vigentes": 20,
-      "obsoletos": 0,
-      "enActualizacion": 0,
-      "enConstruccion": 15
-    },
-    {
-      "tipoDocumental": "Guía",
-      "vigentes": 4,
-      "obsoletos": 0,
-      "enActualizacion": 0,
-      "enConstruccion": 7
-    },
-    {
-      "tipoDocumental": "Manual",
-      "vigentes": 8,
-      "obsoletos": 0,
-      "enActualizacion": 3,
-      "enConstruccion": 2
-    },
-    {
-      "tipoDocumental": "Matriz",
-      "vigentes": 0,
-      "obsoletos": 0,
-      "enActualizacion": 2,
-      "enConstruccion": 4
-    },
-    {
-      "tipoDocumental": "Plan",
-      "vigentes": 2,
-      "obsoletos": 0,
-      "enActualizacion": 0,
-      "enConstruccion": 0
-    },
-    {
-      "tipoDocumental": "Política",
-      "vigentes": 5,
-      "obsoletos": 0,
-      "enActualizacion": 5,
-      "enConstruccion": 2
-    },
-    {
-      "tipoDocumental": "Procedimiento",
-      "vigentes": 6,
-      "obsoletos": 0,
-      "enActualizacion": 1,
-      "enConstruccion": 8
-    },
-    {
-      "tipoDocumental": "Reglamento",
-      "vigentes": 0,
-      "obsoletos": 0,
-      "enActualizacion": 1,
-      "enConstruccion": 0
-    },
-    {
-      "tipoDocumental": "Video",
-      "vigentes": 0,
-      "obsoletos": 0,
-      "enActualizacion": 0,
-      "enConstruccion": 3
+      "clasificacion": "Interna"
     }
   ]
-};
-(function loadDocumentCatalogPreview() {
-  const load = () => {
-    const script = document.createElement("script");
-    script.src = "assets/js/document-catalog-preview.js?v=20260826";
-    document.body.appendChild(script);
-  };
-  if (document.readyState === "loading") {
-    window.addEventListener("DOMContentLoaded", load, { once: true });
-  } else {
-    load();
-  }
-})();
+}

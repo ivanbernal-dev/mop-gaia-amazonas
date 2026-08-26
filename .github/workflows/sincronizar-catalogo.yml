@@ -3,19 +3,29 @@ name: Sincronizar catálogo documental MOP
 # Fase 1 de la auditoría del módulo administrador (agosto 2026):
 # antes, alguien tenía que descargar el CSV a mano y correr
 # tools/build-document-catalog-from-import.js en su máquina. Este flujo
-# hace ese trabajo solo, todas las noches y también bajo demanda, leyendo
-# el Listado Maestro MOP directamente desde Google Sheets.
+# hacía ese trabajo solo, todas las noches y también bajo demanda,
+# leyendo el Listado Maestro MOP directamente desde Google Sheets.
 #
-# Requisito único para TI: crear la variable de repositorio MOP_SHEET_ID
-# (Settings > Secrets and variables > Actions > Variables) con el ID de
-# la hoja de cálculo, compartida como "Cualquier persona con el enlace:
-# Lector". Sin esa variable, este flujo se detiene sin hacer cambios.
+# SUPERADO desde agosto de 2026: el Listado Maestro ahora se administra
+# directamente desde /admin (colección "documentos", ver
+# tools/build-cms-data.js), que edita assets/data/documentos-mop.json y
+# publica el cambio de inmediato -- sin CSV, sin Google Sheets y sin
+# esperar a una corrida nocturna. Este flujo import-desde-CSV usa un
+# esquema distinto (exige una columna "clasificacion" que ya no existe)
+# y escribe sobre el mismo archivo de salida (assets/documentos-mop.js):
+# activarlo tal cual sobrescribiría silenciosamente lo editado desde el
+# CMS. Por eso el disparador automático queda desactivado; se deja
+# "workflow_dispatch" únicamente para poder correrlo a mano si en algún
+# momento se decide retomar la sincronización con Google Sheets --
+# primero habría que reconciliar ambos esquemas.
+#
+# Requisito único para TI, si se retoma: crear la variable de
+# repositorio MOP_SHEET_ID (Settings > Secrets and variables > Actions >
+# Variables) con el ID de la hoja de cálculo, compartida como
+# "Cualquier persona con el enlace: Lector". Sin esa variable, este
+# flujo se detiene sin hacer cambios.
 
 on:
-  schedule:
-    # 09:00 UTC = 04:00 en Colombia (UTC-5). Fuera del horario laboral,
-    # para que cualquier PR generado esté listo cuando el equipo llegue.
-    - cron: "0 9 * * *"
   workflow_dispatch: {}
 
 permissions:

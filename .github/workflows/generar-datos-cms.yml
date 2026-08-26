@@ -49,6 +49,6 @@ jobs:
           fi
           git config user.name "mop-cms-bot"
           git config user.email "actions@github.com"
-          git add assets/data/*.js
+          git add assets/data/*.js assets/documentos-mop.js
           git commit -m "[cms-datos] Regenera datos publicados desde el CMS"
           git push
