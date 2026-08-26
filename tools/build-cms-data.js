@@ -31,6 +31,18 @@ const MAPEOS = [
     globalName: "GAIA_MOP_UPDATES"
   },
   {
+    json: "assets/data/junta-compromisos.json",
+    js: "assets/data/junta-compromisos.js",
+    globalName: "GAIA_JUNTA_COMPROMISOS",
+    // El CMS solo edita la matriz cruda de compromisos (una fila por
+    // compromiso). Los totales, conteos por estado, por prioridad y por
+    // acta que el tablero de Junta Directiva muestra son un resumen
+    // CALCULADO a partir de esa matriz — así nadie tiene que mantener
+    // esos números sincronizados a mano cada vez que se agrega o cierra
+    // un compromiso.
+    transform: buildJuntaCompromisos
+  },
+  {
     json: "assets/data/gobernanza-panel.json",
     js: "assets/data/gobernanza-panel.js",
     globalName: "GAIA_GOBERNANZA_PANEL"
@@ -51,6 +63,83 @@ const MAPEOS = [
     globalName: "GAIA_ASEGURAMIENTO_PANEL"
   }
 ];
+
+// Estados que cuentan como "abierto" (todavía requieren seguimiento).
+// "Cumplido" y "Cancelado" son los dos estados de cierre.
+const JUNTA_OPEN_STATES = new Set(["Pendiente", "En curso", "Seguimiento recurrente"]);
+const JUNTA_STATUS_ORDER = [
+  { name: "Cumplido", tone: "done" },
+  { name: "En curso", tone: "progress" },
+  { name: "Pendiente", tone: "pending" },
+  { name: "Seguimiento recurrente", tone: "recurring" },
+  { name: "Cancelado", tone: "closed" }
+];
+const JUNTA_PRIORITY_ORDER = [
+  { name: "Crítica", tone: "critical" },
+  { name: "Alta", tone: "high" },
+  { name: "Media", tone: "medium" },
+  { name: "Baja", tone: "low" }
+];
+
+function buildJuntaCompromisos(data) {
+  const matrix = Array.isArray(data.matrix) ? data.matrix : [];
+  const referenceDate = data.updatedAt || "";
+  const isOpen = (r) => JUNTA_OPEN_STATES.has(r.estado);
+
+  const completed = matrix.filter((r) => r.estado === "Cumplido").length;
+  const canceled = matrix.filter((r) => r.estado === "Cancelado").length;
+  const activeFollowUp = matrix.filter(isOpen).length;
+
+  const status = JUNTA_STATUS_ORDER.map((s) => ({
+    name: s.name,
+    count: matrix.filter((r) => r.estado === s.name).length,
+    tone: s.tone
+  }));
+
+  const priorityOpen = JUNTA_PRIORITY_ORDER.map((p) => {
+    const all = matrix.filter((r) => r.prioridad === p.name);
+    return { name: p.name, count: all.filter(isOpen).length, total: all.length, tone: p.tone };
+  }).filter((p) => p.total > 0);
+
+  const actaOrder = [...new Set(matrix.map((r) => r.acta))];
+  const byActa = actaOrder.map((acta) => {
+    const rows = matrix.filter((r) => r.acta === acta);
+    return {
+      acta,
+      total: rows.length,
+      open: rows.filter(isOpen).length,
+      completed: rows.filter((r) => r.estado === "Cumplido").length,
+      canceled: rows.filter((r) => r.estado === "Cancelado").length
+    };
+  });
+
+  const criticalOpen = (priorityOpen.find((p) => p.name === "Crítica") || {}).count || 0;
+  const deadlines = matrix.filter((r) => r.plazo).length;
+  const overdueOpen = matrix.filter((r) => isOpen(r) && r.plazo && r.plazo < referenceDate).length;
+  const futureOpen = matrix.filter((r) => isOpen(r) && r.plazo && r.plazo >= referenceDate).length;
+
+  return {
+    updatedAt: data.updatedAt,
+    sourceLabel: data.sourceLabel,
+    scopeLabel: data.scopeLabel,
+    securityLabel: data.securityLabel,
+    totals: {
+      records: matrix.length,
+      activeFollowUp,
+      completed,
+      canceled,
+      criticalOpen,
+      deadlines,
+      overdueOpen,
+      futureOpen
+    },
+    status,
+    priorityOpen,
+    byActa,
+    matrix,
+    reading: data.reading
+  };
+}
 
 function build({ json, js, globalName, transform }) {
   const jsonPath = path.join(ROOT, json);

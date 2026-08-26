@@ -65,6 +65,54 @@ collections:
             widget: "list"
             allow_add: true
 
+  - name: "compromisos"
+    label: "Compromisos de Junta Directiva"
+    description: >-
+      Matriz de compromisos por acta (panel "Compromisos" del tablero de
+      Junta Directiva). Los totales, conteos por estado, por prioridad y
+      por acta que se ven en ese tablero se calculan automáticamente a
+      partir de esta matriz al guardar — no hay que editarlos aparte ni
+      mantenerlos sincronizados a mano.
+    files:
+      - file: "assets/data/junta-compromisos.json"
+        label: "Matriz de compromisos"
+        name: "compromisos"
+        fields:
+          - { label: "Actualizado al (AAAA-MM-DD)", name: "updatedAt", widget: "string" }
+          - { label: "Fuente", name: "sourceLabel", widget: "string" }
+          - { label: "Alcance (actas cubiertas)", name: "scopeLabel", widget: "string" }
+          - label: "Aviso de confidencialidad"
+            name: "securityLabel"
+            widget: "text"
+          - label: "Matriz de compromisos"
+            name: "matrix"
+            widget: "list"
+            summary: "{{id}} — {{acta}} — {{estado}}"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Acta", name: "acta", widget: "string" }
+              - label: "Fecha del acta (AAAA-MM-DD)"
+                name: "fecha"
+                widget: "string"
+              - { label: "Categoría", name: "categoria", widget: "string" }
+              - label: "Prioridad"
+                name: "prioridad"
+                widget: "select"
+                options: ["Crítica", "Alta", "Media", "Baja"]
+              - label: "Estado"
+                name: "estado"
+                widget: "select"
+                options: ["Pendiente", "En curso", "Cumplido", "Cancelado", "Seguimiento recurrente"]
+              - label: "Plazo (AAAA-MM-DD, dejar vacío si no aplica)"
+                name: "plazo"
+                widget: "string"
+                required: false
+                default: ""
+          - label: "Cómo leer este panel"
+            name: "reading"
+            widget: "list"
+            allow_add: true
+
   - name: "gobernanza"
     label: "Gobernanza y Propósito"
     description: >-
