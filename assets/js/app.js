@@ -418,7 +418,6 @@ const gaiaViews = document.querySelectorAll(".gaia-view");
 const gaiaViewTitles = {
   "conoce-gaia": "Esto es GAIA Amazonas",
   "ruta-2030": "GAIA Amazonas y su Modelo de Operación",
-  "arquitectura-gaia": "Arquitectura organizacional y equipos de GAIA",
   "que-es-mop": "Qué es el MOP y para qué sirve",
   "modelo-direccion-transitoria": "Quién decide qué durante la transición",
   "junta-directiva": "Junta Directiva",
