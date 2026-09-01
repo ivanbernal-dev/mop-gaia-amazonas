@@ -419,7 +419,6 @@ const gaiaViewTitles = {
   "conoce-gaia": "Esto es GAIA Amazonas",
   "ruta-2030": "GAIA Amazonas y su Modelo de Operación",
   "que-es-mop": "Qué es el MOP y para qué sirve",
-  "modelo-direccion-transitoria": "Quién decide qué durante la transición",
   "junta-directiva": "Junta Directiva",
   "novedades-mop": "Novedades del MOP",
   "mop-anillos": defaultPageTitle
